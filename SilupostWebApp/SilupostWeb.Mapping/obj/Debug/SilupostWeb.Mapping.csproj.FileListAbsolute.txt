@@ -1,13 +1,7 @@
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POS.Mapping.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POS.Mapping.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\AutoMapper.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POSAdmin.Data.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POSAdmin.Domain.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\System.ValueTuple.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\Dapper.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\Newtonsoft.Json.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POSAdmin.Data.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\POSWeb.POSAdmin.Domain.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\AutoMapper.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\AutoMapper.xml
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\System.ValueTuple.xml
@@ -16,5 +10,11 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\SilupostWeb.Mapping.csprojAssemblyReference.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\SilupostWeb.Mapping.csproj.CoreCompileInputs.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\SilupostWeb.Mapping.csproj.CopyComplete
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\POSWeb.POS.Mapping.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\POSWeb.POS.Mapping.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Mapping.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Mapping.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Data.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Domain.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Data.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Debug\SilupostWeb.Domain.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\SilupostWeb.Mapping.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Debug\SilupostWeb.Mapping.pdb
