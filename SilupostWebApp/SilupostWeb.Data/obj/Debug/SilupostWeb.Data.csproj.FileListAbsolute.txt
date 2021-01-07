@@ -1,0 +1,13 @@
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\POSWeb.POSAdmin.Data.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\POSWeb.POSAdmin.Data.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Dapper.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\POSWeb.POSAdmin.Domain.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Newtonsoft.Json.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\POSWeb.POSAdmin.Domain.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Dapper.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Newtonsoft.Json.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csprojAssemblyReference.cache
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.CoreCompileInputs.cache
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.CopyComplete
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\POSWeb.POSAdmin.Data.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\POSWeb.POSAdmin.Data.pdb
