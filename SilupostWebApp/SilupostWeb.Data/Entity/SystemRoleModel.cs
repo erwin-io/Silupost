@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace POSWeb.POSAdmin.Data.Entity
+namespace SilupostWeb.Data.Entity
 {
     public class SystemRoleModel
     {

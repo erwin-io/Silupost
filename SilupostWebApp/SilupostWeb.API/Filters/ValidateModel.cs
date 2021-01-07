@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace POSWeb.POS.API.Filters
+namespace SilupostWeb.API.Filters
 {
     public class ValidateModel : ActionFilterAttribute
     {

@@ -1,14 +1,14 @@
 ﻿using POSWeb.POS.Mapping;
-using POSWeb.POSAdmin.Data.Entity;
-using POSWeb.POSAdmin.Data.Interface;
-using POSWeb.POSAdmin.Domain.BindingModel;
-using POSWeb.POSAdmin.Domain.ViewModel;
-using POSWeb.POSAdmin.Facade.Interface;
+using SilupostWeb.Data.Entity;
+using SilupostWeb.Data.Interface;
+using SilupostWeb.Domain.BindingModel;
+using SilupostWeb.Domain.ViewModel;
+using SilupostWeb.Facade.Interface;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
 
-namespace POSWeb.POSAdmin.Facade
+namespace SilupostWeb.Facade
 {
     public class UserAuthFacade : IUserAuthFacade
     {

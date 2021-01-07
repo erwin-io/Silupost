@@ -4,17 +4,22 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Jwt;
 using Owin;
-using POSWeb.POS.API.Providers;
+using SilupostWeb.API.Providers;
+using SilupostWeb.Data;
+using SilupostWeb.Data.Interface;
+using SilupostWeb.Facade;
+using SilupostWeb.Facade.Interface;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Data;
+using System.Data.SqlClient;
 
-
-[assembly: OwinStartup(typeof(POSWeb.POS.API.Startup))]
-namespace POSWeb.POS.API
+[assembly: OwinStartup(typeof(SilupostWeb.API.Startup))]
+namespace SilupostWeb.API
 {
     /// <summary>
     /// Startup
@@ -41,7 +46,12 @@ namespace POSWeb.POS.API
 
         private void ConfigureOAuth(IAppBuilder app)
         {
-            //string connectionString = Helpers.Configuration.ConnectionString();
+            string connectionString = Helpers.Configuration.ConnectionString();
+            IDbConnection dbConnection = new SqlConnection(connectionString);
+            //DAC
+            ISystemUserRepository _systemUserRepository = new SystemUserDAC(dbConnection);
+            //Facade
+            IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
 
 
             var issuer = "http://pos.azurewebsites.net";
@@ -66,7 +76,7 @@ namespace POSWeb.POS.API
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/oauth2/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new AppOAuthProvider(),
+                Provider = new AppOAuthProvider(_userAuthFacade),
                 AccessTokenFormat = new AppOAuthJWTFormat(issuer),
                 RefreshTokenProvider = new AppRefreshTokenProvider()
             };

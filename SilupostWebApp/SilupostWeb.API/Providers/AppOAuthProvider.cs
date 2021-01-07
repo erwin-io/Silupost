@@ -1,6 +1,8 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using POSWeb.POS.API.Models;
+using SilupostWeb.API.Models;
+using SilupostWeb.Facade.Interface;
+using SilupostWeb.Domain.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace POSWeb.POS.API.Providers
+namespace SilupostWeb.API.Providers
 {
     public class AppOAuthProvider : OAuthAuthorizationServerProvider
     {
-
+        private readonly IUserAuthFacade _userAuthFacade;
         #region CONSTRUCTORS
-        public AppOAuthProvider() { 
+        public AppOAuthProvider(IUserAuthFacade userAuthFacade)
+        {
+            this._userAuthFacade = userAuthFacade;
         }
         #endregion
 
@@ -26,17 +30,42 @@ namespace POSWeb.POS.API.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var identity = new ClaimsIdentity("JWT");
+            SystemUserViewModel user = await Task.Run(() => this._userAuthFacade.Find(context.UserName, context.Password));
+            if (user != null && !string.IsNullOrEmpty(user?.SystemUserId))
+            {
+                var identity = new ClaimsIdentity("JWT");
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            identity.AddClaim(new Claim("Password", context.Password));
+                identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+                identity.AddClaim(new Claim("SystemUserId", user.SystemUserId));
+                identity.AddClaim(new Claim("LocationId", user.Location.LocationId.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Email, user.EntityInformation.EmailAddress??string.Empty));
+                identity.AddClaim(new Claim(ClaimTypes.GivenName, user.EntityInformation.FullName??string.Empty));
+                identity.AddClaim(new Claim(ClaimTypes.Gender, user.EntityInformation?.Gender?.Name??string.Empty));
+                identity.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.EntityInformation.BirthDate.ToString("yyyy-MM-dd")));
 
-            var props = new AuthenticationProperties(new Dictionary<string, string>());
-            props = new AuthenticationProperties(new Dictionary<string, string> { { "as:clientRefreshTokenLifeTime", "60" }, { "userId", "1" }, });
+                var props = new AuthenticationProperties(new Dictionary<string, string>());
+                var authProperties = new Dictionary<string, string>
+                {
+                    {"as:clientRefreshTokenLifeTime", "60"},
+                    { "username", user.UserName },
+                    { "SystemUserId", user.SystemUserId },
+                };
+
+                //foreach (RoleViewModel role in user.UserRoles)
+                //    identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+
+                props = new AuthenticationProperties(authProperties);
 
 
-            AuthenticationTicket ticket = new AuthenticationTicket(identity, props);
-            context.Validated(ticket);
+                AuthenticationTicket ticket = new AuthenticationTicket(identity, props);
+
+                context.Validated(ticket);
+            }
+            else
+            {
+                context.Rejected();
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+            }
         }
 
         public override async Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)

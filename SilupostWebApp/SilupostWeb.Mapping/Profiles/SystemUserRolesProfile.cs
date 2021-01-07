@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using POSWeb.POSAdmin.Data.Entity;
-using POSWeb.POSAdmin.Domain.BindingModel;
-using POSWeb.POSAdmin.Domain.ViewModel;
+using SilupostWeb.Data.Entity;
+using SilupostWeb.Domain.BindingModel;
+using SilupostWeb.Domain.ViewModel;
 using System.Collections.Generic;
 
 namespace POSWeb.POS.Mapping.Profiles

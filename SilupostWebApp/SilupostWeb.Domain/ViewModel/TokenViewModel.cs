@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace POSWeb.POSAdmin.Domain.ViewModel
+namespace SilupostWeb.Domain.ViewModel
 {
     public class TokenViewModel
     {

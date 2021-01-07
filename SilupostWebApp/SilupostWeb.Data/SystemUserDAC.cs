@@ -1,13 +1,13 @@
-﻿using POSWeb.POSAdmin.Data.Core;
-using POSWeb.POSAdmin.Data.Interface;
-using POSWeb.POSAdmin.Data.Entity;
+﻿using SilupostWeb.Data.Core;
+using SilupostWeb.Data.Interface;
+using SilupostWeb.Data.Entity;
 using System.Collections.Generic;
 using System.Data;
 using System;
 using Dapper;
 using System.Linq;
 
-namespace POSWeb.POSAdmin.Data
+namespace SilupostWeb.Data
 {
     public class SystemUserDAC : RepositoryBase<SystemUserModel>, ISystemUserRepository
     {

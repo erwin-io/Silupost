@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POSWeb.POSAdmin.Domain.BindingModel
+namespace SilupostWeb.Domain.BindingModel
 {
     public class SystemRolePrivilegesBindingModel
     {

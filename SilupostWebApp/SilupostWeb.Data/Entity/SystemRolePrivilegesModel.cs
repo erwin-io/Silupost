@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POSWeb.POSAdmin.Data.Entity
+namespace SilupostWeb.Data.Entity
 {
     public class SystemRolePrivilegesModel
     {

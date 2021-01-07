@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POSWeb.POSAdmin.Domain.ViewModel
+namespace SilupostWeb.Domain.ViewModel
 {
     public class SystemRoleViewModel
     {

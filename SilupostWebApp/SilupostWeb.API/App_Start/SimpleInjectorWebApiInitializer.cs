@@ -1,11 +1,15 @@
-[assembly: WebActivator.PostApplicationStartMethod(typeof(POSWeb.POS.API.App_Start.SimpleInjectorWebApiInitializer), "Initialize")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(SilupostWeb.API.App_Start.SimpleInjectorWebApiInitializer), "Initialize")]
 
-namespace POSWeb.POS.API.App_Start
+namespace SilupostWeb.API.App_Start
 {
     using System.Data;
     using System.Data.SqlClient;
     using System.Web.Http;
-    using POSWeb.POS.API.Helpers;
+    using SilupostWeb.API.Helpers;
+    using SilupostWeb.Data;
+    using SilupostWeb.Data.Interface;
+    using SilupostWeb.Facade;
+    using SilupostWeb.Facade.Interface;
     using SimpleInjector;
     using SimpleInjector.Integration.WebApi;
     using SimpleInjector.Lifestyles;
@@ -32,12 +36,16 @@ namespace POSWeb.POS.API.App_Start
         {
             string connectionString = Configuration.ConnectionString();;
             #region DAL
-
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
-
+            container.Register<ISystemUserRepository, SystemUserDAC>(Lifestyle.Scoped);
+            container.Register<IEntityInformationRepository, EntityInformationDAC>(Lifestyle.Scoped);
+            container.Register<ISystemRoleRepositoryDAC, SystemRoleDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
+            container.Register<ISystemUserFacade, SystemUserFacade>(Lifestyle.Scoped);
+            container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
+            container.Register<ISystemRoleFacade, SystemRoleFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

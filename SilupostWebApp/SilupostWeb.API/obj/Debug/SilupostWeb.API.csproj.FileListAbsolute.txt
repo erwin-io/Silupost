@@ -1,6 +1,6 @@
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POS.API.dll.config
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POS.API.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POS.API.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POSAdmin.API.dll.config
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POSAdmin.API.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\POSWeb.POSAdmin.API.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe.config
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.rsp
@@ -267,5 +267,5 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debu
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.ResolveComReference.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CoreCompileInputs.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CopyComplete
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\POSWeb.POS.API.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\POSWeb.POS.API.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\POSWeb.POSAdmin.API.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\POSWeb.POSAdmin.API.pdb

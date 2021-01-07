@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 
-namespace POSWeb.POS.API.Helpers
+namespace SilupostWeb.API.Helpers
 {
     /// <summary>
     /// App Configurations

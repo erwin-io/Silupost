@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace POSWeb.POSAdmin.Domain.ViewModel
+namespace SilupostWeb.Domain.ViewModel
 {
     public class SystemUserRolesViewModel
     {

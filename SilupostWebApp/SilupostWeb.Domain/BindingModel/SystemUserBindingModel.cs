@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace POSWeb.POSAdmin.Domain.BindingModel
+namespace SilupostWeb.Domain.BindingModel
 {
     public class SystemUserBindingModel
     {

@@ -1,7 +1,7 @@
-﻿using POSWeb.POSAdmin.Data.Core;
-using POSWeb.POSAdmin.Data.Entity;
+﻿using SilupostWeb.Data.Core;
+using SilupostWeb.Data.Entity;
 
-namespace POSWeb.POSAdmin.Data.Interface
+namespace SilupostWeb.Data.Interface
 {
     public interface ISystemUserRepository : IRepository<SystemUserModel>
     {

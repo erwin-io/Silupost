@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace POSWeb.POS.API.Filters
+namespace SilupostWeb.API.Filters
 {
     /// <summary>
     /// Jinisys implementation of IHttpActionResult to return custom content

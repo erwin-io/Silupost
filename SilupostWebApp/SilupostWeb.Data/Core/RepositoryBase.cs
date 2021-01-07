@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace POSWeb.POSAdmin.Data.Core
+namespace SilupostWeb.Data.Core
 {
     public abstract class RepositoryBase<T> : IRepository<T>
     {

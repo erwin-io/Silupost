@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace POSWeb.POS.API.Models
+namespace SilupostWeb.API.Models
 {
     public class AppToken
     {

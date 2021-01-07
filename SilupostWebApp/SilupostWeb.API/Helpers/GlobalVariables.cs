@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace POSWeb.POS.API.Helpers
+namespace SilupostWeb.API.Helpers
 {
     public static class GlobalVariables
     {

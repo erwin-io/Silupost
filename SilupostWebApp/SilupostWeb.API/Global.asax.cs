@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 
-namespace POSWeb.POS.API
+namespace SilupostWeb.API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

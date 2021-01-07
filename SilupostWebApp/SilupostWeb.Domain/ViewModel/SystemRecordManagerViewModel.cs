@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POSWeb.POSAdmin.Domain.ViewModel
+namespace SilupostWeb.Domain.ViewModel
 {
     public class SystemRecordManagerViewModel
     {
