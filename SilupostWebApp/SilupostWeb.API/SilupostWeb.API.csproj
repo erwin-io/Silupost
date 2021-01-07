@@ -245,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Providers\" />
     <Folder Include="Utility\" />
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +282,6 @@
     <Compile Include="Models\AppResponseModel .cs" />
     <Compile Include="Models\AppToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\AppOAuthJWTFormat.cs" />
-    <Compile Include="Providers\AppOAuthProvider.cs" />
-    <Compile Include="Providers\AppRefreshTokenProvider.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

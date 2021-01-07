@@ -1,9 +1,8 @@
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.xml
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csprojAssemblyReference.cache
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb

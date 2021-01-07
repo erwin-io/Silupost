@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Configuration;
 using Thinktecture.IdentityModel.Tokens;
 
-namespace SilupostWeb.API.Providers
+namespace SilupostWeb.OAuth.Providers
 {
     public class AppOAuthJWTFormat : ISecureDataFormat<AuthenticationTicket>
     {

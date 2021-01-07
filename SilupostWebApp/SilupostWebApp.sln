@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilupostWeb.Mapping", "Silu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilupostWeb.API", "SilupostWeb.API\SilupostWeb.API.csproj", "{C13321D3-3D27-4DB0-94AC-3CD8C542872E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilupostWeb.OAuth", "SilupostWeb.OAuth\SilupostWeb.OAuth.csproj", "{E858AB30-19FC-4386-AD1F-B932A5019062}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C13321D3-3D27-4DB0-94AC-3CD8C542872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C13321D3-3D27-4DB0-94AC-3CD8C542872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C13321D3-3D27-4DB0-94AC-3CD8C542872E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E858AB30-19FC-4386-AD1F-B932A5019062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E858AB30-19FC-4386-AD1F-B932A5019062}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E858AB30-19FC-4386-AD1F-B932A5019062}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E858AB30-19FC-4386-AD1F-B932A5019062}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

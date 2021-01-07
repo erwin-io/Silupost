@@ -1,14 +1,14 @@
 ﻿using Microsoft.Owin.Security.Infrastructure;
 using Newtonsoft.Json;
-using SilupostWeb.API.Helpers;
-using SilupostWeb.API.Models;
+using SilupostWeb.OAuth.Helpers;
+using SilupostWeb.OAuth.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace SilupostWeb.API.Providers
+namespace SilupostWeb.OAuth.Providers
 {
     public class AppRefreshTokenProvider : IAuthenticationTokenProvider
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using SilupostWeb.API.Models;
+using SilupostWeb.OAuth.Models;
 using SilupostWeb.Facade.Interface;
 using SilupostWeb.Domain.ViewModel;
 using System;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace SilupostWeb.API.Providers
+namespace SilupostWeb.OAuth.Providers
 {
     public class AppOAuthProvider : OAuthAuthorizationServerProvider
     {

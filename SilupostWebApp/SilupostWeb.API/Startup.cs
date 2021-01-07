@@ -4,7 +4,6 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Jwt;
 using Owin;
-using SilupostWeb.API.Providers;
 using SilupostWeb.Data;
 using SilupostWeb.Data.Interface;
 using SilupostWeb.Facade;
@@ -70,19 +69,6 @@ namespace SilupostWeb.API
                     }
                 });
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                //For Dev enviroment only (on production should be AllowInsecureHttp = false)
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/oauth2/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new AppOAuthProvider(_userAuthFacade),
-                AccessTokenFormat = new AppOAuthJWTFormat(issuer),
-                RefreshTokenProvider = new AppRefreshTokenProvider()
-            };
-
-            // OAuth 2.0 Bearer Access Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
 
         }
     }
