@@ -7,8 +7,8 @@
     <ProjectGuid>{31EFDD49-5DA5-4852-80D0-2ACFE1A2E1F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>POSWeb.POS.Mapping</RootNamespace>
-    <AssemblyName>POSWeb.POS.Mapping</AssemblyName>
+    <RootNamespace>SilupostWeb.Mapping</RootNamespace>
+    <AssemblyName>SilupostWeb.Mapping</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -7,8 +7,8 @@
     <ProjectGuid>{6ED6C5C5-3E42-43DA-BD78-09B809BB3008}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>POSWeb.POSAdmin.Data</RootNamespace>
-    <AssemblyName>POSWeb.POSAdmin.Data</AssemblyName>
+    <RootNamespace>SilupostWeb.Data</RootNamespace>
+    <AssemblyName>SilupostWeb.Data</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
