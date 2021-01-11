@@ -54,7 +54,7 @@ namespace SilupostWeb.OAuth
             IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
 
 
-            var issuer = "http://pos.azurewebsites.net";
+            var issuer = "http://silupostadmin.azurewebsites.net";
             string audienceId = ConfigurationManager.AppSettings["audienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["audienceSecret"]);
 
