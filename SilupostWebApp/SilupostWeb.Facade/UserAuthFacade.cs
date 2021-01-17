@@ -1,4 +1,4 @@
-﻿using POSWeb.POS.Mapping;
+﻿using SilupostWeb.Mapping;
 using SilupostWeb.Data.Entity;
 using SilupostWeb.Data.Interface;
 using SilupostWeb.Domain.BindingModel;

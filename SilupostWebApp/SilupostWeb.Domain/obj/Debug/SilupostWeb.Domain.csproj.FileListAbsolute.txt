@@ -6,3 +6,4 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\D
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csprojAssemblyReference.cache

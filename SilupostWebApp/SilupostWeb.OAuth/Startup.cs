@@ -17,6 +17,7 @@ using System.Web;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using SilupostWeb.Mapping;
 
 [assembly: OwinStartup(typeof(SilupostWeb.OAuth.Startup))]
 namespace SilupostWeb.OAuth
@@ -34,7 +35,8 @@ namespace SilupostWeb.OAuth
         {
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
-            
+            AutoMapperConfig.Configure("SilupostWeb.Mapping");
+
             // Web API routes
             //config.MapHttpAttributeRoutes();
 
@@ -54,7 +56,7 @@ namespace SilupostWeb.OAuth
             IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
 
 
-            var issuer = "http://silupostadmin.azurewebsites.net";
+            var issuer = ConfigurationManager.AppSettings["Issuer"];
             string audienceId = ConfigurationManager.AppSettings["audienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["audienceSecret"]);
 

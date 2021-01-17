@@ -38,14 +38,17 @@ namespace SilupostWeb.API.App_Start
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ISystemUserRepository, SystemUserDAC>(Lifestyle.Scoped);
-            container.Register<IEntityInformationRepository, EntityInformationDAC>(Lifestyle.Scoped);
-            container.Register<ISystemRoleRepositoryDAC, SystemRoleDAC>(Lifestyle.Scoped);
+            container.Register<ILegalEntityRepository, LegalEntityDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminUserRolesRepositoryDAC, SystemWebAdminUserRolesDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
             container.Register<ISystemUserFacade, SystemUserFacade>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminRoleFacade, SystemWebAdminRoleFacade>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminMenuRolesFacade, SystemWebAdminMenuRolesFacade>(Lifestyle.Scoped);
             container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
-            container.Register<ISystemRoleFacade, SystemRoleFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

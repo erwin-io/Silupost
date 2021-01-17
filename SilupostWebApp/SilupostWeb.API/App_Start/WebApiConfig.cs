@@ -1,5 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
-using POSWeb.POS.Mapping;
+using SilupostWeb.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace SilupostWeb.API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            AutoMapperConfig.Configure("POSWeb.POS.Mapping");
+            AutoMapperConfig.Configure("SilupostWeb.Mapping");
 
             // Web API routes
             config.MapHttpAttributeRoutes();

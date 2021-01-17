@@ -263,7 +263,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\POSAPIHttpActionResult.cs" />
+    <Compile Include="Filters\SilupostWebHttpActionResult.cs" />
     <Compile Include="Filters\ValidateModel.cs" />
     <Compile Include="Helpers\Configuration.cs" />
     <Compile Include="Helpers\Constant.cs" />
@@ -341,7 +341,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50534</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56000/</IISUrl>
+          <IISUrl>http://localhost:5500</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

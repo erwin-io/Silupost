@@ -45,24 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindingModel\EntityContactInformationBindingModel.cs" />
-    <Compile Include="BindingModel\SystemMenuRoleBindingModel.cs" />
-    <Compile Include="BindingModel\SystemRoleBindingModel.cs" />
-    <Compile Include="BindingModel\SystemRolePrivilegesBindingModel.cs" />
+    <Compile Include="BindingModel\SystemWebAdminMenuRolesBindingModel.cs" />
+    <Compile Include="BindingModel\SystemWebAdminRoleBindingModel.cs" />
     <Compile Include="BindingModel\SystemUserBindingModel.cs" />
-    <Compile Include="BindingModel\SystemUserRolesBindingModel.cs" />
+    <Compile Include="BindingModel\SystemWebAdminUserRolesBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\EntityInformationViewModel.cs" />
-    <Compile Include="ViewModel\LocationViewModel.cs" />
+    <Compile Include="ViewModel\EntityGenderViewModel.cs" />
+    <Compile Include="ViewModel\EntityStatusViewModel.cs" />
+    <Compile Include="ViewModel\FileViewModel.cs" />
+    <Compile Include="ViewModel\LegalEntityViewModel.cs" />
     <Compile Include="ViewModel\PageResultsViewModel.cs" />
-    <Compile Include="ViewModel\SystemMenuViewModel.cs" />
-    <Compile Include="ViewModel\SystemMenuRoleViewModel.cs" />
-    <Compile Include="ViewModel\SystemPrivilegeViewModel.cs" />
     <Compile Include="ViewModel\SystemRecordManagerViewModel.cs" />
-    <Compile Include="ViewModel\SystemRoleViewModel.cs" />
-    <Compile Include="ViewModel\SystemRolePrivilegesViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminMenuRolesViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminMenuViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminModuleViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminRoleViewModel.cs" />
+    <Compile Include="ViewModel\SystemUserTypeViewModel.cs" />
     <Compile Include="ViewModel\SystemUserViewModel.cs" />
-    <Compile Include="ViewModel\SystemUserRolesViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminUserRolesViewModel.cs" />
     <Compile Include="ViewModel\TokenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

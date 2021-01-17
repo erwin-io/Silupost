@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace POSWeb.POS.Mapping
+namespace SilupostWeb.Mapping
 {
     public class AutoMapperConfig
     {

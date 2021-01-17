@@ -10,26 +10,18 @@ namespace SilupostWeb.Domain.BindingModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
+        public long? GenderId { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string EmailAddress { get; set; }
-        public string CivilStatusTypeId { get; set; }
-        public string GenderId { get; set; }
-        public DateTime BirthDate { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string MobileNumber { get; set; }
+        public List<SystemWebAdminUserRolesBindingModel> SystemWebAdminUserRoles { get; set; }
     }
     public class CreateSystemUserBindingModel : SystemUserBindingModel
     {
-        public long LocationId { get; set; }
-        public List<EntityContactInformationBindingModel> Contact { get; set; }
+        public long SystemUserTypeId { get; set; }
     }
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {
         public string SystemUserId { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-    }
-
-    public class SystemUserAccountApprovalBindingModel
-    {
-        public string SystemUserId { get; set; }
-        public List<SystemUserRolesBindingModel> UserRoles { get; set; }
     }
 }

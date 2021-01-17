@@ -31,17 +31,15 @@ namespace SilupostWeb.OAuth.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             SystemUserViewModel user = await Task.Run(() => this._userAuthFacade.Find(context.UserName, context.Password));
+            string clientId = string.Empty;
+            string clientSecret = string.Empty;
+
             if (user != null && !string.IsNullOrEmpty(user?.SystemUserId))
             {
                 var identity = new ClaimsIdentity("JWT");
 
                 identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
                 identity.AddClaim(new Claim("SystemUserId", user.SystemUserId));
-                identity.AddClaim(new Claim("LocationId", user.Location.LocationId.ToString()));
-                identity.AddClaim(new Claim(ClaimTypes.Email, user.EntityInformation.EmailAddress??string.Empty));
-                identity.AddClaim(new Claim(ClaimTypes.GivenName, user.EntityInformation.FullName??string.Empty));
-                identity.AddClaim(new Claim(ClaimTypes.Gender, user.EntityInformation?.Gender?.Name??string.Empty));
-                identity.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.EntityInformation.BirthDate.ToString("yyyy-MM-dd")));
 
                 var props = new AuthenticationProperties(new Dictionary<string, string>());
                 var authProperties = new Dictionary<string, string>

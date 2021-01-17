@@ -8,7 +8,12 @@ namespace SilupostWeb.Data.Entity
 {
     public class SystemRecordManagerModel
     {
-        public string SystemUserId { get; set; }
-        public string FullName { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string CreatedByFullName { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
+        public string LastUpdatedByFullName { get; set; }
+        
     }
 }
