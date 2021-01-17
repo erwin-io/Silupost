@@ -9,6 +9,6 @@ namespace SilupostWeb.Domain.ViewModel
     public class PageResultsViewModel<T>
     {
         public IEnumerable<T> Items { get; set; }
-        public int TotalCount { get; set; }
+        public long TotalRows { get; set; }
     }
 }

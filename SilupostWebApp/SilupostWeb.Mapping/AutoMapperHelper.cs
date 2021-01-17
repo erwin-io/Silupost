@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace POSWeb.POS.Mapping
+namespace SilupostWeb.Mapping
 {
     public class AutoMapperHelper<TSource, TDestination>
          where TSource : class

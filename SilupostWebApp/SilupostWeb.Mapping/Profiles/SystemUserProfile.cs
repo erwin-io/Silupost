@@ -4,7 +4,7 @@ using SilupostWeb.Domain.BindingModel;
 using SilupostWeb.Domain.ViewModel;
 using System.Collections.Generic;
 
-namespace POSWeb.POS.Mapping.Profiles
+namespace SilupostWeb.Mapping.Profiles
 {
     public class SystemUserProfile : Profile
     {
@@ -13,36 +13,46 @@ namespace POSWeb.POS.Mapping.Profiles
             this.IgnoreUnmapped();
             CreateMap<SystemUserModel, SystemUserViewModel>();
             CreateMap<CreateSystemUserBindingModel, SystemUserModel>()
-                .ForPath(dest => dest.EntityInformation, opt => opt.MapFrom(src =>
-                    new EntityInformationModel
+                .ForPath(dest => dest.LegalEntity, opt => opt.MapFrom(src =>
+                    new LegalEntityModel
                     {
                         FirstName = src.FirstName,
                         LastName = src.LastName,
                         MiddleName = src.MiddleName,
                         EmailAddress = src.EmailAddress,
+                        MobileNumber = src.MobileNumber,
                         BirthDate = src.BirthDate,
-                        Gender = new EntityGenderTypeModel() {GenderId = src.GenderId },
-                        CivilStatusType = new EntityCivilStatusTypeModel() { CivilStatusTypeId = src.CivilStatusTypeId },
-                        Location = new LocationModel() { LocationId = src.LocationId }
+                        Gender = new EntityGenderModel() { GenderId = src.GenderId },
                     }))
-                .ForPath(dest=> dest.EntityInformation.Contact, opt => opt.MapFrom(src=> src.Contact))
-                .ForPath(dest => dest.Location, opt => opt.MapFrom(src =>
-                new LocationModel()
-                {
-                    LocationId = src.LocationId
-                })); ;
+                .ForPath(dest => dest.SystemUserType, opt => opt.MapFrom(src =>
+                    new SystemUserTypeModel
+                    {
+                        SystemUserTypeId = src.SystemUserTypeId
+                    }))
+                .ForPath(dest => dest.SystemRecordManager, opt => opt.MapFrom(src =>
+                    new SystemRecordManagerModel()))
+                .ForPath(dest => dest.SystemWebAdminUserRoles, opt => opt.MapFrom(src =>
+                    new List<SystemWebAdminUserRolesModel>()));
             CreateMap<UpdateSystemUserBindingModel, SystemUserModel>()
-                .ForPath(dest => dest.EntityInformation, opt => opt.MapFrom(src =>
-                    new EntityInformationModel
+                .ForPath(dest => dest.LegalEntity, opt => opt.MapFrom(src =>
+                    new LegalEntityModel
                     {
                         FirstName = src.FirstName,
                         LastName = src.LastName,
                         MiddleName = src.MiddleName,
                         EmailAddress = src.EmailAddress,
+                        MobileNumber = src.MobileNumber,
                         BirthDate = src.BirthDate,
-                        Gender = new EntityGenderTypeModel() { GenderId = src.GenderId },
-                        CivilStatusType = new EntityCivilStatusTypeModel() { CivilStatusTypeId = src.CivilStatusTypeId }
-                    }));
+                        Age = 0,
+                        Gender = new EntityGenderModel() { GenderId = src.GenderId }
+                    }))
+                .ForPath(dest => dest.SystemRecordManager, opt => opt.MapFrom(src =>
+                    new SystemRecordManagerModel()))
+                .ForPath(dest => dest.SystemWebAdminUserRoles, opt => opt.MapFrom(src =>
+                    new List<SystemWebAdminUserRolesModel>()));
+
+
+            CreateMap<SystemUserTypeModel, SystemUserTypeViewModel>();
         }
     }
 }

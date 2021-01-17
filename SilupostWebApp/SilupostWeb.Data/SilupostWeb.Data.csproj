@@ -47,24 +47,32 @@
   <ItemGroup>
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
-    <Compile Include="Entity\EntityInformationModel.cs" />
+    <Compile Include="Entity\SystemUserTypeModel.cs" />
+    <Compile Include="Entity\EntityGenderModel.cs" />
+    <Compile Include="Entity\EntityStatusModel.cs" />
+    <Compile Include="Entity\FileModel.cs" />
+    <Compile Include="Entity\LegalEntityModel.cs" />
     <Compile Include="Entity\LocationModel.cs" />
     <Compile Include="Entity\PageResultsModel.cs" />
-    <Compile Include="Entity\SystemMenuRoleModel.cs" />
-    <Compile Include="Entity\SystemPrivilegeModel.cs" />
+    <Compile Include="Entity\SystemWebAdminModuleModel.cs" />
+    <Compile Include="Entity\SystemWebAdminMenuRolesModel.cs" />
     <Compile Include="Entity\SystemRecordManagerModel.cs" />
-    <Compile Include="Entity\SystemRoleModel.cs" />
-    <Compile Include="Entity\SystemMenuModel.cs" />
-    <Compile Include="Entity\SystemRolePrivilegesModel.cs" />
+    <Compile Include="Entity\SystemWebAdminRoleModel.cs" />
+    <Compile Include="Entity\SystemWebAdminMenuModel.cs" />
+    <Compile Include="Entity\SystemWebAdminRolePrivilegesModel.cs" />
     <Compile Include="Entity\SystemUserModel.cs" />
-    <Compile Include="Entity\SystemUserRolesModel.cs" />
-    <Compile Include="Interface\IEntityInformationRepository.cs" />
+    <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
+    <Compile Include="Interface\ILegalEntityRepository.cs" />
+    <Compile Include="Interface\ISystemWebAdminMenuRolesRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemWebAdminUserRolesRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemUserRepository.cs" />
-    <Compile Include="Interface\ISystemRoleRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemWebAdminRoleRepositoryDAC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntityInformationDAC.cs" />
+    <Compile Include="LegalEntityDAC.cs" />
+    <Compile Include="SystemWebAdminMenurRolesDAC.cs" />
+    <Compile Include="SystemWebAdminUserRolesDAC.cs" />
     <Compile Include="SystemUserDAC.cs" />
-    <Compile Include="SystemRoleDAC.cs" />
+    <Compile Include="SystemWebAdminRoleDAC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

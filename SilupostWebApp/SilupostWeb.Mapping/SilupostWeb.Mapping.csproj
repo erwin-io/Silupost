@@ -53,10 +53,11 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="AutoMapperHelper.cs" />
-    <Compile Include="Profiles\SystemMenuRoleProfile.cs" />
-    <Compile Include="Profiles\PageResultProfile.cs" />
-    <Compile Include="Profiles\SystemUserRolesProfile.cs" />
-    <Compile Include="Profiles\SystemRoleProfile.cs" />
+    <Compile Include="Profiles\SystemWebAdminMenuProfile.cs" />
+    <Compile Include="Profiles\SystemWebAdminMenuRolesProfile.cs" />
+    <Compile Include="Profiles\SystemWebAdminUserRolesProfile.cs" />
+    <Compile Include="Profiles\SystemWebAdminRoleProfile.cs" />
+    <Compile Include="Profiles\LegalEntityProfile.cs" />
     <Compile Include="Profiles\SystemUserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

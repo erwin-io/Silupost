@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SilupostWeb.Data.Entity
 {
-    public class PageResultsModel<T>
+    public class PageResultsModel
     {
-        public IEnumerable<T> Items { get; set; }
-        public int TotalCount { get; set; }
+        public long TotalRows { get; set; }
     }
 }
