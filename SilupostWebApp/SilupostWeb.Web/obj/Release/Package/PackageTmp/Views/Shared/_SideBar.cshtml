@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+ <!-- Sidebar Starts -->
+<div class="pmd-sidebar-overlay"></div>
+
+<!-- Left sidebar -->
+<aside id="basicSidebar" class="pmd-sidebar sidebar-default pmd-sidebar-slide-push pmd-sidebar-left pmd-sidebar-open bg-fill-darkblue sidebar-with-icons basic-sub-menu-1" role="navigation">
+	<ul class="nav pmd-sidebar-nav">
+		
+        @*@Html.Partial("~/Views/Account/_UserNavigationInfo.cshtml")*@
+
+        <li> 
+            @if (ViewBag.Page.MenuName.Equals("Dashboard"))
+            {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-sm">dashboard</i><span class="media-body">Dashboard</span></a>}
+            else
+            {<a class="pmd-ripple-effect" href="/"><i class="material-icons media-left pmd-sm">dashboard</i> <span class="media-body">Dashboard</span></a>}
+
+        </li>
+
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Configuration") ? "open" : "")"> 
+            @if (ViewBag.Page.Module.Equals("Configuration"))
+            {
+                <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">settings</i> <span class="media-body">Configuration</span>
+                </a> 
+            }
+            else
+            {
+                <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">settings</i> 
+                    <span class="media-body">Configuration</span>
+                </a>
+             }
+        <ul class="dropdown-menu">
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Pet Group"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Group</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/PetGroup"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Group</span></a>}
+            </li>
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Pet Type"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Type</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/PetType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Type</span></a>}
+            </li>
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Pet Classification"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Classification</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/PetClassification"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Classification</span></a>}
+            </li>
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Pet Ability"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Ability</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/PetAbility"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Ability</span></a>}
+            </li>
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Location Configuration"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Location Configuration</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/Location"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Location Configuration</span></a>}
+            </li>
+        </ul>
+        </li>
+	</ul>
+</aside>
+<!-- End Left sidebar -->
+<!-- Sidebar Ends -->  
+
+
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            var sPath = window.location.pathname;
+            var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+            $(".pmd-sidebar-nav").each(function () {
+                $(this).find("a[href='" + sPage + "']").parents(".dropdown").addClass("open");
+                $(this).find("a[href='" + sPage + "']").parents(".dropdown").find('.dropdown-menu').css("display", "block");
+                $(this).find("a[href='" + sPage + "']").parents(".dropdown").find('a.dropdown-toggle').addClass("active");
+                $(this).find("a[href='" + sPage + "']").addClass("active");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+            var toggles = document.querySelectorAll(".c-hamburger");
+            for (var i = toggles.length - 1; i >= 0; i--) {
+                var toggle = toggles[i];
+                toggleHandler(toggle);
+            };
+            function toggleHandler(toggle) {
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+                });
+            }
+
+        })();
+    </script>
+}

@@ -49,7 +49,7 @@ namespace SilupostWeb.Facade
             var result = new PageResultsViewModel<SystemWebAdminRoleViewModel>();
             var data = _systemWebAdminRoleRepositoryDAC.GetPage(Search, PageNo, PageSize, OrderColumn, OrderDir);
             result.Items = AutoMapperHelper<SystemWebAdminRoleModel, SystemWebAdminRoleViewModel>.MapList(data);
-            result.TotalRows = data.FirstOrDefault().PageResult.TotalRows;
+            result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows: 0;
             return result;
         } 
 

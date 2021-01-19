@@ -54,6 +54,8 @@
     <Compile Include="ViewModel\EntityStatusViewModel.cs" />
     <Compile Include="ViewModel\FileViewModel.cs" />
     <Compile Include="ViewModel\LegalEntityViewModel.cs" />
+    <Compile Include="ViewModel\LookupTableViewModel.cs" />
+    <Compile Include="ViewModel\LookupViewModel.cs" />
     <Compile Include="ViewModel\PageResultsViewModel.cs" />
     <Compile Include="ViewModel\SystemRecordManagerViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuRolesViewModel.cs" />

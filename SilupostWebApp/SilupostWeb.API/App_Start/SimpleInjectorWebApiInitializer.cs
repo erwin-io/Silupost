@@ -37,6 +37,7 @@ namespace SilupostWeb.API.App_Start
             string connectionString = Configuration.ConnectionString();;
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
+            container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);
             container.Register<ISystemUserRepository, SystemUserDAC>(Lifestyle.Scoped);
             container.Register<ILegalEntityRepository, LegalEntityDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
@@ -45,6 +46,7 @@ namespace SilupostWeb.API.App_Start
             #endregion
 
             #region Facade
+            container.Register<ILookupFacade, LookupFacade>(Lifestyle.Scoped);
             container.Register<ISystemUserFacade, SystemUserFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleFacade, SystemWebAdminRoleFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesFacade, SystemWebAdminMenuRolesFacade>(Lifestyle.Scoped);

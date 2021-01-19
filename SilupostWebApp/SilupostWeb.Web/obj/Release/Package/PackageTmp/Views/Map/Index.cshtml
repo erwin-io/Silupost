@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+
+@section Styles {
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            height: 100%;
+            min-width: 100%;
+            margin: auto;
+        }
+    </style>
+}
+
+<div>
+    <div style="display: none;">
+        <br />
+        <span>Latitude</span>
+        <br />
+        <input type="text" id="Latitude" name="">
+        <br />
+        <span>Longitude</span>
+        <br />
+        <input type="text" id="Longitude" name="">
+        <br />
+    </div>
+    <div>
+        <div id="map">
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>    
+    <script src="~/Scripts/Controller/Map.js"></script>
+    <script>
+        map.init();
+    </script>
+}

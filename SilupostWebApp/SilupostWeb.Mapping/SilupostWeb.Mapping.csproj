@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="AutoMapperHelper.cs" />
+    <Compile Include="Profiles\LookupTableProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuRolesProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminUserRolesProfile.cs" />
