@@ -38,6 +38,12 @@
                 {<a class="pmd-ripple-effect" href="/SystemWebAdminRole"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Role</span></a>}
             </li>
             <li>
+                @if (ViewBag.Page.MenuName.Equals("System User"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System User</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/SystemUser"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System User</span></a>}
+            </li>
+            <li>
                 @if (ViewBag.Page.MenuName.Equals("System Web Admin Menu Roles"))
                 {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Menu Roles</span></a>}
                 else

@@ -696,6 +696,7 @@
     <Content Include="plugins\toastr\toastr.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
+    <Content Include="Scripts\Controller\SystemUser.js" />
     <Content Include="Scripts\Controller\SystemWebAdminRole.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -720,7 +721,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LegalEntityController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
+    <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -759,6 +762,10 @@
     <Content Include="Views\SystemWebAdminRole\_Table.cshtml" />
     <Content Include="Views\SystemWebAdminMenuRoles\_Table.cshtml" />
     <Content Include="Views\SystemWebAdminMenuRoles\Index.cshtml" />
+    <Content Include="Views\SystemUser\_Table.cshtml" />
+    <Content Include="Views\SystemUser\Index.cshtml" />
+    <Content Include="Views\LegalEntity\_LegalEntity.cshtml" />
+    <Content Include="Views\SystemUser\_Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

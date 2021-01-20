@@ -42,24 +42,39 @@ namespace SilupostWeb.API.Controllers
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir)
+        public IHttpActionResult GetPage(int Draw, long SystemUserType, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
-            AppResponseModel<PageResultsViewModel<SystemUserViewModel>> response = new AppResponseModel<PageResultsViewModel<SystemUserViewModel>>();
+            DataTableResponseModel<IList<SystemUserViewModel>> response = new DataTableResponseModel<IList<SystemUserViewModel>>();
 
             try
             {
-                var pageResults = _systemUserFacade.GetPage(Search, SystemUserType, PageNo, PageSize, OrderColumn, OrderDir);
-                response.Data = pageResults;
-                response.IsSuccess = true;
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
+                long recordsFiltered = 0;
+                long recordsTotal = 0;
+                var pageResults = _systemUserFacade.GetPage(
+                    (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
+                    SystemUserType,
+                    PageNo,
+                    PageSize,
+                    OrderColumn,
+                    OrderDir);
+                var records = pageResults.Items.ToList();
+                recordsTotal = pageResults.TotalRows;
+                recordsFiltered = pageResults.TotalRows;
 
+                response.draw = Draw;
+                response.recordsFiltered = recordsFiltered;
+                response.recordsTotal = recordsTotal;
+                response.data = pageResults.Items.ToList();
+
+                return new POSAPIHttpActionResult<DataTableResponseModel<IList<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
             }
             catch (Exception ex)
             {
-                response.DeveloperMessage = ex.Message;
-                response.Message = Messages.ServerError;
+                var exception = new AppResponseModel<object>();
+                exception.DeveloperMessage = ex.Message;
+                exception.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
+                return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, exception);
             }
         }
 

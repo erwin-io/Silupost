@@ -105,6 +105,12 @@ namespace SilupostWeb.Facade
                 }
                 var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
                 var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _legalEntityRepository.Update(updateModel.LegalEntity);
+                if (!success)
+                {
+                    throw new Exception("Error Updating System User");
+                }
                 foreach (var role in currentSystemWebAdminUserRoles)
                 {
                     if(!model.SystemWebAdminUserRoles.Any(swaur=>swaur.SystemWebAdminRoleId == role.SystemWebAdminRole.SystemWebAdminRoleId))
