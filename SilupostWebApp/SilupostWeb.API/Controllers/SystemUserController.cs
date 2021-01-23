@@ -42,24 +42,39 @@ namespace SilupostWeb.API.Controllers
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir)
+        public IHttpActionResult GetPage(int Draw, long SystemUserType, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
-            AppResponseModel<PageResultsViewModel<SystemUserViewModel>> response = new AppResponseModel<PageResultsViewModel<SystemUserViewModel>>();
+            DataTableResponseModel<IList<SystemUserViewModel>> response = new DataTableResponseModel<IList<SystemUserViewModel>>();
 
             try
             {
-                var pageResults = _systemUserFacade.GetPage(Search, SystemUserType, PageNo, PageSize, OrderColumn, OrderDir);
-                response.Data = pageResults;
-                response.IsSuccess = true;
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
+                long recordsFiltered = 0;
+                long recordsTotal = 0;
+                var pageResults = _systemUserFacade.GetPage(
+                    (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
+                    SystemUserType,
+                    PageNo,
+                    PageSize,
+                    OrderColumn,
+                    OrderDir);
+                var records = pageResults.Items.ToList();
+                recordsTotal = pageResults.TotalRows;
+                recordsFiltered = pageResults.TotalRows;
 
+                response.draw = Draw;
+                response.recordsFiltered = recordsFiltered;
+                response.recordsTotal = recordsTotal;
+                response.data = pageResults.Items.ToList();
+
+                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
             }
             catch (Exception ex)
             {
-                response.DeveloperMessage = ex.Message;
-                response.Message = Messages.ServerError;
+                var exception = new AppResponseModel<object>();
+                exception.DeveloperMessage = ex.Message;
+                exception.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, exception);
             }
         }
 
@@ -75,7 +90,7 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 response.Message = string.Format(Messages.InvalidId, "System User");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -86,12 +101,12 @@ namespace SilupostWeb.API.Controllers
                 {
                     response.IsSuccess = true;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -100,7 +115,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -116,13 +131,13 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(username))
             {
                 response.Message = string.Format(Messages.CustomError, "Invalid Username!");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             if (string.IsNullOrEmpty(password))
             {
                 response.Message = string.Format(Messages.CustomError, "Invalid Username!");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -133,12 +148,12 @@ namespace SilupostWeb.API.Controllers
                 {
                     response.IsSuccess = true;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = string.Format(Messages.CustomError, "Username or Password is incorrect!");
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -147,7 +162,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -177,12 +192,12 @@ namespace SilupostWeb.API.Controllers
                     response.IsSuccess = true;
                     response.Message = Messages.Created;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.Created, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.Created, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
 
                 }
             }
@@ -191,7 +206,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
         [Route("")]
@@ -208,7 +223,7 @@ namespace SilupostWeb.API.Controllers
             if (model != null && string.IsNullOrEmpty(model.SystemUserId))
             {
                 response.Message = string.Format(Messages.InvalidId, "System User");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -222,7 +237,7 @@ namespace SilupostWeb.API.Controllers
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "System User");
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
                 bool success = _systemUserFacade.Update(model, RecordedBy);
                 response.IsSuccess = success;
@@ -232,12 +247,12 @@ namespace SilupostWeb.API.Controllers
                     result = _systemUserFacade.Find(model.SystemUserId);
                     response.Message = Messages.Updated;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadGateway, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadGateway, response);
                 }
             }
             catch (Exception ex)
@@ -245,7 +260,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -261,7 +276,7 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 response.Message = string.Format(Messages.InvalidId, "System User");
-                return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -276,7 +291,7 @@ namespace SilupostWeb.API.Controllers
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "System User");
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
                 bool success = _systemUserFacade.Remove(id, RecordedBy);
@@ -285,12 +300,12 @@ namespace SilupostWeb.API.Controllers
                 if (success)
                 {
                     response.Message = Messages.Removed;
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -299,7 +314,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
     }

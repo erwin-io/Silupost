@@ -40,24 +40,39 @@ namespace SilupostWeb.API.Controllers
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
+        public IHttpActionResult GetPage(int Draw, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
-            AppResponseModel<PageResultsViewModel<SystemWebAdminRoleViewModel>> response = new AppResponseModel<PageResultsViewModel<SystemWebAdminRoleViewModel>>();
+            DataTableResponseModel<IList<SystemWebAdminRoleViewModel>> response = new DataTableResponseModel<IList<SystemWebAdminRoleViewModel>>();
 
             try
             {
-                var pageResults = _systemWebAdminRoleFacade.GetPage(Search, PageNo, PageSize, OrderColumn, OrderDir);
-                response.Data = pageResults;
-                response.IsSuccess = true;
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemWebAdminRoleViewModel>>>(Request, HttpStatusCode.OK, response);
+                
+                long recordsFiltered = 0;
+                long recordsTotal = 0;
+                var pageResults = _systemWebAdminRoleFacade.GetPage(
+                    (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
+                    PageNo,
+                    PageSize,
+                    OrderColumn,
+                    OrderDir);
+                var records = pageResults.Items.ToList();
+                recordsTotal = pageResults.TotalRows;
+                recordsFiltered = pageResults.TotalRows;
+
+                response.draw = Draw;
+                response.recordsFiltered = recordsFiltered;
+                response.recordsTotal = recordsTotal;
+                response.data = pageResults.Items.ToList();
+                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<SystemWebAdminRoleViewModel>>>(Request, HttpStatusCode.OK, response);
 
             }
             catch (Exception ex)
             {
-                response.DeveloperMessage = ex.Message;
-                response.Message = Messages.ServerError;
+                var exception = new AppResponseModel<object>();
+                exception.DeveloperMessage = ex.Message;
+                exception.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<PageResultsViewModel<SystemWebAdminRoleViewModel>>>(Request, HttpStatusCode.OK, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, exception);
             }
         }
 
@@ -73,7 +88,7 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 response.Message = string.Format(Messages.InvalidId, "System Web Admin Role");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -84,12 +99,12 @@ namespace SilupostWeb.API.Controllers
                 {
                     response.IsSuccess = true;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -98,7 +113,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -128,12 +143,12 @@ namespace SilupostWeb.API.Controllers
                     response.IsSuccess = true;
                     response.Message = Messages.Created;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.Created, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.Created, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
 
                 }
             }
@@ -142,7 +157,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
         [Route("")]
@@ -159,7 +174,7 @@ namespace SilupostWeb.API.Controllers
             if (model != null && string.IsNullOrEmpty(model.SystemWebAdminRoleId))
             {
                 response.Message = string.Format(Messages.InvalidId, "System Web Admin Role");
-                return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -173,7 +188,7 @@ namespace SilupostWeb.API.Controllers
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "System Web Admin Role");
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
                 bool success = _systemWebAdminRoleFacade.Update(model, RecordedBy);
                 response.IsSuccess = success;
@@ -183,12 +198,12 @@ namespace SilupostWeb.API.Controllers
                     result = _systemWebAdminRoleFacade.Find(model.SystemWebAdminRoleId);
                     response.Message = Messages.Updated;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadGateway, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadGateway, response);
                 }
             }
             catch (Exception ex)
@@ -196,7 +211,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemWebAdminRoleViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -212,7 +227,7 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 response.Message = string.Format(Messages.InvalidId, "System Web Admin Role");
-                return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -227,7 +242,7 @@ namespace SilupostWeb.API.Controllers
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "System Web Admin Role");
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
                 bool success = _systemWebAdminRoleFacade.Remove(id, RecordedBy);
@@ -236,12 +251,12 @@ namespace SilupostWeb.API.Controllers
                 if (success)
                 {
                     response.Message = Messages.Removed;
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -250,7 +265,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
     }

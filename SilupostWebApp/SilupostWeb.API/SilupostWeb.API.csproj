@@ -268,10 +268,14 @@
     <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
+    <Compile Include="Controllers\SystemLookupTableController.cs" />
+    <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
-    <Compile Include="Filters\POSAPIHttpActionResult.cs" />
+    <Compile Include="Filters\SilupostAPIHttpActionResult.cs" />
     <Compile Include="Filters\ValidateModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -279,6 +283,7 @@
     <Compile Include="Helpers\Configuration.cs" />
     <Compile Include="Helpers\Constant.cs" />
     <Compile Include="Helpers\GlobalVariables.cs" />
+    <Compile Include="Models\DataTableResponseModel.cs" />
     <Compile Include="Models\AppResponseModel .cs" />
     <Compile Include="Models\AppToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -349,7 +354,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50534</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51000/</IISUrl>
+          <IISUrl>http://localhost:8100/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

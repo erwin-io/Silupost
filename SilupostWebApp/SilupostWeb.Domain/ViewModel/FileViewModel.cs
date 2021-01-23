@@ -8,5 +8,12 @@ namespace SilupostWeb.Domain.ViewModel
 {
     public class FileViewModel
     {
+        public string FileId { get; set; }
+        public string FileName { get; set; }
+        public string MimeType { get; set; }
+        public int FileSize { get; set; }
+        public byte[] FileContent { get; set; }
+        public SystemRecordManagerViewModel SystemRecordManager { get; set; }
+        public EntityStatusViewModel EntityStatus { get; set; }
     }
 }

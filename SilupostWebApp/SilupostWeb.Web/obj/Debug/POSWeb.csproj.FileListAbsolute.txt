@@ -1,0 +1,89 @@
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\DataTables.Mvc.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Practices.Unity.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Newtonsoft.Json.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Data.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Domain.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Facade.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Mapping.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.Integration.Web.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.Integration.Web.Mvc.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Helpers.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Http.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Http.WebHost.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Mvc.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Optimization.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Razor.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.WebPages.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.WebPages.Razor.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\WebActivator.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\WebActivatorEx.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Dapper.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\AutoMapper.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Data.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Domain.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Facade.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\POSWeb.Mapping.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Practices.Unity.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Practices.Unity.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Newtonsoft.Json.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.Integration.Web.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\SimpleInjector.Integration.Web.Mvc.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Net.Http.Formatting.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Http.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\System.Web.Http.WebHost.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\AutoMapper.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\AutoMapper.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\obj\Debug\POSWeb.csprojResolveAssemblyReference.cache
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\obj\Debug\POSWeb.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\obj\Debug\POSWeb.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.dll.config
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\DataTables.Mvc.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.Security.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Newtonsoft.Json.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Owin.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Data.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Domain.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Facade.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Mapping.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Dapper.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\AutoMapper.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Data.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Domain.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Facade.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\POSWeb.Mapping.pdb
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Microsoft.Owin.Security.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\bin\Newtonsoft.Json.xml
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\obj\Debug\POSWeb.csprojAssemblyReference.cache
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\obj\Debug\POSWeb.csproj.CoreCompileInputs.cache
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\obj\Debug\POSWeb.csproj.CopyComplete
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\obj\Debug\POSWeb.dll
+C:\Users\SHENA\Desktop\POSWeb\POSWeb\POSWeb\obj\Debug\POSWeb.pdb
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.Security.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Owin.dll
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Erwin\Documents\Visual Studio 2012\Projects\POSWeb\POSWeb\bin\Microsoft.Owin.Security.xml

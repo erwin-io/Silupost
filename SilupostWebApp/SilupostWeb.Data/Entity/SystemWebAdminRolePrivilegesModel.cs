@@ -11,7 +11,6 @@ namespace SilupostWeb.Data.Entity
         public string SystemWebAdminRolePrivilegesId { get; set; }
         public SystemWebAdminRoleModel SystemWebAdminRole { get; set; }
         public bool IsAllowed { get; set; }
-        public LocationModel Location { get; set; }
         public SystemRecordManagerModel CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public SystemRecordManagerModel UpdatedBy { get; set; }
