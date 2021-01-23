@@ -268,11 +268,14 @@
     <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
     <Compile Include="Controllers\SystemLookupTableController.cs" />
+    <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
-    <Compile Include="Filters\POSAPIHttpActionResult.cs" />
+    <Compile Include="Filters\SilupostAPIHttpActionResult.cs" />
     <Compile Include="Filters\ValidateModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

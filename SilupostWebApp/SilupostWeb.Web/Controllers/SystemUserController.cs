@@ -20,7 +20,7 @@ namespace SilupostWeb.Web.Controllers
         {
             var page = new PageModel();
             page.MenuName = "System User";
-            page.Module = "Web Admin Security";
+            page.Module = "System Admin Security";
             page.Title = "System User";
             ViewBag.Page = page;
             return View();

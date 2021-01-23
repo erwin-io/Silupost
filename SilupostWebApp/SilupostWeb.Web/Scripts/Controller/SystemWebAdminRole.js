@@ -83,7 +83,7 @@ var systemWebAdminRoleController = function() {
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-danger" type="button" id="drop-role-'+full.SystemWebAdminRoleId+'" data-toggle="dropdown" aria-expanded="true">'
+                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.SystemWebAdminRoleId+'" data-toggle="dropdown" aria-expanded="true">'
                                     +'<i class="material-icons pmd-sm">more_vert</i>'
                                 +'</button>'
                                 +'<ul aria-labelledby="drop-role-'+full.SystemWebAdminRoleId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'

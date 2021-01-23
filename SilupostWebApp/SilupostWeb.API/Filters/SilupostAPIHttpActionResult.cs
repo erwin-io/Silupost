@@ -14,7 +14,7 @@ namespace SilupostWeb.API.Filters
     /// Jinisys implementation of IHttpActionResult to return custom content
     /// </summary>
     /// <typeparam name="T">Return content data type</typeparam>
-    public class POSAPIHttpActionResult<T> : IHttpActionResult
+    public class SilupostAPIHttpActionResult<T> : IHttpActionResult
     {
         private T content;
         private HttpStatusCode status;
@@ -25,7 +25,7 @@ namespace SilupostWeb.API.Filters
         /// <param name="request">HttpRequestMessage of current ApiController</param>
         /// <param name="status">Response status code</param>
         /// <param name="content">Response content</param>
-        public POSAPIHttpActionResult(HttpRequestMessage request, HttpStatusCode status, T content)
+        public SilupostAPIHttpActionResult(HttpRequestMessage request, HttpStatusCode status, T content)
         {
             this.request = request;
             this.status = status;

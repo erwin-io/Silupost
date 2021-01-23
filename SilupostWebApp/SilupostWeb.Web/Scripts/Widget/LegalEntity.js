@@ -38,6 +38,8 @@ var legalEntityController = function() {
         $('#BirthDate').datetimepicker({
             format: 'MM/DD/YYYY'
         });
+
+        $('#BirthDate').parent().addClass('pmd-textfield-floating-label-completed');
         $(".select-simple").select2({
             theme: "bootstrap",
             minimumResultsForSearch: Infinity,

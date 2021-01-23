@@ -34,7 +34,12 @@ namespace SilupostWeb.API.App_Start
 
         private static void InitializeContainer(Container container)
         {
-            string connectionString = Configuration.ConnectionString();;
+            string connectionString = Configuration.ConnectionString();
+
+            GlobalVariables.goDefaultCrimeIncidentTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeProfilePic");
+            GlobalVariables.goDefaultEnforcementTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeProfilePic");
+            GlobalVariables.goDefaultEnforcementUnitProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitProfilePic");
+            GlobalVariables.goDefaultEnforcementStationProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationProfilePic");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);
@@ -43,6 +48,9 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminUserRolesRepositoryDAC, SystemWebAdminUserRolesDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentTypeRepositoryDAC, CrimeIncidentTypeDAC>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentCategoryRepositoryDAC, CrimeIncidentCategoryDAC>(Lifestyle.Scoped);
+            container.Register<IFileRepositoryDAC, FileDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -51,6 +59,8 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemWebAdminRoleFacade, SystemWebAdminRoleFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesFacade, SystemWebAdminMenuRolesFacade>(Lifestyle.Scoped);
             container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentTypeFacade, CrimeIncidentTypeFacade>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentCategoryFacade, CrimeIncidentCategoryFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

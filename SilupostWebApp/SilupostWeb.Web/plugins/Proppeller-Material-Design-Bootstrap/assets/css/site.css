@@ -3,21 +3,25 @@
 }
 
     .web-theme .navbar.navbar-fixed-top.pmd-navbar {
-        background-color: #ff5252 !important;
-        border-color: #ff5252!important;
+        /*background-color: #ff5252 !important;//RED THEME
+        border-color: #ff5252 !important;*/
+        background-color: #4285f4 !important;
+        border-color: #4285f4 !important;
     }
     .web-theme .pmd-sidebar-left .nav > li > a.active {
-        background-color: #ff8a80 !important;
+        /*        background-color: #ff8a80 !important;*/ /* RED THEME */
+        background-color: #007bff !important;
     }
     .web-theme .pmd-table .selected, .web-theme .pmd-table .selected td {
-        background-color: #ff8a80 !important;
+        /*        background-color: #ff8a80 !important;*/ /* RED THEME */
+        background-color: #0172d2 !important;
     }
     .web-theme .select2-container--bootstrap .select2-results__option[aria-selected=true] {
-        background-color: #ff8a80;
+        /*        background-color: #ff8a80;*/ /* RED THEME */
     }
 
     .web-theme .select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
-        background-color: #ff8a80;
+        /*        background-color: #ff8a80;*/ /* RED THEME */
     }
     .admin-footer {
     margin-top: 0 !important;

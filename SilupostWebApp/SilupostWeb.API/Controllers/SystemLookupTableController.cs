@@ -49,7 +49,7 @@ namespace SilupostWeb.API.Controllers
             if (string.IsNullOrEmpty(TableNames))
             {
                 response.Message = string.Format(Messages.InvalidId, "System Lookup Table");
-                return new POSAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -65,12 +65,12 @@ namespace SilupostWeb.API.Controllers
                 {
                     response.IsSuccess = true;
                     response.Data = result;
-                    return new POSAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new POSAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -79,7 +79,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new POSAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
     }

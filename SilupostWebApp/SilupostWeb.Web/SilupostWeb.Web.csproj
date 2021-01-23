@@ -697,6 +697,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
     <Content Include="Scripts\Controller\SystemUser.js" />
+    <Content Include="Scripts\Controller\CrimeIncidentType.js" />
     <Content Include="Scripts\Controller\SystemWebAdminRole.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -722,6 +723,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LegalEntityController.cs" />
+    <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
@@ -766,6 +768,8 @@
     <Content Include="Views\SystemUser\Index.cshtml" />
     <Content Include="Views\LegalEntity\_LegalEntity.cshtml" />
     <Content Include="Views\SystemUser\_Details.cshtml" />
+    <Content Include="Views\CrimeIncidentType\_Table.cshtml" />
+    <Content Include="Views\CrimeIncidentType\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

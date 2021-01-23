@@ -16,11 +16,35 @@
 
         </li>
 
-        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Web Admin Security") ? "open" : "")">
-            @if (ViewBag.Page.Module.Equals("Web Admin Security"))
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Setup") ? "open" : "")">
+            @if (ViewBag.Page.Module.Equals("System Setup"))
             {
                 <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
-                    <i class="material-icons media-left pmd-sm">security</i> <span class="media-body">Admin Security</span>
+                    <i class="material-icons media-left pmd-sm">settings</i> <span class="media-body">System Setup</span>
+                </a>
+            }
+            else
+            {
+                <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">settings</i>
+                    <span class="media-body">System Setup</span>
+                </a>
+            }
+            <ul class="dropdown-menu">
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Admin Security") ? "open" : "")">
+            @if (ViewBag.Page.Module.Equals("System Admin Security"))
+            {
+                <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">security</i> <span class="media-body">Security</span>
                 </a>
             }
             else
@@ -30,26 +54,26 @@
                     <span class="media-body">Security</span>
                 </a>
             }
-        <ul class="dropdown-menu">
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("System Web Admin Role"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Role</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/SystemWebAdminRole"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Role</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("System User"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System User</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/SystemUser"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System User</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("System Web Admin Menu Roles"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Menu Roles</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/SystemWebAdminMenuRoles"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Menu Roles</span></a>}
-            </li>
-        </ul>
+            <ul class="dropdown-menu">
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System Role"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Role</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemWebAdminRole"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Role</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System User"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System User</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemUser"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System User</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System Menu Roles"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Menu Roles</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemWebAdminMenuRoles"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Menu Roles</span></a>}
+                </li>
+            </ul>
         </li>
     </ul>
 </aside>

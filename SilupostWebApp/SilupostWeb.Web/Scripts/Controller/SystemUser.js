@@ -65,14 +65,34 @@ var systemUserController = function() {
                 }
             },
             Messages: {
-                LegalEntityId: "Please enter LegalEntityId",
-                Firstname: "Please enter a Firstname",
-                Middlename: "Please enter Middlename",
-                Lastname: "Please enter Lastname",
+                FirstName: "Please enter a Firstname",
+                MiddleName: "Please enter Middlename",
+                LastName: "Please enter Lastname",
                 BirthDate: "Please select Birth Date",
-                Gender: "Please select Gender",
+                GenderId: "Please select Gender",
+                EmailAddress: "Please select Gender"
             },
         }
+
+
+        $(window).resize(function () {
+            if ($("#table-systemUser").hasClass('collapsed')) {
+                $("#btnDelete").removeClass("hidden");
+                $("#btnEdit").removeClass("hidden");
+            } else {
+                $("#btnDelete").addClass("hidden");
+                $("#btnEdit").addClass("hidden");
+            }
+        });
+        $(document).ready(function () {
+            if ($("#table-systemUser").hasClass('collapsed')) {
+                $("#btnDelete").removeClass("hidden");
+                $("#btnEdit").removeClass("hidden");
+            } else {
+                $("#btnDelete").addClass("hidden");
+                $("#btnEdit").addClass("hidden");
+            }
+        });
     };
 
     var initLookup = function(){
@@ -86,7 +106,7 @@ var systemUserController = function() {
         form.validate({
             ignore:[],
             rules: {
-                Username: {
+                UserName: {
                     required: true,
                     minlength: 4,
                 },
@@ -95,7 +115,7 @@ var systemUserController = function() {
                         return appSettings.model.IsNew;
                     },
                     minlength: function(){
-                        var min = appSettings.model.IsNew ? 8 : 0;
+                        var min = appSettings.model.IsNew ? 6 : 0;
                         return min;
                     },
                     pwcheck: function(){
@@ -112,7 +132,7 @@ var systemUserController = function() {
                 }
             },
             messages: {
-                Username: {
+                UserName: {
                     required: "Please enter Username",
                     minlength: $.validator.format("Please enter at least {0} characters."),
                 },
@@ -174,9 +194,28 @@ var systemUserController = function() {
     var initEvent = function () {
         $("#btnAdd").on("click", Add);
         $("#btnSave").on("click", Save);
-        $("#table-systemUser tbody").on("click", "tr .dropdown-menu a.edit", Edit);
-        $("#table-systemUser tbody").on("click", "tr .dropdown-menu a.remove", Delete);
+        $("#btnEdit").on("click", Edit);
+        $("#btnDelete").on("click", Delete);
+        $("#table-systemUser tbody").on("click", "tr .dropdown-menu a.edit", function () {
+            appSettings.currentId = $(this).attr("data-value");
+            Edit();
+        });
+        $("#table-systemUser tbody").on("click", "tr .dropdown-menu a.remove", function () {
+            appSettings.currentId = $(this).attr("data-value");
+            Delete();
+        });
 
+        $('#table-systemUser tbody').on('click', 'tr', function () {
+            appSettings.currentId = dataTableSystemUser.row(this).data().SystemUserId;
+            var isSelected = !$(this).hasClass('selected');
+            if (isSelected && $("#table-systemUser").hasClass('collapsed')) {
+                $("#btnDelete").removeClass("hidden");
+                $("#btnEdit").removeClass("hidden");
+            } else {
+                $("#btnDelete").addClass("hidden");
+                $("#btnEdit").addClass("hidden");
+            }
+        });
     };
 
     var initGrid = function() {
@@ -201,7 +240,7 @@ var systemUserController = function() {
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-danger" type="button" id="drop-role-'+full.SystemUserId+'" data-toggle="dropdown" aria-expanded="true">'
+                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.SystemUserId+'" data-toggle="dropdown" aria-expanded="true">'
                                     +'<i class="material-icons pmd-sm">more_vert</i>'
                                 +'</button>'
                                 +'<ul aria-labelledby="drop-role-'+full.SystemUserId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
@@ -265,6 +304,19 @@ var systemUserController = function() {
             }
         });
         dataTableSystemUser.columns.adjust();
+        //dataTableSystemUser.on('select', function (e, dt, type, indexes) {
+        //    var count = dataTableSystemUser.rows({ selected: true }).count();
+
+        //    // do something with the number of selected rows
+        //    var collapsed = $("#table-systemUser").hasClass('collapsed');
+        //    if (count >= 1 && collapsed) {
+        //        $("#btnDelete").removeClass("hidden");
+        //        $("#btnEdit").removeClass("hidden");
+        //    } else {
+        //        $("#btnDelete").addClass("hidden");
+        //        $("#btnEdit").addClass("hidden");
+        //    }
+        //});
     };
 
     var Add = function(){
@@ -280,7 +332,8 @@ var systemUserController = function() {
         appSettings.model.IsNew = true;
         appSettings.model.SystemUserTypeId = 1;
         appSettings.model.BirthDate = moment(new Date()).format("MM/DD/YYYY");
-        appSettings.model.SystemWebAdminUserRoles = [];
+        //appSettings.model.SystemWebAdminUserRoles = [];
+        appSettings.model.SelectedSystemWebAdminUserRoles = [];
         appSettings.model.lookup = {
             EntityGender: appSettings.lookup.EntityGender,
             SystemWebAdminRole: []
@@ -317,14 +370,14 @@ var systemUserController = function() {
     }
 
     var Edit = function () {
-        if ($(this).attr("data-value") != "") {
+        if (appSettings.currentId !== null || appSettings.currentId !== undefined || appSettings.currentId !== "") {
             appSettings.status.IsNew = false;
             var systemUserTemplate = $.templates('#systemUser-template');
             $("#modal-dialog").find('.modal-title').html('Update System Web User');
             $("#modal-dialog").find('.modal-footer #btnSave').html('Update');
             $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Update");
             circleProgress.show(true);
-            api.getById($(this).attr("data-value")).done(function (data) {
+            api.getById(appSettings.currentId).done(function (data) {
                 appSettings.model = {
                     SystemUserId: data.Data.SystemUserId,
                     UserName: data.Data.UserName,
@@ -349,12 +402,12 @@ var systemUserController = function() {
                     if (appSettings.lookup.SystemWebAdminRole[i].Id != undefined)
                         appSettings.model.lookup.SystemWebAdminRole.push({ id: appSettings.lookup.SystemWebAdminRole[i].Id, name: appSettings.lookup.SystemWebAdminRole[i].Name });
                 }
-                var systemWebAdminUserRoles = [];
+                var selectedSystemWebAdminUserRoles = [];
                 for(var i in data.Data.SystemWebAdminUserRoles){
                     if (data.Data.SystemWebAdminUserRoles[i].SystemWebAdminRole.SystemWebAdminRoleId != undefined)
-                        systemWebAdminUserRoles.push({id:data.Data.SystemWebAdminUserRoles[i].SystemWebAdminRole.SystemWebAdminRoleId, name:data.Data.SystemWebAdminUserRoles[i].SystemWebAdminRole.RoleName});
+                        selectedSystemWebAdminUserRoles.push({id:data.Data.SystemWebAdminUserRoles[i].SystemWebAdminRole.SystemWebAdminRoleId, name:data.Data.SystemWebAdminUserRoles[i].SystemWebAdminRole.RoleName});
                 }
-                appSettings.model.SystemWebAdminUserRoles = systemWebAdminUserRoles;
+                appSettings.model.SelectedSystemWebAdminUserRoles = selectedSystemWebAdminUserRoles;
                 //render template
                 systemUserTemplate.link("#modal-dialog .modal-body", appSettings.model);
                 //end render template
@@ -377,6 +430,8 @@ var systemUserController = function() {
                 setTimeout(1000, function()
                 {
                     $("body").addClass("modal-open");
+                    $("#user-details-tab-nav").css("width", "100%");
+                    
                 })
 
             });
@@ -384,7 +439,6 @@ var systemUserController = function() {
     }
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if (!legalEntity.valid()) {
             $("#tab-control-legalentity").trigger('click');
             return;
@@ -398,12 +452,13 @@ var systemUserController = function() {
             return;
         }
         var systemWebAdminUserRoles = [];
-        for (var i in appSettings.model.SystemWebAdminUserRoles) {
-            if (appSettings.model.SystemWebAdminUserRoles[i].id != undefined)
-                systemWebAdminUserRoles.push({ SystemWebAdminRoleId: appSettings.model.SystemWebAdminUserRoles[i].id });
+        for (var i in appSettings.model.SelectedSystemWebAdminUserRoles) {
+            if (appSettings.model.SelectedSystemWebAdminUserRoles[i].id != undefined)
+                systemWebAdminUserRoles.push({ SystemWebAdminRoleId: appSettings.model.SelectedSystemWebAdminUserRoles[i].id });
         }
 
         appSettings.model.SystemWebAdminUserRoles = systemWebAdminUserRoles;
+        console.log(appSettings.model);
         if(appSettings.status.IsNew){
             Swal.fire({
                 title: 'Save',
@@ -546,8 +601,8 @@ var systemUserController = function() {
         }
     }
 
-    var Delete = function() {
-        if($(this).attr("data-value")!= ""){
+    var Delete = function () {
+        if (appSettings.currentId !== null || appSettings.currentId !== undefined || appSettings.currentId !== "") {
             Swal.fire({
                 title: 'Remove',
                 text: "Do you want to continue!",
@@ -561,12 +616,9 @@ var systemUserController = function() {
             .then((result) => {
                 if (result.value) {
                     $(".content").find("input,button,a").prop("disabled", true).addClass("disabled");
-                    var target = $(this);
-                    var targetName = target.attr("data-name");
-                    target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/SystemUser/" + $(this).attr("data-value"),
+                        url: app.appSettings.silupostWebAPIURI + "/SystemUser/" + appSettings.currentId,
                         type: "DELETE",
                         contentType: 'application/json;charset=utf-8',
                         dataType: "json",
@@ -579,23 +631,17 @@ var systemUserController = function() {
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {
                                     circleProgress.show(true);
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                                    target.empty();
-                                    target.html(targetName);
                                     dataTableSystemUser.ajax.reload();
                                     circleProgress.close();
                                 });
                             } else {
                                 Swal.fire("Error!", result.Message, "error").then((result) => {
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                                    target.empty();
-                                    target.html(targetName);
                                 });
                             }
                         },
                         error: function (errormessage) {
                             $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                            target.empty();
-                            target.html(targetName);
                             Swal.fire('Error!',errormessage.Message,'error');
                             circleProgress.close();
                         }

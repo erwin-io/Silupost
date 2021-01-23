@@ -1,9 +1,15 @@
-﻿
-
-<script id="systemUser-template" type="text/x-jsrender">
-    <div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
+﻿<script id="systemUser-template" type="text/x-jsrender">
+    @*<div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
         <div class="pmd-tab-active-bar"></div>
         <ul class="nav nav-tabs" role="tablist" style="width:100%">
+            <li role="presentation" class="active"><a id="tab-control-legalentity" href="#tab-page-legalentity" aria-controls="tab-legalentity" role="tab" data-toggle="tab">Details</a></li>
+            <li role="presentation"><a id="tab-control-credentials" href="#tab-page-credentials" aria-controls="tab-credentials" role="tab" data-toggle="tab">Credentials</a></li>
+            <li role="presentation"><a id="tab-control-roles" href="#tab-page-roles" aria-controls="tab-roles" role="tab" data-toggle="tab">Roles</a></li>
+        </ul>
+    </div>*@
+
+    <div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
+        <ul id="user-details-tab-nav" class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a id="tab-control-legalentity" href="#tab-page-legalentity" aria-controls="tab-legalentity" role="tab" data-toggle="tab">Details</a></li>
             <li role="presentation"><a id="tab-control-credentials" href="#tab-page-credentials" aria-controls="tab-credentials" role="tab" data-toggle="tab">Credentials</a></li>
             <li role="presentation"><a id="tab-control-roles" href="#tab-page-roles" aria-controls="tab-roles" role="tab" data-toggle="tab">Roles</a></li>
@@ -60,10 +66,10 @@
                 <form id="form-SystemWebAdminUserRoles">
                     <div class="group-fields clearfix row">
                         <div class="col-xs-12">
-	                        <div class="form-group pmd-textfield">       
+                            <div class="form-group pmd-textfield">
                                 <label>System User Roles</label>
-                                <select id="SystemWebAdminUserRoles" name="SystemWebAdminUserRoles" data-link="{multisel items=lookup.SystemWebAdminRole selected=SystemWebAdminUserRoles size=lookup.SystemWebAdminRole.length}" class="form-control select-tags pmd-select2-tags"></select>
-	                        </div>  
+                                <select id="SystemWebAdminUserRoles" name="SystemWebAdminUserRoles" data-link="{multisel items=lookup.SystemWebAdminRole selected=SelectedSystemWebAdminUserRoles size=lookup.SystemWebAdminRole.length}" class="form-control select-tags pmd-select2-tags"></select>
+                            </div>
                         </div>
                     </div>
                 </form>

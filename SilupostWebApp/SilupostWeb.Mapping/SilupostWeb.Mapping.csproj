@@ -53,9 +53,12 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="AutoMapperHelper.cs" />
+    <Compile Include="Profiles\CrimeIncidentCategoryProfile.cs" />
+    <Compile Include="Profiles\FIleProfile.cs" />
     <Compile Include="Profiles\LookupTableProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuRolesProfile.cs" />
+    <Compile Include="Profiles\CrimeIncidentTypeProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminUserRolesProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminRoleProfile.cs" />
     <Compile Include="Profiles\LegalEntityProfile.cs" />

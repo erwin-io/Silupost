@@ -19,9 +19,9 @@ namespace SilupostWeb.Web.Controllers
         public ActionResult Index()
         {
             var page = new PageModel();
-            page.MenuName = "System Web Admin Menu Roles";
-            page.Module = "Web Admin Security";
-            page.Title = "System Web Admin Menu Roles";
+            page.MenuName = "System Menu Roles";
+            page.Module = "System Admin Security";
+            page.Title = "System Menu Roles";
             ViewBag.Page = page;
             return View();
         }

@@ -32,7 +32,8 @@ namespace SilupostWeb.Facade
                     var addModel = AutoMapperHelper<SystemWebAdminRoleBindingModel, SystemWebAdminRoleModel>.Map(model);
                     addModel.SystemRecordManager.CreatedBy = CreatedBy;
                     id = _systemWebAdminRoleRepositoryDAC.Add(addModel);
-                    scope.Complete();
+                    if (!string.IsNullOrEmpty(id))
+                        scope.Complete();
                 }
                 return id;
             }
@@ -59,7 +60,8 @@ namespace SilupostWeb.Facade
             using (var scope = new TransactionScope())
             {
                 success = _systemWebAdminRoleRepositoryDAC.Remove(id, LastUpdatedBy);
-                scope.Complete();
+                if (success)
+                    scope.Complete();
             }
             return success;
         }
@@ -72,7 +74,8 @@ namespace SilupostWeb.Facade
                 var updateModel = AutoMapperHelper<UpdateSystemWebAdminRoleBindingModel, SystemWebAdminRoleModel>.Map(model);
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
                 success = _systemWebAdminRoleRepositoryDAC.Update(updateModel);
-                scope.Complete();
+                if (success)
+                    scope.Complete();
             }
             return success;
         }
