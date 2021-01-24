@@ -1,10 +1,10 @@
 ﻿
-var crimeIncidentTypeController = function() {
+var enforcementTypeController = function() {
 
     var apiService = function (apiURI,apiToken) {
         var getById = function (Id) {
             return $.ajax({
-                url: apiURI + "CrimeIncidentType/" + Id + "/detail",
+                url: apiURI + "EnforcementType/" + Id + "/detail",
                 data: { Id: Id },
                 type: "GET",
                 contentType: 'application/json;charset=utf-8',
@@ -16,7 +16,7 @@ var crimeIncidentTypeController = function() {
         }
         var getDefaultIconPic = function (Id) {
             return $.ajax({
-                url: apiURI + "File/getDefaultCrimeIncidentTypeProfilePic",
+                url: apiURI + "File/getDefaultEnforcementTypeProfilePic",
                 data: null,
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
@@ -48,7 +48,7 @@ var crimeIncidentTypeController = function() {
         
 
         $(window).resize(function () {
-            if ($("#table-crimeIncidentType").hasClass('collapsed')) {
+            if ($("#table-enforcementType").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -57,7 +57,7 @@ var crimeIncidentTypeController = function() {
             }
         });
         $(document).ready(function () {
-            if ($("#table-crimeIncidentType").hasClass('collapsed')) {
+            if ($("#table-enforcementType").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -79,16 +79,12 @@ var crimeIncidentTypeController = function() {
         form.validate({
             ignore:[],
             rules: {
-                CrimeIncidentTypeName: {
-                    required: true
-                },
-                CrimeIncidentTypeDescription: {
+                EnforcementTypeName: {
                     required: true
                 }
             },
             messages: {
-                CrimeIncidentTypeName: "Please enter Crime Incident Type Name",
-                CrimeIncidentTypeDescription: "Please enter Crime Incident Type Description"
+                EnforcementTypeName: "Please enter Enforcement Type Name",
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -109,23 +105,21 @@ var crimeIncidentTypeController = function() {
         $("#btnSave").on("click", Save);
         $("#btnEdit").on("click", Edit);
         $("#btnDelete").on("click", Delete);
-        // $("#table-crimeIncidentType tbody").on("click", "tr .dropdown-menu a.edit", Edit);
-        // $("#table-crimeIncidentType tbody").on("click", "tr .dropdown-menu a.remove", Delete);
 
 
-        $("#table-crimeIncidentType tbody").on("click", "tr .dropdown-menu a.edit", function () {
+        $("#table-enforcementType tbody").on("click", "tr .dropdown-menu a.edit", function () {
             appSettings.currentId = $(this).attr("data-value");
             Edit();
         });
-        $("#table-crimeIncidentType tbody").on("click", "tr .dropdown-menu a.remove", function () {
+        $("#table-enforcementType tbody").on("click", "tr .dropdown-menu a.remove", function () {
             appSettings.currentId = $(this).attr("data-value");
             Delete();
         });
 
-        $('#table-crimeIncidentType tbody').on('click', 'tr', function () {
-            appSettings.currentId = dataTable.row(this).data().CrimeIncidentTypeId;
+        $('#table-enforcementType tbody').on('click', 'tr', function () {
+            appSettings.currentId = dataTable.row(this).data().EnforcementTypeId;
             var isSelected = !$(this).hasClass('selected');
-            if (isSelected && $("#table-crimeIncidentType").hasClass('collapsed')) {
+            if (isSelected && $("#table-enforcementType").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -136,7 +130,7 @@ var crimeIncidentTypeController = function() {
     };
 
     var initGrid = function() {
-        dataTable = $("#table-crimeIncidentType").DataTable({
+        dataTable = $("#table-enforcementType").DataTable({
             processing: true,
             responsive: true,
             columnDefs: [
@@ -144,11 +138,11 @@ var crimeIncidentTypeController = function() {
                     targets: 0, className:"hidden",
                 },
                 {
-                    targets: [1,4], width:1
+                    targets: [1,3], width:1
                 }
             ],
             "columns": [
-                { "data": "CrimeIncidentTypeId","sortable":false, "orderable": false, "searchable": false},
+                { "data": "EnforcementTypeId","sortable":false, "orderable": false, "searchable": false},
                 {
                     "data": null, "searchable": false, "orderable": false,
                     render: function (data, type, full, meta) {
@@ -156,17 +150,16 @@ var crimeIncidentTypeController = function() {
                         return '<image class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" style="width:50px;height:50px" src="' + fileData + '"></image>'
                     }
                 },
-                { "data": "CrimeIncidentTypeName" },
-                { "data": "CrimeIncidentTypeDescription" },
+                { "data": "EnforcementTypeName" },
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.CrimeIncidentTypeId+'" data-toggle="dropdown" aria-expanded="true">'
+                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.EnforcementTypeId+'" data-toggle="dropdown" aria-expanded="true">'
                                     +'<i class="material-icons pmd-sm">more_vert</i>'
                                 +'</button>'
-                                +'<ul aria-labelledby="drop-role-'+full.CrimeIncidentTypeId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
-                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.CrimeIncidentTypeId+'" role="menuitem">Edit</a></li>'
-                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.CrimeIncidentTypeId+'" role="menuitem">Remove</a></li>'
+                                +'<ul aria-labelledby="drop-role-'+full.EnforcementTypeId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.EnforcementTypeId+'" role="menuitem">Edit</a></li>'
+                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.EnforcementTypeId+'" role="menuitem">Remove</a></li>'
                                 +'</ul>'
                                 +'</span>'
                     }
@@ -180,7 +173,7 @@ var crimeIncidentTypeController = function() {
             bLengthChange: true,
             "serverSide": true,
             "ajax": {
-                "url": app.appSettings.silupostWebAPIURI + "CrimeIncidentType/GetPage",
+                "url": app.appSettings.silupostWebAPIURI + "EnforcementType/GetPage",
                 "type": "GET",
                 "datatype": "json",
                 contentType: 'application/json;charset=utf-8',
@@ -204,7 +197,7 @@ var crimeIncidentTypeController = function() {
             "searching": true,
             "language": {
                 "info": " _START_ - _END_ of _TOTAL_ ",
-                "sLengthMenu": "<div class='crimeIncidentType-lookup-table-length-menu form-group pmd-textfield pmd-textfield-floating-label'><label>Rows per page:</label>_MENU_</div>",
+                "sLengthMenu": "<div class='enforcementType-lookup-table-length-menu form-group pmd-textfield pmd-textfield-floating-label'><label>Rows per page:</label>_MENU_</div>",
                 "sSearch": "",
                 "sSearchPlaceholder": "Search",
                 "paginate": {
@@ -216,7 +209,7 @@ var crimeIncidentTypeController = function() {
                  "<'row'<'col-sm-12'tr>>" +
                  "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
             "initComplete": function (settings, json) {
-                $(".crimeIncidentType-lookup-table-length-menu select").select2({
+                $(".enforcementType-lookup-table-length-menu select").select2({
                     theme: "bootstrap",
                     minimumResultsForSearch: Infinity,
                 });
@@ -228,8 +221,8 @@ var crimeIncidentTypeController = function() {
 
     var Add = function(){
         appSettings.status.IsNew = true;
-        var crimeIncidentTypeTemplate = $.templates('#crimeIncidentType-template');
-        $("#modal-dialog").find('.modal-title').html('New Crime Incident Type');
+        var enforcementTypeTemplate = $.templates('#enforcementType-template');
+        $("#modal-dialog").find('.modal-title').html('New Enforcement Type');
         $("#modal-dialog").find('.modal-footer #btnSave').html('Save');
         $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Save");
 
@@ -247,10 +240,10 @@ var crimeIncidentTypeController = function() {
         };
         //end reset model
         //render template
-        crimeIncidentTypeTemplate.link("#modal-dialog .modal-body", appSettings.model);
+        enforcementTypeTemplate.link("#modal-dialog .modal-body", appSettings.model);
 
         //init form validation
-        form = $('#form-crimeIncidentType');
+        form = $('#form-enforcementType');
         iniValidation();
         //end init form
         //custom init for ui
@@ -263,7 +256,7 @@ var crimeIncidentTypeController = function() {
 
 
         $("#IconFilePicker").on("change", async function () {
-            var file = $("input[type=file]").get(0).files[0];
+            var file = $("#IconFilePicker").get(0).files[0];
 
             var reader = new FileReader();
             reader.onload = function() {
@@ -290,8 +283,8 @@ var crimeIncidentTypeController = function() {
     var Edit = function () {
         if (appSettings.currentId !== null || appSettings.currentId !== undefined || appSettings.currentId !== "") {
             appSettings.status.IsNew = false;
-            var crimeIncidentTypeTemplate = $.templates('#crimeIncidentType-template');
-            $("#modal-dialog").find('.modal-title').html('Update Crime Incident Type');
+            var enforcementTypeTemplate = $.templates('#enforcementType-template');
+            $("#modal-dialog").find('.modal-title').html('Update Enforcement Type');
             $("#modal-dialog").find('.modal-footer #btnSave').html('Update');
             $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Update");
             circleProgress.show(true);
@@ -313,9 +306,9 @@ var crimeIncidentTypeController = function() {
                 console.log(appSettings.model);
 
                 //render template
-                crimeIncidentTypeTemplate.link("#modal-dialog .modal-body", appSettings.model);
+                enforcementTypeTemplate.link("#modal-dialog .modal-body", appSettings.model);
                 //end render template
-                form = $('#form-crimeIncidentType');
+                form = $('#form-enforcementType');
                 iniValidation();
                 $("#modal-dialog").modal('show');
                 circleProgress.close();
@@ -323,7 +316,7 @@ var crimeIncidentTypeController = function() {
 
                 $("#IconFilePicker").val(null);
                 $("#IconFilePicker").on("change", function () {
-                    var file = $("input[type=file]").get(0).files[0];
+                    var file = $("#IconFilePicker").get(0).files[0];
 
                         if (file && fileValid(file)) {
                         var reader = new FileReader();
@@ -391,7 +384,7 @@ var crimeIncidentTypeController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentType/",
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementType/",
                         type: 'POST',
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8',
@@ -463,7 +456,7 @@ var crimeIncidentTypeController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentType/",
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementType/",
                         type: "PUT",
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8',
@@ -534,7 +527,7 @@ var crimeIncidentTypeController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentType/" + appSettings.currentId,
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementType/" + appSettings.currentId,
                         type: "DELETE",
                         contentType: 'application/json;charset=utf-8',
                         dataType: "json",
@@ -578,4 +571,4 @@ var crimeIncidentTypeController = function() {
         init: init
     };
 }
-var crimeIncidentType = new crimeIncidentTypeController;
+var enforcementType = new enforcementTypeController;

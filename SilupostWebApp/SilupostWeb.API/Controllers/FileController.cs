@@ -132,7 +132,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementUnitIconFilePicPath);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementTypeIconFilePath);
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 var fileSize = new FileInfo(filePath).Length;
                 using (Image image = Image.FromFile(filePath))
