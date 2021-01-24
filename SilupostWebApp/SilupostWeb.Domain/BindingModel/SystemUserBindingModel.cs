@@ -19,9 +19,11 @@ namespace SilupostWeb.Domain.BindingModel
     public class CreateSystemUserBindingModel : SystemUserBindingModel
     {
         public long SystemUserTypeId { get; set; }
+        public FileBindingModel ProfilePicture { get; set; }
     }
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {
         public string SystemUserId { get; set; }
+        public UpdateFileBindingModel ProfilePicture { get; set; }
     }
 }

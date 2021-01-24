@@ -18,6 +18,24 @@
     <div class="pmd-card-body">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="tab-page-legalentity">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <label>Profile Picture</label>
+                        <div class="form-group pure-material-textfield-outlined">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <img id="img-upload" data-link="src{:ProfilePicture.FileData}" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-card pmd-z-depth pmd-card-custom-view" style="width: 100px;height: 100px;display: block;" class="" />
+                                </div>
+                            </div>
+                            <br />
+                            <label class="btn pmd-ripple-effect btn-primary" for="ProfilePicturePicker"> UPLOAD IMAGE </label>
+                            <button id="btnOpenWebCam" class="btn pmd-ripple-effect btn-primary"> TAKE A PHOTO </button>
+                            <input type="file" class="hidden" id="ProfilePicturePicker" name="ProfilePicturePicker" data-link="ProfilePicturePicker">
+                        </div>
+                    </div>
+                </div>
+
                 @Html.Partial("~/Views/LegalEntity/_LegalEntity.cshtml")
             </div>
             <div role="tabpanel" class="tab-pane" id="tab-page-credentials">

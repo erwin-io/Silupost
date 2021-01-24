@@ -45,10 +45,10 @@ namespace SilupostWeb.Facade
 
         public CrimeIncidentCategoryViewModel Find(string id) => AutoMapperHelper<CrimeIncidentCategoryModel, CrimeIncidentCategoryViewModel>.Map(_crimeIncidentCategoryRepositoryDAC.Find(id));
 
-        public PageResultsViewModel<CrimeIncidentCategoryViewModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir) 
+        public PageResultsViewModel<CrimeIncidentCategoryViewModel> GetPage(string CrimeIncidentTypeId, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir) 
         {
             var result = new PageResultsViewModel<CrimeIncidentCategoryViewModel>();
-            var data = _crimeIncidentCategoryRepositoryDAC.GetPage(Search, PageNo, PageSize, OrderColumn, OrderDir);
+            var data = _crimeIncidentCategoryRepositoryDAC.GetPage(CrimeIncidentTypeId, Search, PageNo, PageSize, OrderColumn, OrderDir);
             result.Items = AutoMapperHelper<CrimeIncidentCategoryModel, CrimeIncidentCategoryViewModel>.MapList(data);
             result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows: 0;
             return result;

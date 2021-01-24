@@ -36,10 +36,11 @@ namespace SilupostWeb.API.App_Start
         {
             string connectionString = Configuration.ConnectionString();
 
-            GlobalVariables.goDefaultCrimeIncidentTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeProfilePic");
-            GlobalVariables.goDefaultEnforcementTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeProfilePic");
-            GlobalVariables.goDefaultEnforcementUnitProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitProfilePic");
-            GlobalVariables.goDefaultEnforcementStationProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationProfilePic");
+            GlobalVariables.goDefaultSystemUserProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultSystemUserProfilePic");
+            GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeIconfilePic");
+            GlobalVariables.goDefaultEnforcementTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeIconfilePic");
+            GlobalVariables.goDefaultEnforcementUnitIconFilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitIconfilePic");
+            GlobalVariables.goDefaultEnforcementStationIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationIconfilePic");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);

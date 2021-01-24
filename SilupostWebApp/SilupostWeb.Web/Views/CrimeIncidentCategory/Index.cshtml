@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Title -->
+<h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
+<!-- End Title -->
+<!--breadcrum start-->
+<ol class="breadcrumb text-left">
+    <li>
+        @ViewBag.Page.Module
+    </li>
+    @if (ViewBag.Page.ParentName != null)
+    {
+        <li><a href="@ViewBag.Page.ParentName">@ViewBag.Page.ParentTitle</a></li>
+    }
+    <li>
+        @ViewBag.Page.Title
+    </li>
+</ol><!--breadcrum end-->
+
+<div class="row ">
+    <!-- table card code and example -->
+    <div class="col-md-12">
+        <div class="component-box">
+            <!-- table card example -->
+            <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">@ViewBag.Page.Title</h2>
+                </div>
+                <div class="pmd-card-body">
+                    <div id="select-CrimeIncidentType"></div>
+                    @Html.Partial("_Table")
+                </div>
+            </div>
+            <!-- table card example end -->
+
+        </div>
+    </div>
+    <!-- table card code and example end -->
+    <div class="custom-floating-action">
+        <button id="btnDelete" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary">
+            <i class="material-icons pmd-sm">delete</i>
+        </button>
+        <button id="btnEdit" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary">
+            <i class="material-icons pmd-sm">edit</i>
+        </button>
+        <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary">
+            <i class="material-icons pmd-sm">add</i>
+        </button>
+    </div>
+</div>
+
+
+@Html.Partial("~/Views/Widget/_Modal.cshtml")
+
+@section Scripts{
+    <script src="~/Scripts/Controller/CrimeIncidentCategory.js"></script>
+    <script id="crimeIncidentType-template" type="text/x-jsrender">
+        <form id="form-crimeIncidentType">
+            <div class="group-fields clearfix row">
+                <div class="col-xs-4">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label>Filter by Crime Incident Type</label>
+                        <select id="CrimeIncidentType" name="CrimeIncidentTypeId" data-link="CrimeIncidentTypeId" class="select-simple form-control pmd-select2">
+                            {^{for lookup.CrimeIncidentType}}
+                            <option value="{{>Id}}">{{>Name}}</option>
+                            {{/for}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </script>
+
+    <script id="crimeIncidentCategory-template" type="text/x-jsrender">
+        <form id="form-crimeIncidentCategory">
+            <div class="group-fields clearfix row">
+                <div class="col-xs-4">
+                    <label data-link="visible{:!IsNew}" class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentCategoryId" disabled name="CrimeIncidentCategoryId" data-link="CrimeIncidentCategoryId" placeholder=" " />
+                        <span>CrimeIncidentCategoryId</span>
+                    </label>
+                </div>
+            </div>
+            <div class="group-fields clearfix row">
+                <div class="col-xs-4">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label>Crime Incident Type</label>
+                        <select id="CrimeIncidentTypeId" name="CrimeIncidentTypeId" data-link="CrimeIncidentTypeId" class="select-simple form-control pmd-select2">
+                            {^{for lookup.CrimeIncidentType}}
+                            <option value="{{>Id}}">{{>Name}}</option>
+                            {{/for}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentCategoryName" name="CrimeIncidentCategoryName" data-link="CrimeIncidentCategoryName" placeholder=" " />
+                        <span>Crime Incident Category Name</span>
+                    </label>
+                </div>
+            </div>
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentCategoryDescription" name="CrimeIncidentCategoryDescription" data-link="CrimeIncidentCategoryDescription" placeholder=" " />
+                        <span>Crime Incident Category Description</span>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script>
+        crimeIncidentCategory.init();
+    </script>
+}

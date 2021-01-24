@@ -30,14 +30,20 @@
                     <span class="media-body">System Setup</span>
                 </a>
             }
-            <ul class="dropdown-menu">
-                <li>
-                    @if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
-                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
-                    else
-                    {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
-                </li>
-            </ul>
+        <ul class="dropdown-menu">
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
+            </li>
+            <li>
+                @if (ViewBag.Page.MenuName.Equals("Crime Incident Category"))
+                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
+                else
+                {<a class="pmd-ripple-effect" href="/CrimeIncidentCategory"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Category</span></a>}
+            </li>
+        </ul>
         </li>
 
         <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Admin Security") ? "open" : "")">

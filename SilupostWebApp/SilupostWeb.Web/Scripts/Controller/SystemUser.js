@@ -25,10 +25,23 @@ var systemUserController = function() {
                 }
             });
         }
+        var getDefaultProfilePic = function (Id) {
+            return $.ajax({
+                url: apiURI + "File/getDefaultSystemUserProfilePic",
+                data: null,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + apiToken
+                }
+            });
+        }
 
         return {
             getById: getById,
-            getLookup: getLookup
+            getLookup: getLookup,
+            getDefaultProfilePic: getDefaultProfilePic
         };
     }
     var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
@@ -40,6 +53,8 @@ var systemUserController = function() {
         currentId:null
     };
     var init = function (obj) {
+
+        initDefaultProfilePic();
         initEvent();
         initGrid();
         initLookup();
@@ -94,6 +109,13 @@ var systemUserController = function() {
             }
         });
     };
+
+    var initDefaultProfilePic = function () {
+        api.getDefaultProfilePic().done(function (data) {
+            appSettings.DefaultProfilePic = data.Data;
+            console.log(data.Data);
+        });
+    }
 
     var initLookup = function(){
         api.getLookup("SystemWebAdminRole,EntityGender").done(function (data) {
@@ -216,7 +238,123 @@ var systemUserController = function() {
                 $("#btnEdit").addClass("hidden");
             }
         });
+
+
     };
+
+    var OpenWebCam = function(){
+        $("#camera_View").removeClass("hidden");
+        $("#modal-dialog-webcam #btnCapture").removeClass("hidden");
+        $("#capture_View").addClass("hidden");
+        $("#modal-dialog-webcam #btnReset").addClass("hidden");
+        $("#modal-dialog-webcam #btnSave").addClass("hidden");
+         Webcam.set({
+          width: 320,
+          height: 240,
+          // device capture size
+          dest_width: 320,
+          dest_height: 240,
+
+          // final cropped size
+          crop_width: 240,
+          crop_height: 240,
+
+          image_format: 'jpeg',
+          jpeg_quality: 90,
+          flip_horiz: true
+
+
+         });
+         Webcam.attach('#camera_View');
+
+        $("#modal-dialog-webcam").modal('show');
+
+        //events
+
+        //close camera function
+        $('#modal-dialog-webcam').on('hidden.bs.modal', function () {
+
+            const video = document.querySelector('#camera_View video');
+
+            // A video's MediaStream object is available through its srcObject attribute
+            const mediaStream = video.srcObject;
+
+            // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+            const tracks = mediaStream.getTracks();
+
+            // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+            tracks[0].stop();
+
+            // Or stop all like so:
+            tracks.forEach(track => track.stop())
+        });
+        //capture
+        var cameraCapture = {
+            data: null
+        }
+        $("#modal-dialog-webcam #btnCapture").on("click", function(){
+            $("#camera_View").addClass("hidden");
+            $("#btnCapture").addClass("hidden");
+            $("#btnReset").removeClass("hidden");
+            $("#capture_View").removeClass("hidden");
+            $("#modal-dialog-webcam #btnSave").removeClass("hidden");
+            Webcam.snap( function(data) {
+                cameraCapture.data = data;
+                $("#capture_View img").attr("src",cameraCapture.data);
+            });
+        });
+        //reset preview
+        $("#modal-dialog-webcam #btnReset").on("click", function(){
+            $("#camera_View").removeClass("hidden");
+            $("#modal-dialog-webcam #btnCapture").removeClass("hidden");
+
+            $("#capture_View").addClass("hidden");
+            $("#modal-dialog-webcam #btnReset").addClass("hidden");
+            $("#modal-dialog-webcam #btnSave").addClass("hidden");
+            
+        });
+        //save capture
+        $("#modal-dialog-webcam #btnSave").on("click", function(){
+
+            var base64String = cameraCapture.data.replace('data:image/jpeg;base64,', '');
+            var sizeInBytes = 4 * Math.ceil((base64String.length / 3))*0.5624896334383812;
+            var sizeInKb=sizeInBytes/1000;
+
+            
+            appSettings.model.ProfilePicture.FileName = "SILUPOST_CAPTURE_" + moment(new Date()).format("YYYY-MM-DD_HH:mm:ss.sss");
+            appSettings.model.ProfilePicture.MimeType = "image/jpeg";
+            appSettings.model.ProfilePicture.FileSize = parseInt(sizeInKb);
+            appSettings.model.ProfilePicture.IsDefault = false;
+            appSettings.model.ProfilePicture.FileFromBase64String = base64String;
+            appSettings.model.ProfilePicture.FileData = cameraCapture.data;
+            $("#img-upload").attr("src", appSettings.model.ProfilePicture.FileData);
+            $('#modal-dialog-webcam').modal('hide');
+            $('#ProfilePicturePicker').val('');
+
+        });
+    }
+
+    var OpeFile = function () {
+        var file = $("#ProfilePicturePicker").get(0).files[0];
+
+        var reader = new FileReader();
+        reader.onload = function() {
+
+            if (file && fileValid(file)) {
+                var arrayBuffer = this.result;
+                var fileFromBase64String = arrayBuffer.replace('data:'+file.type+';base64,', '');
+                $("#img-upload").attr("src", reader.result);
+
+            
+                appSettings.model.ProfilePicture.FileName = file.name;
+                appSettings.model.ProfilePicture.MimeType = file.type;
+                appSettings.model.ProfilePicture.FileSize = file.size;
+                appSettings.model.ProfilePicture.FileFromBase64String = fileFromBase64String;
+                appSettings.model.ProfilePicture.IsDefault = false;
+            }
+        }
+        reader.readAsDataURL(file);
+    }
 
     var initGrid = function() {
         dataTableSystemUser = $("#table-systemUser").DataTable({
@@ -237,6 +375,16 @@ var systemUserController = function() {
                 { "data": "LegalEntity.Gender.GenderName" },
                 { "data": "LegalEntity.EmailAddress" },
                 { "data": "LegalEntity.MobileNumber" },
+                {
+                    "data": null, "searchable": true, "orderable": false,
+                    render: function (data, type, full, meta) {
+                        var userRoles = [];
+                        for(var i in data.SystemWebAdminUserRoles){
+                            userRoles.push(data.SystemWebAdminUserRoles[i].SystemWebAdminRole.RoleName);
+                        }
+                        return userRoles.toString();
+                    }
+                },
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
@@ -328,7 +476,16 @@ var systemUserController = function() {
         $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Save");
 
         //reset model 
-        appSettings.model = {};
+        appSettings.model = {
+            ProfilePicture: {
+                FileName: appSettings.DefaultProfilePic.FileName,
+                MimeType: appSettings.DefaultProfilePic.MimeType,
+                FileSize: appSettings.DefaultProfilePic.FileSize,
+                IsDefault: true,
+                FileFromBase64String: appSettings.DefaultProfilePic.FileContent,
+                FileData: 'data:' + appSettings.DefaultProfilePic.MimeType + ';base64,' + appSettings.DefaultProfilePic.FileContent
+            }
+        };
         appSettings.model.IsNew = true;
         appSettings.model.SystemUserTypeId = 1;
         appSettings.model.BirthDate = moment(new Date()).format("MM/DD/YYYY");
@@ -367,6 +524,10 @@ var systemUserController = function() {
         $("body").addClass("modal-open");
         //end show modal
 
+        $("#ProfilePicturePicker").on("change", OpeFile);
+
+        $("#btnOpenWebCam").on("click", OpenWebCam);
+
     }
 
     var Edit = function () {
@@ -384,11 +545,13 @@ var systemUserController = function() {
                     Password: data.Data.Password,
                     ConfirmPassword: data.Data.Password
                 };
-
                 appSettings.model = $.extend(appSettings.model, data.Data.LegalEntity);
                 appSettings.model.BirthDate = moment(data.Data.LegalEntity.BirthDate).format("MM/DD/YYYY");
                 appSettings.model.GenderId = data.Data.LegalEntity.Gender.GenderId;
-                //appSettings.model.lookup = appSettings.lookup;
+                appSettings.model.ProfilePicture = data.Data.ProfilePicture;
+                appSettings.model.ProfilePicture = data.Data.ProfilePicture;
+                appSettings.model.ProfilePicture.FileData = 'data:' + appSettings.model.ProfilePicture.MimeType + ';base64,' + appSettings.model.ProfilePicture.FileContent;
+                appSettings.model.ProfilePicture.FileFromBase64String = appSettings.model.ProfilePicture.FileContent;
                 appSettings.model.lookup = {
                     EntityGender: appSettings.lookup.EntityGender,
                     SystemWebAdminRole : []
@@ -433,9 +596,28 @@ var systemUserController = function() {
                     $("#user-details-tab-nav").css("width", "100%");
                     
                 })
+                $("#ProfilePicturePicker").on("change", OpeFile);
 
+                $("#btnOpenWebCam").on("click", OpenWebCam);
             });
         }
+    }
+
+    var fileValid = function (file) {
+        var max_size = 10000000;
+        if (file.size > max_size) {
+            Swal.fire("Not Allowed!", file.name + " exceeds the maximum upload size", 'error');
+            return false;
+        }
+
+        var extensions = ["jpg", "jpeg", "png"];
+        var extension = file.name.replace(/.*\./, '').toLowerCase();
+
+        if (extensions.indexOf(extension) < 0) {
+            Swal.fire("Not Allowed!", "File not allowed", 'error');
+            return false;
+        }
+        return true;
     }
     //Save Data Function 
     var Save = function(e){
@@ -459,6 +641,7 @@ var systemUserController = function() {
 
         appSettings.model.SystemWebAdminUserRoles = systemWebAdminUserRoles;
         console.log(appSettings.model);
+        console.log(JSON.stringify(appSettings.model));
         if(appSettings.status.IsNew){
             Swal.fire({
                 title: 'Save',
