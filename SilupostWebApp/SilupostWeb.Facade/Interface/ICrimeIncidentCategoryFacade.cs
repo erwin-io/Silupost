@@ -14,6 +14,6 @@ namespace SilupostWeb.Facade.Interface
         CrimeIncidentCategoryViewModel Find(string id);
         bool Remove(string id, string LastUpdatedBy);
         bool Update(UpdateCrimeIncidentCategoryBindingModel model, string LastUpdatedBy);
-        PageResultsViewModel<CrimeIncidentCategoryViewModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir);
+        PageResultsViewModel<CrimeIncidentCategoryViewModel> GetPage(string CrimeIncidentTypeId, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir);
     }
 }

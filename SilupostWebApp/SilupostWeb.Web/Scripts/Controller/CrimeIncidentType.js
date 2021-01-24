@@ -48,7 +48,7 @@ var crimeIncidentTypeController = function() {
         
 
         $(window).resize(function () {
-            if ($("#table-systemUser").hasClass('collapsed')) {
+            if ($("#table-crimeIncidentType").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -57,7 +57,7 @@ var crimeIncidentTypeController = function() {
             }
         });
         $(document).ready(function () {
-            if ($("#table-systemUser").hasClass('collapsed')) {
+            if ($("#table-crimeIncidentType").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -309,6 +309,7 @@ var crimeIncidentTypeController = function() {
                 }
 
                 appSettings.model.IconFile.FileData = 'data:' + appSettings.model.IconFile.MimeType + ';base64,' + appSettings.model.IconFile.FileContent;
+                appSettings.model.IconFile.FileFromBase64String = appSettings.model.IconFile.FileContent;
                 console.log(appSettings.model);
 
                 //render template

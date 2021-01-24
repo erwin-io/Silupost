@@ -56,6 +56,7 @@ namespace SilupostWeb.Data
                     if(model != null)
                     {
                         model.CrimeIncidentType = result.Read<CrimeIncidentTypeModel>().FirstOrDefault();
+                        model.CrimeIncidentType.IconFile = result.Read<FileModel>().FirstOrDefault();
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
                     }
@@ -71,7 +72,7 @@ namespace SilupostWeb.Data
 
         public override List<CrimeIncidentCategoryModel> GetAll() => throw new NotImplementedException();
 
-        public List<CrimeIncidentCategoryModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
+        public List<CrimeIncidentCategoryModel> GetPage(string CrimeIncidentTypeId, string Search,  int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
             var results = new List<CrimeIncidentCategoryModel>();
             try
@@ -96,6 +97,7 @@ namespace SilupostWeb.Data
                 new
                 {
                     Search = Search,
+                    CrimeIncidentTypeId = CrimeIncidentTypeId,
                     PageNo = PageNo,
                     PageSize = PageSize,
                     OrderColumn = OrderColumn,

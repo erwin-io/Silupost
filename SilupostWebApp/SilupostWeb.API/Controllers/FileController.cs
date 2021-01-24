@@ -37,7 +37,47 @@ namespace SilupostWeb.API.Controllers
         }
         #endregion
 
+        [Route("getDefaultSystemUserProfilePic")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        public IHttpActionResult GetDefaultSystemUserProfilePic()
+        {
+            AppResponseModel<FileViewModel> response = new AppResponseModel<FileViewModel>();
 
+            try
+            {
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUserProfilePicPath);
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                var fileSize = new FileInfo(filePath).Length;
+                using (Image image = Image.FromFile(filePath))
+                {
+                    using (MemoryStream m = new MemoryStream())
+                    {
+                        image.Save(m, image.RawFormat);
+                        byte[] imageBytes = m.ToArray();
+                        var file = new FileViewModel()
+                        {
+                            FileName = fileName,
+                            FileSize = int.Parse(fileSize.ToString()),
+                            MimeType = image.RawFormat.ToString(),
+                            FileContent = imageBytes
+                        };
+                        response.Data = file;
+                        response.IsSuccess = true;
+                        return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.OK, response);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
 
         [Route("getDefaultCrimeIncidentTypeProfilePic")]
         [HttpGet]
@@ -49,7 +89,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultCrimeIncidentTypeProfilePicPath);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath);
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 var fileSize = new FileInfo(filePath).Length;
                 using (Image image = Image.FromFile(filePath))
@@ -92,7 +132,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementTypeProfilePicPath);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementUnitIconFilePicPath);
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 var fileSize = new FileInfo(filePath).Length;
                 using (Image image = Image.FromFile(filePath))
@@ -135,7 +175,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementUnitProfilePicPath);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementUnitIconFilePicPath);
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 var fileSize = new FileInfo(filePath).Length;
                 using (Image image = Image.FromFile(filePath))
@@ -178,7 +218,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementStationProfilePicPath);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultEnforcementStationIconFilePath);
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 var fileSize = new FileInfo(filePath).Length;
                 using (Image image = Image.FromFile(filePath))

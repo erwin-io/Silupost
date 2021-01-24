@@ -15,10 +15,10 @@ namespace SilupostWeb.Facade
     public class CrimeIncidentTypeFacade : ICrimeIncidentTypeFacade
     {
         private readonly ICrimeIncidentTypeRepositoryDAC _crimeIncidentTypeRepositoryDAC;
-        private readonly IFileRepositoryDAC _fileRepositoryDAC;
+        private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
 
         #region CONSTRUCTORS
-        public CrimeIncidentTypeFacade(ICrimeIncidentTypeRepositoryDAC crimeIncidentTypeRepositoryDAC, IFileRepositoryDAC fileRepositoryDAC)
+        public CrimeIncidentTypeFacade(ICrimeIncidentTypeRepositoryDAC crimeIncidentTypeRepositoryDAC, IFileRepositoryRepositoryDAC fileRepositoryDAC)
         {
             _crimeIncidentTypeRepositoryDAC = crimeIncidentTypeRepositoryDAC ?? throw new ArgumentNullException(nameof(crimeIncidentTypeRepositoryDAC));
             _fileRepositoryDAC = fileRepositoryDAC ?? throw new ArgumentNullException(nameof(fileRepositoryDAC));

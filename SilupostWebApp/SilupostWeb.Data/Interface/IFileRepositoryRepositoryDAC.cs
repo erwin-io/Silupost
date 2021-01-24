@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SilupostWeb.Data.Interface
 {
-    public interface IFileRepositoryDAC : IRepository<FileModel>
+    public interface IFileRepositoryRepositoryDAC : IRepository<FileModel>
     {
     }
 }

@@ -36,10 +36,11 @@ namespace SilupostWeb.API.App_Start
         {
             string connectionString = Configuration.ConnectionString();
 
-            GlobalVariables.goDefaultCrimeIncidentTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeProfilePic");
-            GlobalVariables.goDefaultEnforcementTypeProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeProfilePic");
-            GlobalVariables.goDefaultEnforcementUnitProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitProfilePic");
-            GlobalVariables.goDefaultEnforcementStationProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationProfilePic");
+            GlobalVariables.goDefaultSystemUserProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultSystemUserProfilePic");
+            GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeIconfilePic");
+            GlobalVariables.goDefaultEnforcementTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeIconfilePic");
+            GlobalVariables.goDefaultEnforcementUnitIconFilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitIconfilePic");
+            GlobalVariables.goDefaultEnforcementStationIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationIconfilePic");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);
@@ -50,7 +51,8 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeRepositoryDAC, CrimeIncidentTypeDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryRepositoryDAC, CrimeIncidentCategoryDAC>(Lifestyle.Scoped);
-            container.Register<IFileRepositoryDAC, FileDAC>(Lifestyle.Scoped);
+            container.Register<IFileRepositoryRepositoryDAC, FileDAC>(Lifestyle.Scoped);
+            container.Register<ILegalEntityAddressRepositoryDAC, LegalEntityAddressDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -61,6 +63,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeFacade, CrimeIncidentTypeFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryFacade, CrimeIncidentCategoryFacade>(Lifestyle.Scoped);
+            container.Register<ILegalEntityAddressFacade, LegalEntityAddressFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

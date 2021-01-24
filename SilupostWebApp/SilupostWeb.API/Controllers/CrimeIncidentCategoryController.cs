@@ -42,7 +42,7 @@ namespace SilupostWeb.API.Controllers
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(int Draw, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
+        public IHttpActionResult GetPage(int Draw, string CrimeIncidentTypeId, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
             DataTableResponseModel<IList<CrimeIncidentCategoryViewModel>> response = new DataTableResponseModel<IList<CrimeIncidentCategoryViewModel>>();
 
@@ -51,6 +51,7 @@ namespace SilupostWeb.API.Controllers
                 long recordsFiltered = 0;
                 long recordsTotal = 0;
                 var pageResults = _crimeIncidentCategoryFacade.GetPage(
+                    CrimeIncidentTypeId,
                     (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
                     PageNo,
                     PageSize,

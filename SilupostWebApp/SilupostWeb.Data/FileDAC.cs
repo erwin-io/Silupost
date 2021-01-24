@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SilupostWeb.Data
 {
-    public class FileDAC : RepositoryBase<FileModel>, IFileRepositoryDAC
+    public class FileDAC : RepositoryBase<FileModel>, IFileRepositoryRepositoryDAC
     {
         private readonly IDbConnection _dBConnection;
 

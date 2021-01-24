@@ -604,6 +604,30 @@
     <Content Include="plugins\toastr\toastr.css" />
     <Content Include="plugins\toastr\toastr.min.css" />
     <Content Include="plugins\toastr\toastr.min.js" />
+    <Content Include="plugins\webcamjs-master\demos\basic.html" />
+    <Content Include="plugins\webcamjs-master\demos\click-to-run.html" />
+    <Content Include="plugins\webcamjs-master\demos\combo.html" />
+    <Content Include="plugins\webcamjs-master\demos\constraints.html" />
+    <Content Include="plugins\webcamjs-master\demos\continuous.html" />
+    <Content Include="plugins\webcamjs-master\demos\crop-large.html" />
+    <Content Include="plugins\webcamjs-master\demos\crop.html" />
+    <Content Include="plugins\webcamjs-master\demos\events.html" />
+    <Content Include="plugins\webcamjs-master\demos\flash-disabled.html" />
+    <Content Include="plugins\webcamjs-master\demos\flash.html" />
+    <Content Include="plugins\webcamjs-master\demos\flip-flash.html" />
+    <Content Include="plugins\webcamjs-master\demos\flip.html" />
+    <Content Include="plugins\webcamjs-master\demos\hd.html" />
+    <Content Include="plugins\webcamjs-master\demos\ios-large.html" />
+    <Content Include="plugins\webcamjs-master\demos\large.html" />
+    <Content Include="plugins\webcamjs-master\demos\preview.html" />
+    <Content Include="plugins\webcamjs-master\demos\reset.html" />
+    <Content Include="plugins\webcamjs-master\demos\sfx.html" />
+    <Content Include="plugins\webcamjs-master\demos\shutter.mp3" />
+    <Content Include="plugins\webcamjs-master\demos\shutter.ogg" />
+    <Content Include="plugins\webcamjs-master\flash\README.txt" />
+    <Content Include="plugins\webcamjs-master\webcam.js" />
+    <Content Include="plugins\webcamjs-master\webcam.min.js" />
+    <Content Include="plugins\webcamjs-master\webcam.swf" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\dataFormat.js" />
     <Content Include="Scripts\App\globalConfig.js" />
@@ -694,7 +718,20 @@
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\components\select2\README.md" />
     <Content Include="plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="plugins\toastr\toastr.js.map" />
+    <Content Include="plugins\webcamjs-master\bower.json" />
+    <Content Include="plugins\webcamjs-master\build.sh" />
+    <Content Include="plugins\webcamjs-master\DOCS.md" />
+    <Content Include="plugins\webcamjs-master\flash\com\adobe\images\BitString.as" />
+    <Content Include="plugins\webcamjs-master\flash\com\adobe\images\JPGEncoder.as" />
+    <Content Include="plugins\webcamjs-master\flash\com\adobe\images\PNGEncoder.as" />
+    <Content Include="plugins\webcamjs-master\flash\mx\utils\Base64Encoder.as" />
+    <Content Include="plugins\webcamjs-master\flash\Webcam.as" />
+    <Content Include="plugins\webcamjs-master\flash\Webcam.fla" />
+    <Content Include="plugins\webcamjs-master\LICENSE" />
+    <Content Include="plugins\webcamjs-master\package.json" />
+    <Content Include="plugins\webcamjs-master\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Controller\CrimeIncidentCategory.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
     <Content Include="Scripts\Controller\SystemUser.js" />
     <Content Include="Scripts\Controller\CrimeIncidentType.js" />
@@ -714,6 +751,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Widget\MapBox.js" />
     <Content Include="Scripts\Widget\LegalEntity.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -722,6 +760,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
     <Compile Include="Controllers\LegalEntityController.cs" />
     <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
@@ -770,6 +809,8 @@
     <Content Include="Views\SystemUser\_Details.cshtml" />
     <Content Include="Views\CrimeIncidentType\_Table.cshtml" />
     <Content Include="Views\CrimeIncidentType\Index.cshtml" />
+    <Content Include="Views\CrimeIncidentCategory\_Table.cshtml" />
+    <Content Include="Views\CrimeIncidentCategory\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

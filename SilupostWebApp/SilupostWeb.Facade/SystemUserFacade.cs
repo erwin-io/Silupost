@@ -15,14 +15,22 @@ namespace SilupostWeb.Facade
     {
         private readonly ISystemUserRepository _systemUserRepository;
         private readonly ILegalEntityRepository _legalEntityRepository;
+        private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
         private readonly ISystemWebAdminUserRolesRepositoryDAC _systemWebAdminUserRolesRepositoryDAC;
+        private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
 
         #region CONSTRUCTORS
-        public SystemUserFacade(ISystemUserRepository systemUserRepository, ILegalEntityRepository entityInformationRepository, ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC)
+        public SystemUserFacade(ISystemUserRepository systemUserRepository,
+            ILegalEntityRepository legalEntityRepository,
+            ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
+            ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC,
+            IFileRepositoryRepositoryDAC fileRepositoryDAC)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
-            _legalEntityRepository = entityInformationRepository ?? throw new ArgumentNullException(nameof(entityInformationRepository));
+            _legalEntityRepository = legalEntityRepository ?? throw new ArgumentNullException(nameof(legalEntityRepository));
+            _legalEntityAddressRepositoryDAC = legalEntityAddressRepositoryDAC ?? throw new ArgumentNullException(nameof(legalEntityAddressRepositoryDAC));
             _systemWebAdminUserRolesRepositoryDAC = systemWebAdminUserRolesRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminUserRolesRepositoryDAC));
+            _fileRepositoryDAC = fileRepositoryDAC ?? throw new ArgumentNullException(nameof(fileRepositoryDAC));
         }
         #endregion
 
@@ -34,10 +42,37 @@ namespace SilupostWeb.Facade
                 using (var scope = new TransactionScope())
                 {
                     var addModel = AutoMapperHelper<CreateSystemUserBindingModel, SystemUserModel>.Map(model);
+
+                    //Start Saving LegalEntity
                     var legalEntityId = _legalEntityRepository.Add(addModel.LegalEntity);
+                    //End Saving LegalEntity
+
+                    //Start Saving LegalEntity Address
+                    foreach (var addess in addModel.LegalEntity.LegalEntityAddress)
+                    {
+                        var legalEntityAddressId = _legalEntityAddressRepositoryDAC.Add(new LegalEntityAddressModel()
+                        {
+                            LegalEntity = new LegalEntityModel() {  LegalEntityId = legalEntityId },
+                            Address = addess.Address
+                        });
+                        if (string.IsNullOrEmpty(legalEntityAddressId))
+                        {
+                            throw new Exception("Error Saving System User Legal Entity Address");
+                        }
+                    }
+                    //End Saving LegalEntity Address
+
+                    //Start Saving file
+                    addModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                    addModel.ProfilePicture.SystemRecordManager.CreatedBy = CreatedBy;
+                    var fileId = _fileRepositoryDAC.Add(addModel.ProfilePicture);
+                    if (string.IsNullOrEmpty(fileId))
+                        throw new Exception("Error Saving File");
+                    addModel.ProfilePicture.FileId = fileId;
+                    //End Saving file
+
                     addModel.SystemRecordManager.CreatedBy = CreatedBy;
                     addModel.LegalEntity.LegalEntityId = legalEntityId;
-                    addModel.ProfilePicture = new FileModel() { FileId = string.Empty };
                     id = _systemUserRepository.Add(addModel);
                     if (string.IsNullOrEmpty(id))
                     {
@@ -103,14 +138,29 @@ namespace SilupostWeb.Facade
                 {
                     throw new Exception("Error Updating System User");
                 }
-                var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
-                var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
+
+                //Start Saving LegalEntity
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
                 success = _legalEntityRepository.Update(updateModel.LegalEntity);
                 if (!success)
                 {
                     throw new Exception("Error Updating System User");
                 }
+                //End Saving file
+
+                //Start Saving file
+                updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                updateModel.ProfilePicture.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _fileRepositoryDAC.Update(updateModel.ProfilePicture);
+                if (!success)
+                {
+                    throw new Exception("Error Saving File");
+                }
+                //End Saving file
+
+                var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
+                var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
+
                 foreach (var role in currentSystemWebAdminUserRoles)
                 {
                     if(!model.SystemWebAdminUserRoles.Any(swaur=>swaur.SystemWebAdminRoleId == role.SystemWebAdminRole.SystemWebAdminRoleId))

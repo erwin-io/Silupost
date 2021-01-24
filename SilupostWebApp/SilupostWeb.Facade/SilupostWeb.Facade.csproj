@@ -47,12 +47,14 @@
     <Compile Include="Interface\ICrimeIncidentCategoryFacade.cs" />
     <Compile Include="Interface\ICrimeIncidentTypeFacade.cs" />
     <Compile Include="Interface\ILookupFacade.cs" />
+    <Compile Include="Interface\ILegalEntityAddressFacade.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRolesFacade.cs" />
     <Compile Include="Interface\IUserAuthFacade.cs" />
     <Compile Include="Interface\ISystemUserFacade.cs" />
     <Compile Include="Interface\ISystemWebAdminRoleFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LookupFacade.cs" />
+    <Compile Include="LegalEntityAddressFacade.cs" />
     <Compile Include="SystemWebAdminMenuRolesFacade.cs" />
     <Compile Include="CrimeIncidentTypeFacade.cs" />
     <Compile Include="UserAuthFacade.cs" />

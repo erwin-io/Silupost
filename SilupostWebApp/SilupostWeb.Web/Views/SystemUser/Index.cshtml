@@ -2,6 +2,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles
+{
+    <style>
+        #my_camera, #capture_View {
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+            #my_camera video, #capture_View img {
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+
+        #table-legalEntityAddress tbody td:last-child {
+            width: 1px !important;
+        }
+    </style>
+}
 <!-- Title -->
 <h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
 <!-- End Title -->

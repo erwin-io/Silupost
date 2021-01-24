@@ -59,6 +59,7 @@ namespace SilupostWeb.Data
                     if (model != null)
                     {
                         model.SystemUserType = result.Read<SystemUserTypeModel>().FirstOrDefault();
+                        model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
@@ -100,6 +101,7 @@ namespace SilupostWeb.Data
                     if(model != null)
                     {
                         model.SystemUserType = result.Read<SystemUserTypeModel>().FirstOrDefault();
+                        model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>

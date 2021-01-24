@@ -55,6 +55,7 @@
     <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="Profiles\CrimeIncidentCategoryProfile.cs" />
     <Compile Include="Profiles\FIleProfile.cs" />
+    <Compile Include="Profiles\LegalEntityAddressProfile.cs" />
     <Compile Include="Profiles\LookupTableProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuRolesProfile.cs" />
