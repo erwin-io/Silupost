@@ -758,8 +758,8 @@ var systemUserController = function() {
                         confirmButtonText: 'Yes',
                         allowOutsideClick: false
                     })
-                    .then((result) => {
-                        if(result){
+                        .then((result) => {
+                            if (result.value) {
                             circleProgress.show(true);
                             $.ajax({
                                     url: app.appSettings.silupostWebAPIURI + "/SystemUser/RemoveSystemUserAddress/" + $(this).attr("data-value"),

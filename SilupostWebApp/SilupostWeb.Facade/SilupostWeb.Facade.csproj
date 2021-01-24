@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrimeIncidentCategoryFacade.cs" />
+    <Compile Include="EnforcementTypeFacade.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryFacade.cs" />
+    <Compile Include="Interface\IEnforcementTypeFacade.cs" />
     <Compile Include="Interface\ICrimeIncidentTypeFacade.cs" />
     <Compile Include="Interface\ILookupFacade.cs" />
     <Compile Include="Interface\ILegalEntityAddressFacade.cs" />
