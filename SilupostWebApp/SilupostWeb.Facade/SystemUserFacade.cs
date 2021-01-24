@@ -15,17 +15,20 @@ namespace SilupostWeb.Facade
     {
         private readonly ISystemUserRepository _systemUserRepository;
         private readonly ILegalEntityRepository _legalEntityRepository;
+        private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
         private readonly ISystemWebAdminUserRolesRepositoryDAC _systemWebAdminUserRolesRepositoryDAC;
-        private readonly IFileRepositoryDAC _fileRepositoryDAC;
+        private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
 
         #region CONSTRUCTORS
         public SystemUserFacade(ISystemUserRepository systemUserRepository,
-            ILegalEntityRepository entityInformationRepository,
+            ILegalEntityRepository legalEntityRepository,
+            ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
             ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC,
-            IFileRepositoryDAC fileRepositoryDAC)
+            IFileRepositoryRepositoryDAC fileRepositoryDAC)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
-            _legalEntityRepository = entityInformationRepository ?? throw new ArgumentNullException(nameof(entityInformationRepository));
+            _legalEntityRepository = legalEntityRepository ?? throw new ArgumentNullException(nameof(legalEntityRepository));
+            _legalEntityAddressRepositoryDAC = legalEntityAddressRepositoryDAC ?? throw new ArgumentNullException(nameof(legalEntityAddressRepositoryDAC));
             _systemWebAdminUserRolesRepositoryDAC = systemWebAdminUserRolesRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminUserRolesRepositoryDAC));
             _fileRepositoryDAC = fileRepositoryDAC ?? throw new ArgumentNullException(nameof(fileRepositoryDAC));
         }
@@ -43,6 +46,21 @@ namespace SilupostWeb.Facade
                     //Start Saving LegalEntity
                     var legalEntityId = _legalEntityRepository.Add(addModel.LegalEntity);
                     //End Saving LegalEntity
+
+                    //Start Saving LegalEntity Address
+                    foreach (var addess in addModel.LegalEntity.LegalEntityAddress)
+                    {
+                        var legalEntityAddressId = _legalEntityAddressRepositoryDAC.Add(new LegalEntityAddressModel()
+                        {
+                            LegalEntity = new LegalEntityModel() {  LegalEntityId = legalEntityId },
+                            Address = addess.Address
+                        });
+                        if (string.IsNullOrEmpty(legalEntityAddressId))
+                        {
+                            throw new Exception("Error Saving System User Legal Entity Address");
+                        }
+                    }
+                    //End Saving LegalEntity Address
 
                     //Start Saving file
                     addModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);

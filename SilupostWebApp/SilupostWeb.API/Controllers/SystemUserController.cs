@@ -28,12 +28,14 @@ namespace SilupostWeb.API.Controllers
     public class SystemUserController : ApiController
     {
         private readonly ISystemUserFacade _systemUserFacade;
+        private readonly ILegalEntityAddressFacade _legalEntityAddressFacade;
         private string RecordedBy { get; set; }
         private long LocationId { get; set; }
         #region CONSTRUCTORS
-        public SystemUserController(ISystemUserFacade systemUserFacade)
+        public SystemUserController(ISystemUserFacade systemUserFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
         {
             _systemUserFacade = systemUserFacade ?? throw new ArgumentNullException(nameof(systemUserFacade));
+            _legalEntityAddressFacade = legalEntityAddressFacade ?? throw new ArgumentNullException(nameof(legalEntityAddressFacade));
         }
         #endregion
 
@@ -209,6 +211,7 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+
         [Route("")]
         [HttpPut]
         [ValidateModel]
@@ -317,5 +320,185 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+
+        [Route("{id}/detail/SystemUserAddress")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetSystemUserAddress(string id)
+        {
+            AppResponseModel<List<LegalEntityAddressViewModel>> response = new AppResponseModel<List<LegalEntityAddressViewModel>>();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                return new SilupostAPIHttpActionResult<AppResponseModel<List<LegalEntityAddressViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+                List<LegalEntityAddressViewModel> result = _legalEntityAddressFacade.FindBySystemUserId(id);
+
+                if (result != null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<List<LegalEntityAddressViewModel>>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<List<LegalEntityAddressViewModel>>>(Request, HttpStatusCode.NotFound, response);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<List<LegalEntityAddressViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+        [Route("createSystemUserAddress")]
+        [HttpPost]
+        [ValidateModel]
+        [SwaggerOperation("create")]
+        [SwaggerResponse(HttpStatusCode.Created)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        public IHttpActionResult CreateSystemUserAddress([FromBody] CreateLegalEntityAddressBindingModel model)
+        {
+            AppResponseModel<LegalEntityAddressViewModel> response = new AppResponseModel<LegalEntityAddressViewModel>();
+
+            try
+            {
+                string id = _legalEntityAddressFacade.Add(model);
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var result = _legalEntityAddressFacade.Find(id);
+
+                    response.IsSuccess = true;
+                    response.Message = Messages.Created;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.Created, response);
+                }
+                else
+                {
+                    response.Message = Messages.Failed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+        [Route("UpdateSystemUserAddress")]
+        [HttpPut]
+        [ValidateModel]
+        [SwaggerOperation("update")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult UpdateSystemUserAddress([FromBody] UpdateLegalEntityAddressBindingModel model)
+        {
+            AppResponseModel<LegalEntityAddressViewModel> response = new AppResponseModel<LegalEntityAddressViewModel>();
+
+            if (model != null && string.IsNullOrEmpty(model.LegalEntityAddressId))
+            {
+                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+                var result = _legalEntityAddressFacade.Find(model.LegalEntityAddressId);
+                if (result == null)
+                {
+                    response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+                bool success = _legalEntityAddressFacade.Update(model);
+                response.IsSuccess = success;
+
+                if (success)
+                {
+                    result = _legalEntityAddressFacade.Find(model.LegalEntityAddressId);
+                    response.Message = Messages.Updated;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.Failed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadGateway, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+        [Route("RemoveSystemUserAddress/{id}")]
+        [HttpDelete]
+        [SwaggerOperation("remove")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult RemoveSystemUserAddress(string id)
+        {
+            AppResponseModel<object> response = new AppResponseModel<object>();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+
+                var result = _legalEntityAddressFacade.Find(id);
+                if (result == null)
+                {
+                    response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
+                bool success = _legalEntityAddressFacade.Remove(id);
+                response.IsSuccess = success;
+
+                if (success)
+                {
+                    response.Message = Messages.Removed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.NotFound, response);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
     }
 }

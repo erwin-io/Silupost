@@ -24,6 +24,7 @@ namespace SilupostWeb.Mapping.Profiles
                         BirthDate = src.BirthDate,
                         Gender = new EntityGenderModel() { GenderId = src.GenderId },
                     }))
+                .ForPath(dest => dest.LegalEntity.LegalEntityAddress, opt => opt.MapFrom(src => src.LegalEntityAddress))
                 .ForPath(dest => dest.SystemUserType, opt => opt.MapFrom(src =>
                     new SystemUserTypeModel
                     {

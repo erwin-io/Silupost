@@ -20,6 +20,7 @@ namespace SilupostWeb.Domain.BindingModel
     {
         public long SystemUserTypeId { get; set; }
         public FileBindingModel ProfilePicture { get; set; }
+        public List<LegalEntityAddressBindingModel> LegalEntityAddress { get; set; }
     }
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {

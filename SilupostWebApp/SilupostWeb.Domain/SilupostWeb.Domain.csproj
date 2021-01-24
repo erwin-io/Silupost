@@ -51,6 +51,7 @@
     <Compile Include="BindingModel\CrimeIncidentTypeBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminRoleBindingModel.cs" />
     <Compile Include="BindingModel\SystemUserBindingModel.cs" />
+    <Compile Include="BindingModel\LegalEntityAddressBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminUserRolesBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CrimeIncidentCategoryViewModel.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="ViewModel\EntityGenderViewModel.cs" />
     <Compile Include="ViewModel\EntityStatusViewModel.cs" />
     <Compile Include="ViewModel\FileViewModel.cs" />
+    <Compile Include="ViewModel\LegalEntityAddressViewModel.cs" />
     <Compile Include="ViewModel\LegalEntityViewModel.cs" />
     <Compile Include="ViewModel\LookupTableViewModel.cs" />
     <Compile Include="ViewModel\LookupViewModel.cs" />

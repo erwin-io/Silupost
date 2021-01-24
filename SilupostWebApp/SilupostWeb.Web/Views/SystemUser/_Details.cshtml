@@ -1,16 +1,9 @@
 ﻿<script id="systemUser-template" type="text/x-jsrender">
-    @*<div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
-        <div class="pmd-tab-active-bar"></div>
-        <ul class="nav nav-tabs" role="tablist" style="width:100%">
-            <li role="presentation" class="active"><a id="tab-control-legalentity" href="#tab-page-legalentity" aria-controls="tab-legalentity" role="tab" data-toggle="tab">Details</a></li>
-            <li role="presentation"><a id="tab-control-credentials" href="#tab-page-credentials" aria-controls="tab-credentials" role="tab" data-toggle="tab">Credentials</a></li>
-            <li role="presentation"><a id="tab-control-roles" href="#tab-page-roles" aria-controls="tab-roles" role="tab" data-toggle="tab">Roles</a></li>
-        </ul>
-    </div>*@
 
     <div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
         <ul id="user-details-tab-nav" class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a id="tab-control-legalentity" href="#tab-page-legalentity" aria-controls="tab-legalentity" role="tab" data-toggle="tab">Details</a></li>
+            <li role="presentation"><a id="tab-control-legalEntityAddress" href="#tab-page-legalEntityAddress" aria-controls="tab-legalEntityAddress" role="tab" data-toggle="tab">Address/Location</a></li>
             <li role="presentation"><a id="tab-control-credentials" href="#tab-page-credentials" aria-controls="tab-credentials" role="tab" data-toggle="tab">Credentials</a></li>
             <li role="presentation"><a id="tab-control-roles" href="#tab-page-roles" aria-controls="tab-roles" role="tab" data-toggle="tab">Roles</a></li>
         </ul>
@@ -38,14 +31,40 @@
 
                 @Html.Partial("~/Views/LegalEntity/_LegalEntity.cshtml")
             </div>
+            <div role="tabpanel" class="tab-pane" id="tab-page-legalEntityAddress">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <button id="btnNewAddress" class="btn pmd-ripple-effect btn-primary"> New Address </button>
+                        <table id="table-legalEntityAddress" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Legal Entity Address Id</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
             <div role="tabpanel" class="tab-pane" id="tab-page-credentials">
                 <form id="form-systemUser">
                     <div class="group-fields clearfix row">
                         <div class="col-xs-12">
+                            {^{if IsNew}}
                             <label class="form-group pure-material-textfield-outlined">
                                 <input id="UserName" name="UserName" data-link="UserName" placeholder=" " />
                                 <span>User Name</span>
                             </label>
+                            {{else}}
+                            <label class="form-group pure-material-textfield-outlined">
+                                <input id="UserName" name="UserName" disabled data-link="UserName" placeholder=" " />
+                                <span>User Name</span>
+                            </label>
+                            {{/if}}
                         </div>
                     </div>
                     <div class="group-fields clearfix row">
@@ -94,4 +113,27 @@
             </div>
         </div>
     </div>
+</script>
+
+
+
+<script id="legalEntityAddress-template" type="text/x-jsrender">
+    <form id="form-legalEntityAddress">
+        <div class="group-fields clearfix row hidden">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <input id="LegalEntityAddressId" name="LegalEntityAddressId" data-link="LegalEntityAddressId" placeholder=" " />
+                    <span>LegalEntityAddressId</span>
+                </label>
+            </div>
+        </div>
+        <div class="group-fields clearfix row">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <input id="Address" name="Address" data-link="Address" placeholder=" " />
+                    <span>Address</span>
+                </label>
+            </div>
+        </div>
+    </form>
 </script>

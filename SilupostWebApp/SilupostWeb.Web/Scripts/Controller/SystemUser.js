@@ -14,6 +14,18 @@ var systemUserController = function() {
                 }
             });
         }
+        var getSystemUserAddress = function (Id) {
+            return $.ajax({
+                url: apiURI + "SystemUser/" + Id + "/detail/SystemUserAddress",
+                data: { Id: Id },
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json",
+                headers: {
+                    Authorization: 'Bearer ' + apiToken
+                }
+            });
+        }
         var getLookup = function (tableNames) {
             return $.ajax({
                 url: apiURI + "SystemLookup/GetAllByTableNames?TableNames=" + tableNames,
@@ -40,13 +52,14 @@ var systemUserController = function() {
 
         return {
             getById: getById,
+            getSystemUserAddress: getSystemUserAddress,
             getLookup: getLookup,
             getDefaultProfilePic: getDefaultProfilePic
         };
     }
     var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
 
-    var form,formSystemWebAdminUserRoles,dataTableSystemUser;
+    var form,formSystemWebAdminUserRoles,formLegalEntityAddress,dataTableSystemUser,dataTableLegalEntityAddress;
     var appSettings = {
         model: {},
         status:{ IsNew:false},
@@ -77,6 +90,9 @@ var systemUserController = function() {
                 },
                 EmailAddress: {
                     required: true
+                },
+                MobileNumber: {
+                    required: true
                 }
             },
             Messages: {
@@ -85,7 +101,8 @@ var systemUserController = function() {
                 LastName: "Please enter Lastname",
                 BirthDate: "Please select Birth Date",
                 GenderId: "Please select Gender",
-                EmailAddress: "Please select Gender"
+                EmailAddress: "Please enter Email Address",
+                MobileNumber: "Please enter Mobile Number"
             },
         }
 
@@ -113,14 +130,12 @@ var systemUserController = function() {
     var initDefaultProfilePic = function () {
         api.getDefaultProfilePic().done(function (data) {
             appSettings.DefaultProfilePic = data.Data;
-            console.log(data.Data);
         });
     }
 
     var initLookup = function(){
         api.getLookup("SystemWebAdminRole,EntityGender").done(function (data) {
         	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
-        	console.log(data.Data);
         });
     }
 
@@ -228,19 +243,19 @@ var systemUserController = function() {
         });
 
         $('#table-systemUser tbody').on('click', 'tr', function () {
-            appSettings.currentId = dataTableSystemUser.row(this).data().SystemUserId;
-            var isSelected = !$(this).hasClass('selected');
-            if (isSelected && $("#table-systemUser").hasClass('collapsed')) {
-                $("#btnDelete").removeClass("hidden");
-                $("#btnEdit").removeClass("hidden");
-            } else {
-                $("#btnDelete").addClass("hidden");
-                $("#btnEdit").addClass("hidden");
+            if(dataTableSystemUser.row(this).data()){
+                appSettings.currentId = dataTableSystemUser.row(this).data().SystemUserId;
+                var isSelected = !$(this).hasClass('selected');
+                if (isSelected && $("#table-systemUser").hasClass('collapsed')) {
+                    $("#btnDelete").removeClass("hidden");
+                    $("#btnEdit").removeClass("hidden");
+                } else {
+                    $("#btnDelete").addClass("hidden");
+                    $("#btnEdit").addClass("hidden");
+                }
             }
         });
-
-
-    };
+    }
 
     var OpenWebCam = function(){
         $("#camera_View").removeClass("hidden");
@@ -452,19 +467,77 @@ var systemUserController = function() {
             }
         });
         dataTableSystemUser.columns.adjust();
-        //dataTableSystemUser.on('select', function (e, dt, type, indexes) {
-        //    var count = dataTableSystemUser.rows({ selected: true }).count();
+    };
 
-        //    // do something with the number of selected rows
-        //    var collapsed = $("#table-systemUser").hasClass('collapsed');
-        //    if (count >= 1 && collapsed) {
-        //        $("#btnDelete").removeClass("hidden");
-        //        $("#btnEdit").removeClass("hidden");
-        //    } else {
-        //        $("#btnDelete").addClass("hidden");
-        //        $("#btnEdit").addClass("hidden");
-        //    }
-        //});
+    var initGridLegalEntityAddress = function() {
+        dataTableLegalEntityAddress = $("#table-legalEntityAddress").DataTable({
+            processing: true,
+            responsive: false,
+            columnDefs: [
+                {
+                    targets: 0, className:"hidden",
+                },
+                {
+                    targets: [2], width:1
+                }
+            ],
+            "columns": [
+                { "data": "LegalEntityAddressId","sortable":false, "orderable": false, "searchable": false},
+                { "data": "Address" },
+                { "data": null, "searchable": false, "orderable": false, 
+                    render: function(data, type, full, meta){
+                        var tableControl;
+                        if(appSettings.status.IsNew){
+                                tableControl = '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.LegalEntityAddressId+'" data-value='+full.LegalEntityAddressId+' data-toggle="dropdown" aria-expanded="true">'
+                                            +'<i class="material-icons pmd-sm">delete</i>'
+                                        +'</button>';
+                        }
+                        else{
+                                tableControl = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                                        +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.LegalEntityAddressId+'" data-toggle="dropdown" aria-expanded="true">'
+                                            +'<i class="material-icons pmd-sm">more_vert</i>'
+                                        +'</button>'
+                                        +'<ul aria-labelledby="drop-role-'+full.LegalEntityAddressId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                                            +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.LegalEntityAddressId+'" role="menuitem">Edit</a></li>'
+                                            +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.LegalEntityAddressId+'" role="menuitem">Remove</a></li>'
+                                        +'</ul>'
+                                        +'</span>';
+                        }
+                        return tableControl;
+                    }
+                }
+            ],
+            "order": [[1, "asc"]],
+            select: {
+                style: 'single'
+            },
+            bFilter: true,
+            bLengthChange: true,
+
+            "paging": true,
+            "searching": true,
+            "language": {
+                "info": " _START_ - _END_ of _TOTAL_ ",
+                "sLengthMenu": "<div class='legalEntityAddress-lookup-table-length-menu form-group pmd-textfield pmd-textfield-floating-label'><label>Rows per page:</label>_MENU_</div>",
+                "sSearch": "",
+                "sSearchPlaceholder": "Search",
+                "paginate": {
+                    "sNext": " ",
+                    "sPrevious": " "
+                },
+            },
+            dom: "<'pmd-card-title'<'data-table-responsive pull-left'><'search-paper pmd-textfield'f>>" +
+                 "<'row'<'col-sm-12'tr>>" +
+                 "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
+            "initComplete": function (settings, json) {
+                $(".legalEntityAddress-lookup-table-length-menu select").select2({
+                    theme: "bootstrap",
+                    minimumResultsForSearch: Infinity,
+                });
+                circleProgress.close();
+            }
+        });
+        dataTableLegalEntityAddress.columns.adjust();
     };
 
     var Add = function(){
@@ -528,8 +601,55 @@ var systemUserController = function() {
 
         $("#btnOpenWebCam").on("click", OpenWebCam);
 
-    }
 
+        appSettings.model.LegalEntityAddress = [];
+        initGridLegalEntityAddress();
+        $('#table-legalEntityAddress tbody').on('click', 'tr button', function () {
+            for(var i in appSettings.model.LegalEntityAddress){
+                if(appSettings.model.LegalEntityAddress[i].LegalEntityAddressId == $(this).attr("data-value")){
+                    appSettings.model.LegalEntityAddress.splice(i, 1);
+                    dataTableLegalEntityAddress.row($(this).parents("tr")).remove().draw();
+                }
+            }
+        });
+
+
+        $("#modal-dialog-legalEntityAddress #btnSave").on("click", function(){
+            if (!formLegalEntityAddress.valid()) {
+                return;
+            }
+            if(appSettings.status.IsNew){
+                appSettings.model.LegalEntityAddress.push(appSettings.LegalEntityAddressModel);
+                dataTableLegalEntityAddress.row.add(
+                    {
+                        LegalEntityAddressId :appSettings.LegalEntityAddressModel.LegalEntityAddressId, 
+                        Address: appSettings.LegalEntityAddressModel.Address 
+                    }).draw();
+                dataTableLegalEntityAddress.columns.adjust();
+                $("#modal-dialog-legalEntityAddress").modal("hide");
+            }
+        });
+        $("#tab-page-legalEntityAddress #btnNewAddress").on("click", function(){
+            var legalEntityAddressTemplate = $.templates('#legalEntityAddress-template');
+            $("#modal-dialog-legalEntityAddress").find('.modal-title').html('New Address');
+            $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').html('Save');
+            $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').attr("data-name","Save");
+
+            appSettings.LegalEntityAddressModel = { LegalEntityAddressId :moment(new Date()).format("YYYY-MM-DD_HH:mm:ss.sss") };
+            appSettings.LegalEntityAddressModel.IsNew = true;
+            appSettings.LegalEntityAddressModel.LegalEntityId = appSettings.model.LegalEntityId;
+            legalEntityAddressTemplate.link("#modal-dialog-legalEntityAddress .modal-body", appSettings.LegalEntityAddressModel);
+
+            //show modal
+            $("#modal-dialog-legalEntityAddress").modal('show');
+            $("body").addClass("modal-open");
+
+            formLegalEntityAddress = $("#form-legalEntityAddress");
+
+            initValidationLegalEntityAddress();
+        });
+
+    }
     var Edit = function () {
         if (appSettings.currentId !== null || appSettings.currentId !== undefined || appSettings.currentId !== "") {
             appSettings.status.IsNew = false;
@@ -557,10 +677,6 @@ var systemUserController = function() {
                     SystemWebAdminRole : []
                 };
 
-                //for (var i in appSettings.lookup.EntityGender) {
-                //    if (appSettings.lookup.EntityGender[i].Id != undefined)
-                //        appSettings.model.lookup.EntityGender.push({ id: appSettings.lookup.EntityGender[i].Id, name: appSettings.lookup.EntityGender[i].Name });
-                //}
                 for (var i in appSettings.lookup.SystemWebAdminRole) {
                     if (appSettings.lookup.SystemWebAdminRole[i].Id != undefined)
                         appSettings.model.lookup.SystemWebAdminRole.push({ id: appSettings.lookup.SystemWebAdminRole[i].Id, name: appSettings.lookup.SystemWebAdminRole[i].Name });
@@ -599,8 +715,252 @@ var systemUserController = function() {
                 $("#ProfilePicturePicker").on("change", OpeFile);
 
                 $("#btnOpenWebCam").on("click", OpenWebCam);
+
+                appSettings.model.LegalEntityAddress = [];
+                initGridLegalEntityAddress();
+                LoadSystemUserAddress();
+                $('#table-legalEntityAddress tbody').on('click', 'tr a.edit', function () {
+
+
+                    for(var i in appSettings.model.LegalEntityAddress){
+                        if(appSettings.model.LegalEntityAddress[i].LegalEntityAddressId == $(this).attr("data-value")){
+
+                            appSettings.LegalEntityAddress = appSettings.model.LegalEntityAddress[i];
+                        }
+                    }
+
+                    var legalEntityAddressTemplate = $.templates('#legalEntityAddress-template');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-title').html('Update Address');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').html('Update');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').attr("data-name","Update");
+
+                    legalEntityAddressTemplate.link("#modal-dialog-legalEntityAddress .modal-body", appSettings.LegalEntityAddressModel);
+
+                    //show modal
+                    $("#modal-dialog-legalEntityAddress").modal('show');
+                    $("body").addClass("modal-open");
+
+                    
+                    formLegalEntityAddress = $("#form-legalEntityAddress");
+
+                    initValidationLegalEntityAddress();
+
+                });
+                $('#table-legalEntityAddress tbody').on('click', 'tr a.remove', function () {
+
+                    Swal.fire({
+                        title: 'Save',
+                        text: "Do you want to continue!",
+                        type: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',  
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes',
+                        allowOutsideClick: false
+                    })
+                    .then((result) => {
+                        if(result){
+                            circleProgress.show(true);
+                            $.ajax({
+                                    url: app.appSettings.silupostWebAPIURI + "/SystemUser/RemoveSystemUserAddress/" + $(this).attr("data-value"),
+                                    type: 'DELETE',
+                                    dataType: "json",
+                                    contentType: 'application/json;charset=utf-8',
+                                    headers: {
+                                        Authorization: 'Bearer ' + app.appSettings.apiToken
+                                    },
+                                    data: JSON.stringify(appSettings.LegalEntityAddressModel),
+                                    success: function (result) {
+                                        if (result.IsSuccess) {
+                                            circleProgress.close();
+                                            Swal.fire('Success!',result.Message,'success');
+                                            LoadSystemUserAddress();
+                                        } else {
+                                            Swal.fire('Error!',result.Message,'error');
+                                        }
+                                    },
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                    },
+                                    error: function (errormessage) {
+                                        $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
+                                        Swal.fire('Error!',errormessage.Message,'error');
+                                        circleProgress.close();
+                                    }
+                                });
+                        }
+                    });
+                });
+
+                $("#modal-dialog-legalEntityAddress #btnSave").on("click", function(){
+                    if (!formLegalEntityAddress.valid()) {
+                        return;
+                    }
+                    
+                    Swal.fire({
+                        title: 'Save',
+                        text: "Do you want to continue!",
+                        type: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',  
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes',
+                        allowOutsideClick: false
+                    })
+                    .then((result) => {
+                        if (result.value){
+                            circleProgress.show(true);
+                            if(appSettings.LegalEntityAddressModel.IsNew){
+                                $.ajax({
+                                        url: app.appSettings.silupostWebAPIURI + "/SystemUser/createSystemUserAddress",
+                                        type: 'POST',
+                                        dataType: "json",
+                                        contentType: 'application/json;charset=utf-8',
+                                        headers: {
+                                            Authorization: 'Bearer ' + app.appSettings.apiToken
+                                        },
+                                        data: JSON.stringify(appSettings.LegalEntityAddressModel),
+                                        success: function (result) {
+                                            if (result.IsSuccess) {
+                                                circleProgress.close();
+                                                Swal.fire("Success!", result.Message, "success").then((prompt) => {
+                                                    $("#modal-dialog-legalEntityAddress").modal("hide");
+                                                    LoadSystemUserAddress();
+                                                });
+                                            } else {
+                                                Swal.fire("Error!", result.Message, "error").then((result) => {
+                                                });
+                                            }
+                                        },
+                                        failure: function (response) {
+                                            alert(response.responseText);
+                                        },
+                                        error: function (data) {
+                                            var errormessage = "";
+                                            var errorTitle = "";
+                                            if (data.responseJSON.Message != null) {
+                                                erroTitle = "Error!";
+                                                errormessage = data.responseJSON.Message;
+                                            }
+                                            if (data.responseJSON.DeveloperMessage != null && data.responseJSON.DeveloperMessage.includes("Cannot insert duplicate")) {
+                                                erroTitle = "Not Allowed!";
+                                                errormessage = "Already exist!";
+                                            }
+                                            Swal.fire(erroTitle, errormessage, 'error');
+                                            circleProgress.close();
+                                        }
+                                    });
+                            }
+                            else{
+
+                                $.ajax({
+                                        url: app.appSettings.silupostWebAPIURI + "/SystemUser/UpdateSystemUserAddress",
+                                        type: 'PUT',
+                                        dataType: "json",
+                                        contentType: 'application/json;charset=utf-8',
+                                        headers: {
+                                            Authorization: 'Bearer ' + app.appSettings.apiToken
+                                        },
+                                        data: JSON.stringify(appSettings.LegalEntityAddressModel),
+                                        success: function (result) {
+                                            if (result.IsSuccess) {
+                                                circleProgress.close();
+                                                Swal.fire("Success!", result.Message, "success").then((prompt) => {
+                                                    $("#modal-dialog-legalEntityAddress").modal("hide");
+                                                    LoadSystemUserAddress();
+                                                });
+                                            } else {
+                                                Swal.fire("Error!", result.Message, "error").then((result) => {
+                                                });
+                                            }
+                                        },
+                                        failure: function (response) {
+                                            alert(response.responseText);
+                                        },
+                                        error: function (data) {
+                                            var errormessage = "";
+                                            var errorTitle = "";
+                                            if (data.responseJSON.Message != null) {
+                                                erroTitle = "Error!";
+                                                errormessage = data.responseJSON.Message;
+                                            }
+                                            if (data.responseJSON.DeveloperMessage != null && data.responseJSON.DeveloperMessage.includes("Cannot insert duplicate")) {
+                                                erroTitle = "Not Allowed!";
+                                                errormessage = "Already exist!";
+                                            }
+                                            Swal.fire(erroTitle, errormessage, 'error');
+                                            circleProgress.close();
+                                        }
+                                    });
+                            }
+                                
+                        }
+                    });
+                });
+                $("#tab-page-legalEntityAddress #btnNewAddress").on("click", function(){
+                    var legalEntityAddressTemplate = $.templates('#legalEntityAddress-template');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-title').html('New Address');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').html('Save');
+                    $("#modal-dialog-legalEntityAddress").find('.modal-footer #btnSave').attr("data-name","Save");
+
+                    appSettings.LegalEntityAddressModel = { LegalEntityId: appSettings.model.LegalEntityId};
+                    appSettings.LegalEntityAddressModel.IsNew = true;
+                    legalEntityAddressTemplate.link("#modal-dialog-legalEntityAddress .modal-body", appSettings.LegalEntityAddressModel);
+
+                    //show modal
+                    $("#modal-dialog-legalEntityAddress").modal('show');
+                    $("body").addClass("modal-open");
+
+                    formLegalEntityAddress = $("#form-legalEntityAddress");
+
+                    initValidationLegalEntityAddress();
+                });
             });
         }
+    }
+
+    var LoadSystemUserAddress = function(){
+        appSettings.model.LegalEntityAddress = [];
+        dataTableLegalEntityAddress.clear().draw();
+        api.getSystemUserAddress(appSettings.model.SystemUserId).done(function (data) {
+            for(var i in data.Data){
+                appSettings.LegalEntityAddressModel = {
+                    LegalEntityAddressId:data.Data[i].LegalEntityAddressId,
+                    Address:data.Data[i].Address
+                }
+                appSettings.model.LegalEntityAddress.push(appSettings.LegalEntityAddressModel);
+                dataTableLegalEntityAddress.row.add(appSettings.LegalEntityAddressModel).draw();
+            }
+        });
+    }
+
+    var initValidationLegalEntityAddress = function(){
+
+            formLegalEntityAddress.validate({
+                ignore:[],
+                rules: {
+                    Address: {
+                        required: true
+                    }
+                },
+                messages: {
+                    Address: {
+                        required: "Please enter Address",
+                        minlength: $.validator.format("Please enter at least {0} characters."),
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('help-block');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                }
+            });
     }
 
     var fileValid = function (file) {
@@ -640,8 +1000,6 @@ var systemUserController = function() {
         }
 
         appSettings.model.SystemWebAdminUserRoles = systemWebAdminUserRoles;
-        console.log(appSettings.model);
-        console.log(JSON.stringify(appSettings.model));
         if(appSettings.status.IsNew){
             Swal.fire({
                 title: 'Save',
@@ -670,7 +1028,6 @@ var systemUserController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {

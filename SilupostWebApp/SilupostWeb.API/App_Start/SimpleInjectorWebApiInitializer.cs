@@ -51,7 +51,8 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeRepositoryDAC, CrimeIncidentTypeDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryRepositoryDAC, CrimeIncidentCategoryDAC>(Lifestyle.Scoped);
-            container.Register<IFileRepositoryDAC, FileDAC>(Lifestyle.Scoped);
+            container.Register<IFileRepositoryRepositoryDAC, FileDAC>(Lifestyle.Scoped);
+            container.Register<ILegalEntityAddressRepositoryDAC, LegalEntityAddressDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -62,6 +63,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeFacade, CrimeIncidentTypeFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryFacade, CrimeIncidentCategoryFacade>(Lifestyle.Scoped);
+            container.Register<ILegalEntityAddressFacade, LegalEntityAddressFacade>(Lifestyle.Scoped);
             #endregion
         }
     }
