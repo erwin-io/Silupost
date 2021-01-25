@@ -732,6 +732,7 @@
     <Content Include="plugins\webcamjs-master\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controller\CrimeIncidentCategory.js" />
+    <Content Include="Scripts\Controller\EnforcementStation.js" />
     <Content Include="Scripts\Controller\EnforcementType.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
     <Content Include="Scripts\Controller\SystemUser.js" />
@@ -762,6 +763,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
+    <Compile Include="Controllers\EnforcementStationController.cs" />
     <Compile Include="Controllers\EnforcementTypeController.cs" />
     <Compile Include="Controllers\LegalEntityController.cs" />
     <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
@@ -815,6 +817,8 @@
     <Content Include="Views\CrimeIncidentCategory\Index.cshtml" />
     <Content Include="Views\EnforcementType\_Table.cshtml" />
     <Content Include="Views\EnforcementType\Index.cshtml" />
+    <Content Include="Views\EnforcementStation\_Table.cshtml" />
+    <Content Include="Views\EnforcementStation\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

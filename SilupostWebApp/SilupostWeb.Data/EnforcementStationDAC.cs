@@ -9,24 +9,24 @@ using System.Linq;
 
 namespace SilupostWeb.Data
 {
-    public class EnforcementTypeDAC : RepositoryBase<EnforcementTypeModel>, IEnforcementTypeRepositoryDAC
+    public class EnforcementStationDAC : RepositoryBase<EnforcementStationModel>, IEnforcementStationRepositoryDAC
     {
         private readonly IDbConnection _dBConnection;
 
         #region CONSTRUCTORS
-        public EnforcementTypeDAC(IDbConnection dbConnection)
+        public EnforcementStationDAC(IDbConnection dbConnection)
         {
             _dBConnection = dbConnection ?? throw new ArgumentNullException(nameof(dbConnection));
         }
         #endregion
 
-        public override string Add(EnforcementTypeModel model)
+        public override string Add(EnforcementStationModel model)
         {
             try
             {
-                var id = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementtype_add", new
+                var id = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementstation_add", new
                 {
-                    model.EnforcementTypeName,
+                    model.EnforcementStationName,
                     IconFileId = model.IconFile.FileId,
                     model.SystemRecordManager.CreatedBy,
                 }, commandType: CommandType.StoredProcedure));
@@ -42,16 +42,16 @@ namespace SilupostWeb.Data
             }
         }
 
-        public override EnforcementTypeModel Find(string id)
+        public override EnforcementStationModel Find(string id)
         {
             try
             {
-                using (var result = _dBConnection.QueryMultiple("usp_enforcementtype_getByID", new
+                using (var result = _dBConnection.QueryMultiple("usp_enforcementstation_getByID", new
                 {
-                    EnforcementTypeId = id,
+                    EnforcementStationId = id,
                 }, commandType: CommandType.StoredProcedure))
                 {
-                    var model = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                    var model = result.Read<EnforcementStationModel>().FirstOrDefault();
                     if(model != null)
                     {
                         model.IconFile = result.Read<FileModel>().FirstOrDefault();
@@ -68,29 +68,29 @@ namespace SilupostWeb.Data
             }
         }
 
-        public override List<EnforcementTypeModel> GetAll() => throw new NotImplementedException();
+        public override List<EnforcementStationModel> GetAll() => throw new NotImplementedException();
 
-        public List<EnforcementTypeModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
+        public List<EnforcementStationModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
-            var results = new List<EnforcementTypeModel>();
+            var results = new List<EnforcementStationModel>();
             try
             {
-                var lookup = new Dictionary<string, EnforcementTypeModel>();
+                var lookup = new Dictionary<string, EnforcementStationModel>();
 
-                _dBConnection.Query("usp_enforcementtype_getPaged",
+                _dBConnection.Query("usp_enforcementstation_getPaged",
                 new[]
                 {
-                    typeof(EnforcementTypeModel),
+                    typeof(EnforcementStationModel),
                     typeof(FileModel),
                     typeof(PageResultsModel),
                 }, obj =>
                 {
-                    EnforcementTypeModel cit = obj[0] as EnforcementTypeModel;
+                    EnforcementStationModel cit = obj[0] as EnforcementStationModel;
                     FileModel f = obj[1] as FileModel;
                     PageResultsModel pr = obj[2] as PageResultsModel;
-                    EnforcementTypeModel model;
-                    if (!lookup.TryGetValue(cit.EnforcementTypeId, out model))
-                        lookup.Add(cit.EnforcementTypeId, model = cit);
+                    EnforcementStationModel model;
+                    if (!lookup.TryGetValue(cit.EnforcementStationId, out model))
+                        lookup.Add(cit.EnforcementStationId, model = cit);
                     cit.IconFile = f;
                     cit.PageResult = pr;
                     return model;
@@ -102,7 +102,7 @@ namespace SilupostWeb.Data
                     PageSize = PageSize,
                     OrderColumn = OrderColumn,
                     OrderDir = OrderDir
-                }, splitOn: "EnforcementTypeId,FileId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                }, splitOn: "EnforcementStationId,FileId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
                 if (lookup.Values.Any())
                 {
                     results.AddRange(lookup.Values);
@@ -123,9 +123,9 @@ namespace SilupostWeb.Data
             try
             {
                 int affectedRows = 0;
-                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementtype_delete", new
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementstation_delete", new
                 {
-                    EnforcementTypeId = id,
+                    EnforcementStationId = id,
                     LastUpdatedBy = LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 
@@ -143,16 +143,16 @@ namespace SilupostWeb.Data
             return success;
         }
 
-        public override bool Update(EnforcementTypeModel model)
+        public override bool Update(EnforcementStationModel model)
         {
             bool success = false;
             try
             {
                 int affectedRows = 0;
-                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementtype_update", new
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementstation_update", new
                 {
-                    model.EnforcementTypeId,
-                    model.EnforcementTypeName,
+                    model.EnforcementStationId,
+                    model.EnforcementStationName,
                     model.SystemRecordManager.LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 

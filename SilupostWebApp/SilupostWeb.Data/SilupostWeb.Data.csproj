@@ -48,8 +48,10 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
     <Compile Include="CrimeIncidentCategoryDAC.cs" />
+    <Compile Include="EnforcementStationDAC.cs" />
     <Compile Include="EnforcementTypeDAC.cs" />
     <Compile Include="Entity\CrimeIncidentCategoryModel.cs" />
+    <Compile Include="Entity\EnforcementStationModel.cs" />
     <Compile Include="Entity\EnforcementTypeModel.cs" />
     <Compile Include="Entity\LegalEntityAddressModel.cs" />
     <Compile Include="Entity\LookupModel.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
     <Compile Include="FileDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryRepositoryDAC.cs" />
+    <Compile Include="Interface\IEnforcementStationRepositoryDAC.cs" />
     <Compile Include="Interface\IEnforcementTypeRepositoryDAC.cs" />
     <Compile Include="Interface\ILegalEntityAddressRepositoryDAC.cs" />
     <Compile Include="Interface\IFileRepositoryRepositoryDAC.cs" />

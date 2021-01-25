@@ -1,10 +1,10 @@
 ﻿
-var crimeIncidentCategoryController = function() {
+var enforcementStationController = function() {
 
     var apiService = function (apiURI,apiToken) {
         var getById = function (Id) {
             return $.ajax({
-                url: apiURI + "CrimeIncidentCategory/" + Id + "/detail",
+                url: apiURI + "EnforcementStation/" + Id + "/detail",
                 data: { Id: Id },
                 type: "GET",
                 contentType: 'application/json;charset=utf-8',
@@ -14,11 +14,12 @@ var crimeIncidentCategoryController = function() {
                 }
             });
         }
-        var getLookup = function (tableNames) {
+        var getDefaultIconPic = function (Id) {
             return $.ajax({
-                url: apiURI + "SystemLookup/GetAllByTableNames?TableNames=" + tableNames,
+                url: apiURI + "File/getDefaultEnforcementStationProfilePic",
+                data: null,
                 type: "GET",
-                contentType: 'application/json;charset=utf-8',
+                contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 headers: {
                     Authorization: 'Bearer ' + apiToken
@@ -26,10 +27,9 @@ var crimeIncidentCategoryController = function() {
             });
         }
 
-
         return {
             getById: getById,
-            getLookup: getLookup
+            getDefaultIconPic: getDefaultIconPic
         };
     }
     var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
@@ -42,16 +42,13 @@ var crimeIncidentCategoryController = function() {
     };
     var init = function (obj) {
         initEvent();
+        initGrid();
+        initDefaultIconPic();
 
-		appSettings.CrimeIncidentType = {
-			CrimeIncidentTypeId : "",
-			lookup : []
-		};
-		initLookup();
-
+        
 
         $(window).resize(function () {
-            if ($("#table-crimeIncidentCategory").hasClass('collapsed')) {
+            if ($("#table-enforcementStation").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -60,7 +57,7 @@ var crimeIncidentCategoryController = function() {
             }
         });
         $(document).ready(function () {
-            if ($("#table-crimeIncidentCategory").hasClass('collapsed')) {
+            if ($("#table-enforcementStation").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -70,42 +67,24 @@ var crimeIncidentCategoryController = function() {
         });
     };
 
-    var initLookup = function(){
-        api.getLookup("CrimeIncidentType").done(function (data) {
-	    	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
-
-			appSettings.CrimeIncidentType = {
-				CrimeIncidentTypeId : "",
-				lookup : appSettings.lookup
-			};
-	        var crimeIncidentTypeTemplate = $.templates('#crimeIncidentType-template');
-	        crimeIncidentTypeTemplate.link("#select-CrimeIncidentType", appSettings.CrimeIncidentType);
-
-
-            $("#CrimeIncidentType").on("select2:select", function () {
-	        	initGrid();
-            });
-
-	        $(".select-simple").select2({
-	            theme: "bootstrap",
-	            minimumResultsForSearch: Infinity,
-	        });
+    var initDefaultIconPic = function () {
+        api.getDefaultIconPic().done(function (data) {
+            appSettings.DefaultIconPic = data.Data;
+            console.log(data.Data);
         });
     }
+
+
     var iniValidation = function() {
         form.validate({
             ignore:[],
             rules: {
-                CrimeIncidentCategoryName: {
-                    required: true
-                },
-                CrimeIncidentCategoryDescription: {
+                EnforcementStationName: {
                     required: true
                 }
             },
             messages: {
-                CrimeIncidentCategoryName: "Please enter Crime Incident Category Name",
-                CrimeIncidentCategoryDescription: "Please enter Crime Incident Category Description"
+                EnforcementStationName: "Please enter Enforcement Station Name",
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -127,19 +106,20 @@ var crimeIncidentCategoryController = function() {
         $("#btnEdit").on("click", Edit);
         $("#btnDelete").on("click", Delete);
 
-        $("#table-crimeIncidentCategory tbody").on("click", "tr .dropdown-menu a.edit", function () {
+
+        $("#table-enforcementStation tbody").on("click", "tr .dropdown-menu a.edit", function () {
             appSettings.currentId = $(this).attr("data-value");
             Edit();
         });
-        $("#table-crimeIncidentCategory tbody").on("click", "tr .dropdown-menu a.remove", function () {
+        $("#table-enforcementStation tbody").on("click", "tr .dropdown-menu a.remove", function () {
             appSettings.currentId = $(this).attr("data-value");
             Delete();
         });
 
-        $('#table-crimeIncidentCategory tbody').on('click', 'tr', function () {
+        $('#table-enforcementStation tbody').on('click', 'tr', function () {
+            appSettings.currentId = dataTable.row(this).data().EnforcementStationId;
             var isSelected = !$(this).hasClass('selected');
-            if (isSelected && $("#table-crimeIncidentCategory").hasClass('collapsed')) {
-	            appSettings.currentId = dataTable.row(this).data().CrimeIncidentCategoryId;
+            if (isSelected && $("#table-enforcementStation").hasClass('collapsed')) {
                 $("#btnDelete").removeClass("hidden");
                 $("#btnEdit").removeClass("hidden");
             } else {
@@ -147,18 +127,10 @@ var crimeIncidentCategoryController = function() {
                 $("#btnEdit").addClass("hidden");
             }
         });
-
-        $(".select-simple").select2({
-            theme: "bootstrap",
-            minimumResultsForSearch: Infinity,
-        });
     };
 
     var initGrid = function() {
-        if (dataTable) {
-            dataTable.destroy();
-        }
-        dataTable = $("#table-crimeIncidentCategory").DataTable({
+        dataTable = $("#table-enforcementStation").DataTable({
             processing: true,
             responsive: true,
             columnDefs: [
@@ -166,22 +138,28 @@ var crimeIncidentCategoryController = function() {
                     targets: 0, className:"hidden",
                 },
                 {
-                    targets: [3], width:1
+                    targets: [1,3], width:1
                 }
             ],
             "columns": [
-                { "data": "CrimeIncidentCategoryId","sortable":false, "orderable": false, "searchable": false},
-                { "data": "CrimeIncidentCategoryName" },
-                { "data": "CrimeIncidentCategoryDescription" },
+                { "data": "EnforcementStationId","sortable":false, "orderable": false, "searchable": false},
+                {
+                    "data": null, "searchable": false, "orderable": false,
+                    render: function (data, type, full, meta) {
+                        var fileData = 'data:' + full.IconFile.MimeType + ';base64,' + full.IconFile.FileContent;
+                        return '<image class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" style="width:50px;height:50px" src="' + fileData + '"></image>'
+                    }
+                },
+                { "data": "EnforcementStationName" },
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.CrimeIncidentCategoryId+'" data-toggle="dropdown" aria-expanded="true">'
+                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.EnforcementStationId+'" data-toggle="dropdown" aria-expanded="true">'
                                     +'<i class="material-icons pmd-sm">more_vert</i>'
                                 +'</button>'
-                                +'<ul aria-labelledby="drop-role-'+full.CrimeIncidentCategoryId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
-                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.CrimeIncidentCategoryId+'" role="menuitem">Edit</a></li>'
-                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.CrimeIncidentCategoryId+'" role="menuitem">Remove</a></li>'
+                                +'<ul aria-labelledby="drop-role-'+full.EnforcementStationId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.EnforcementStationId+'" role="menuitem">Edit</a></li>'
+                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.EnforcementStationId+'" role="menuitem">Remove</a></li>'
                                 +'</ul>'
                                 +'</span>'
                     }
@@ -195,7 +173,7 @@ var crimeIncidentCategoryController = function() {
             bLengthChange: true,
             "serverSide": true,
             "ajax": {
-                "url": app.appSettings.silupostWebAPIURI + "CrimeIncidentCategory/GetPage",
+                "url": app.appSettings.silupostWebAPIURI + "EnforcementStation/GetPage",
                 "type": "GET",
                 "datatype": "json",
                 contentType: 'application/json;charset=utf-8',
@@ -205,7 +183,6 @@ var crimeIncidentCategoryController = function() {
                 data: function (data) {
                     var dataFilter = {
                         Draw: data.draw,
-                        CrimeIncidentTypeId: appSettings.CrimeIncidentType.CrimeIncidentTypeId,
                         Search: data.search.value,
                         PageNo: data.start <= 0 ? data.start + 1 : (data.start / data.length) + 1,//must be added to 1
                         PageSize: data.length,
@@ -220,7 +197,7 @@ var crimeIncidentCategoryController = function() {
             "searching": true,
             "language": {
                 "info": " _START_ - _END_ of _TOTAL_ ",
-                "sLengthMenu": "<div class='crimeIncidentCategory-lookup-table-length-menu form-group pmd-textfield pmd-textfield-floating-label'><label>Rows per page:</label>_MENU_</div>",
+                "sLengthMenu": "<div class='enforcementStation-lookup-table-length-menu form-group pmd-textfield pmd-textfield-floating-label'><label>Rows per page:</label>_MENU_</div>",
                 "sSearch": "",
                 "sSearchPlaceholder": "Search",
                 "paginate": {
@@ -232,7 +209,7 @@ var crimeIncidentCategoryController = function() {
                  "<'row'<'col-sm-12'tr>>" +
                  "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
             "initComplete": function (settings, json) {
-                $(".crimeIncidentCategory-lookup-table-length-menu select").select2({
+                $(".enforcementStation-lookup-table-length-menu select").select2({
                     theme: "bootstrap",
                     minimumResultsForSearch: Infinity,
                 });
@@ -244,71 +221,144 @@ var crimeIncidentCategoryController = function() {
 
     var Add = function(){
         appSettings.status.IsNew = true;
-        var crimeIncidentCategoryTemplate = $.templates('#crimeIncidentCategory-template');
-        $("#modal-dialog").find('.modal-title').html('New Crime Incident Type');
+        var enforcementStationTemplate = $.templates('#enforcementStation-template');
+        $("#modal-dialog").find('.modal-title').html('New Enforcement Station');
         $("#modal-dialog").find('.modal-footer #btnSave').html('Save');
         $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Save");
 
+        console.log(appSettings.DefaultIconPic);
         //reset model 
         appSettings.model = {
-        };
-        appSettings.model.lookup = {
-            CrimeIncidentType: appSettings.lookup.CrimeIncidentType
+            IconFile: {
+                FileName: appSettings.DefaultIconPic.FileName,
+                MimeType: appSettings.DefaultIconPic.MimeType,
+                FileSize: appSettings.DefaultIconPic.FileSize,
+                IsDefault: true,
+                FileFromBase64String: appSettings.DefaultIconPic.FileContent,
+                FileData: 'data:' + appSettings.DefaultIconPic.MimeType + ';base64,' + appSettings.DefaultIconPic.FileContent
+            }
         };
         //end reset model
         //render template
-        crimeIncidentCategoryTemplate.link("#modal-dialog .modal-body", appSettings.model);
+        enforcementStationTemplate.link("#modal-dialog .modal-body", appSettings.model);
 
         //init form validation
-        form = $('#form-crimeIncidentCategory');
+        form = $('#form-enforcementStation');
         iniValidation();
         //end init form
         //custom init for ui
         form.find(".group-fields").first().addClass("hidden");
-
-        $(".select-simple").select2({
-            theme: "bootstrap",
-            minimumResultsForSearch: Infinity,
-        });
         //end custom init
 
         //show modal
         $("#modal-dialog").modal('show');
         //end show modal
+
+
+        $("#IconFilePicker").on("change", async function () {
+            var file = $("#IconFilePicker").get(0).files[0];
+
+            var reader = new FileReader();
+            reader.onload = function() {
+
+                if (file && fileValid(file)) {
+                    var arrayBuffer = this.result;
+                    var fileFromBase64String = arrayBuffer.replace('data:'+file.type+';base64,', '');
+                    $("#img-upload").attr("src", reader.result);
+
+                    appSettings.model.IconFile = {
+                        FileName: file.name,
+                        MimeType: file.type,
+                        FileSize: file.size,
+                        FileFromBase64String: fileFromBase64String,
+                        IsDefault: false
+                    }
+                    console.log(appSettings.model);
+                }
+            }
+            reader.readAsDataURL(file);
+        });
     }
 
     var Edit = function () {
         if (appSettings.currentId !== null || appSettings.currentId !== undefined || appSettings.currentId !== "") {
             appSettings.status.IsNew = false;
-            var crimeIncidentCategoryTemplate = $.templates('#crimeIncidentCategory-template');
-            $("#modal-dialog").find('.modal-title').html('Update Crime Incident Type');
+            var enforcementStationTemplate = $.templates('#enforcementStation-template');
+            $("#modal-dialog").find('.modal-title').html('Update Enforcement Station');
             $("#modal-dialog").find('.modal-footer #btnSave').html('Update');
             $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Update");
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
                 appSettings.model = data.Data;
-                appSettings.model.CrimeIncidentTypeId = data.Data.CrimeIncidentType.CrimeIncidentTypeId;
+                console.log(appSettings.model);
+                if(appSettings.model.IconFile == null){
+                    appSettings.model.IconFile = {
+                        FileName: appSettings.DefaultIconPic.FileName,
+                        MimeType: appSettings.DefaultIconPic.MimeType,
+                        FileSize: appSettings.DefaultIconPic.FileSize,
+                        FileContent: appSettings.DefaultIconPic.FileContent,
+                        IsDefault: true
+                    }
+                }
 
-                appSettings.model.lookup = {
-                    CrimeIncidentType: appSettings.lookup.CrimeIncidentType
-                };
+                appSettings.model.IconFile.FileData = 'data:' + appSettings.model.IconFile.MimeType + ';base64,' + appSettings.model.IconFile.FileContent;
+                appSettings.model.IconFile.FileFromBase64String = appSettings.model.IconFile.FileContent;
+                console.log(appSettings.model);
+
                 //render template
-                crimeIncidentCategoryTemplate.link("#modal-dialog .modal-body", appSettings.model);
-
-
-		        $(".select-simple").select2({
-		            theme: "bootstrap",
-		            minimumResultsForSearch: Infinity,
-		        });
+                enforcementStationTemplate.link("#modal-dialog .modal-body", appSettings.model);
                 //end render template
-                form = $('#form-crimeIncidentCategory');
+                form = $('#form-enforcementStation');
                 iniValidation();
                 $("#modal-dialog").modal('show');
                 circleProgress.close();
 
+
+                $("#IconFilePicker").val(null);
+                $("#IconFilePicker").on("change", function () {
+                    var file = $("#IconFilePicker").get(0).files[0];
+
+                        if (file && fileValid(file)) {
+                        var reader = new FileReader();
+
+                        reader.onload = function () {
+                            var arrayBuffer = this.result;
+                            var fileFromBase64String = arrayBuffer.replace('data:'+file.type+';base64,', '');
+                            $("#img-upload").attr("src", reader.result);
+                            appSettings.model.IconFile.FileName = file.name;
+                            appSettings.model.IconFile.MimeType = file.type;
+                            appSettings.model.IconFile.FileSize = file.size;
+                            appSettings.model.IconFile.FileFromBase64String = fileFromBase64String;
+
+                            appSettings.model.IconFile.HasChange = true;
+                        }
+
+                        reader.readAsDataURL(file);
+                    }
+                });
+
             });
         }
     }
+
+
+    var fileValid = function (file) {
+        var max_size = 10000000;
+        if (file.size > max_size) {
+            Swal.fire("Not Allowed!", file.name + " exceeds the maximum upload size", 'error');
+            return false;
+        }
+
+        var extensions = ["jpg", "jpeg", "png"];
+        var extension = file.name.replace(/.*\./, '').toLowerCase();
+
+        if (extensions.indexOf(extension) < 0) {
+            Swal.fire("Not Allowed!", "File not allowed", 'error');
+            return false;
+        }
+        return true;
+    }
+
 
     //Save Data Function 
     var Save = function(e){
@@ -334,7 +384,7 @@ var crimeIncidentCategoryController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentCategory/",
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementStation/",
                         type: 'POST',
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8',
@@ -406,7 +456,7 @@ var crimeIncidentCategoryController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentCategory/",
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementStation/",
                         type: "PUT",
                         dataType: "json",
                         contentType: 'application/json;charset=utf-8',
@@ -477,7 +527,7 @@ var crimeIncidentCategoryController = function() {
                     target.html(targetName+'&nbsp;<span class="spinner-border spinner-border-sm"></span>');
                     circleProgress.show(true);
                     $.ajax({
-                        url: app.appSettings.silupostWebAPIURI + "/CrimeIncidentCategory/" + appSettings.currentId,
+                        url: app.appSettings.silupostWebAPIURI + "/EnforcementStation/" + appSettings.currentId,
                         type: "DELETE",
                         contentType: 'application/json;charset=utf-8',
                         dataType: "json",
@@ -521,4 +571,4 @@ var crimeIncidentCategoryController = function() {
         init: init
     };
 }
-var crimeIncidentCategory = new crimeIncidentCategoryController;
+var enforcementStation = new enforcementStationController;
