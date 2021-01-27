@@ -13,14 +13,14 @@ namespace SilupostWeb.Facade
 {
     public class SystemUserFacade : ISystemUserFacade
     {
-        private readonly ISystemUserRepository _systemUserRepository;
+        private readonly ISystemUserRepositoryDAC _systemUserRepository;
         private readonly ILegalEntityRepository _legalEntityRepository;
         private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
         private readonly ISystemWebAdminUserRolesRepositoryDAC _systemWebAdminUserRolesRepositoryDAC;
         private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
 
         #region CONSTRUCTORS
-        public SystemUserFacade(ISystemUserRepository systemUserRepository,
+        public SystemUserFacade(ISystemUserRepositoryDAC systemUserRepository,
             ILegalEntityRepository legalEntityRepository,
             ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
             ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC,

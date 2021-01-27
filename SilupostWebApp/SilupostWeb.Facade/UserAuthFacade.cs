@@ -12,10 +12,10 @@ namespace SilupostWeb.Facade
 {
     public class UserAuthFacade : IUserAuthFacade
     {
-        private readonly ISystemUserRepository _systemUserRepository;
+        private readonly ISystemUserRepositoryDAC _systemUserRepository;
 
         #region CONSTRUCTORS
-        public UserAuthFacade(ISystemUserRepository systemUserRepository)
+        public UserAuthFacade(ISystemUserRepositoryDAC systemUserRepository)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
         }

@@ -107,6 +107,47 @@ namespace SilupostWeb.Data
                 throw ex;
             }
         }
+
+
+        public List<LegalEntityAddressModel> FindByLegalEntityId(string LegalEntityId)
+        {
+            var results = new List<LegalEntityAddressModel>();
+            try
+            {
+                var lookup = new Dictionary<string, LegalEntityAddressModel>();
+
+                _dBConnection.Query("usp_legalentityaddress_getByLegalEntityId",
+                new[]
+                {
+                    typeof(LegalEntityAddressModel),
+                    typeof(LegalEntityModel),
+                }, obj =>
+                {
+                    LegalEntityAddressModel lea = obj[0] as LegalEntityAddressModel;
+                    LegalEntityModel le = obj[1] as LegalEntityModel;
+                    LegalEntityAddressModel model;
+                    if (!lookup.TryGetValue(lea.LegalEntityAddressId, out model))
+                        lookup.Add(lea.LegalEntityAddressId, model = lea);
+                    if (model.LegalEntity == null)
+                        model.LegalEntity = new LegalEntityModel();
+                    model.LegalEntity = le;
+                    return model;
+                },
+                new
+                {
+                    LegalEntityId = LegalEntityId,
+                }, splitOn: "LegalEntityAddressId,LegalEntityId", commandType: CommandType.StoredProcedure).ToList();
+                if (lookup.Values.Any())
+                {
+                    results.AddRange(lookup.Values);
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public override bool Remove(string id)
         {
             bool success = false;

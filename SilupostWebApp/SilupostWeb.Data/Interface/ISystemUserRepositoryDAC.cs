@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SilupostWeb.Data.Interface
 {
-    public interface ISystemUserRepository : IRepository<SystemUserModel>
+    public interface ISystemUserRepositoryDAC : IRepository<SystemUserModel>
     {
         SystemUserModel Find(string Username, string Password);
         List<SystemUserModel> GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir);

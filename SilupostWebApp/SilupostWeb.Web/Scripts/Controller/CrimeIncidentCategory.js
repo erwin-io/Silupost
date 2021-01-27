@@ -42,7 +42,6 @@ var crimeIncidentCategoryController = function() {
     };
     var init = function (obj) {
         initEvent();
-
 		appSettings.CrimeIncidentType = {
 			CrimeIncidentTypeId : "",
 			lookup : []
@@ -351,7 +350,11 @@ var crimeIncidentCategoryController = function() {
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                                     target.empty();
                                     target.html(targetName);
-                                    dataTable.ajax.reload();
+                                    if(dataTable === null || dataTable === undefined){
+                                        initGrid();
+                                    }else{
+                                        dataTable.ajax.reload();
+                                    }
                                     circleProgress.close();
                                     $("#modal-dialog").modal('hide');
                                 });
@@ -422,7 +425,11 @@ var crimeIncidentCategoryController = function() {
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                                     target.empty();
                                     target.html(targetName);
-                                    dataTable.ajax.reload();
+                                    if(dataTable === null || dataTable === undefined){
+                                        initGrid();
+                                    }else{
+                                        dataTable.ajax.reload();
+                                    }
                                     circleProgress.close();
                                     $("#modal-dialog").modal('hide');
                                 });
@@ -492,7 +499,11 @@ var crimeIncidentCategoryController = function() {
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                                     target.empty();
                                     target.html(targetName);
-                                    dataTable.ajax.reload();
+                                    if(dataTable === null){
+                                        initGrid();
+                                    }else{
+                                        dataTable.ajax.reload();
+                                    }
                                     circleProgress.close();
                                 });
                             } else {
