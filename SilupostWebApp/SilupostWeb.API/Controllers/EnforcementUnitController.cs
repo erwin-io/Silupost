@@ -24,17 +24,17 @@ using System.Security.Claims;
 namespace SilupostWeb.API.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/v1/SystemUser")]
-    public class SystemUserController : ApiController
+    [RoutePrefix("api/v1/EnforcementUnit")]
+    public class EnforcementUnitController : ApiController
     {
-        private readonly ISystemUserFacade _systemUserFacade;
+        private readonly IEnforcementUnitFacade _enforcementUnitFacade;
         private readonly ILegalEntityAddressFacade _legalEntityAddressFacade;
         private string RecordedBy { get; set; }
         private long LocationId { get; set; }
         #region CONSTRUCTORS
-        public SystemUserController(ISystemUserFacade systemUserFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
+        public EnforcementUnitController(IEnforcementUnitFacade enforcementUnitFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
         {
-            _systemUserFacade = systemUserFacade ?? throw new ArgumentNullException(nameof(systemUserFacade));
+            _enforcementUnitFacade = enforcementUnitFacade ?? throw new ArgumentNullException(nameof(enforcementUnitFacade));
             _legalEntityAddressFacade = legalEntityAddressFacade ?? throw new ArgumentNullException(nameof(legalEntityAddressFacade));
         }
         #endregion
@@ -44,17 +44,16 @@ namespace SilupostWeb.API.Controllers
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(int Draw, long SystemUserType, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
+        public IHttpActionResult GetPage(int Draw, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {
-            DataTableResponseModel<IList<SystemUserViewModel>> response = new DataTableResponseModel<IList<SystemUserViewModel>>();
+            DataTableResponseModel<IList<EnforcementUnitViewModel>> response = new DataTableResponseModel<IList<EnforcementUnitViewModel>>();
 
             try
             {
                 long recordsFiltered = 0;
                 long recordsTotal = 0;
-                var pageResults = _systemUserFacade.GetPage(
+                var pageResults = _enforcementUnitFacade.GetPage(
                     (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
-                    SystemUserType,
                     PageNo,
                     PageSize,
                     OrderColumn,
@@ -68,7 +67,7 @@ namespace SilupostWeb.API.Controllers
                 response.recordsTotal = recordsTotal;
                 response.data = pageResults.Items.ToList();
 
-                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<SystemUserViewModel>>>(Request, HttpStatusCode.OK, response);
+                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<EnforcementUnitViewModel>>>(Request, HttpStatusCode.OK, response);
             }
             catch (Exception ex)
             {
@@ -87,28 +86,28 @@ namespace SilupostWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.NotFound)]
         public IHttpActionResult Get(string id)
         {
-            AppResponseModel<SystemUserViewModel> response = new AppResponseModel<SystemUserViewModel>();
+            AppResponseModel<EnforcementUnitViewModel> response = new AppResponseModel<EnforcementUnitViewModel>();
 
             if (string.IsNullOrEmpty(id))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User");
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit");
+                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
             {
-                SystemUserViewModel result = _systemUserFacade.Find(id);
+                EnforcementUnitViewModel result = _enforcementUnitFacade.Find(id);
 
                 if (result != null)
                 {
                     response.IsSuccess = true;
                     response.Data = result;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.NoRecord;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.NotFound, response);
                 }
 
             }
@@ -117,54 +116,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
-            }
-        }
-
-        [Route("")]
-        [HttpGet]
-        [SwaggerOperation("GetByCredentials")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IHttpActionResult GetByCredentials(string username, string password)
-        {
-            AppResponseModel<SystemUserViewModel> response = new AppResponseModel<SystemUserViewModel>();
-
-            if (string.IsNullOrEmpty(username))
-            {
-                response.Message = string.Format(Messages.CustomError, "Invalid Username!");
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                response.Message = string.Format(Messages.CustomError, "Invalid Username!");
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
-            }
-
-            try
-            {
-                SystemUserViewModel result = _systemUserFacade.Find(username, password);
-
-                if (result != null)
-                {
-                    response.IsSuccess = true;
-                    response.Data = result;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
-                }
-                else
-                {
-                    response.Message = string.Format(Messages.CustomError, "Username or Password is incorrect!");
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.NotFound, response);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                response.DeveloperMessage = ex.Message;
-                response.Message = Messages.ServerError;
-                //TODO Logging of exceptions
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -174,9 +126,9 @@ namespace SilupostWeb.API.Controllers
         [SwaggerOperation("create")]
         [SwaggerResponse(HttpStatusCode.Created)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
-        public IHttpActionResult Create([FromBody] CreateSystemUserBindingModel model)
+        public IHttpActionResult Create([FromBody] CreateEnforcementUnitBindingModel model)
         {
-            AppResponseModel<SystemUserViewModel> response = new AppResponseModel<SystemUserViewModel>();
+            AppResponseModel<EnforcementUnitViewModel> response = new AppResponseModel<EnforcementUnitViewModel>();
 
             try
             {
@@ -185,21 +137,21 @@ namespace SilupostWeb.API.Controllers
                 {
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
-                string id = _systemUserFacade.Add(model, RecordedBy);
+                string id = _enforcementUnitFacade.Add(model, RecordedBy);
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var result = _systemUserFacade.Find(id);
+                    var result = _enforcementUnitFacade.Find(id);
 
                     response.IsSuccess = true;
                     response.Message = Messages.Created;
                     response.Data = result;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.Created, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.Created, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
 
                 }
             }
@@ -208,7 +160,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -219,14 +171,14 @@ namespace SilupostWeb.API.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IHttpActionResult Update([FromBody] UpdateSystemUserBindingModel model)
+        public IHttpActionResult Update([FromBody] UpdateEnforcementUnitBindingModel model)
         {
-            AppResponseModel<SystemUserViewModel> response = new AppResponseModel<SystemUserViewModel>();
+            AppResponseModel<EnforcementUnitViewModel> response = new AppResponseModel<EnforcementUnitViewModel>();
 
-            if (model != null && string.IsNullOrEmpty(model.SystemUserId))
+            if (model != null && string.IsNullOrEmpty(model.EnforcementUnitId))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User");
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit");
+                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
             try
@@ -236,26 +188,26 @@ namespace SilupostWeb.API.Controllers
                 {
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
-                var result = _systemUserFacade.Find(model.SystemUserId);
+                var result = _enforcementUnitFacade.Find(model.EnforcementUnitId);
                 if (result == null)
                 {
-                    response.Message = string.Format(Messages.InvalidId, "System User");
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    response.Message = string.Format(Messages.InvalidId, "Enforcement Unit");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
-                bool success = _systemUserFacade.Update(model, RecordedBy);
+                bool success = _enforcementUnitFacade.Update(model, RecordedBy);
                 response.IsSuccess = success;
 
                 if (success)
                 {
-                    result = _systemUserFacade.Find(model.SystemUserId);
+                    result = _enforcementUnitFacade.Find(model.EnforcementUnitId);
                     response.Message = Messages.Updated;
                     response.Data = result;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.OK, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.OK, response);
                 }
                 else
                 {
                     response.Message = Messages.Failed;
-                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadGateway, response);
+                    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadGateway, response);
                 }
             }
             catch (Exception ex)
@@ -263,7 +215,7 @@ namespace SilupostWeb.API.Controllers
                 response.DeveloperMessage = ex.Message;
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
-                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementUnitViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
 
@@ -278,7 +230,7 @@ namespace SilupostWeb.API.Controllers
 
             if (string.IsNullOrEmpty(id))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User");
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit");
                 return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
 
@@ -290,14 +242,14 @@ namespace SilupostWeb.API.Controllers
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
 
-                var result = _systemUserFacade.Find(id);
+                var result = _enforcementUnitFacade.Find(id);
                 if (result == null)
                 {
-                    response.Message = string.Format(Messages.InvalidId, "System User");
+                    response.Message = string.Format(Messages.InvalidId, "Enforcement Unit");
                     return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
-                bool success = _systemUserFacade.Remove(id, RecordedBy);
+                bool success = _enforcementUnitFacade.Remove(id, RecordedBy);
                 response.IsSuccess = success;
 
                 if (success)
@@ -332,7 +284,7 @@ namespace SilupostWeb.API.Controllers
 
             if (string.IsNullOrEmpty(legalEntityId))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit LegalEntity Address");
                 return new SilupostAPIHttpActionResult<AppResponseModel<List<LegalEntityAddressViewModel>>>(Request, HttpStatusCode.BadRequest, response);
             }
 
@@ -362,13 +314,13 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [Route("createSystemUserAddress")]
+        [Route("createEnforcementUnitAddress")]
         [HttpPost]
         [ValidateModel]
         [SwaggerOperation("create")]
         [SwaggerResponse(HttpStatusCode.Created)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
-        public IHttpActionResult CreateSystemUserAddress([FromBody] CreateLegalEntityAddressBindingModel model)
+        public IHttpActionResult CreateEnforcementUnitAddress([FromBody] CreateLegalEntityAddressBindingModel model)
         {
             AppResponseModel<LegalEntityAddressViewModel> response = new AppResponseModel<LegalEntityAddressViewModel>();
 
@@ -401,20 +353,20 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [Route("UpdateSystemUserAddress")]
+        [Route("UpdateEnforcementUnitAddress")]
         [HttpPut]
         [ValidateModel]
         [SwaggerOperation("update")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IHttpActionResult UpdateSystemUserAddress([FromBody] UpdateLegalEntityAddressBindingModel model)
+        public IHttpActionResult UpdateEnforcementUnitAddress([FromBody] UpdateLegalEntityAddressBindingModel model)
         {
             AppResponseModel<LegalEntityAddressViewModel> response = new AppResponseModel<LegalEntityAddressViewModel>();
 
             if (model != null && string.IsNullOrEmpty(model.LegalEntityAddressId))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit LegalEntity Address");
                 return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 
@@ -423,7 +375,7 @@ namespace SilupostWeb.API.Controllers
                 var result = _legalEntityAddressFacade.Find(model.LegalEntityAddressId);
                 if (result == null)
                 {
-                    response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                    response.Message = string.Format(Messages.InvalidId, "Enforcement Unit LegalEntity Address");
                     return new SilupostAPIHttpActionResult<AppResponseModel<LegalEntityAddressViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
                 bool success = _legalEntityAddressFacade.Update(model);
@@ -451,18 +403,18 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [Route("RemoveSystemUserAddress/{id}")]
+        [Route("RemoveEnforcementUnitAddress/{id}")]
         [HttpDelete]
         [SwaggerOperation("remove")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IHttpActionResult RemoveSystemUserAddress(string id)
+        public IHttpActionResult RemoveEnforcementUnitAddress(string id)
         {
             AppResponseModel<object> response = new AppResponseModel<object>();
 
             if (string.IsNullOrEmpty(id))
             {
-                response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Unit LegalEntity Address");
                 return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
             }
 
@@ -472,7 +424,7 @@ namespace SilupostWeb.API.Controllers
                 var result = _legalEntityAddressFacade.Find(id);
                 if (result == null)
                 {
-                    response.Message = string.Format(Messages.InvalidId, "System User LegalEntity Address");
+                    response.Message = string.Format(Messages.InvalidId, "Enforcement Unit LegalEntity Address");
                     return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
                 }
 

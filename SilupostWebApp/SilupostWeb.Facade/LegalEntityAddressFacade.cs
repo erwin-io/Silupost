@@ -42,7 +42,8 @@ namespace SilupostWeb.Facade
         }
 
 
-        public List<LegalEntityAddressViewModel> FindBySystemUserId(string id) => AutoMapperHelper<LegalEntityAddressModel, LegalEntityAddressViewModel>.MapList(_legalEntityAddressRepositoryDAC.FindBySystemUserId(id)).ToList();
+        public List<LegalEntityAddressViewModel> FindBySystemUserId(string SystemUserId) => AutoMapperHelper<LegalEntityAddressModel, LegalEntityAddressViewModel>.MapList(_legalEntityAddressRepositoryDAC.FindBySystemUserId(SystemUserId)).ToList();
+        public List<LegalEntityAddressViewModel> FindByLegalEntityId(string LegalEntityId) => AutoMapperHelper<LegalEntityAddressModel, LegalEntityAddressViewModel>.MapList(_legalEntityAddressRepositoryDAC.FindByLegalEntityId(LegalEntityId)).ToList();
         public LegalEntityAddressViewModel Find(string id) => AutoMapperHelper<LegalEntityAddressModel, LegalEntityAddressViewModel>.Map(_legalEntityAddressRepositoryDAC.Find(id));
 
         public bool Remove(string id)

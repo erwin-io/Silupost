@@ -274,6 +274,7 @@
     <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
     <Compile Include="Controllers\SystemLookupTableController.cs" />
     <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
+    <Compile Include="Controllers\EnforcementUnitController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />

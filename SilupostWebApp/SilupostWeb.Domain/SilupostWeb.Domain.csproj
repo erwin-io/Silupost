@@ -49,6 +49,7 @@
     <Compile Include="BindingModel\EnforcementTypeBindingModel.cs" />
     <Compile Include="BindingModel\FileBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentCategoryBindingModel.cs" />
+    <Compile Include="BindingModel\EnforcementUnitBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminMenuRolesBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentTypeBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminRoleBindingModel.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ViewModel\LookupViewModel.cs" />
     <Compile Include="ViewModel\PageResultsViewModel.cs" />
     <Compile Include="ViewModel\SystemRecordManagerViewModel.cs" />
+    <Compile Include="ViewModel\EnforcementUnitViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuRolesViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminModuleViewModel.cs" />

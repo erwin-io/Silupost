@@ -56,6 +56,7 @@
     <Compile Include="Entity\LegalEntityAddressModel.cs" />
     <Compile Include="Entity\LookupModel.cs" />
     <Compile Include="Entity\LookupTableModel.cs" />
+    <Compile Include="Entity\EnforcementUnitModel.cs" />
     <Compile Include="Entity\SystemUserTypeModel.cs" />
     <Compile Include="Entity\EntityGenderModel.cs" />
     <Compile Include="Entity\EntityStatusModel.cs" />
@@ -79,14 +80,16 @@
     <Compile Include="Interface\IFileRepositoryRepositoryDAC.cs" />
     <Compile Include="Interface\ILegalEntityRepository.cs" />
     <Compile Include="Interface\ILookupTableRepositoryDAC.cs" />
+    <Compile Include="Interface\IEnforcementUnitRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRolesRepositoryDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentTypeRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminUserRolesRepositoryDAC.cs" />
-    <Compile Include="Interface\ISystemUserRepository.cs" />
+    <Compile Include="Interface\ISystemUserRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminRoleRepositoryDAC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LegalEntityDAC.cs" />
     <Compile Include="LookupTableDAC.cs" />
+    <Compile Include="EnforcementUnitDAC.cs" />
     <Compile Include="SystemWebAdminMenurRolesDAC.cs" />
     <Compile Include="CrimeIncidentTypeDAC.cs" />
     <Compile Include="LegalEntityAddressDAC.cs" />

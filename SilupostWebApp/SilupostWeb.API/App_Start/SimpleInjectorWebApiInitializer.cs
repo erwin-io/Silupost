@@ -44,7 +44,7 @@ namespace SilupostWeb.API.App_Start
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);
-            container.Register<ISystemUserRepository, SystemUserDAC>(Lifestyle.Scoped);
+            container.Register<ISystemUserRepositoryDAC, SystemUserDAC>(Lifestyle.Scoped);
             container.Register<ILegalEntityRepository, LegalEntityDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminUserRolesRepositoryDAC, SystemWebAdminUserRolesDAC>(Lifestyle.Scoped);
@@ -55,6 +55,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ILegalEntityAddressRepositoryDAC, LegalEntityAddressDAC>(Lifestyle.Scoped);
             container.Register<IEnforcementTypeRepositoryDAC, EnforcementTypeDAC>(Lifestyle.Scoped);
             container.Register<IEnforcementStationRepositoryDAC, EnforcementStationDAC>(Lifestyle.Scoped);
+            container.Register<IEnforcementUnitRepositoryDAC, EnforcementUnitDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -68,6 +69,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ILegalEntityAddressFacade, LegalEntityAddressFacade>(Lifestyle.Scoped);
             container.Register<IEnforcementTypeFacade, EnforcementTypeFacade>(Lifestyle.Scoped);
             container.Register<IEnforcementStationFacade, EnforcementStationFacade>(Lifestyle.Scoped);
+            container.Register<IEnforcementUnitFacade, EnforcementUnitFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

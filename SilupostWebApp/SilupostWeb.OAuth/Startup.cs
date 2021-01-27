@@ -51,7 +51,7 @@ namespace SilupostWeb.OAuth
             string connectionString = Helpers.Configuration.ConnectionString();
             IDbConnection dbConnection = new SqlConnection(connectionString);
             //DAC
-            ISystemUserRepository _systemUserRepository = new SystemUserDAC(dbConnection);
+            ISystemUserRepositoryDAC _systemUserRepository = new SystemUserDAC(dbConnection);
             //Facade
             IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
 
