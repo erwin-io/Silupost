@@ -48,11 +48,17 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
     <Compile Include="CrimeIncidentCategoryDAC.cs" />
+    <Compile Include="CrimeIncidentReportMediaDAC.cs" />
+    <Compile Include="CrimeIncidentReportDAC.cs" />
     <Compile Include="EnforcementStationDAC.cs" />
     <Compile Include="EnforcementTypeDAC.cs" />
     <Compile Include="Entity\CrimeIncidentCategoryModel.cs" />
+    <Compile Include="Entity\CrimeIncidentReportModel.cs" />
     <Compile Include="Entity\EnforcementStationModel.cs" />
+    <Compile Include="Entity\CrimeIncidentReportMediaModel.cs" />
     <Compile Include="Entity\EnforcementTypeModel.cs" />
+    <Compile Include="Entity\EntityApprovalStatusModel.cs" />
+    <Compile Include="Entity\DocReportMediaTypeModel.cs" />
     <Compile Include="Entity\LegalEntityAddressModel.cs" />
     <Compile Include="Entity\LookupModel.cs" />
     <Compile Include="Entity\LookupTableModel.cs" />
@@ -74,6 +80,8 @@
     <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
     <Compile Include="FileDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryRepositoryDAC.cs" />
+    <Compile Include="Interface\ICrimeIncidentReportMediaRepositoryDAC.cs" />
+    <Compile Include="Interface\ICrimeIncidentReportRepositoryDAC.cs" />
     <Compile Include="Interface\IEnforcementStationRepositoryDAC.cs" />
     <Compile Include="Interface\IEnforcementTypeRepositoryDAC.cs" />
     <Compile Include="Interface\ILegalEntityAddressRepositoryDAC.cs" />

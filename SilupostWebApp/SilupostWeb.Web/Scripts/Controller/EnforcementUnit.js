@@ -88,10 +88,14 @@ var enforcementUnitController = function() {
                     required: true
                 },
                 EmailAddress: {
-                    required: true
+                    required: true,
+                    emailCheck: function(){
+                        return true;
+                    }
                 },
                 MobileNumber: {
-                    required: true
+                    required: true,
+                    digits: true
                 }
             },
             Messages: {
@@ -100,8 +104,14 @@ var enforcementUnitController = function() {
                 LastName: "Please enter Lastname",
                 BirthDate: "Please select Birth Date",
                 GenderId: "Please select Gender",
-                EmailAddress: "Please enter Email Address",
-                MobileNumber: "Please enter Mobile Number"
+                EmailAddress: {
+                    required: "Please enter Email Address",
+                    emailCheck : "Please enter valid email",
+                },
+                MobileNumber: {
+                    required: "Please enter Mobile Number",
+                    digits : "Please enter valid Mobile Number",
+                }
             },
         }
 
@@ -169,11 +179,8 @@ var enforcementUnitController = function() {
                 $(element).closest('.form-group').removeClass('has-error');
             },
         });
-        $.validator.addMethod("pwcheck", function(value) {
-           return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
-               && /[a-z]/.test(value) // has a lowercase letter
-               && /[A-Z]/.test(value) // has a uppercase letter
-               && /\d/.test(value) // has a digit
+        $.validator.addMethod("emailCheck", function(value) {
+           return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(value) // consists of only these
         });
     };
 
@@ -224,7 +231,7 @@ var enforcementUnitController = function() {
           crop_height: 240,
 
           image_format: 'jpeg',
-          jpeg_quality: 90,
+          jpeg_quality: 200,
           flip_horiz: true
 
 
@@ -323,16 +330,28 @@ var enforcementUnitController = function() {
     var initGrid = function() {
         dataTableEnforcementUnit = $("#table-enforcementUnit").DataTable({
             processing: true,
-            responsive: true,
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
+            },
             columnDefs: [
                 {
-                    targets: 0, className:"hidden",
+                    targets: [0,8], width:1
                 },
                 {
-                    targets: [7], width:1
+                    className: 'control',
+                    orderable: false,
+                    targets:   0
                 }
             ],
             "columns": [
+                { "data": "","sortable":false, "orderable": false, "searchable": false,
+                    render: function (data, type, full, meta) {
+                        return '';
+                    }
+                },
                 { "data": "EnforcementUnitId","sortable":false, "orderable": false, "searchable": false},
                 { "data": "LegalEntity.FullName" },
                 { "data": "EnforcementType.EnforcementTypeName" },
@@ -405,6 +424,7 @@ var enforcementUnitController = function() {
                 circleProgress.close();
             }
         });
+        $(".custom-select-action").html('<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">delete</i></button><button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">more_vert</i></button>');
         dataTableEnforcementUnit.columns.adjust();
     };
 
@@ -611,6 +631,9 @@ var enforcementUnitController = function() {
                         IsDefault: true,
                         FileFromBase64String: appSettings.DefaultProfilePic.FileContent
                     }
+                }
+                else{
+                    appSettings.model.ProfilePicture.FileFromBase64String = appSettings.model.ProfilePicture.FileContent;
                 }
 
                 appSettings.model.ProfilePicture.FileData = 'data:' + appSettings.model.ProfilePicture.MimeType + ';base64,' + appSettings.model.ProfilePicture.FileContent;

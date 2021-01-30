@@ -88,10 +88,14 @@ var systemUserController = function() {
                     required: true
                 },
                 EmailAddress: {
-                    required: true
+                    required: true,
+                    emailCheck: function(){
+                        return true;
+                    }
                 },
                 MobileNumber: {
-                    required: true
+                    required: true,
+                    digits: true
                 }
             },
             Messages: {
@@ -100,8 +104,14 @@ var systemUserController = function() {
                 LastName: "Please enter Lastname",
                 BirthDate: "Please select Birth Date",
                 GenderId: "Please select Gender",
-                EmailAddress: "Please enter Email Address",
-                MobileNumber: "Please enter Mobile Number"
+                EmailAddress: {
+                	required: "Please enter Email Address",
+                    emailCheck : "Please enter valid email",
+                },
+                MobileNumber: {
+                	required: "Please enter Mobile Number",
+                    digits : "Please enter valid Mobile Number",
+                }
             },
         }
 
@@ -225,6 +235,9 @@ var systemUserController = function() {
                && /[A-Z]/.test(value) // has a uppercase letter
                && /\d/.test(value) // has a digit
         });
+        $.validator.addMethod("emailCheck", function(value) {
+           return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(value) // consists of only these
+        });
     };
 
     var initEvent = function () {
@@ -265,16 +278,16 @@ var systemUserController = function() {
          Webcam.set({
           width: 320,
           height: 240,
-          // device capture size
+          // // device capture size
           dest_width: 320,
           dest_height: 240,
 
-          // final cropped size
+          // // final cropped size
           crop_width: 240,
           crop_height: 240,
 
           image_format: 'jpeg',
-          jpeg_quality: 90,
+          jpeg_quality: 200,
           flip_horiz: true
 
 
@@ -338,7 +351,7 @@ var systemUserController = function() {
             appSettings.model.ProfilePicture.FileName = "SILUPOST_CAPTURE_" + moment(new Date()).format("YYYY-MM-DD_HH:mm:ss.sss");
             appSettings.model.ProfilePicture.MimeType = "image/jpeg";
             appSettings.model.ProfilePicture.FileSize = parseInt(sizeInKb);
-            appSettings.model.ProfilePicture.IsDefault = false;
+            // appSettings.model.ProfilePicture.IsDefault = false;
             appSettings.model.ProfilePicture.FileFromBase64String = base64String;
             appSettings.model.ProfilePicture.FileData = cameraCapture.data;
             $("#img-upload").attr("src", appSettings.model.ProfilePicture.FileData);
@@ -364,7 +377,8 @@ var systemUserController = function() {
                 appSettings.model.ProfilePicture.MimeType = file.type;
                 appSettings.model.ProfilePicture.FileSize = file.size;
                 appSettings.model.ProfilePicture.FileFromBase64String = fileFromBase64String;
-                appSettings.model.ProfilePicture.IsDefault = false;
+                // if(!appSettings.model.ProfilePicture.IsDefault)
+                // 	appSettings.model.ProfilePicture.IsDefault = false;
             }
         }
         reader.readAsDataURL(file);
@@ -373,17 +387,29 @@ var systemUserController = function() {
     var initGrid = function() {
         dataTableSystemUser = $("#table-systemUser").DataTable({
             processing: true,
-            responsive: true,
+			responsive: {
+				details: {
+					type: 'column',
+					target: 'tr'
+				}
+			},
             columnDefs: [
                 {
-                    targets: 0, className:"hidden",
+                    targets: [0,7], width:1
                 },
                 {
-                    targets: [6], width:1
-                }
+					className: 'control',
+					orderable: false,
+					targets:   0
+				}
             ],
             "columns": [
-                { "data": "SystemUserId","sortable":false, "orderable": false, "searchable": false},
+                { "data": "","sortable":false, "orderable": false, "searchable": false,
+                    render: function (data, type, full, meta) {
+                    	return '';
+                    }
+                },
+                { "data": "SystemUserId","sortable":true, "orderable": true, "searchable": true},
                 { "data": "UserName" },
                 { "data": "LegalEntity.FullName" },
                 { "data": "LegalEntity.Gender.GenderName" },
@@ -465,6 +491,7 @@ var systemUserController = function() {
                 circleProgress.close();
             }
         });
+		$(".custom-select-action").html('<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">delete</i></button><button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">more_vert</i></button>');
         dataTableSystemUser.columns.adjust();
     };
 
@@ -478,7 +505,12 @@ var systemUserController = function() {
                 },
                 {
                     targets: [2], width:1
-                }
+                }, 
+                {
+                	className: 'control',
+					orderable: false,
+					targets:   1
+				}
             ],
             "columns": [
                 { "data": "LegalEntityAddressId","sortable":false, "orderable": false, "searchable": false},
@@ -659,6 +691,7 @@ var systemUserController = function() {
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
             	console.log(data.Data);
+            	console.log(appSettings.DefaultProfilePic);
                 appSettings.model = {
                     SystemUserId: data.Data.SystemUserId,
                     UserName: data.Data.UserName,
@@ -672,6 +705,7 @@ var systemUserController = function() {
                 if (appSettings.model.ProfilePicture === null){
 
                     appSettings.model.ProfilePicture = {
+                        FileName: appSettings.DefaultProfilePic.FileId,
                         FileName: appSettings.DefaultProfilePic.FileName,
                         MimeType: appSettings.DefaultProfilePic.MimeType,
                         FileSize: appSettings.DefaultProfilePic.FileSize,
@@ -679,6 +713,9 @@ var systemUserController = function() {
                         IsDefault: true,
                         FileFromBase64String: appSettings.DefaultProfilePic.FileContent
                     }
+                }
+                else{
+                    appSettings.model.ProfilePicture.FileFromBase64String = appSettings.model.ProfilePicture.FileContent;
                 }
 
                 appSettings.model.ProfilePicture.FileData = 'data:' + appSettings.model.ProfilePicture.MimeType + ';base64,' + appSettings.model.ProfilePicture.FileContent;

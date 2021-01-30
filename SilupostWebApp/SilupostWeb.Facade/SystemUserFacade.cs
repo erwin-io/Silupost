@@ -132,13 +132,6 @@ namespace SilupostWeb.Facade
             using (var scope = new TransactionScope())
             {
                 var updateModel = AutoMapperHelper<UpdateSystemUserBindingModel, SystemUserModel>.Map(model);
-                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
-                success = _systemUserRepository.Update(updateModel);
-                if (!success)
-                {
-                    throw new Exception("Error Updating System User");
-                }
-
                 //Start Saving LegalEntity
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
                 success = _legalEntityRepository.Update(updateModel.LegalEntity);
@@ -149,12 +142,24 @@ namespace SilupostWeb.Facade
                 //End Saving file
 
                 //Start Saving file
-                updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
-                updateModel.ProfilePicture.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
-                success = _fileRepositoryDAC.Update(updateModel.ProfilePicture);
-                if (!success)
+                if (model.ProfilePicture.IsDefault)
                 {
-                    throw new Exception("Error Saving File");
+                    updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                    updateModel.ProfilePicture.SystemRecordManager.CreatedBy = LastUpdatedBy;
+                    var fileId = _fileRepositoryDAC.Add(updateModel.ProfilePicture);
+                    if (string.IsNullOrEmpty(fileId))
+                        throw new Exception("Error Saving File");
+                    updateModel.ProfilePicture.FileId = fileId;
+                }
+                else
+                {
+                    updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                    updateModel.ProfilePicture.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                    success = _fileRepositoryDAC.Update(updateModel.ProfilePicture);
+                    if (!success)
+                    {
+                        throw new Exception("Error Saving File");
+                    }
                 }
                 //End Saving file
 
@@ -189,6 +194,13 @@ namespace SilupostWeb.Facade
                         }
                     }
                 }
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _systemUserRepository.Update(updateModel);
+                if (!success)
+                {
+                    throw new Exception("Error Updating System User");
+                }
+
                 scope.Complete();
             }
             return success;

@@ -239,6 +239,7 @@ namespace SilupostWeb.Data
                 var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuser_update", new
                 {
                     model.SystemUserId,
+                    ProfilePictureFile = model.ProfilePicture.FileId,
                     model.SystemRecordManager.LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 

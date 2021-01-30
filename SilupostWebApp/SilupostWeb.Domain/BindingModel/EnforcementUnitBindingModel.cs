@@ -23,6 +23,7 @@ namespace SilupostWeb.Domain.BindingModel
     public class UpdateEnforcementUnitBindingModel : EnforcementUnitBindingModel
     {
         public string EnforcementUnitId { get; set; }
+        public string LegalEntityId { get; set; }
         public UpdateFileBindingModel ProfilePicture { get; set; }
     }
 }

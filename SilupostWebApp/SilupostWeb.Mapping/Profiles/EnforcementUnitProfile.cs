@@ -41,6 +41,7 @@ namespace SilupostWeb.Mapping.Profiles
                 .ForPath(dest => dest.LegalEntity, opt => opt.MapFrom(src =>
                     new LegalEntityModel
                     {
+                        LegalEntityId = src.LegalEntityId,
                         FirstName = src.FirstName,
                         LastName = src.LastName,
                         MiddleName = src.MiddleName,

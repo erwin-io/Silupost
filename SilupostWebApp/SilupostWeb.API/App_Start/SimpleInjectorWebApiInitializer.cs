@@ -56,6 +56,8 @@ namespace SilupostWeb.API.App_Start
             container.Register<IEnforcementTypeRepositoryDAC, EnforcementTypeDAC>(Lifestyle.Scoped);
             container.Register<IEnforcementStationRepositoryDAC, EnforcementStationDAC>(Lifestyle.Scoped);
             container.Register<IEnforcementUnitRepositoryDAC, EnforcementUnitDAC>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentReportRepositoryDAC, CrimeIncidentReportDAC>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentReportMediaRepositoryDAC, CrimeIncidentReportMediaDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -70,6 +72,8 @@ namespace SilupostWeb.API.App_Start
             container.Register<IEnforcementTypeFacade, EnforcementTypeFacade>(Lifestyle.Scoped);
             container.Register<IEnforcementStationFacade, EnforcementStationFacade>(Lifestyle.Scoped);
             container.Register<IEnforcementUnitFacade, EnforcementUnitFacade>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentReportFacade, CrimeIncidentReportFacade>(Lifestyle.Scoped);
+            container.Register<ICrimeIncidentReportMediaFacade, CrimeIncidentReportMediaFacade>(Lifestyle.Scoped);
             #endregion
         }
     }
