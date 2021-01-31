@@ -7,7 +7,8 @@ namespace SilupostWeb.Domain.BindingModel
         public bool IsDefault { get; set; }
         public string FileName { get; set; }
         public string MimeType { get; set; }
-        public int FileSize { get; set; }
+        public byte[] FileContent { get; set; }
+        public long FileSize { get; set; }
         public string FileFromBase64String { get; set; }
     }
 

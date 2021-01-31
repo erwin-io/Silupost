@@ -1684,6 +1684,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/Controller/Account.js">
       <publishTime>06/27/2020 01:30:24</publishTime>
     </File>
+    <File Include="Scripts/Controller/CrimeIncidentReport-Details.js">
+      <publishTime>01/30/2021 23:25:35</publishTime>
+    </File>
     <File Include="Scripts/Controller/Home.js">
       <publishTime>11/21/2020 05:04:37</publishTime>
     </File>

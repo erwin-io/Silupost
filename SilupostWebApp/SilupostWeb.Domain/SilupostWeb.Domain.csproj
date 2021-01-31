@@ -58,6 +58,7 @@
     <Compile Include="BindingModel\SystemUserBindingModel.cs" />
     <Compile Include="BindingModel\LegalEntityAddressBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminUserRolesBindingModel.cs" />
+    <Compile Include="Enumerations\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CrimeIncidentCategoryViewModel.cs" />
     <Compile Include="ViewModel\CrimeIncidentReportViewModel.cs" />
@@ -87,7 +88,6 @@
     <Compile Include="ViewModel\TokenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enumerations\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@ namespace SilupostWeb.Domain.ViewModel
         public DateTime PossibleDate { get; set; }
         public string PossibleTime { get; set; }
         public string Description { get; set; }
+        public string GeoAddress { get; set; }
         public string GeoStreet { get; set; }
         public string GeoDistrict { get; set; }
         public string GeoCityMun { get; set; }

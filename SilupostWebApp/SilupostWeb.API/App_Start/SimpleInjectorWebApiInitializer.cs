@@ -41,6 +41,7 @@ namespace SilupostWeb.API.App_Start
             GlobalVariables.goDefaultEnforcementTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeIconfilePic");
             GlobalVariables.goDefaultEnforcementUnitIconFilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitIconfilePic");
             GlobalVariables.goDefaultEnforcementStationIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationIconfilePic");
+            GlobalVariables.goDefaultSystemUploadRootDirectory = GlobalVariables.GetApplicationConfig("DefaultSystemUploadRootDirectory");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);

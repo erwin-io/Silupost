@@ -157,6 +157,7 @@ namespace SilupostWeb.Data
                 var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_crimeincidentreportmedia_update", new
                 {
                     model.CrimeIncidentReportMediaId,
+                    model.DocReportMediaType.DocReportMediaTypeId,
                     model.Caption
                 }, commandType: CommandType.StoredProcedure));
 

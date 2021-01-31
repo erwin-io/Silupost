@@ -28,8 +28,6 @@ namespace SilupostWeb.Data
                 {
                     model.FileName,
                     model.MimeType,
-                    model.FileSize,
-                    model.FileContent,
                     model.SystemRecordManager.CreatedBy,
                 }, commandType: CommandType.StoredProcedure));
 
@@ -78,8 +76,6 @@ namespace SilupostWeb.Data
                     model.FileId,
                     model.FileName,
                     model.MimeType,
-                    model.FileSize,
-                    model.FileContent,
                     model.SystemRecordManager.LastUpdatedBy,
                 }, commandType: CommandType.StoredProcedure));
 

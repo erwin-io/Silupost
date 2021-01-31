@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Transactions;
 using System.Linq;
+using System.IO;
 
 namespace SilupostWeb.Facade
 {
@@ -71,6 +72,17 @@ namespace SilupostWeb.Facade
                     addModel.ProfilePicture.FileId = fileId;
                     //End Saving file
 
+                    //start store file directory
+                    if (File.Exists(addModel.ProfilePicture.FileName))
+                    {
+                        File.Delete(addModel.ProfilePicture.FileName);
+                    }
+                    using (var fs = new FileStream(addModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(addModel.ProfilePicture.FileContent, 0, addModel.ProfilePicture.FileContent.Length);
+                    }
+                    //end store file directory
+
                     addModel.SystemRecordManager.CreatedBy = CreatedBy;
                     addModel.LegalEntity.LegalEntityId = legalEntityId;
                     id = _systemUserRepository.Add(addModel);
@@ -105,15 +117,28 @@ namespace SilupostWeb.Facade
             var result = new PageResultsViewModel<SystemUserViewModel>();
             var data = _systemUserRepository.GetPage(Search, SystemUserType, PageNo, PageSize, OrderColumn, OrderDir);
             result.Items = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.MapList(data);
+            foreach (var item in result.Items)
+            {
+                if (item.ProfilePicture != null && File.Exists(item.ProfilePicture.FileName))
+                    item.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(item.ProfilePicture.FileName);
+            }
             result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows : 0;
             return result;
         }
-
-
-        public SystemUserViewModel Find(string id) => AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(id));
-
-        public SystemUserViewModel Find(string Username, string Password) => AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(Username, Password));
-
+        public SystemUserViewModel Find(string id)
+        {
+            var result = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(id));
+            if (result.ProfilePicture != null && File.Exists(result.ProfilePicture.FileName))
+                result.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(result.ProfilePicture.FileName);
+            return result;
+        }
+        public SystemUserViewModel Find(string Username, string Password)
+        {
+            var result = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(Username, Password));
+            if (result.ProfilePicture != null && File.Exists(result.ProfilePicture.FileName))
+                result.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(result.ProfilePicture.FileName);
+            return result;
+        }
         public bool Remove(string id, string LastUpdatedBy)
         {
             var success = false;
@@ -162,6 +187,17 @@ namespace SilupostWeb.Facade
                     }
                 }
                 //End Saving file
+
+                //start store file directory
+                if (File.Exists(updateModel.ProfilePicture.FileName))
+                {
+                    File.Delete(updateModel.ProfilePicture.FileName);
+                }
+                using (var fs = new FileStream(updateModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(updateModel.ProfilePicture.FileContent, 0, updateModel.ProfilePicture.FileContent.Length);
+                }
+                //end store file directory
 
                 var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
                 var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();

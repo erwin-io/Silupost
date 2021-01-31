@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Transactions;
 using System.Linq;
+using System.IO;
 
 namespace SilupostWeb.Facade
 {
@@ -35,11 +36,22 @@ namespace SilupostWeb.Facade
                     var addModel = AutoMapperHelper<CreateCrimeIncidentReportMediaBindingModel, CrimeIncidentReportMediaModel>.Map(model);
                     //Start Saving file
                     addModel.File.SystemRecordManager.CreatedBy = CreatedBy;
-                    addModel.File.FileContent = System.Convert.FromBase64String(model.File.FileFromBase64String);
                     var fileId = _fileRepositoryDAC.Add(addModel.File);
                     if (string.IsNullOrEmpty(fileId))
                         throw new Exception("Error Saving Crime Incident Report Media File");
                     //End Saving file
+
+                    //start store file directory
+                    if (File.Exists(addModel.File.FileName))
+                    {
+                        File.Delete(addModel.File.FileName);
+                    }
+                    using (var fs = new FileStream(addModel.File.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(addModel.File.FileContent, 0, addModel.File.FileContent.Length);
+                    }
+                    //end store file directory
+
                     addModel.File.FileId = fileId;
                     id = _crimeIncidentReportMediaRepositoryDAC.Add(addModel);
                     if (string.IsNullOrEmpty(id))
@@ -53,9 +65,17 @@ namespace SilupostWeb.Facade
                 throw ex;
             }
         }
-
-
-        public List<CrimeIncidentReportMediaViewModel> FindByCrimeIncidentReportId(string CrimeIncidentReportId) => AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.MapList(_crimeIncidentReportMediaRepositoryDAC.FindByCrimeIncidentReportId(CrimeIncidentReportId)).ToList();
+        //public List<CrimeIncidentReportMediaViewModel> FindByCrimeIncidentReportId(string CrimeIncidentReportId) => AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.MapList(_crimeIncidentReportMediaRepositoryDAC.FindByCrimeIncidentReportId(CrimeIncidentReportId)).ToList();
+        public List<CrimeIncidentReportMediaViewModel> FindByCrimeIncidentReportId(string CrimeIncidentReportId)
+        {
+            var result = AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.MapList(_crimeIncidentReportMediaRepositoryDAC.FindByCrimeIncidentReportId(CrimeIncidentReportId)).ToList();
+            foreach(var media in result)
+            {
+                if(media.File != null && File.Exists(media.File.FileName))
+                    media.File.FileContent = System.IO.File.ReadAllBytes(media.File.FileName);
+            }
+            return result;
+        }
         public CrimeIncidentReportMediaViewModel Find(string id) => AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.Map(_crimeIncidentReportMediaRepositoryDAC.Find(id));
 
         public bool Remove(string id)
@@ -82,11 +102,22 @@ namespace SilupostWeb.Facade
 
                 //Start Saving file
                 updateModel.File.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
-                updateModel.File.FileContent = System.Convert.FromBase64String(model.File.FileFromBase64String);
                 success = _fileRepositoryDAC.Update(updateModel.File);
                 if (!success)
                     throw new Exception("Error Updating Crime Incident Report Media File");
                 //End Saving file
+
+                //start store file directory
+                if (File.Exists(updateModel.File.FileName))
+                {
+                    File.Delete(updateModel.File.FileName);
+                }
+                using (var fs = new FileStream(updateModel.File.FileName, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(updateModel.File.FileContent, 0, updateModel.File.FileContent.Length);
+                }
+                //end store file directory
+
                 scope.Complete();
             }
             return success;

@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <style>
+        #camera_View, #capture_View {
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+            #camera_View video, #capture_View img {
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+
+        #table-legalEntityAddress tbody td:nth-child(0), #table-legalEntityAddress tbody td:last-child {
+            width: 1px !important;
+        }
+
+    </style>
+}
+<!-- Title -->
+<h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
+<!-- End Title -->
+<!--breadcrum start-->
+<ol class="breadcrumb text-left">
+    <li>
+        @ViewBag.Page.Module
+    </li>
+    @if (ViewBag.Page.ParentName != null)
+    {
+        <li><a href="@ViewBag.Page.ParentName">@ViewBag.Page.ParentTitle</a></li>
+    }
+    <li>
+        @ViewBag.Page.Title
+    </li>
+</ol><!--breadcrum end-->
+
+<div class="row ">
+    <!-- table card code and example -->
+    <div class="col-md-12">
+        <div class="component-box">
+            <!-- table card example -->
+            <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">@ViewBag.Page.Title</h2>
+                </div>
+                <div class="pmd-card-body">
+                    <div class="group-fields row clearfix">
+                        <div class="pull-right">
+                            <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="btnToggleAdvanceSearch">
+                                <i class="material-icons pmd-sm">filter_list</i>
+                            </button>
+                        </div>
+                        <div class="col-xs-8 pull-left" id="filterApprovalStatusView">
+                        </div>
+                    </div>
+                    <div id="advanceSearchView"></div>
+                    @Html.Partial("_Table")
+                </div>
+
+            </div>
+            <!-- table card example end -->
+
+        </div>
+    </div>
+    <!-- table card code and example end -->
+    <div class="custom-floating-action">
+    </div>
+</div>
+
+
+@section Scripts{
+    
+    <script id="filterApprovalStatus-template" type="text/x-jsrender">
+        <form id="form-filterApprovalStatus">
+
+            <div class="group-fields clearfix row">
+                <div class="col-xs-4">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label>Filter By ApprovalStatus Id</label>
+                        <select id="ApprovalStatusId" name="ApprovalStatusId" data-link="ApprovalStatusId" class="select-simple form-control pmd-select2">
+                            {^{for lookup.EntityApprovalStatus}}
+                            <option value="{{>Id}}">{{>Name}}</option>
+                            {{/for}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script id="advanceSearch-template" type="text/x-jsrender">
+
+        <form id="form-advanceSearch" class="hidden table-bordered" style="padding: 0px 10px;">
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    <h5>Advance Search</h5>
+                </div>
+                <div class="col-xs-2">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentReportId" name="CrimeIncidentReportId" data-link="CrimeIncidentReportId" placeholder=" " />
+                        <span>CrimeIncidentReportId</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentCategoryName" name="CrimeIncidentCategoryName" data-link="CrimeIncidentCategoryName" placeholder=" " />
+                        <span>Crime Category Name</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="PostedByFullName" name="PostedByFullName" data-link="PostedByFullName" placeholder=" " />
+                        <span>Posted By</span>
+                    </label>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="DateReportedFrom" class="control-label">Date Reported From</label>
+                        <input type="text" id="DateReportedFrom" name="DateReportedFrom" data-link="{formatDate:DateReportedFrom}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="DateReportedTo" class="control-label">Date Reported To</label>
+                        <input type="text" id="DateReportedTo" name="DateReportedTo" data-link="{formatDate:DateReportedTo}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="PossibleDateFrom" class="control-label">Possible Date From</label>
+                        <input type="text" id="PossibleDateFrom" name="PossibleDateFrom" data-link="{formatDate:PossibleDateFrom}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="PossibleDateTo" class="control-label">Possible Date To</label>
+                        <input type="text" id="PossibleDateTo" name="PossibleDateTo" data-link="{formatDate:PossibleDateTo}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="PossibleTimeFrom" name="PossibleTimeFrom" data-link="PossibleTimeFrom" placeholder=" " />
+                        <span>Possible Time From</span>
+                    </label>
+                </div>
+                <div class="col-xs-2">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="PossibleTimeTo" name="PossibleTimeTo" data-link="PossibleTimeTo" placeholder=" " />
+                        <span>Possible Time To</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="Description" name="Description" data-link="Description" placeholder=" " />
+                        <span>Report Description</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="GeoStreet" name="GeoStreet" data-link="GeoStreet" placeholder=" " />
+                        <span>Street</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="GeoDistrict" name="GeoDistrict" data-link="GeoDistrict" placeholder=" " />
+                        <span>District/Barangay/Village</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="GeoCityMun" name="GeoCityMun" data-link="GeoCityMun" placeholder=" " />
+                        <span>GeoCity / Municipality</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="GeoProvince" name="GeoProvince" data-link="GeoProvince" placeholder=" " />
+                        <span>Province</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="GeoCountry" name="GeoCountry" data-link="GeoCountry" placeholder=" " />
+                        <span>Country</span>
+                    </label>
+                </div>
+                <div class="col-xs-12">
+                    <label class="form-group">
+                        <a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="btnAdvanceSearch">
+                            <i class="material-icons pmd-sm">search</i>
+                        </a>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </script>
+
+    <script src="~/Scripts/Controller/CrimeIncidentReport.js"></script>
+    <script>
+        crimeIncidentReport.init(@Html.Raw(Json.Encode(ViewBag.Lookup)));
+    </script>
+
+}

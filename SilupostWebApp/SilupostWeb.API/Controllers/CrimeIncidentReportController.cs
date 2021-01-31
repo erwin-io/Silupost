@@ -212,6 +212,7 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+
         [Route("")]
         [HttpPut]
         [ValidateModel]
@@ -318,6 +319,113 @@ namespace SilupostWeb.API.Controllers
                 response.Message = Messages.ServerError;
                 //TODO Logging of exceptions
                 return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+
+        [Route("createReport")]
+        [HttpPost]
+        [ValidateModel]
+        [SwaggerOperation("create")]
+        [SwaggerResponse(HttpStatusCode.Created)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        public async Task<IHttpActionResult> CreateReport()
+        {
+            AppResponseModel<CrimeIncidentReportViewModel> response = new AppResponseModel<CrimeIncidentReportViewModel>();
+
+            try
+            {
+                var identity = User.Identity as ClaimsIdentity;
+                if (identity != null)
+                {
+                    RecordedBy = identity.FindFirst("SystemUserId").Value;
+                }
+
+                if (!this.Request.Content.IsMimeMultipartContent())
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                var root = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUploadRootDirectory);
+                var dataDirectory = Path.Combine(root,"Data", RecordedBy);
+                Directory.CreateDirectory(dataDirectory);
+                var provider = new MultipartFormDataStreamProvider(dataDirectory);
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                var formDataModel = provider.FormData["model"];
+                if (formDataModel == null)
+                {
+                    response.Message = Messages.Failed;
+                    response.DeveloperMessage = string.Format(Messages.Empty, "Crime Incident Report Model");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+                var model = JsonConvert.DeserializeObject<CreateCrimeIncidentReportBindingModel>(formDataModel);
+
+                if(model == null)
+                {
+                    response.Message = Messages.Failed;
+                    response.DeveloperMessage = string.Format(Messages.Empty, "Crime Incident Report Model");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
+                if (model.CrimeIncidentReportMedia == null)
+                    model.CrimeIncidentReportMedia = new List<CreateCrimeIncidentReportMediaBindingModel>();
+
+                var storageDirectory = Path.Combine(root, @"Storage\", string.Format(@"{0}\", RecordedBy));
+                foreach (var file in provider.FileData)
+                {
+                    var newFileName = string.Format("{0}{1}-{2}-{3}{4}", storageDirectory, RecordedBy, DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH-mm"), GlobalFunctions.GetFileExtensionByFileRawFormat(file.Headers.ContentType.MediaType));
+                    model.CrimeIncidentReportMedia.Add(new CreateCrimeIncidentReportMediaBindingModel()
+                    {
+                        File = new FileBindingModel() 
+                        { 
+                            FileName = newFileName,
+                            MimeType = file.Headers.ContentType.MediaType,
+                            IsDefault = false,
+                            FileContent = System.IO.File.ReadAllBytes(file.LocalFileName),
+                            FileSize = new FileInfo(file.LocalFileName).Length
+                        },
+                        DocReportMediaTypeId = GlobalFunctions.GetFileTypeByFileExtension(GlobalFunctions.GetFileExtensionByFileRawFormat(file.Headers.ContentType.MediaType))
+                    });
+                }
+
+                Directory.CreateDirectory(storageDirectory);
+                string id = _crimeIncidentReportFacade.Add(model, RecordedBy);
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var result = _crimeIncidentReportFacade.Find(id);
+
+                    try
+                    {
+                        System.IO.DirectoryInfo di = new DirectoryInfo(dataDirectory);
+
+                        foreach (FileInfo file in di.GetFiles())
+                        {
+                            file.Delete();
+                        }
+                        foreach (DirectoryInfo dir in di.GetDirectories())
+                        {
+                            dir.Delete(true);
+                        }
+                    }
+                    catch { }
+
+                    response.IsSuccess = true;
+                    response.Message = Messages.Created;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.Created, response);
+                }
+                else
+                {
+                    response.Message = Messages.Failed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
     }

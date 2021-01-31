@@ -146,6 +146,12 @@ namespace SilupostWeb.API.Controllers
                 {
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
+                var root = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUploadRootDirectory);
+
+                var storageDirectory = Path.Combine(root, @"Storage\", string.Format(@"{0}\", RecordedBy));
+                var newFileName = string.Format("{0}{1}-{2}-{3}{4}", storageDirectory, RecordedBy, DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH-mm"), GlobalFunctions.GetFileExtensionByFileRawFormat(model.IconFile.MimeType));
+                model.IconFile.FileName = newFileName;
+                Directory.CreateDirectory(storageDirectory);
 
                 string id = _enforcementStation.Add(model, RecordedBy);
 
@@ -213,6 +219,12 @@ namespace SilupostWeb.API.Controllers
                     response.Message = string.Format(Messages.InvalidId, "Enforcement Type");
                     return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementStationViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
+                var root = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUploadRootDirectory);
+
+                var storageDirectory = Path.Combine(root, @"Storage\", string.Format(@"{0}\", RecordedBy));
+                var newFileName = string.Format("{0}{1}-{2}-{3}{4}", storageDirectory, RecordedBy, DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH-mm"), GlobalFunctions.GetFileExtensionByFileRawFormat(model.IconFile.MimeType));
+                model.IconFile.FileName = newFileName;
+                Directory.CreateDirectory(storageDirectory);
                 bool success = _enforcementStation.Update(model, RecordedBy);
                 response.IsSuccess = success;
 
