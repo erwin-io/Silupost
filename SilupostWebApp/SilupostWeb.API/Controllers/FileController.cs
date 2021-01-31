@@ -27,15 +27,53 @@ namespace SilupostWeb.API.Controllers
     [RoutePrefix("api/v1/File")]
     public class FileController : ApiController
     {
-        private readonly ICrimeIncidentCategoryFacade _crimeIncidentCategoryFacade;
         private string RecordedBy { get; set; }
         private long LocationId { get; set; }
         #region CONSTRUCTORS
-        public FileController(ICrimeIncidentCategoryFacade crimeIncidentCategoryFacade)
+        public FileController()
         {
-            _crimeIncidentCategoryFacade = crimeIncidentCategoryFacade ?? throw new ArgumentNullException(nameof(crimeIncidentCategoryFacade));
         }
         #endregion
+
+        [Route("getFile")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        public IHttpActionResult GetFile(string FileId)
+        {
+            AppResponseModel<FileViewModel> response = new AppResponseModel<FileViewModel>();
+
+            try
+            {
+                string filePath = HttpContext.Current.Server.MapPath(string.Format("~/App_Data/UploadedFiles/{0}", FileId));
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                var fileSize = new FileInfo(filePath).Length;
+                using (Image image = Image.FromFile(filePath))
+                {
+                    using (MemoryStream m = new MemoryStream())
+                    {
+                        image.Save(m, image.RawFormat);
+                        var file = new FileViewModel()
+                        {
+                            FileName = fileName,
+                            FileSize = int.Parse(fileSize.ToString()),
+                            MimeType = image.RawFormat.ToString()
+                        };
+                        response.Data = file;
+                        response.IsSuccess = true;
+                        return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.OK, response);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
 
         [Route("getDefaultSystemUserProfilePic")]
         [HttpGet]

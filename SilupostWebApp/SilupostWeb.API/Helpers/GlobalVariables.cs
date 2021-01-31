@@ -9,6 +9,7 @@ namespace SilupostWeb.API.Helpers
     public static class GlobalVariables
     {
         public static string goApplicationName { get; set; }
+        public static string goDefaultSystemUploadRootDirectory { get; set; }
         public static string goDefaultSystemUserProfilePicPath { get; set; }
         public static string goDefaultCrimeIncidentTypeIconFilePath { get; set; }
         public static string goDefaultEnforcementTypeIconFilePath { get; set; }

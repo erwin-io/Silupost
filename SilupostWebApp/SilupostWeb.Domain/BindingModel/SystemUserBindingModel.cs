@@ -25,6 +25,7 @@ namespace SilupostWeb.Domain.BindingModel
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {
         public string SystemUserId { get; set; }
+        public string LegalEntityId { get; set; }
         public UpdateFileBindingModel ProfilePicture { get; set; }
     }
 }

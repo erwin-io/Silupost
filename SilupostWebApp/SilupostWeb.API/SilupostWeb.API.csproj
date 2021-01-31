@@ -268,6 +268,8 @@
     <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CrimeIncidentReportMediaController.cs" />
+    <Compile Include="Controllers\CrimeIncidentReportController.cs" />
     <Compile Include="Controllers\EnforcementStationController.cs" />
     <Compile Include="Controllers\EnforcementTypeController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -285,6 +287,7 @@
     </Compile>
     <Compile Include="Helpers\Configuration.cs" />
     <Compile Include="Helpers\Constant.cs" />
+    <Compile Include="Helpers\GlobalFunctions.cs" />
     <Compile Include="Helpers\GlobalVariables.cs" />
     <Compile Include="Models\DataTableResponseModel.cs" />
     <Compile Include="Models\AppResponseModel .cs" />

@@ -1,0 +1,218 @@
+﻿<script id="crimeIncidentReport-template" type="text/x-jsrender">
+
+    <div class="group-fields clearfix row">
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" data-link="disabled{:Validated}">
+                    <i class="material-icons pmd-sm">present_to_all</i>
+                </button>
+                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-link="disabled{:!Validated}">
+                    <i class="material-icons pmd-sm">check</i>
+                </button>
+                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" data-link="disabled{:Validated}">
+                    <i class="material-icons pmd-sm">close</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div id="crimeIncidentReport-tab-control" class="pmd-tabs pmd-tabs-bg">
+        <ul id="crimeIncidentReport-details-tab-nav" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a id="tab-control-crimeIncidentReport" href="#tab-page-crimeIncidentReport" aria-controls="tab-crimeIncidentReport" role="tab" data-toggle="tab">Crime Incident Report</a></li>
+            <li role="presentation"><a id="tab-control-crimeIncidentLocation" href="#tab-page-crimeIncidentLocation" aria-controls="tab-crimeIncidentLocation" role="tab" data-toggle="tab">Location</a></li>
+            <li role="presentation"><a id="tab-control-crimeIncidentReportMedia" href="#tab-page-crimeIncidentReportMedia" aria-controls="tab-crimeIncidentReportMedia" role="tab" data-toggle="tab">Photo/Video</a></li>
+        </ul>
+    </div>
+    <div class="pmd-card-body">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab-page-crimeIncidentReport">
+                <form id="form-crimeIncidentReport">
+                    <div class="group-fields row">
+                        <div class="col-xs-4">
+                            <label class="form-group pure-material-textfield-outlined">
+                                <input id="CrimeIncidentReportId" name="CrimeIncidentReportId" data-link="readonly{:!CanEditReportHeader} value{:CrimeIncidentReportId} " placeholder=" " />
+                                <span>CrimeIncidentReportId</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="group-fields row">
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="DateReported" name="DateReported" data-link="readonly{:!CanEditReportHeader} value{formatDate:DateReported}" placeholder=" " />
+                                    <span>Date Reported</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="PossibleDate" name="PossibleDate" data-link="readonly{:!CanEditReportHeader} value{formatDate:PossibleDate}" placeholder=" " />
+                                    <span>Possible Date Happened</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="PossibleTime" name="PossibleTime" data-link="readonly{:!CanEditReportHeader} value{:PossibleTime}" placeholder=" " />
+                                    <span>Possible Time Happened</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-fields row">
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="FullName" name="FullName" data-link="readonly{:!CanEditReportHeader} value{:FullName}" placeholder=" " />
+                                    <span>Posted By</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-fields row">
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                {^{if CanEditReportHeader}}
+                                <label>CrimeIncident Category</label>
+                                <select id="CrimeIncidentCategoryId" name="CrimeIncidentCategoryId" data-link="CrimeIncidentCategoryId" class="select-simple form-control pmd-select2">
+                                    {^{for lookup.CrimeIncidentCategory}}
+                                    <option value="{{>Id}}">{{>Name}}</option>
+                                    {{/for}}
+                                </select>
+                                {{else}}
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="CrimeIncidentCategoryName" name="CrimeIncidentCategoryName" data-link="readonly{:!CanEditReportHeader} value{:CrimeIncidentCategoryName}" placeholder=" " />
+                                    <span>CrimeIncident Category</span>
+                                </label>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                {^{if CanEditReportHeader}}
+                                <label>CrimeIncident Type</label>
+                                <select id="CrimeIncidentTypeId" name="CrimeIncidentTypeId" data-link="CrimeIncidentTypeId" class="select-simple form-control pmd-select2">
+                                    {^{for lookup.CrimeIncidentCategory}}
+                                    <option value="{{>Id}}">{{>Name}}</option>
+                                    {{/for}}
+                                </select>
+                                {{else}}
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <input id="CrimeIncidentTypeName" name="CrimeIncidentTypeName" data-link="readonly{:!CanEditReportHeader} value{:CrimeIncidentTypeName}" placeholder=" " />
+                                    <span>CrimeIncident Type</span>
+                                </label>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                                <label class="form-group pure-material-textfield-outlined">
+                                    <textarea id="Description" name="Description" data-link="readonly{:!CanEditReportHeader} value{:Description}" placeholder=" "></textarea>
+                                    <span>Description</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab-page-crimeIncidentLocation">
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                            <label class="form-group pure-material-textfield-outlined">
+                                <textarea id="GeoAddress" name="GeoAddress" data-link="readonly{:!CanEditReportHeader} value{:GeoAddress}" placeholder=" "></textarea>
+                                <span>Location</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab-page-crimeIncidentReportMedia">
+
+                <div class="group-fields row">
+                    {^{for CrimeIncidentReportMedia}}
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        {^{if DocReportMediaType.DocReportMediaTypeId == 1}}
+                        <a class="thumbnail text-center" href="#" data-image-id="{{>File.FileId}}" data-toggle="modal" data-title="{{>Caption}}"
+                           data-image="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
+                           data-target="#image-gallery">
+                            <img class="img-thumbnail"
+                                 src="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
+                                 alt="{{>File.FileName}}">
+                            {{>Caption}}
+                        </a>
+
+                        {{else DocReportMediaType.DocReportMediaTypeId == 2}}
+                        <a class="thumbnail text-center" data-toggle="modal" data-title="{{>Caption}}"
+                           data-target="#video-gallery">
+                            <video controls>
+                                <source type="{{>File.MimeType}}" src="data:{{>File.MimeType}};base64,{{>File.FileContent}}">
+                            </video>
+                            {{>Caption}}
+                        </a>
+                        {{/if}}
+                    </div>
+                    {{/for}}
+                </div>
+
+
+
+                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="image-gallery-title"></h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="image-gallery-image" class="img-responsive col-md-12" src=""/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
+                                    <i class="material-icons pmd-sm">chevron_left</i>
+                                </button>
+
+                                <button type="button" id="show-next-image" class="btn btn-secondary float-right">
+                                    <i class="material-icons pmd-sm">chevron_right</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+<script id="legalEntityAddress-template" type="text/x-jsrender">
+    <form id="form-legalEntityAddress">
+        <div class="group-fields clearfix row hidden">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <input id="LegalEntityAddressId" name="LegalEntityAddressId" data-link="LegalEntityAddressId" placeholder=" " />
+                    <span>LegalEntityAddressId</span>
+                </label>
+            </div>
+        </div>
+        <div class="group-fields clearfix row">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <input id="Address" name="Address" data-link="Address" placeholder=" " />
+                    <span>Address</span>
+                </label>
+            </div>
+        </div>
+    </form>
+</script>

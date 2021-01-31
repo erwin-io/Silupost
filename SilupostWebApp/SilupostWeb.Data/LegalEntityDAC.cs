@@ -65,6 +65,8 @@ namespace SilupostWeb.Data
                     model.MiddleName,
                     model.Gender.GenderId,
                     model.BirthDate,
+                    model.EmailAddress,
+                    model.MobileNumber,
                 }, commandType: CommandType.StoredProcedure));
 
                 if (result.Contains("Error"))
