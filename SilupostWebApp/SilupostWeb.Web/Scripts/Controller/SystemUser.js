@@ -58,7 +58,7 @@ var systemUserController = function() {
     }
     var api = new apiService(app.appSettings.silupostWebAPIURI);
 
-    var form,formSystemWebAdminUserRoles,formLegalEntityAddress,dataTableSystemUser,dataTableLegalEntityAddress;
+    var form, formSystemWebAdminUserRoles, formLegalEntityAddress, dataTableSystemUser, dataTableLegalEntityAddress, formEnforcementUnit;
     var appSettings = {
         model: {},
         status:{ IsNew:false},
@@ -147,7 +147,7 @@ var systemUserController = function() {
     }
 
     var initLookup = function(){
-        api.getLookup("SystemWebAdminRole,EntityGender").done(function (data) {
+        api.getLookup("SystemWebAdminRole,EntityGender,EnforcementType,EnforcementStation").done(function (data) {
         	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
         });
     }
@@ -653,11 +653,14 @@ var systemUserController = function() {
         };
         appSettings.model.IsNew = true;
         appSettings.model.SystemUserTypeId = 1;
+        appSettings.model.IsEnforcementUnit = false;
         appSettings.model.BirthDate = moment(new Date()).format("MM/DD/YYYY");
         //appSettings.model.SystemWebAdminUserRoles = [];
         appSettings.model.SelectedSystemWebAdminUserRoles = [];
         appSettings.model.lookup = {
             EntityGender: appSettings.lookup.EntityGender,
+            EnforcementType: appSettings.lookup.EnforcementType,
+            EnforcementStation: appSettings.lookup.EnforcementStation,
             SystemWebAdminRole: []
         };
         for (var i in appSettings.lookup.SystemWebAdminRole) {
@@ -692,7 +695,21 @@ var systemUserController = function() {
         $("#ProfilePicturePicker").on("change", OpeFile);
 
         $("#btnOpenWebCam").on("click", OpenWebCam);
+        if ($("#IsEnforcementUnit").parent().find("pmd-checkbox-label").length === 0) {
+            $("#IsEnforcementUnit").after(function () {
+                return '<span class="pmd-checkbox-label">&nbsp;</span>';
+            });
+        }
+        $("#IsEnforcementUnit").on("change", function () {
+            if (!$(this).is(':checked')) {
+                $("#form-enforcementUnit").addClass("hidden");
+            } else {
+                $("#form-enforcementUnit").removeClass("hidden");
+            }
+        });
 
+        formEnforcementUnit = $("#form-enforcementUnit");
+        initValidationEnforcementUnit();
 
         appSettings.model.LegalEntityAddress = [];
         initGridLegalEntityAddress();
@@ -755,7 +772,10 @@ var systemUserController = function() {
                     SystemUserId: data.Data.SystemUserId,
                     UserName: data.Data.UserName,
                     Password: data.Data.Password,
-                    ConfirmPassword: data.Data.Password
+                    ConfirmPassword: data.Data.Password,
+                    IsEnforcementUnit: data.Data.IsEnforcementUnit,
+                    EnforcementTypeId: data.Data.EnforcementUnit.EnforcementType !== (undefined || null) ? data.Data.EnforcementUnit.EnforcementType.EnforcementTypeId : null,
+                    EnforcementStationId: data.Data.EnforcementUnit.EnforcementStation !== (undefined || null) ? data.Data.EnforcementUnit.EnforcementStation.EnforcementStationId : null,
                 };
                 appSettings.model = $.extend(appSettings.model, data.Data.LegalEntity);
                 appSettings.model.BirthDate = moment(data.Data.LegalEntity.BirthDate).format("MM/DD/YYYY");
@@ -781,6 +801,8 @@ var systemUserController = function() {
 
                 appSettings.model.lookup = {
                     EntityGender: appSettings.lookup.EntityGender,
+                    EnforcementType: appSettings.lookup.EnforcementType,
+                    EnforcementStation: appSettings.lookup.EnforcementStation,
                     SystemWebAdminRole : []
                 };
 
@@ -813,6 +835,24 @@ var systemUserController = function() {
 
                 $("#modal-dialog").modal('show');
                 $("body").addClass("modal-open");
+
+                if (!$("#IsEnforcementUnit").is(':checked')) {
+                    $("#form-enforcementUnit").addClass("hidden");
+                } else {
+                    $("#form-enforcementUnit").removeClass("hidden");
+                }
+
+                $("#IsEnforcementUnit").on("change", function () {
+                    if (!$(this).is(':checked')) {
+                        $("#form-enforcementUnit").addClass("hidden");
+                    } else {
+                        $("#form-enforcementUnit").removeClass("hidden");
+                    }
+                });
+
+                formEnforcementUnit = $("#form-enforcementUnit");
+                initValidationEnforcementUnit();
+
                 setTimeout(1000, function()
                 {
                     $("body").addClass("modal-open");
@@ -1070,6 +1110,42 @@ var systemUserController = function() {
             });
     }
 
+
+    var initValidationEnforcementUnit = function () {
+
+        formEnforcementUnit.validate({
+            ignore: [],
+            rules: {
+                EnforcementTypeId: {
+                    required: true
+                },
+                EnforcementStationId: {
+                    required: true
+                }
+            },
+            messages: {
+                EnforcementTypeId: {
+                    required: "Please select Enforcement Type"
+                },
+                EnforcementStationId: {
+                    required: "Please select Enforcement Station"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('help-block');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+        });
+    }
+
+
     var fileValid = function (file) {
         var max_size = 10000000;
         if (file.size > max_size) {
@@ -1091,6 +1167,12 @@ var systemUserController = function() {
         if (!legalEntity.valid()) {
             $("#tab-control-legalentity").trigger('click');
             return;
+        }
+        if (appSettings.model.IsEnforcementUnit) {
+            if (!formEnforcementUnit.valid()) {
+                return;
+            }
+
         }
         if (!form.valid()) {
             $("#tab-control-credentials").trigger('click');

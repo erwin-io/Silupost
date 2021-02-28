@@ -31,6 +31,8 @@ namespace SilupostWeb.Data
                     ProfilePictureFile = model.ProfilePicture.FileId,
                     model.UserName,
                     model.Password,
+                    model.IsEnforcementUnit,
+                    model.EnforcementUnit.EnforcementUnitId,
                     model.SystemRecordManager.CreatedBy,
                 }, commandType: CommandType.StoredProcedure));
 
@@ -90,6 +92,24 @@ namespace SilupostWeb.Data
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
 
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if (model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+
+
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
                     }
@@ -122,6 +142,7 @@ namespace SilupostWeb.Data
                         model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
                         model.SystemUserConfig = result.Read<SystemUserConfigModel>().FirstOrDefault();
 
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
@@ -148,6 +169,23 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminMenus == null)
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if (model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
 
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
@@ -206,6 +244,23 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminMenus == null)
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if(model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
 
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
@@ -354,6 +409,8 @@ namespace SilupostWeb.Data
                 {
                     model.SystemUserId,
                     model.IsWebAdminGuestUser,
+                    model.IsEnforcementUnit,
+                    model.EnforcementUnit.EnforcementUnitId,
                     ProfilePictureFile = model?.ProfilePicture?.FileId,
                     model.SystemRecordManager.LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));

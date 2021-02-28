@@ -24,6 +24,22 @@ namespace SilupostWeb.Mapping.Profiles
                         BirthDate = src.BirthDate,
                         Gender = new EntityGenderModel() { GenderId = src.GenderId },
                     }))
+                .ForPath(dest => dest.EnforcementUnit, opt => opt.MapFrom(src =>
+                    new EnforcementUnitModel
+                    {
+                        EnforcementType = new EnforcementTypeModel() { EnforcementTypeId = src.EnforcementTypeId },
+                        EnforcementStation = new EnforcementStationModel() { EnforcementStationId = src.EnforcementStationId },
+                        LegalEntity = new LegalEntityModel
+                        {
+                            FirstName = src.FirstName,
+                            LastName = src.LastName,
+                            MiddleName = src.MiddleName,
+                            EmailAddress = src.EmailAddress,
+                            MobileNumber = src.MobileNumber,
+                            BirthDate = src.BirthDate,
+                            Gender = new EntityGenderModel() { GenderId = src.GenderId },
+                        }
+                    }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel
                     {
@@ -64,7 +80,6 @@ namespace SilupostWeb.Mapping.Profiles
                 .ForPath(dest => dest.LegalEntity, opt => opt.MapFrom(src =>
                     new LegalEntityModel
                     {
-                        LegalEntityId = src.LegalEntityId,
                         FirstName = src.FirstName,
                         LastName = src.LastName,
                         MiddleName = src.MiddleName,
@@ -73,6 +88,22 @@ namespace SilupostWeb.Mapping.Profiles
                         BirthDate = src.BirthDate,
                         Age = 0,
                         Gender = new EntityGenderModel() { GenderId = src.GenderId }
+                    }))
+                .ForPath(dest => dest.EnforcementUnit, opt => opt.MapFrom(src =>
+                    new EnforcementUnitModel
+                    {
+                        EnforcementType = new EnforcementTypeModel() { EnforcementTypeId = src.EnforcementTypeId },
+                        EnforcementStation = new EnforcementStationModel() { EnforcementStationId = src.EnforcementStationId },
+                        LegalEntity = new LegalEntityModel
+                        {
+                            FirstName = src.FirstName,
+                            LastName = src.LastName,
+                            MiddleName = src.MiddleName,
+                            EmailAddress = src.EmailAddress,
+                            MobileNumber = src.MobileNumber,
+                            BirthDate = src.BirthDate,
+                            Gender = new EntityGenderModel() { GenderId = src.GenderId },
+                        }
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel

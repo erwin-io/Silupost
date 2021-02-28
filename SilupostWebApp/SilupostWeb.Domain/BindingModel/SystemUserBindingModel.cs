@@ -19,6 +19,9 @@ namespace SilupostWeb.Domain.BindingModel
     public class CreateSystemUserBindingModel : SystemUserBindingModel
     {
         public long SystemUserTypeId { get; set; }
+        public bool IsEnforcementUnit { get; set; }
+        public string EnforcementTypeId { get; set; }
+        public string EnforcementStationId { get; set; }
         public FileBindingModel ProfilePicture { get; set; }
         public List<LegalEntityAddressBindingModel> LegalEntityAddress { get; set; }
     }
@@ -35,7 +38,9 @@ namespace SilupostWeb.Domain.BindingModel
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {
         public string SystemUserId { get; set; }
-        public string LegalEntityId { get; set; }
+        public bool IsEnforcementUnit { get; set; }
+        public string EnforcementTypeId { get; set; }
+        public string EnforcementStationId { get; set; }
         public UpdateFileBindingModel ProfilePicture { get; set; }
     }
     public class UpdateSystemUserNameBindingModel

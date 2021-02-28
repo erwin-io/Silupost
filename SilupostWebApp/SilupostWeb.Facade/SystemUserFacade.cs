@@ -21,6 +21,7 @@ namespace SilupostWeb.Facade
         private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
         private readonly ISystemWebAdminUserRolesRepositoryDAC _systemWebAdminUserRolesRepositoryDAC;
         private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
+        private readonly IEnforcementUnitRepositoryDAC _enforcementUnitRepositoryDAC;
 
         #region CONSTRUCTORS
         public SystemUserFacade(ISystemUserRepositoryDAC systemUserRepository,
@@ -28,7 +29,8 @@ namespace SilupostWeb.Facade
             ILegalEntityRepository legalEntityRepository,
             ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
             ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC,
-            IFileRepositoryRepositoryDAC fileRepositoryDAC)
+            IFileRepositoryRepositoryDAC fileRepositoryDAC,
+            IEnforcementUnitRepositoryDAC enforcementUnitRepositoryDAC)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
             _systemUserConfigRepositoryDAC = systemUserConfigRepositoryDAC ?? throw new ArgumentNullException(nameof(systemUserConfigRepositoryDAC));
@@ -36,6 +38,7 @@ namespace SilupostWeb.Facade
             _legalEntityAddressRepositoryDAC = legalEntityAddressRepositoryDAC ?? throw new ArgumentNullException(nameof(legalEntityAddressRepositoryDAC));
             _systemWebAdminUserRolesRepositoryDAC = systemWebAdminUserRolesRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminUserRolesRepositoryDAC));
             _fileRepositoryDAC = fileRepositoryDAC ?? throw new ArgumentNullException(nameof(fileRepositoryDAC));
+            _enforcementUnitRepositoryDAC = enforcementUnitRepositoryDAC ?? throw new ArgumentNullException(nameof(enforcementUnitRepositoryDAC));
         }
         #endregion
 
@@ -108,6 +111,15 @@ namespace SilupostWeb.Facade
                         if (string.IsNullOrEmpty(SystemWebAdminUserRoleId))
                         {
                             throw new Exception("Error Creating System User Roles");
+                        }
+                    }
+                    if (model.IsEnforcementUnit)
+                    {
+                        addModel.EnforcementUnit.ProfilePicture = addModel.ProfilePicture;
+                        addModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(addModel.EnforcementUnit);
+                        if (string.IsNullOrEmpty(addModel.EnforcementUnit.EnforcementUnitId))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
                         }
                     }
                     addModel.SystemUserConfig.SystemUser.SystemUserId = id;
@@ -333,8 +345,10 @@ namespace SilupostWeb.Facade
             using (var scope = new TransactionScope())
             {
                 var updateModel = AutoMapperHelper<UpdateSystemUserBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
                 //Start Saving LegalEntity
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                updateModel.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
                 success = _legalEntityRepository.Update(updateModel.LegalEntity);
                 if (!success)
                 {
@@ -416,12 +430,45 @@ namespace SilupostWeb.Facade
                         }
                     }
                 }
-                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
                 if (user.IsWebAdminGuestUser)
                 {
                     if(model.SystemWebAdminUserRoles.Count > 0)
                     {
                         updateModel.IsWebAdminGuestUser = false;
+                    }
+                }
+                if (model.IsEnforcementUnit)
+                {
+                    updateModel.EnforcementUnit.ProfilePicture = updateModel.ProfilePicture;
+                    updateModel.EnforcementUnit.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
+                    updateModel.EnforcementUnit.SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = user.SystemRecordManager.CreatedBy, LastUpdatedBy = user.SystemRecordManager.LastUpdatedBy };
+                    if (user.EnforcementUnit != null && !string.IsNullOrEmpty(user.EnforcementUnit.EnforcementUnitId))
+                    {
+                        updateModel.EnforcementUnit.EnforcementUnitId = user.EnforcementUnit.EnforcementUnitId;
+                        if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+                    else
+                    {
+                        var enforcement = _enforcementUnitRepositoryDAC.FindLegalEntityId(updateModel.LegalEntity.LegalEntityId);
+                        if(enforcement == null)
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(updateModel.EnforcementUnit);
+                            if (string.IsNullOrEmpty(updateModel.EnforcementUnit.EnforcementUnitId))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                        else
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = enforcement.EnforcementUnitId;
+                            if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
                     }
                 }
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
@@ -442,8 +489,10 @@ namespace SilupostWeb.Facade
             using (var scope = new TransactionScope())
             {
                 var updateModel = AutoMapperHelper<UpdateSystemUserBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
                 //Start Saving LegalEntity
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                updateModel.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
                 success = _legalEntityRepository.Update(updateModel.LegalEntity);
                 if (!success)
                 {
@@ -484,7 +533,42 @@ namespace SilupostWeb.Facade
                 }
                 //end store file directory
 
-                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
+
+                if (model.IsEnforcementUnit)
+                {
+                    updateModel.EnforcementUnit.ProfilePicture = updateModel.ProfilePicture;
+                    updateModel.EnforcementUnit.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
+                    updateModel.EnforcementUnit.SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = user.SystemRecordManager.CreatedBy, LastUpdatedBy = user.SystemRecordManager.LastUpdatedBy };
+                    if (user.EnforcementUnit != null)
+                    {
+                        updateModel.EnforcementUnit.EnforcementUnitId = user.EnforcementUnit.EnforcementUnitId;
+                        if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+                    else
+                    {
+                        var enforcement = _enforcementUnitRepositoryDAC.FindLegalEntityId(updateModel.LegalEntity.LegalEntityId);
+                        if (enforcement == null)
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(updateModel.EnforcementUnit);
+                            if (string.IsNullOrEmpty(updateModel.EnforcementUnit.EnforcementUnitId))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                        else
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = enforcement.EnforcementUnitId;
+                            if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                    }
+                }
+
                 updateModel.IsWebAdminGuestUser = user.IsWebAdminGuestUser;
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
                 success = _systemUserRepository.Update(updateModel);

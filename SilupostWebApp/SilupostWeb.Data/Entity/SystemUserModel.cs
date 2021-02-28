@@ -10,6 +10,8 @@ namespace SilupostWeb.Data.Entity
         public FileModel ProfilePicture { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public bool IsEnforcementUnit { get; set; }
+        public EnforcementUnitModel EnforcementUnit { get; set; }
         public bool HasFirstLogin { get; set; }
         public DateTime LasteDateTimeActive { get; set; }
         public DateTime LasteDateTimeLogin { get; set; }
