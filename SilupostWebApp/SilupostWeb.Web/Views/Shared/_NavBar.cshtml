@@ -4,29 +4,51 @@
 }
 
 <!--Start Nav bar -->
-<nav class="navbar navbar-inverse navbar-fixed-top pmd-navbar pmd-z-depth">
+@{
+    var appState = SilupostWeb.Web.Models.GlobalFunctions.GetAppState();
 
-	<div class="container-fluid">
-		<div class="pmd-navbar-right-icon pull-right navigation">
-			<!-- Notifications -->
-            <div class="dropdown notification icons pmd-dropdown">
-			
-				<a href="javascript:void(0)" title="Notification" class="dropdown-toggle pmd-ripple-effect"  data-toggle="dropdown" role="button" aria-expanded="true">
-                    @{
-                        var totalVisitors = SilupostWeb.Web.Models.GlobalFunctions.GetVisitors_Online();
-                        <div data-badge="@(totalVisitors)" class="material-icons md-light pmd-sm pmd-badge pmd-badge-overlap">visibility</div>
+    if (appState != null)
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top pmd-navbar pmd-z-depth">
+
+            <div class="container-fluid">
+
+                <div class="pull-right" style="margin-right:10px">
+                    <div class="row">
+                        <div class="pull-right">
+                            <span class="dropdown pmd-dropdown">
+                                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="dropdownMenuBottomRight" data-toggle="dropdown" aria-expanded="true">
+                                    <div style="background-color: white;border-radius:100%;width:100%;height:100%;display:block;padding:2px">
+                                        <img src="@(appState.User.ProfilePictureSource)" style="border-radius:100%;width:100%;height:100%;" />
+                                    </div>
+                                </button>
+                                <ul aria-labelledby="dropdownMenuDivider" role="menu" class="dropdown-menu dropdown-menu-right">
+                                    <li role="presentation"><a href="/Account" tabindex="-1" role="menuitem">Account Settings</a></li>
+                                    <li role="presentation"><a href="javascript:void(0);" id="btnLogout" tabindex="-1" role="menuitem">Sign Out</a></li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a href="javascript:void(0);" data-target="basicSidebar" data-placement="left" data-position="slidepush" is-open="true" is-open-width="1200" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect pull-left margin-r8 pmd-sidebar-toggle"><i class="material-icons md-light">menu</i></a>
+                    @if (ViewBag.Page.Title == "Dashboard")
+                    {
+                        <a href="#" class="navbar-brand">
+                            SILUPOST
+                        </a>
                     }
-				</a>
-				
-            </div> <!-- End notifications -->
-		</div>
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a href="javascript:void(0);" data-target="basicSidebar" data-placement="left" data-position="slidepush" is-open="true" is-open-width="1200" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect pull-left margin-r8 pmd-sidebar-toggle"><i class="material-icons md-light">menu</i></a>	
-		  <a href="index.html" class="navbar-brand">
-		  </a>
-		</div>
-	</div>
+                    else
+                    {
+                        <a href="/" class="navbar-brand">
+                            SILUPOST
+                        </a>
+                    }
+                </div>
+            </div>
 
-</nav>
+        </nav>
+    }
+}
 <!--End Nav bar -->

@@ -1,0 +1,70 @@
+﻿<script id="mobileUser-template" type="text/x-jsrender">
+
+    <div id="user-details-tab-control" class="pmd-tabs pmd-tabs-bg">
+        <ul id="user-details-tab-nav" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a id="tab-control-legalentity" href="#tab-page-legalentity" aria-controls="tab-legalentity" role="tab" data-toggle="tab">Details</a></li>
+            <li role="presentation"><a id="tab-control-legalEntityAddress" href="#tab-page-legalEntityAddress" aria-controls="tab-legalEntityAddress" role="tab" data-toggle="tab">Address/Location</a></li>
+            <li role="presentation"><a id="tab-control-crimeIncidentReport" href="#tab-page-crimeIncidentReport" aria-controls="tab-crimeIncidentReport" role="tab" data-toggle="tab">Timeline</a></li>
+        </ul>
+    </div>
+    <div class="pmd-card-body">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab-page-legalentity">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <label>Profile Picture</label>
+                        <div class="form-group pure-material-textfield-outlined">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <img id="img-upload" data-link="src{:ProfilePicture.FileData}" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-card pmd-z-depth pmd-card-custom-view" style="width: 100px;height: 100px;display: block;" class="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.Partial("~/Views/LegalEntity/_LegalEntity.cshtml")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab-page-legalEntityAddress">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <table id="table-legalEntityAddress" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Legal Entity Address Id</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab-page-crimeIncidentReport">
+                <div class="group-fields clearfix row">
+                    <div class="col-xs-12">
+                        <table id="table-crimeIncidentReport" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Id</th>
+                                    <th>Crime Category</th>
+                                    <th>Approval Status</th>
+                                    <th>Date Reported</th>
+                                    <th>Possible Date</th>
+                                    <th>Possible Time</th>
+                                    <th>Location</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

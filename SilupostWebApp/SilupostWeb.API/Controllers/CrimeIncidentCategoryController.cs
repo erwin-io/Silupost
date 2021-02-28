@@ -37,6 +37,39 @@ namespace SilupostWeb.API.Controllers
         }
         #endregion
 
+        [Route("")]
+        [HttpGet]
+        [SwaggerOperation("getAll")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        public IHttpActionResult GetAll()
+        {
+            AppResponseModel<IList<CrimeIncidentCategoryViewModel>> response = new AppResponseModel<IList<CrimeIncidentCategoryViewModel>>();
+
+            try
+            {
+                IList<CrimeIncidentCategoryViewModel> result = _crimeIncidentCategoryFacade.GetAll();
+
+                if (result != null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentCategoryViewModel>>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentCategoryViewModel>>>(Request, HttpStatusCode.NotFound, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentCategoryViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
 
         [Route("getPage")]
         [HttpGet]

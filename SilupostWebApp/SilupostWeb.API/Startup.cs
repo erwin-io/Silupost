@@ -16,6 +16,7 @@ using System.Web;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using SilupostWeb.API.Helpers;
 
 [assembly: OwinStartup(typeof(SilupostWeb.API.Startup))]
 namespace SilupostWeb.API
@@ -31,6 +32,11 @@ namespace SilupostWeb.API
         /// <param name="app"></param>
         public void Configuration(IAppBuilder app)
         {
+            GlobalVariables.goIssuer = GlobalVariables.GetApplicationConfig("Issuer");
+            GlobalVariables.goAudienceId = GlobalVariables.GetApplicationConfig("audienceID");
+            GlobalVariables.goAudienceSecret = GlobalVariables.GetApplicationConfig("audienceSecret");
+            GlobalVariables.goClientId = GlobalVariables.GetApplicationConfig("ClientId");
+
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
             
@@ -45,17 +51,9 @@ namespace SilupostWeb.API
 
         private void ConfigureOAuth(IAppBuilder app)
         {
-            string connectionString = Helpers.Configuration.ConnectionString();
-            IDbConnection dbConnection = new SqlConnection(connectionString);
-            //DAC
-            ISystemUserRepositoryDAC _systemUserRepository = new SystemUserDAC(dbConnection);
-            //Facade
-            IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
-
-
-            var issuer = ConfigurationManager.AppSettings["Issuer"];
-            string audienceId = ConfigurationManager.AppSettings["audienceId"];
-            byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["audienceSecret"]);
+            var issuer = GlobalVariables.goIssuer;
+            var audienceId = GlobalVariables.goAudienceId;
+            byte[] audienceSecret = TextEncodings.Base64Url.Decode(GlobalVariables.goAudienceSecret);
 
             // Api controllers with an [Authorize] attribute will be validated with JWT
             app.UseJwtBearerAuthentication(

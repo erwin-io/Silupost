@@ -14,21 +14,56 @@
 
                 <div class="group-fields clearfix row">
                     <div class="col-xs-12">
-                        <label>Profile Picture</label>
-                        <div class="form-group pure-material-textfield-outlined">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <img id="img-upload" data-link="src{:ProfilePicture.FileData}" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-card pmd-z-depth pmd-card-custom-view" style="width: 100px;height: 100px;display: block;" class="" />
+                        <div class="pull-left">
+                            <label>Profile Picture</label>
+                            <div class="form-group pure-material-textfield-outlined">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img id="img-upload" data-link="src{:ProfilePicture.FileData}" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-card pmd-z-depth pmd-card-custom-view" style="width: 100px;height: 100px;display: block;" class="" />
+                                    </div>
                                 </div>
+                                <br />
+                                <label class="btn pmd-ripple-effect btn-primary" for="ProfilePicturePicker"> UPLOAD IMAGE </label>
+                                <button id="btnOpenWebCam" class="btn pmd-ripple-effect btn-primary"> TAKE A PHOTO </button>
+                                <input type="file" class="hidden" id="ProfilePicturePicker" name="ProfilePicturePicker" data-link="ProfilePicturePicker">
                             </div>
-                            <br />
-                            <label class="btn pmd-ripple-effect btn-primary" for="ProfilePicturePicker"> UPLOAD IMAGE </label>
-                            <button id="btnOpenWebCam" class="btn pmd-ripple-effect btn-primary"> TAKE A PHOTO </button>
-                            <input type="file" class="hidden" id="ProfilePicturePicker" name="ProfilePicturePicker" data-link="ProfilePicturePicker">
+                        </div>
+                        <div class="checkbox pull-right">
+                            <label class="pmd-checkbox checkbox-pmd-ripple-effect">
+                                <input type="checkbox" id="IsEnforcementUnit" name="IsEnforcementUnit" data-link="IsEnforcementUnit">
+                                <span class="pmd-checkbox"> Enforcement Unit</span>
+                            </label>
                         </div>
                     </div>
                 </div>
 
+
+                <form id="form-enforcementUnit" class="hidden">
+                    <div class="group-fields clearfix row">
+                        <div class="col-xs-4">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Enforcement Type</label>
+                                <select id="EnforcementTypeId" name="EnforcementTypeId" data-link="EnforcementTypeId" class="select-simple form-control pmd-select2">
+                                    {^{for lookup.EnforcementType}}
+                                    <option value="{{>Id}}">{{>Name}}</option>
+                                    {{/for}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-fields clearfix row">
+                        <div class="col-xs-4">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Enforcement Station</label>
+                                <select id="EnforcementStationId" name="EnforcementStationId" data-link="EnforcementStationId" class="select-simple form-control pmd-select2">
+                                    {^{for lookup.EnforcementStation}}
+                                    <option value="{{>Id}}">{{>Name}}</option>
+                                    {{/for}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 @Html.Partial("~/Views/LegalEntity/_LegalEntity.cshtml")
             </div>
             <div role="tabpanel" class="tab-pane" id="tab-page-legalEntityAddress">

@@ -239,3 +239,8 @@
 {
     color: #a94442;
 }
+
+
+.nav.nav-tabs{
+    width: 100%!important;
+}

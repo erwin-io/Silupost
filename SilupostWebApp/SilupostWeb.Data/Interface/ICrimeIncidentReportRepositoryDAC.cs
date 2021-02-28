@@ -30,5 +30,6 @@ namespace SilupostWeb.Data.Interface
                                                string OrderColumn, 
                                                string OrderDir);
         bool Remove(string id, string LastUpdatedBy);
+        List<CrimeIncidentReportModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize);
     }
 }

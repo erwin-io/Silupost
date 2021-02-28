@@ -13,6 +13,7 @@ namespace SilupostWeb.Data.Entity
         public string MimeType { get; set; }
         public long FileSize { get; set; }
         public byte[] FileContent { get; set; }
+        public bool IsFromStorage { get; set; }
         public SystemRecordManagerModel SystemRecordManager { get; set; }
         public EntityStatusModel EntityStatus { get; set; }
     }

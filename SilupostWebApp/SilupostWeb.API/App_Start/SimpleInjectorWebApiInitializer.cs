@@ -36,20 +36,33 @@ namespace SilupostWeb.API.App_Start
         {
             string connectionString = Configuration.ConnectionString();
 
+            GlobalVariables.goAppHostName = GlobalVariables.GetApplicationConfig("AppHostName");
+            GlobalVariables.goApplicationName = GlobalVariables.GetApplicationConfig("ApplicationName");
             GlobalVariables.goDefaultSystemUserProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultSystemUserProfilePic");
             GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeIconfilePic");
             GlobalVariables.goDefaultEnforcementTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeIconfilePic");
             GlobalVariables.goDefaultEnforcementUnitIconFilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitIconfilePic");
             GlobalVariables.goDefaultEnforcementStationIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationIconfilePic");
             GlobalVariables.goDefaultSystemUploadRootDirectory = GlobalVariables.GetApplicationConfig("DefaultSystemUploadRootDirectory");
+
+            GlobalVariables.goEmailVerificationTempPath = GlobalVariables.GetApplicationConfig("EmailVerificationTempPath");
+            GlobalVariables.goChangePasswordTempPath = GlobalVariables.GetApplicationConfig("ChangePasswordTempPath");
+            GlobalVariables.goForgotPasswordTempPath = GlobalVariables.GetApplicationConfig("ForgotPasswordTempPath");
+            GlobalVariables.goEmailTempProfilePath = GlobalVariables.GetApplicationConfig("EmailTempProfilePath");
+            GlobalVariables.goSiteSupportEmail = GlobalVariables.GetApplicationConfig("SiteSupportEmail");
+            GlobalVariables.goSiteSupportEmailPassword = GlobalVariables.GetApplicationConfig("SiteSupportEmailPassword");
+            GlobalVariables.goClientLandingPageWebsite = GlobalVariables.GetApplicationConfig("ClientLandingPageWebsite");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);
             container.Register<ILookupTableRepositoryDAC, LookupTableDAC>(Lifestyle.Scoped);
             container.Register<ISystemUserRepositoryDAC, SystemUserDAC>(Lifestyle.Scoped);
+            container.Register<ISystemUserConfigRepositoryDAC, SystemUserConfigDAC>(Lifestyle.Scoped);
             container.Register<ILegalEntityRepository, LegalEntityDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminUserRolesRepositoryDAC, SystemWebAdminUserRolesDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminMenuRepositoryDAC, SystemWebAdminMenuDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminMenuModuleRepositoryDAC, SystemWebAdminMenuModuleDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeRepositoryDAC, CrimeIncidentTypeDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryRepositoryDAC, CrimeIncidentCategoryDAC>(Lifestyle.Scoped);
             container.Register<IFileRepositoryRepositoryDAC, FileDAC>(Lifestyle.Scoped);
@@ -59,10 +72,12 @@ namespace SilupostWeb.API.App_Start
             container.Register<IEnforcementUnitRepositoryDAC, EnforcementUnitDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentReportRepositoryDAC, CrimeIncidentReportDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentReportMediaRepositoryDAC, CrimeIncidentReportMediaDAC>(Lifestyle.Scoped);
+            container.Register<ISystemUserVerificationRepositoryDAC, SystemUserVerificationDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
             container.Register<ILookupFacade, LookupFacade>(Lifestyle.Scoped);
+            container.Register<IFileFacade, FileFacade>(Lifestyle.Scoped);
             container.Register<ISystemUserFacade, SystemUserFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleFacade, SystemWebAdminRoleFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesFacade, SystemWebAdminMenuRolesFacade>(Lifestyle.Scoped);
@@ -75,6 +90,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<IEnforcementUnitFacade, EnforcementUnitFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentReportFacade, CrimeIncidentReportFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentReportMediaFacade, CrimeIncidentReportMediaFacade>(Lifestyle.Scoped);
+            container.Register<ISystemUserVerificationFacade, SystemUserVerificationFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

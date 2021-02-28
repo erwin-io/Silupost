@@ -20,6 +20,7 @@ using System.Web.Http.ModelBinding;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
+using System.Net.Http.Headers;
 
 namespace SilupostWeb.API.Controllers
 {
@@ -27,53 +28,59 @@ namespace SilupostWeb.API.Controllers
     [RoutePrefix("api/v1/File")]
     public class FileController : ApiController
     {
+        private readonly IFileFacade _fileFacade;
         private string RecordedBy { get; set; }
         private long LocationId { get; set; }
         #region CONSTRUCTORS
-        public FileController()
+        public FileController(IFileFacade fileFacade)
         {
+            _fileFacade = fileFacade ?? throw new ArgumentNullException(nameof(fileFacade));
         }
-        #endregion
 
+        #endregion
+        [AllowAnonymous]
         [Route("getFile")]
         [HttpGet]
         [SwaggerOperation("get")]
         [SwaggerResponse(HttpStatusCode.OK)]
         public IHttpActionResult GetFile(string FileId)
         {
-            AppResponseModel<FileViewModel> response = new AppResponseModel<FileViewModel>();
+            IHttpActionResult response;
 
             try
             {
-                string filePath = HttpContext.Current.Server.MapPath(string.Format("~/App_Data/UploadedFiles/{0}", FileId));
-                string fileName = Path.GetFileNameWithoutExtension(filePath);
-                var fileSize = new FileInfo(filePath).Length;
-                using (Image image = Image.FromFile(filePath))
+                var result = _fileFacade.Find(FileId);
+                string mimeType = MimeMapping.GetMimeMapping(result.FileName);
+                var contentType = new MediaTypeHeaderValue(mimeType);
+                HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
+                Stream fileStream;
+                if (result.IsFromStorage)
                 {
-                    using (MemoryStream m = new MemoryStream())
-                    {
-                        image.Save(m, image.RawFormat);
-                        var file = new FileViewModel()
-                        {
-                            FileName = fileName,
-                            FileSize = int.Parse(fileSize.ToString()),
-                            MimeType = image.RawFormat.ToString()
-                        };
-                        response.Data = file;
-                        response.IsSuccess = true;
-                        return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.OK, response);
-                    }
+                    fileStream = new MemoryStream(System.IO.File.ReadAllBytes(result.FileName));
                 }
-
+                else
+                {
+                    fileStream = new MemoryStream(result.FileContent);
+                }
+                responseMessage.Content = new StreamContent(fileStream);
+                var cd = new System.Net.Mime.ContentDisposition
+                {
+                    FileName = result.FileName,
+                    Inline = false,
+                };
+                responseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue(cd.DispositionType.ToString());
+                responseMessage.Content.Headers.ContentDisposition.FileName = result.FileName;
+                //responseMessage.Content.Headers.ContentType = contentType;
+                responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                response = ResponseMessage(responseMessage);
+                return response;
             }
             catch (Exception ex)
             {
-                response.DeveloperMessage = ex.Message;
-                response.Message = Messages.ServerError;
-                //TODO Logging of exceptions
-                return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                throw ex;
             }
         }
+
 
         [Route("getDefaultSystemUserProfilePic")]
         [HttpGet]

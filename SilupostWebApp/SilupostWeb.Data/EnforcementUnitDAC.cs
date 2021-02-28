@@ -73,6 +73,35 @@ namespace SilupostWeb.Data
                 throw ex;
             }
         }
+        public EnforcementUnitModel FindLegalEntityId(string LegalEntityId)
+        {
+            try
+            {
+                using (var result = _dBConnection.QueryMultiple("usp_enforcementunit_getByLegalEntityId", new
+                {
+                    LegalEntityId = LegalEntityId
+                }, commandType: CommandType.StoredProcedure))
+                {
+                    var model = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                    if (model != null)
+                    {
+                        model.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+                    }
+
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public override List<EnforcementUnitModel> GetAll() => throw new NotImplementedException();
 

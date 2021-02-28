@@ -23,6 +23,12 @@ namespace SilupostWeb.Mapping.Profiles
                     {
                         CrimeIncidentReportId = src.CrimeIncidentReportId
                     }));
+            CreateMap<NewCrimeIncidentReportMediaBindingModel, CrimeIncidentReportMediaModel>()
+                .ForPath(dest => dest.DocReportMediaType, opt => opt.MapFrom(src =>
+                    new DocReportMediaTypeModel()
+                    {
+                        DocReportMediaTypeId = src.DocReportMediaTypeId
+                    }));
             CreateMap<UpdateCrimeIncidentReportMediaBindingModel, CrimeIncidentReportMediaModel>()
                 .ForPath(dest => dest.DocReportMediaType, opt => opt.MapFrom(src =>
                     new DocReportMediaTypeModel()

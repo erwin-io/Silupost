@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
+using SilupostWeb.OAuth.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -27,9 +28,11 @@ namespace SilupostWeb.OAuth.Providers
                 throw new ArgumentNullException("data");
             }
 
-            string audienceId = WebConfigurationManager.AppSettings["audienceId"];
+            //string audienceId = WebConfigurationManager.AppSettings["audienceId"];
+            string audienceId = GlobalVariables.goAudienceId;
 
-            string symmetricKeyAsBase64 = WebConfigurationManager.AppSettings["audienceSecret"];
+            //string symmetricKeyAsBase64 = WebConfigurationManager.AppSettings["audienceSecret"];
+            string symmetricKeyAsBase64 = GlobalVariables.goAudienceSecret;
 
             var keyByteArray = TextEncodings.Base64Url.Decode(symmetricKeyAsBase64);
 

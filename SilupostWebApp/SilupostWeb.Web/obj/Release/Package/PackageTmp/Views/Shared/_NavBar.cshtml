@@ -13,7 +13,7 @@
 			
 				<a href="javascript:void(0)" title="Notification" class="dropdown-toggle pmd-ripple-effect"  data-toggle="dropdown" role="button" aria-expanded="true">
                     @{
-                        var totalVisitors = PetDatingApp.Web.Models.GlobalFunctions.GetVisitors_Online();
+                        var totalVisitors = SilupostWeb.Web.Models.GlobalFunctions.GetVisitors_Online();
                         <div data-badge="@(totalVisitors)" class="material-icons md-light pmd-sm pmd-badge pmd-badge-overlap">visibility</div>
                     }
 				</a>

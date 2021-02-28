@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace SilupostWeb.Domain.Enumerations
 {
+    public enum SYSTEM_USER_TYPE_ENUMS
+    {
+        USER_WEBADMIN = 1,
+        USER_MOBILE = 2
+    }
     public enum ICON_PROFILE_FORMAT_ENUMS
     {
         NOTSUPPORTED = 0,

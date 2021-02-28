@@ -76,7 +76,37 @@ namespace SilupostWeb.Facade
             }
             return result;
         }
-        public CrimeIncidentReportMediaViewModel Find(string id) => AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.Map(_crimeIncidentReportMediaRepositoryDAC.Find(id));
+        public List<CrimeIncidentReportMediaViewModel> FindByCrimeIncidentReportId(string CrimeIncidentReportId, bool GetMediaFiles)
+        {
+            var result = AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.MapList(_crimeIncidentReportMediaRepositoryDAC.FindByCrimeIncidentReportId(CrimeIncidentReportId)).ToList();
+            if (GetMediaFiles) 
+            {
+                foreach (var media in result)
+                {
+                    if (media.File != null && File.Exists(media.File.FileName))
+                        media.File.FileContent = System.IO.File.ReadAllBytes(media.File.FileName);
+                }
+            }
+            return result;
+        }
+        public CrimeIncidentReportMediaViewModel Find(string id)
+        {
+            var result = AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.Map(_crimeIncidentReportMediaRepositoryDAC.Find(id));
+
+            if (result.File != null && File.Exists(result.File.FileName))
+                result.File.FileContent = System.IO.File.ReadAllBytes(result.File.FileName);
+
+            return result;
+        }
+        public CrimeIncidentReportMediaViewModel Find(string id, bool GetMediaFiles)
+        {
+            var result = AutoMapperHelper<CrimeIncidentReportMediaModel, CrimeIncidentReportMediaViewModel>.Map(_crimeIncidentReportMediaRepositoryDAC.Find(id));
+
+            if (result.File != null && GetMediaFiles && File.Exists(result.File.FileName))
+                result.File.FileContent = System.IO.File.ReadAllBytes(result.File.FileName);
+
+            return result;
+        }
 
         public bool Remove(string id)
         {

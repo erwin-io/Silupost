@@ -49,9 +49,12 @@
     <Compile Include="BindingModel\CrimeIncidentReportMediaBindingModel.cs" />
     <Compile Include="BindingModel\EnforcementStationBindingModel.cs" />
     <Compile Include="BindingModel\EnforcementTypeBindingModel.cs" />
+    <Compile Include="BindingModel\SystemRefreshTokenBindingModel.cs" />
     <Compile Include="BindingModel\FileBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentCategoryBindingModel.cs" />
     <Compile Include="BindingModel\EnforcementUnitBindingModel.cs" />
+    <Compile Include="BindingModel\SystemUserVerificationBindingModel.cs" />
+    <Compile Include="BindingModel\SystemUserConfigBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminMenuRolesBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentTypeBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminRoleBindingModel.cs" />
@@ -78,6 +81,9 @@
     <Compile Include="ViewModel\PageResultsViewModel.cs" />
     <Compile Include="ViewModel\SystemRecordManagerViewModel.cs" />
     <Compile Include="ViewModel\EnforcementUnitViewModel.cs" />
+    <Compile Include="ViewModel\SystemRefreshTokenViewModel.cs" />
+    <Compile Include="ViewModel\SystemUserConfigViewModel.cs" />
+    <Compile Include="ViewModel\SystemUserVerificationViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuRolesViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminModuleViewModel.cs" />
@@ -85,7 +91,7 @@
     <Compile Include="ViewModel\SystemUserTypeViewModel.cs" />
     <Compile Include="ViewModel\SystemUserViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminUserRolesViewModel.cs" />
-    <Compile Include="ViewModel\TokenViewModel.cs" />
+    <Compile Include="ViewModel\SystemTokenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />

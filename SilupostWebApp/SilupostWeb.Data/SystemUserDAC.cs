@@ -31,6 +31,8 @@ namespace SilupostWeb.Data
                     ProfilePictureFile = model.ProfilePicture.FileId,
                     model.UserName,
                     model.Password,
+                    model.IsEnforcementUnit,
+                    model.EnforcementUnit.EnforcementUnitId,
                     model.SystemRecordManager.CreatedBy,
                 }, commandType: CommandType.StoredProcedure));
 
@@ -50,6 +52,7 @@ namespace SilupostWeb.Data
             try
             {
                 var lookupSystemWebAdminUserRoles = new Dictionary<string, SystemWebAdminUserRolesModel>();
+                var lookupSystemWebAdminMenus = new Dictionary<long?, SystemWebAdminMenuModel>();
                 using (var result = _dBConnection.QueryMultiple("usp_systemuser_getByID", new
                 {
                     SystemUserId = id
@@ -62,6 +65,8 @@ namespace SilupostWeb.Data
                         model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.SystemUserConfig = result.Read<SystemUserConfigModel>().FirstOrDefault();
+
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
                         {
                             SystemWebAdminUserRolesModel systemWebAdminUserRolesModel;
@@ -73,6 +78,38 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminUserRoles == null)
                             model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                         model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
+
+
+                        result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
+                        {
+                            SystemWebAdminMenuModel systemWebAdminMenuModel;
+                            if (!lookupSystemWebAdminMenus.TryGetValue(swam.SystemWebAdminMenuId, out systemWebAdminMenuModel))
+                                lookupSystemWebAdminMenus.Add(swam.SystemWebAdminMenuId, systemWebAdminMenuModel = swam);
+                            systemWebAdminMenuModel.SystemWebAdminModule = swamd;
+                            return systemWebAdminMenuModel;
+                        }, splitOn: "SystemWebAdminMenuId,SystemWebAdminModuleId").ToList();
+                        if (model.SystemWebAdminMenus == null)
+                            model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
+                        model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if (model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+
+
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
                     }
@@ -86,11 +123,88 @@ namespace SilupostWeb.Data
             }
         }
 
+
+        public SystemUserModel FindByUsername(string Username)
+        {
+            try
+            {
+                var lookupSystemWebAdminUserRoles = new Dictionary<string, SystemWebAdminUserRolesModel>();
+                var lookupSystemWebAdminMenus = new Dictionary<long?, SystemWebAdminMenuModel>();
+                using (var result = _dBConnection.QueryMultiple("usp_systemuser_getByUsername", new
+                {
+                    Username = Username,
+                }, commandType: CommandType.StoredProcedure))
+                {
+                    var model = result.Read<SystemUserModel>().FirstOrDefault();
+                    if (model != null)
+                    {
+                        model.SystemUserType = result.Read<SystemUserTypeModel>().FirstOrDefault();
+                        model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        model.SystemUserConfig = result.Read<SystemUserConfigModel>().FirstOrDefault();
+
+                        result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
+                        {
+                            SystemWebAdminUserRolesModel systemWebAdminUserRolesModel;
+                            if (!lookupSystemWebAdminUserRoles.TryGetValue(swaur.SystemWebAdminUserRoleId, out systemWebAdminUserRolesModel))
+                                lookupSystemWebAdminUserRoles.Add(swaur.SystemWebAdminUserRoleId, systemWebAdminUserRolesModel = swaur);
+                            systemWebAdminUserRolesModel.SystemWebAdminRole = swar;
+                            return systemWebAdminUserRolesModel;
+                        }, splitOn: "SystemWebAdminUserRoleId,SystemWebAdminRoleId").ToList();
+                        if (model.SystemWebAdminUserRoles == null)
+                            model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
+                        model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
+
+
+                        result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
+                        {
+                            SystemWebAdminMenuModel systemWebAdminMenuModel;
+                            if (!lookupSystemWebAdminMenus.TryGetValue(swam.SystemWebAdminMenuId, out systemWebAdminMenuModel))
+                                lookupSystemWebAdminMenus.Add(swam.SystemWebAdminMenuId, systemWebAdminMenuModel = swam);
+                            systemWebAdminMenuModel.SystemWebAdminModule = swamd;
+                            return systemWebAdminMenuModel;
+                        }, splitOn: "SystemWebAdminMenuId,SystemWebAdminModuleId").ToList();
+                        if (model.SystemWebAdminMenus == null)
+                            model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
+                        model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if (model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+
+                        model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+                    }
+
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public SystemUserModel Find(string Username, string Password)
         {
             try
             {
                 var lookupSystemWebAdminUserRoles = new Dictionary<string, SystemWebAdminUserRolesModel>();
+                var lookupSystemWebAdminMenus = new Dictionary<long?, SystemWebAdminMenuModel>();
                 using (var result = _dBConnection.QueryMultiple("usp_systemuser_getByCredentials", new
                 {
                     Username = Username,
@@ -104,6 +218,8 @@ namespace SilupostWeb.Data
                         model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.SystemUserConfig = result.Read<SystemUserConfigModel>().FirstOrDefault();
+
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
                         {
                             SystemWebAdminUserRolesModel systemWebAdminUserRolesModel;
@@ -115,6 +231,37 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminUserRoles == null)
                             model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                         model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
+
+
+                        result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
+                        {
+                            SystemWebAdminMenuModel systemWebAdminMenuModel;
+                            if (!lookupSystemWebAdminMenus.TryGetValue(swam.SystemWebAdminMenuId, out systemWebAdminMenuModel))
+                                lookupSystemWebAdminMenus.Add(swam.SystemWebAdminMenuId, systemWebAdminMenuModel = swam);
+                            systemWebAdminMenuModel.SystemWebAdminModule = swamd;
+                            return systemWebAdminMenuModel;
+                        }, splitOn: "SystemWebAdminMenuId,SystemWebAdminModuleId").ToList();
+                        if (model.SystemWebAdminMenus == null)
+                            model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
+                        model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
+                        if (model.EnforcementUnit == null)
+                        {
+                            model.EnforcementUnit = new EnforcementUnitModel();
+                        }
+                        model.EnforcementUnit.EnforcementType = result.Read<EnforcementTypeModel>().FirstOrDefault();
+                        model.EnforcementUnit.EnforcementStation = result.Read<EnforcementStationModel>().FirstOrDefault();
+                        model.EnforcementUnit.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
+                        model.EnforcementUnit.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
+                        if(model.EnforcementUnit.LegalEntity == null)
+                        {
+                            model.EnforcementUnit.LegalEntity = new LegalEntityModel();
+                        }
+                        model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
+                        model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
                     }
@@ -127,9 +274,25 @@ namespace SilupostWeb.Data
                 throw ex;
             }
         }
+        public SystemUserModel GetTrackerStatus(string id)
+        {
+            try
+            {
+                var lookupSystemWebAdminUserRoles = new Dictionary<string, SystemWebAdminUserRolesModel>();
+                var lookupSystemWebAdminMenus = new Dictionary<long?, SystemWebAdminMenuModel>();
+                return _dBConnection.Query<SystemUserModel>("usp_systemuser_getTrackerStatus", new
+                {
+                    SystemUserId = id,
+                }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public override List<SystemUserModel> GetAll() => throw new NotImplementedException();
 
-        public List<SystemUserModel> GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir)
+        public List<SystemUserModel> GetPage(string Search, long SystemUserType, long ApprovalStatus, long PageNo, long PageSize, string OrderColumn, string OrderDir)
         {
             var results = new List<SystemUserModel>();
             try
@@ -140,6 +303,7 @@ namespace SilupostWeb.Data
                 new[]
                 {
                     typeof(SystemUserModel),
+                    typeof(FileModel),
                     typeof(SystemUserTypeModel),
                     typeof(LegalEntityModel),
                     typeof(EntityGenderModel),
@@ -149,16 +313,19 @@ namespace SilupostWeb.Data
                 }, obj =>
                 {
                     SystemUserModel su = obj[0] as SystemUserModel;
-                    SystemUserTypeModel sut = obj[1] as SystemUserTypeModel;
-                    LegalEntityModel le = obj[2] as LegalEntityModel;
-                    EntityGenderModel eg = obj[3] as EntityGenderModel;
-                    SystemWebAdminUserRolesModel swaur = obj[4] as SystemWebAdminUserRolesModel;
-                    SystemWebAdminRoleModel swar = obj[5] as SystemWebAdminRoleModel;
-                    PageResultsModel pr = obj[6] as PageResultsModel;
+                    FileModel pf = obj[1] as FileModel;
+                    SystemUserTypeModel sut = obj[2] as SystemUserTypeModel;
+                    LegalEntityModel le = obj[3] as LegalEntityModel;
+                    EntityGenderModel eg = obj[4] as EntityGenderModel;
+                    SystemWebAdminUserRolesModel swaur = obj[5] as SystemWebAdminUserRolesModel;
+                    SystemWebAdminRoleModel swar = obj[6] as SystemWebAdminRoleModel;
+                    PageResultsModel pr = obj[7] as PageResultsModel;
 
                     SystemUserModel model;
                     if (!lookup.TryGetValue(su.SystemUserId, out model))
                         lookup.Add(su.SystemUserId, model = su);
+                    if (model.ProfilePicture == null)
+                        model.ProfilePicture = new FileModel();
                     if (model.SystemUserType == null)
                         model.SystemUserType = new SystemUserTypeModel();
                     if (model.LegalEntity == null)
@@ -169,6 +336,7 @@ namespace SilupostWeb.Data
                         model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                     if (model.PageResult == null)
                         model.PageResult = new PageResultsModel();
+                    model.ProfilePicture = pf;
                     model.SystemUserType = sut;
                     model.LegalEntity = le;
                     model.LegalEntity.Gender = eg;
@@ -186,11 +354,12 @@ namespace SilupostWeb.Data
                 {
                     Search = Search,
                     SystemUserType = SystemUserType,
+                    ApprovalStatus = ApprovalStatus,
                     PageNo = PageNo,
                     PageSize = PageSize,
                     OrderColumn = OrderColumn,
                     OrderDir = OrderDir
-                }, splitOn: "SystemUserId,SystemUserTypeId,LegalEntityId,GenderId,SystemWebAdminUserRoleId,SystemWebAdminRoleId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                }, splitOn: "SystemUserId,FileId,SystemUserTypeId,LegalEntityId,GenderId,SystemWebAdminUserRoleId,SystemWebAdminRoleId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
                 if (lookup.Values.Any())
                 {
                     results.AddRange(lookup.Values);
@@ -239,7 +408,88 @@ namespace SilupostWeb.Data
                 var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuser_update", new
                 {
                     model.SystemUserId,
+                    model.IsWebAdminGuestUser,
+                    model.IsEnforcementUnit,
+                    model.EnforcementUnit.EnforcementUnitId,
+                    ProfilePictureFile = model?.ProfilePicture?.FileId,
+                    model.SystemRecordManager.LastUpdatedBy
+                }, commandType: CommandType.StoredProcedure));
+
+                if (result.Contains("Error"))
+                    throw new Exception(result);
+
+                affectedRows = Convert.ToInt32(result);
+                success = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return success;
+        }
+
+        public string CreateAccount(SystemUserModel model)
+        {
+            try
+            {
+                var id = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuser_createAccount", new
+                {
+                    model.SystemUserType.SystemUserTypeId,
                     ProfilePictureFile = model.ProfilePicture.FileId,
+                    model.LegalEntity.LegalEntityId,
+                    model.UserName,
+                    model.Password,
+                    model.IsWebAdminGuestUser
+                }, commandType: CommandType.StoredProcedure));
+
+                if (id.Contains("Error"))
+                    throw new Exception(id);
+
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool UpdateUsername(SystemUserModel model)
+        {
+            bool success = false;
+            try
+            {
+                int affectedRows = 0;
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuser_changeUsername", new
+                {
+                    model.SystemUserId,
+                    model.UserName,
+                    model.SystemRecordManager.LastUpdatedBy
+                }, commandType: CommandType.StoredProcedure));
+
+                if (result.Contains("Error"))
+                    throw new Exception(result);
+
+                affectedRows = Convert.ToInt32(result);
+                success = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return success;
+        }
+        public bool UpdatePassword(SystemUserModel model)
+        {
+            bool success = false;
+            try
+            {
+                int affectedRows = 0;
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuser_changePassword", new
+                {
+                    model.SystemUserId,
+                    model.Password,
                     model.SystemRecordManager.LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 

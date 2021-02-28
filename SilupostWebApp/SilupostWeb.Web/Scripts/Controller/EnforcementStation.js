@@ -1,7 +1,7 @@
 ﻿
 var enforcementStationController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "EnforcementStation/" + Id + "/detail",
@@ -10,7 +10,7 @@ var enforcementStationController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -22,7 +22,7 @@ var enforcementStationController = function() {
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,7 +32,7 @@ var enforcementStationController = function() {
             getDefaultIconPic: getDefaultIconPic
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable;
     var appSettings = {
@@ -42,8 +42,10 @@ var enforcementStationController = function() {
     };
     var init = function (obj) {
         initEvent();
-        initGrid();
-        initDefaultIconPic();
+        setTimeout(function () {
+            initGrid();
+            initDefaultIconPic();
+        }, 1000);
 
         
 
@@ -70,7 +72,6 @@ var enforcementStationController = function() {
     var initDefaultIconPic = function () {
         api.getDefaultIconPic().done(function (data) {
             appSettings.DefaultIconPic = data.Data;
-            console.log(data.Data);
         });
     }
 
@@ -225,8 +226,6 @@ var enforcementStationController = function() {
         $("#modal-dialog").find('.modal-title').html('New Enforcement Station');
         $("#modal-dialog").find('.modal-footer #btnSave').html('Save');
         $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Save");
-
-        console.log(appSettings.DefaultIconPic);
         //reset model 
         appSettings.model = {
             IconFile: {
@@ -273,7 +272,6 @@ var enforcementStationController = function() {
                         FileFromBase64String: fileFromBase64String,
                         IsDefault: false
                     }
-                    console.log(appSettings.model);
                 }
             }
             reader.readAsDataURL(file);
@@ -290,7 +288,6 @@ var enforcementStationController = function() {
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
                 appSettings.model = data.Data;
-                console.log(appSettings.model);
                 if(appSettings.model.IconFile == null){
                     appSettings.model.IconFile = {
                         FileName: appSettings.DefaultIconPic.FileName,
@@ -303,8 +300,6 @@ var enforcementStationController = function() {
 
                 appSettings.model.IconFile.FileData = 'data:' + appSettings.model.IconFile.MimeType + ';base64,' + appSettings.model.IconFile.FileContent;
                 appSettings.model.IconFile.FileFromBase64String = appSettings.model.IconFile.FileContent;
-                console.log(appSettings.model);
-
                 //render template
                 enforcementStationTemplate.link("#modal-dialog .modal-body", appSettings.model);
                 //end render template
@@ -362,7 +357,6 @@ var enforcementStationController = function() {
 
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if(!form.valid())
             return;
         if(appSettings.status.IsNew){
@@ -393,7 +387,6 @@ var enforcementStationController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {

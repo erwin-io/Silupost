@@ -18,7 +18,7 @@ namespace SilupostWeb.OAuth.Helpers
         /// <returns></returns>
         public static string ConnectionString()
         {
-            return ConfigurationManager.ConnectionStrings["POSWebDB"].ToString();
+            return ConfigurationManager.ConnectionStrings["CrimeReportAppDB"].ToString();
         }
         /// <summary>
         /// Create hash based from input

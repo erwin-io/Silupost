@@ -14,11 +14,13 @@ namespace SilupostWeb.Facade
     public class SystemWebAdminMenuRolesFacade : ISystemWebAdminMenuRolesFacade
     {
         private readonly ISystemWebAdminMenuRolesRepositoryDAC _systemWebAdminMenuRolesRepositoryDAC;
+        private readonly ISystemWebAdminMenuModuleRepositoryDAC _systemWebAdminMenuModuleRepositoryDAC;
 
         #region CONSTRUCTORS
-        public SystemWebAdminMenuRolesFacade(ISystemWebAdminMenuRolesRepositoryDAC systemWebAdminMenuRolesRepositoryDAC)
+        public SystemWebAdminMenuRolesFacade(ISystemWebAdminMenuRolesRepositoryDAC systemWebAdminMenuRolesRepositoryDAC, ISystemWebAdminMenuModuleRepositoryDAC systemWebAdminMenuModuleRepositoryDAC)
         {
             _systemWebAdminMenuRolesRepositoryDAC = systemWebAdminMenuRolesRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminMenuRolesRepositoryDAC));
+            _systemWebAdminMenuModuleRepositoryDAC = systemWebAdminMenuModuleRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminMenuModuleRepositoryDAC));
         }
         #endregion
 
@@ -29,11 +31,13 @@ namespace SilupostWeb.Facade
                 var success = false;
                 using (var scope = new TransactionScope())
                 {
-                    var currentSystemWebAdminMenuRoles = AutoMapperHelper<SystemWebAdminMenuRolesModel, SystemWebAdminMenuRolesViewModel>.MapList(_systemWebAdminMenuRolesRepositoryDAC.FindBySystemWebAdminRoleId(model.SystemWebAdminRoleId));
+                    var menuId = int.Parse(model.SystemWebAdminMenu.FirstOrDefault().SystemWebAdminMenuId.ToString());
+                    var menuModuleId = int.Parse(AutoMapperHelper<SystemWebAdminModuleModel, SystemWebAdminModuleViewModel>.Map(_systemWebAdminMenuModuleRepositoryDAC.FindByMenuId(menuId)).SystemWebAdminModuleId.ToString());
+                    var currentSystemWebAdminMenuRoles = AutoMapperHelper<SystemWebAdminMenuRolesModel, SystemWebAdminMenuRolesViewModel>.MapList(_systemWebAdminMenuRolesRepositoryDAC.FindBySystemWebAdminRoleIdandSystemWebAdminModuleId(model.SystemWebAdminRoleId, menuModuleId));
                     var newSystemWebAdminMenuRoles = new List<SystemWebAdminMenuRolesViewModel>();
                     foreach (var menu in currentSystemWebAdminMenuRoles)
                     {
-                        if (menu != null && menu.SystemWebAdminMenu.SystemWebAdminMenuId != null && !model.SystemWebAdminMenu.Any(swamr => swamr.SystemWebAdminMenuId == menu.SystemWebAdminMenu.SystemWebAdminMenuId))
+                        if (menu != null && menu.SystemWebAdminMenu.SystemWebAdminMenuId != null && menu.IsAllowed && !model.SystemWebAdminMenu.Any(swamr => swamr.SystemWebAdminMenuId == menu.SystemWebAdminMenu.SystemWebAdminMenuId))
                         {
                             var systemUserRole = _systemWebAdminMenuRolesRepositoryDAC.FindBySystemWebAdminMenuIdAndSystemWebAdminRoleId(menu.SystemWebAdminMenu.SystemWebAdminMenuId.Value, model.SystemWebAdminRoleId);
                             if (systemUserRole != null)
@@ -45,7 +49,7 @@ namespace SilupostWeb.Facade
                     }
                     foreach (var menu in model.SystemWebAdminMenu)
                     {
-                        if (!currentSystemWebAdminMenuRoles.Any(swamr => swamr.SystemWebAdminMenu.SystemWebAdminMenuId == menu.SystemWebAdminMenuId))
+                        if (!currentSystemWebAdminMenuRoles.Where(x=>x.IsAllowed).ToList().Any(swamr => swamr.SystemWebAdminMenu.SystemWebAdminMenuId == menu.SystemWebAdminMenuId))
                         {
                             var systemWebAdminMenuRoleId = _systemWebAdminMenuRolesRepositoryDAC.Add(new SystemWebAdminMenuRolesModel()
                             {

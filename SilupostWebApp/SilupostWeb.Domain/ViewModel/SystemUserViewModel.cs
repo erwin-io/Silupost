@@ -10,11 +10,18 @@ namespace SilupostWeb.Domain.ViewModel
         public FileViewModel ProfilePicture { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public bool IsEnforcementUnit { get; set; }
+        public EnforcementUnitViewModel EnforcementUnit { get; set; }
+        public bool HasFirstLogin { get; set; }
+        public DateTime LasteDateTimeActive { get; set; }
+        public DateTime LasteDateTimeLogin { get; set; }
+        public bool IsWebAdminGuestUser { get; set; }
         public LegalEntityViewModel LegalEntity { get; set; }
+        public SystemUserConfigViewModel SystemUserConfig { get; set; }
         public List<SystemWebAdminUserRolesViewModel> SystemWebAdminUserRoles { get; set; }
+        public List<SystemWebAdminMenuViewModel> SystemWebAdminMenus { get; set; }
         public SystemRecordManagerViewModel SystemRecordManager { get; set; }
         public EntityStatusViewModel EntityStatus { get; set; }
-
-        public TokenViewModel Token { get; set; }
+        public SystemTokenViewModel Token { get; set; }
     }
 }

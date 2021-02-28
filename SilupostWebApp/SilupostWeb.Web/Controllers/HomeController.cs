@@ -16,6 +16,7 @@ namespace SilupostWeb.Web.Controllers
 
         //
         // GET: /Home/
+        [AuthorizationPrivilegeFilter(Pagename = "Dashboard", DisplayName = "Dashboard", EnablePrivilegeFilter = true)]
         public ActionResult Index()
         {
             var page = new PageModel();

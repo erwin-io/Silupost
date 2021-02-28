@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using SilupostWeb.OAuth.Helpers;
 
 namespace SilupostWeb.OAuth.Providers
 {
@@ -31,11 +32,10 @@ namespace SilupostWeb.OAuth.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             SystemUserViewModel user = await Task.Run(() => this._userAuthFacade.Find(context.UserName, context.Password));
-            string clientId = string.Empty;
-            string clientSecret = string.Empty;
 
             if (user != null && !string.IsNullOrEmpty(user?.SystemUserId))
             {
+                double refreshTokenLifeTime = GlobalVariables.goRefreshTokenLifeTime;
                 var identity = new ClaimsIdentity("JWT");
 
                 identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
@@ -44,14 +44,10 @@ namespace SilupostWeb.OAuth.Providers
                 var props = new AuthenticationProperties(new Dictionary<string, string>());
                 var authProperties = new Dictionary<string, string>
                 {
-                    {"as:clientRefreshTokenLifeTime", "60"},
+                    {"as:clientRefreshTokenLifeTime", refreshTokenLifeTime.ToString()},
                     { "username", user.UserName },
                     { "SystemUserId", user.SystemUserId },
                 };
-
-                //foreach (RoleViewModel role in user.UserRoles)
-                //    identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-
                 props = new AuthenticationProperties(authProperties);
 
 

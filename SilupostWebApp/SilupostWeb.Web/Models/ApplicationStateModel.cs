@@ -9,6 +9,8 @@ namespace SilupostWeb.Web.Models
     public class ApplicationStateModel
     {
         public ApplicationUserModel User { get; set; }
+        public ApplicationTokenModel ApplicationToken { get; set; }
+        public List<UserViewAccess> UserViewAccess { get; set; }
     }
 
     public class ApplicationUserModel
@@ -21,11 +23,42 @@ namespace SilupostWeb.Web.Models
         public string Middlename { get; set; }
         public string Lastname { get; set; }
         public string FullName { get; set; }
+        public string ProfilePictureSource { get; set; }
+        public bool IsWebAdminGuestUser { get; set; }
+        public ApplicationUserConfigModel SystemUserConfig { get; set; }
+    }
+
+    public class ApplicationUserConfigModel
+    {
+        public string SystemUserConfigId { get; set; }
+        public bool IsUserEnable { get; set; }
+        public bool IsUserAllowToPostNextReport { get; set; }
+        public bool IsNextReportPublic { get; set; }
+        public bool IsAnonymousNextReport { get; set; }
+        public bool AllowReviewActionNextPost { get; set; }
+        public bool AllowReviewCommentNextPost { get; set; }
+        public bool IsAllReportPublic { get; set; }
+        public bool IsAnonymousAllReport { get; set; }
+        public bool AllowReviewActionAllReport { get; set; }
+        public bool AllowReviewCommentAllReport { get; set; }
+    }
+
+    public class ApplicationTokenModel
+    {
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
     }
 
     public class ApplicationErrorModel
     {
         public ExceptionModel Exception { get; set; }
+    }
+
+    public class ApplicationSateUserViewModel
+    {
+        public string MenuId { get; set; }
+        public string ModuleName { get; set; }
+        public string PageName { get; set; }
     }
 
     public class ApplicationSateUserViewAccess

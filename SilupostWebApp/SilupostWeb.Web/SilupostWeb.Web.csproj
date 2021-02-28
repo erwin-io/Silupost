@@ -558,6 +558,7 @@
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\components\typography\css\typography.css" />
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\components\typography\typography.html" />
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\components\utilities\css\utilities.css" />
+    <Content Include="plugins\Proppeller-Material-Design-Bootstrap\favicon.ico" />
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\themes\css\propeller-admin.css" />
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\themes\css\propeller-theme.css" />
     <Content Include="plugins\Proppeller-Material-Design-Bootstrap\themes\images\avtar-b.jpg" />
@@ -809,6 +810,12 @@
     <Content Include="Scripts\Controller\EnforcementType.js" />
     <Content Include="Scripts\Controller\CrimeIncidentReport.js" />
     <Content Include="Scripts\Controller\EnforcementUnit.js" />
+    <Content Include="Scripts\Controller\MobileUser-Details.js" />
+    <Content Include="Scripts\Controller\ResetPassword.js" />
+    <Content Include="Scripts\Controller\Register.js" />
+    <Content Include="Scripts\Controller\Login.js" />
+    <Content Include="Scripts\Controller\Account.js" />
+    <Content Include="Scripts\Controller\MobileUser.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
     <Content Include="Scripts\Controller\SystemUser.js" />
     <Content Include="Scripts\Controller\CrimeIncidentType.js" />
@@ -842,8 +849,11 @@
     <Compile Include="Controllers\EnforcementUnitController.cs" />
     <Compile Include="Controllers\EnforcementStationController.cs" />
     <Compile Include="Controllers\EnforcementTypeController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LegalEntityController.cs" />
     <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
+    <Compile Include="Controllers\MobileControllerController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
@@ -903,6 +913,16 @@
     <Content Include="Views\CrimeIncidentReport\_Table.cshtml" />
     <Content Include="Views\CrimeIncidentReport\Index.cshtml" />
     <Content Include="Views\CrimeIncidentReport\Details.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\_Layout.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\_Details.cshtml" />
+    <Content Include="Views\MobileController\_Details.cshtml" />
+    <Content Include="Views\MobileController\_Table.cshtml" />
+    <Content Include="Views\MobileController\Index.cshtml" />
+    <Content Include="Views\MobileController\Details.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

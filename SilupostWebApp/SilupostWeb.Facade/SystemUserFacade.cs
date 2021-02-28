@@ -3,6 +3,7 @@ using SilupostWeb.Data.Entity;
 using SilupostWeb.Data.Interface;
 using SilupostWeb.Domain.BindingModel;
 using SilupostWeb.Domain.ViewModel;
+using SilupostWeb.Domain.Enumerations;
 using SilupostWeb.Facade.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,23 +16,29 @@ namespace SilupostWeb.Facade
     public class SystemUserFacade : ISystemUserFacade
     {
         private readonly ISystemUserRepositoryDAC _systemUserRepository;
+        private readonly ISystemUserConfigRepositoryDAC _systemUserConfigRepositoryDAC;
         private readonly ILegalEntityRepository _legalEntityRepository;
         private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
         private readonly ISystemWebAdminUserRolesRepositoryDAC _systemWebAdminUserRolesRepositoryDAC;
         private readonly IFileRepositoryRepositoryDAC _fileRepositoryDAC;
+        private readonly IEnforcementUnitRepositoryDAC _enforcementUnitRepositoryDAC;
 
         #region CONSTRUCTORS
         public SystemUserFacade(ISystemUserRepositoryDAC systemUserRepository,
+            ISystemUserConfigRepositoryDAC systemUserConfigRepositoryDAC,
             ILegalEntityRepository legalEntityRepository,
             ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
             ISystemWebAdminUserRolesRepositoryDAC systemWebAdminUserRolesRepositoryDAC,
-            IFileRepositoryRepositoryDAC fileRepositoryDAC)
+            IFileRepositoryRepositoryDAC fileRepositoryDAC,
+            IEnforcementUnitRepositoryDAC enforcementUnitRepositoryDAC)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
+            _systemUserConfigRepositoryDAC = systemUserConfigRepositoryDAC ?? throw new ArgumentNullException(nameof(systemUserConfigRepositoryDAC));
             _legalEntityRepository = legalEntityRepository ?? throw new ArgumentNullException(nameof(legalEntityRepository));
             _legalEntityAddressRepositoryDAC = legalEntityAddressRepositoryDAC ?? throw new ArgumentNullException(nameof(legalEntityAddressRepositoryDAC));
             _systemWebAdminUserRolesRepositoryDAC = systemWebAdminUserRolesRepositoryDAC ?? throw new ArgumentNullException(nameof(systemWebAdminUserRolesRepositoryDAC));
             _fileRepositoryDAC = fileRepositoryDAC ?? throw new ArgumentNullException(nameof(fileRepositoryDAC));
+            _enforcementUnitRepositoryDAC = enforcementUnitRepositoryDAC ?? throw new ArgumentNullException(nameof(enforcementUnitRepositoryDAC));
         }
         #endregion
 
@@ -73,13 +80,16 @@ namespace SilupostWeb.Facade
                     //End Saving file
 
                     //start store file directory
-                    if (File.Exists(addModel.ProfilePicture.FileName))
+                    if (!model.ProfilePicture.IsDefault)
                     {
-                        File.Delete(addModel.ProfilePicture.FileName);
-                    }
-                    using (var fs = new FileStream(addModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
-                    {
-                        fs.Write(addModel.ProfilePicture.FileContent, 0, addModel.ProfilePicture.FileContent.Length);
+                        if (File.Exists(addModel.ProfilePicture.FileName))
+                        {
+                            File.Delete(addModel.ProfilePicture.FileName);
+                        }
+                        using (var fs = new FileStream(addModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                        {
+                            fs.Write(addModel.ProfilePicture.FileContent, 0, addModel.ProfilePicture.FileContent.Length);
+                        }
                     }
                     //end store file directory
 
@@ -103,6 +113,23 @@ namespace SilupostWeb.Facade
                             throw new Exception("Error Creating System User Roles");
                         }
                     }
+                    if (model.IsEnforcementUnit)
+                    {
+                        addModel.EnforcementUnit.ProfilePicture = addModel.ProfilePicture;
+                        addModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(addModel.EnforcementUnit);
+                        if (string.IsNullOrEmpty(addModel.EnforcementUnit.EnforcementUnitId))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+                    addModel.SystemUserConfig.SystemUser.SystemUserId = id;
+                    addModel.SystemUserConfig.IsUserEnable = true;
+                    addModel.SystemUserConfig.IsUserAllowToPostNextReport = true;
+                    var configId = _systemUserConfigRepositoryDAC.Add(addModel.SystemUserConfig);
+                    if (string.IsNullOrEmpty(configId))
+                    {
+                        throw new Exception("Error Creating System User Settings");
+                    }
                     scope.Complete();
                 }
                 return id;
@@ -112,10 +139,163 @@ namespace SilupostWeb.Facade
                 throw ex;
             }
         }
-        public PageResultsViewModel<SystemUserViewModel> GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir)
+
+        public string CreateAccount(CreateAccountSystemUserBindingModel model, FileBindingModel profilePic)
+        {
+            try
+            {
+                var id = string.Empty;
+                using (var scope = new TransactionScope())
+                {
+                    var addModel = AutoMapperHelper<CreateAccountSystemUserBindingModel, SystemUserModel>.Map(model);
+
+                    //Start Saving LegalEntity
+                    addModel.LegalEntity.BirthDate = DateTime.Now;
+                    var legalEntityId = _legalEntityRepository.Add(addModel.LegalEntity);
+                    if (string.IsNullOrEmpty(legalEntityId))
+                    {
+                        throw new Exception("Error Creating System User Legal Entity");
+                    }
+                    //End Saving LegalEntity
+
+                    //Start Saving file
+                    addModel.ProfilePicture = new FileModel()
+                    {
+                        FileName = profilePic.FileName,
+                        MimeType = profilePic.MimeType,
+                        FileContent = profilePic.FileContent,
+                        SystemRecordManager = new SystemRecordManagerModel() { }
+                    };
+
+                    var fileId = _fileRepositoryDAC.Add(addModel.ProfilePicture);
+                    if (string.IsNullOrEmpty(fileId))
+                        throw new Exception("Error Saving File");
+                    addModel.ProfilePicture.FileId = fileId;
+                    //End Saving file
+
+                    //start store file directory
+                    if (!profilePic.IsDefault)
+                    {
+                        if (File.Exists(addModel.ProfilePicture.FileName))
+                        {
+                            File.Delete(addModel.ProfilePicture.FileName);
+                        }
+                        using (var fs = new FileStream(addModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                        {
+                            fs.Write(addModel.ProfilePicture.FileContent, 0, addModel.ProfilePicture.FileContent.Length);
+                        }
+                    }
+                    //end store file directory
+
+                    //Start Saving User
+                    addModel.UserName = addModel.LegalEntity.EmailAddress;
+                    addModel.LegalEntity.LegalEntityId = legalEntityId;
+                    addModel.SystemUserType.SystemUserTypeId = (int)SYSTEM_USER_TYPE_ENUMS.USER_MOBILE;
+                    id = _systemUserRepository.CreateAccount(addModel);
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        throw new Exception("Error Creating System User");
+                    }
+                    //End Saving LegalEntity
+
+                    addModel.SystemUserConfig.SystemUser.SystemUserId = id;
+                    addModel.SystemUserConfig.IsUserEnable = true;
+                    addModel.SystemUserConfig.IsUserAllowToPostNextReport = true;
+                    var configId = _systemUserConfigRepositoryDAC.Add(addModel.SystemUserConfig);
+                    if (string.IsNullOrEmpty(configId))
+                    {
+                        throw new Exception("Error Creating System User Settings");
+                    }
+                    scope.Complete();
+                }
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string CreateWebAdminAccount(CreateAccountSystemUserBindingModel model, FileBindingModel profilePic)
+        {
+            try
+            {
+                var id = string.Empty;
+                using (var scope = new TransactionScope())
+                {
+                    var addModel = AutoMapperHelper<CreateAccountSystemUserBindingModel, SystemUserModel>.Map(model);
+
+                    //Start Saving LegalEntity
+                    addModel.LegalEntity.BirthDate = DateTime.Now;
+                    var legalEntityId = _legalEntityRepository.Add(addModel.LegalEntity);
+                    if (string.IsNullOrEmpty(legalEntityId))
+                    {
+                        throw new Exception("Error Creating System User Legal Entity");
+                    }
+                    //End Saving LegalEntity
+
+                    //Start Saving file
+                    addModel.ProfilePicture = new FileModel()
+                    {
+                        FileName = profilePic.FileName,
+                        MimeType = profilePic.MimeType,
+                        FileContent = profilePic.FileContent,
+                        SystemRecordManager = new SystemRecordManagerModel() { }
+                    };
+
+                    var fileId = _fileRepositoryDAC.Add(addModel.ProfilePicture);
+                    if (string.IsNullOrEmpty(fileId))
+                        throw new Exception("Error Saving File");
+                    addModel.ProfilePicture.FileId = fileId;
+                    //End Saving file
+
+                    //start store file directory
+                    if (!profilePic.IsDefault)
+                    {
+                        if (File.Exists(addModel.ProfilePicture.FileName))
+                        {
+                            File.Delete(addModel.ProfilePicture.FileName);
+                        }
+                        using (var fs = new FileStream(addModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                        {
+                            fs.Write(addModel.ProfilePicture.FileContent, 0, addModel.ProfilePicture.FileContent.Length);
+                        }
+                    }
+                    //end store file directory
+
+                    //Start Saving User
+                    addModel.UserName = addModel.LegalEntity.EmailAddress;
+                    addModel.LegalEntity.LegalEntityId = legalEntityId;
+                    addModel.SystemUserType.SystemUserTypeId = (int)SYSTEM_USER_TYPE_ENUMS.USER_WEBADMIN;
+                    addModel.IsWebAdminGuestUser = true;
+                    id = _systemUserRepository.CreateAccount(addModel);
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        throw new Exception("Error Creating System User");
+                    }
+                    //End Saving LegalEntity
+
+                    addModel.SystemUserConfig.SystemUser.SystemUserId = id;
+                    addModel.SystemUserConfig.IsUserEnable = true;
+                    addModel.SystemUserConfig.IsUserAllowToPostNextReport = true;
+                    var configId = _systemUserConfigRepositoryDAC.Add(addModel.SystemUserConfig);
+                    if (string.IsNullOrEmpty(configId))
+                    {
+                        throw new Exception("Error Creating System User Settings");
+                    }
+                    scope.Complete();
+                }
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public PageResultsViewModel<SystemUserViewModel> GetPage(string Search, long SystemUserType, long ApprovalStatus, long PageNo, long PageSize, string OrderColumn, string OrderDir)
         {
             var result = new PageResultsViewModel<SystemUserViewModel>();
-            var data = _systemUserRepository.GetPage(Search, SystemUserType, PageNo, PageSize, OrderColumn, OrderDir);
+            var data = _systemUserRepository.GetPage(Search, SystemUserType, ApprovalStatus, PageNo, PageSize, OrderColumn, OrderDir);
             result.Items = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.MapList(data);
             foreach (var item in result.Items)
             {
@@ -132,10 +312,18 @@ namespace SilupostWeb.Facade
                 result.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(result.ProfilePicture.FileName);
             return result;
         }
+        public SystemUserViewModel GetTrackerStatus(string id) => AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.GetTrackerStatus(id));
+        public SystemUserViewModel FindByUsername(string Username)
+        {
+            var result = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.FindByUsername(Username));
+            if (result != null && result.ProfilePicture != null && File.Exists(result.ProfilePicture.FileName))
+                result.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(result.ProfilePicture.FileName);
+            return result;
+        }
         public SystemUserViewModel Find(string Username, string Password)
         {
             var result = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(Username, Password));
-            if (result.ProfilePicture != null && File.Exists(result.ProfilePicture.FileName))
+            if (result != null && result.ProfilePicture != null && File.Exists(result.ProfilePicture.FileName))
                 result.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(result.ProfilePicture.FileName);
             return result;
         }
@@ -157,12 +345,158 @@ namespace SilupostWeb.Facade
             using (var scope = new TransactionScope())
             {
                 var updateModel = AutoMapperHelper<UpdateSystemUserBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
                 //Start Saving LegalEntity
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                updateModel.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
                 success = _legalEntityRepository.Update(updateModel.LegalEntity);
                 if (!success)
                 {
                     throw new Exception("Error Updating System User");
+                }
+                //End Saving file
+
+                //Start Saving file
+                if(model.ProfilePicture != null)
+                {
+                    if (model.ProfilePicture.IsDefault)
+                    {
+                        updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                        updateModel.ProfilePicture.SystemRecordManager.CreatedBy = LastUpdatedBy;
+                        var fileId = _fileRepositoryDAC.Add(updateModel.ProfilePicture);
+                        if (string.IsNullOrEmpty(fileId))
+                            throw new Exception("Error Saving File");
+                        updateModel.ProfilePicture.FileId = fileId;
+                    }
+                    else
+                    {
+                        updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                        updateModel.ProfilePicture.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                        success = _fileRepositoryDAC.Update(updateModel.ProfilePicture);
+                        if (!success)
+                        {
+                            throw new Exception("Error Saving File");
+                        }
+                    }
+                    if (model.ProfilePicture.IsFromStorage)
+                    {
+                        //start store file directory
+                        if (File.Exists(updateModel.ProfilePicture.FileName))
+                        {
+                            File.Delete(updateModel.ProfilePicture.FileName);
+                        }
+                        try
+                        {
+                            using (var fs = new FileStream(updateModel.ProfilePicture.FileName, FileMode.Create, FileAccess.Write))
+                            {
+                                fs.Write(updateModel.ProfilePicture.FileContent, 0, updateModel.ProfilePicture.FileContent.Length);
+                            }
+                        }
+                        catch { }
+                    }
+                    //end store file directory
+                }
+                //End Saving file
+
+
+                var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
+                var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
+
+                foreach (var role in currentSystemWebAdminUserRoles)
+                {
+                    if(!model.SystemWebAdminUserRoles.Any(swaur=>swaur.SystemWebAdminRoleId == role.SystemWebAdminRole.SystemWebAdminRoleId))
+                    {
+                        var systemUserRole = _systemWebAdminUserRolesRepositoryDAC.FindBySystemWebAdminRoleIdAndSystemUserId(role.SystemWebAdminRole.SystemWebAdminRoleId, model.SystemUserId);
+                        if(systemUserRole != null)
+                        {
+                            if (!_systemWebAdminUserRolesRepositoryDAC.Remove(systemUserRole.SystemWebAdminUserRoleId, LastUpdatedBy))
+                                throw new Exception("Error Updating System User Role");
+                        }
+                    }
+                }
+                foreach (var role in model.SystemWebAdminUserRoles)
+                {
+                    if (!currentSystemWebAdminUserRoles.Any(swaur => swaur.SystemWebAdminRole.SystemWebAdminRoleId == role.SystemWebAdminRoleId))
+                    {
+                        var SystemWebAdminUserRoleId = _systemWebAdminUserRolesRepositoryDAC.Add(new SystemWebAdminUserRolesModel()
+                        {
+                            SystemUser = new SystemUserModel() { SystemUserId = model.SystemUserId },
+                            SystemWebAdminRole = new SystemWebAdminRoleModel() { SystemWebAdminRoleId = role.SystemWebAdminRoleId },
+                            SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = LastUpdatedBy }
+                        });
+                        if (string.IsNullOrEmpty(SystemWebAdminUserRoleId))
+                        {
+                            throw new Exception("Error Creating System User Roles");
+                        }
+                    }
+                }
+                if (user.IsWebAdminGuestUser)
+                {
+                    if(model.SystemWebAdminUserRoles.Count > 0)
+                    {
+                        updateModel.IsWebAdminGuestUser = false;
+                    }
+                }
+                if (model.IsEnforcementUnit)
+                {
+                    updateModel.EnforcementUnit.ProfilePicture = updateModel.ProfilePicture;
+                    updateModel.EnforcementUnit.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
+                    updateModel.EnforcementUnit.SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = user.SystemRecordManager.CreatedBy, LastUpdatedBy = user.SystemRecordManager.LastUpdatedBy };
+                    if (user.EnforcementUnit != null && !string.IsNullOrEmpty(user.EnforcementUnit.EnforcementUnitId))
+                    {
+                        updateModel.EnforcementUnit.EnforcementUnitId = user.EnforcementUnit.EnforcementUnitId;
+                        if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+                    else
+                    {
+                        var enforcement = _enforcementUnitRepositoryDAC.FindLegalEntityId(updateModel.LegalEntity.LegalEntityId);
+                        if(enforcement == null)
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(updateModel.EnforcementUnit);
+                            if (string.IsNullOrEmpty(updateModel.EnforcementUnit.EnforcementUnitId))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                        else
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = enforcement.EnforcementUnitId;
+                            if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                    }
+                }
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _systemUserRepository.Update(updateModel);
+                if (!success)
+                {
+                    throw new Exception("Error Updating System User");
+                }
+
+                scope.Complete();
+            }
+            return success;
+        }
+
+        public bool UpdatePersonalDetails(UpdateSystemUserBindingModel model, string LastUpdatedBy)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                var updateModel = AutoMapperHelper<UpdateSystemUserBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
+                //Start Saving LegalEntity
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                updateModel.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
+                success = _legalEntityRepository.Update(updateModel.LegalEntity);
+                if (!success)
+                {
+                    throw new Exception("Error Updating Personal Details");
                 }
                 //End Saving file
 
@@ -199,44 +533,117 @@ namespace SilupostWeb.Facade
                 }
                 //end store file directory
 
-                var currentSystemWebAdminUserRoles = AutoMapperHelper<SystemWebAdminUserRolesModel, SystemWebAdminUserRolesViewModel>.MapList(_systemWebAdminUserRolesRepositoryDAC.FindBySystemUserId(model.SystemUserId));
-                var newSystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
 
-                foreach (var role in currentSystemWebAdminUserRoles)
+                if (model.IsEnforcementUnit)
                 {
-                    if(!model.SystemWebAdminUserRoles.Any(swaur=>swaur.SystemWebAdminRoleId == role.SystemWebAdminRole.SystemWebAdminRoleId))
+                    updateModel.EnforcementUnit.ProfilePicture = updateModel.ProfilePicture;
+                    updateModel.EnforcementUnit.LegalEntity.LegalEntityId = user.LegalEntity.LegalEntityId;
+                    updateModel.EnforcementUnit.SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = user.SystemRecordManager.CreatedBy, LastUpdatedBy = user.SystemRecordManager.LastUpdatedBy };
+                    if (user.EnforcementUnit != null)
                     {
-                        var systemUserRole = _systemWebAdminUserRolesRepositoryDAC.FindBySystemWebAdminRoleIdAndSystemUserId(role.SystemWebAdminRole.SystemWebAdminRoleId, model.SystemUserId);
-                        if(systemUserRole != null)
+                        updateModel.EnforcementUnit.EnforcementUnitId = user.EnforcementUnit.EnforcementUnitId;
+                        if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
                         {
-                            if (!_systemWebAdminUserRolesRepositoryDAC.Remove(systemUserRole.SystemWebAdminUserRoleId, LastUpdatedBy))
-                                throw new Exception("Error Updating System User Role");
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+                    else
+                    {
+                        var enforcement = _enforcementUnitRepositoryDAC.FindLegalEntityId(updateModel.LegalEntity.LegalEntityId);
+                        if (enforcement == null)
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(updateModel.EnforcementUnit);
+                            if (string.IsNullOrEmpty(updateModel.EnforcementUnit.EnforcementUnitId))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
+                        }
+                        else
+                        {
+                            updateModel.EnforcementUnit.EnforcementUnitId = enforcement.EnforcementUnitId;
+                            if (!_enforcementUnitRepositoryDAC.Update(updateModel.EnforcementUnit))
+                            {
+                                throw new Exception("Error Saving User Enforcement Unit");
+                            }
                         }
                     }
                 }
-                foreach (var role in model.SystemWebAdminUserRoles)
-                {
-                    if (!currentSystemWebAdminUserRoles.Any(swaur => swaur.SystemWebAdminRole.SystemWebAdminRoleId == role.SystemWebAdminRoleId))
-                    {
-                        var SystemWebAdminUserRoleId = _systemWebAdminUserRolesRepositoryDAC.Add(new SystemWebAdminUserRolesModel()
-                        {
-                            SystemUser = new SystemUserModel() { SystemUserId = model.SystemUserId },
-                            SystemWebAdminRole = new SystemWebAdminRoleModel() { SystemWebAdminRoleId = role.SystemWebAdminRoleId },
-                            SystemRecordManager = new SystemRecordManagerModel() { CreatedBy = LastUpdatedBy }
-                        });
-                        if (string.IsNullOrEmpty(SystemWebAdminUserRoleId))
-                        {
-                            throw new Exception("Error Creating System User Roles");
-                        }
-                    }
-                }
+
+                updateModel.IsWebAdminGuestUser = user.IsWebAdminGuestUser;
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
                 success = _systemUserRepository.Update(updateModel);
+
+                scope.Complete();
+            }
+            return success;
+        }
+
+        public bool UpdateUsername(UpdateSystemUserNameBindingModel model, string LastUpdatedBy)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                var updateModel = AutoMapperHelper<UpdateSystemUserNameBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
+                updateModel.IsWebAdminGuestUser = user.IsWebAdminGuestUser;
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _systemUserRepository.UpdateUsername(updateModel);
                 if (!success)
                 {
-                    throw new Exception("Error Updating System User");
+                    throw new Exception("Error Updating Username");
                 }
 
+                scope.Complete();
+            }
+            return success;
+        }
+
+        public bool UpdatePassword(UpdateSystemPasswordBindingModel model, string LastUpdatedBy)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                var updateModel = AutoMapperHelper<UpdateSystemPasswordBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
+                updateModel.IsWebAdminGuestUser = user.IsWebAdminGuestUser;
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _systemUserRepository.UpdatePassword(updateModel);
+                if (!success)
+                {
+                    throw new Exception("Error Updating Password");
+                }
+
+                scope.Complete();
+            }
+            return success;
+        }
+
+        public bool ResetPassword(UpdateSystemResetPasswordBindingModel model, string LastUpdatedBy)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                var updateModel = AutoMapperHelper<UpdateSystemResetPasswordBindingModel, SystemUserModel>.Map(model);
+                var user = AutoMapperHelper<SystemUserModel, SystemUserViewModel>.Map(_systemUserRepository.Find(updateModel.SystemUserId));
+                updateModel.IsWebAdminGuestUser = user.IsWebAdminGuestUser;
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _systemUserRepository.UpdatePassword(updateModel);
+                if (!success)
+                {
+                    throw new Exception("Error Updating Password");
+                }
+
+                scope.Complete();
+            }
+            return success;
+        }
+
+        public bool UpdateSystemUserConfig(UpdateSystemUserConfigBindingModel model)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                success = _systemUserConfigRepositoryDAC.Update(AutoMapperHelper<UpdateSystemUserConfigBindingModel, SystemUserConfigModel>.Map(model));
                 scope.Complete();
             }
             return success;
