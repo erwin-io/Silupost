@@ -1,7 +1,7 @@
 ﻿
 var systemWebAdminRoleController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "SystemWebAdminRole/" + Id + "/detail",
@@ -10,7 +10,7 @@ var systemWebAdminRoleController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -19,7 +19,7 @@ var systemWebAdminRoleController = function() {
             getById: getById
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable;
     var appSettings = {
@@ -29,7 +29,11 @@ var systemWebAdminRoleController = function() {
     };
     var init = function (obj) {
         initEvent();
-        initGrid();
+
+        setTimeout(function () {
+            initGrid();
+        }, 1000);
+
     };
 
     var iniValidation = function() {
@@ -202,7 +206,6 @@ var systemWebAdminRoleController = function() {
     }
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if(!form.valid())
             return;
         if(appSettings.status.IsNew){
@@ -233,7 +236,6 @@ var systemWebAdminRoleController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {

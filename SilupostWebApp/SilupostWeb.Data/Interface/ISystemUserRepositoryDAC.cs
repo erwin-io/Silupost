@@ -6,8 +6,13 @@ namespace SilupostWeb.Data.Interface
 {
     public interface ISystemUserRepositoryDAC : IRepository<SystemUserModel>
     {
+        string CreateAccount(SystemUserModel model);
+        SystemUserModel FindByUsername(string Username);
         SystemUserModel Find(string Username, string Password);
-        List<SystemUserModel> GetPage(string Search, long SystemUserType, long PageNo, long PageSize, string OrderColumn, string OrderDir);
+        SystemUserModel GetTrackerStatus(string id);
+        List<SystemUserModel> GetPage(string Search, long SystemUserType, long ApprovalStatus, long PageNo, long PageSize, string OrderColumn, string OrderDir);
         bool Remove(string id, string LastUpdatedBy);
+        bool UpdateUsername(SystemUserModel model);
+        bool UpdatePassword(SystemUserModel model);
     }
 }

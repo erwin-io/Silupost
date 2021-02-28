@@ -38,11 +38,11 @@ namespace SilupostWeb.API.Controllers
         #endregion
 
 
-        [Route("getPage")]
+        [Route("getTablePage")]
         [HttpGet]
         [SwaggerOperation("getPage")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult GetPage(int Draw, 
+        public IHttpActionResult GetTablePage(int Draw, 
                                          string Search,
                                          bool IsAdvanceSearchMode,
                                          long ApprovalStatusId,
@@ -127,6 +127,85 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Route("GetTablePageByPostedBySystemUserId")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetTablePageByPostedBySystemUserId(int Draw, string PostedBySystemUserId, int PageNo, int PageSize)
+        {
+            DataTableResponseModel<IList<CrimeIncidentReportViewModel>> response = new DataTableResponseModel<IList<CrimeIncidentReportViewModel>>();
+
+            try
+            {
+                long recordsFiltered = 0;
+                long recordsTotal = 0;
+                var pageResults = _crimeIncidentReportFacade.GetPageByPostedBySystemUserId(PostedBySystemUserId, PageNo, PageSize);
+                var records = pageResults.Items.ToList();
+                recordsTotal = pageResults.TotalRows;
+                recordsFiltered = pageResults.TotalRows;
+
+                response.draw = Draw;
+                response.recordsFiltered = recordsFiltered;
+                response.recordsTotal = recordsTotal;
+                response.data = pageResults.Items.ToList();
+
+                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.OK, response);
+            }
+            catch (Exception ex)
+            {
+                var exception = new AppResponseModel<object>();
+                exception.DeveloperMessage = ex.Message;
+                exception.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, exception);
+            }
+        }
+
+
+        [Route("GetPageByPostedBySystemUserId")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize)
+        {
+            AppResponseModel<IList<CrimeIncidentReportViewModel>> response = new AppResponseModel<IList<CrimeIncidentReportViewModel>>();
+
+            if (string.IsNullOrEmpty(PostedBySystemUserId))
+            {
+                response.Message = string.Format(Messages.InvalidId, "PostedBySystemUserId Crime Incident Report");
+                return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+
+                var result = _crimeIncidentReportFacade.GetPageByPostedBySystemUserId(PostedBySystemUserId, PageNo, PageSize);
+
+                if (result != null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = result.Items.ToList();
+                    return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.NotFound, response);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<IList<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
         [Route("{id}/detail")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -144,7 +223,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                CrimeIncidentReportViewModel result = _crimeIncidentReportFacade.Find(id);
+                CrimeIncidentReportViewModel result = _crimeIncidentReportFacade.Find(id, false);
 
                 if (result != null)
                 {
@@ -190,7 +269,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var result = _crimeIncidentReportFacade.Find(id);
+                    var result = _crimeIncidentReportFacade.Find(id, false);
 
                     response.IsSuccess = true;
                     response.Message = Messages.Created;
@@ -237,7 +316,7 @@ namespace SilupostWeb.API.Controllers
                 {
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
-                var result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId);
+                var result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId, false);
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "Crime Incident Report");
@@ -248,7 +327,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (success)
                 {
-                    result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId);
+                    result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId, false);
                     response.Message = Messages.Updated;
                     response.Data = result;
                     return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.OK, response);
@@ -291,7 +370,7 @@ namespace SilupostWeb.API.Controllers
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
 
-                var result = _crimeIncidentReportFacade.Find(id);
+                var result = _crimeIncidentReportFacade.Find(id, false);
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "Crime Incident Report");
@@ -366,16 +445,16 @@ namespace SilupostWeb.API.Controllers
                 }
 
                 if (model.CrimeIncidentReportMedia == null)
-                    model.CrimeIncidentReportMedia = new List<CreateCrimeIncidentReportMediaBindingModel>();
+                    model.CrimeIncidentReportMedia = new List<NewCrimeIncidentReportMediaBindingModel>();
 
                 var storageDirectory = Path.Combine(root, @"Storage\", string.Format(@"{0}\", RecordedBy));
                 foreach (var file in provider.FileData)
                 {
                     var newFileName = string.Format("{0}{1}-{2}-{3}{4}", storageDirectory, RecordedBy, DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH-mm"), GlobalFunctions.GetFileExtensionByFileRawFormat(file.Headers.ContentType.MediaType));
-                    model.CrimeIncidentReportMedia.Add(new CreateCrimeIncidentReportMediaBindingModel()
+                    var media = new NewCrimeIncidentReportMediaBindingModel()
                     {
-                        File = new FileBindingModel() 
-                        { 
+                        File = new FileBindingModel()
+                        {
                             FileName = newFileName,
                             MimeType = file.Headers.ContentType.MediaType,
                             IsDefault = false,
@@ -383,15 +462,18 @@ namespace SilupostWeb.API.Controllers
                             FileSize = new FileInfo(file.LocalFileName).Length
                         },
                         DocReportMediaTypeId = GlobalFunctions.GetFileTypeByFileExtension(GlobalFunctions.GetFileExtensionByFileRawFormat(file.Headers.ContentType.MediaType))
-                    });
+                    };
+                    model.CrimeIncidentReportMedia.Add(media);
                 }
+
+
 
                 Directory.CreateDirectory(storageDirectory);
                 string id = _crimeIncidentReportFacade.Add(model, RecordedBy);
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var result = _crimeIncidentReportFacade.Find(id);
+                    var result = _crimeIncidentReportFacade.Find(id, false);
 
                     try
                     {

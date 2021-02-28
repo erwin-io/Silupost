@@ -62,6 +62,9 @@
     <Compile Include="Profiles\LegalEntityAddressProfile.cs" />
     <Compile Include="Profiles\LookupTableProfile.cs" />
     <Compile Include="Profiles\EnforcementUnitProfile.cs" />
+    <Compile Include="Profiles\SystemTokenProfile.cs" />
+    <Compile Include="Profiles\SystemUserVerificationProfile.cs" />
+    <Compile Include="Profiles\SystemUserConfigProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuProfile.cs" />
     <Compile Include="Profiles\SystemWebAdminMenuRolesProfile.cs" />
     <Compile Include="Profiles\CrimeIncidentTypeProfile.cs" />

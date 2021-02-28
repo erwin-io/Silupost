@@ -1,7 +1,7 @@
 ﻿
 var crimeIncidentReportDetailsController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "CrimeIncidentReport/" + Id + "/detail",
@@ -9,10 +9,21 @@ var crimeIncidentReportDetailsController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
+
+        var getMediaFiles = function (fileId) {
+            return $.ajax({
+                url: apiURI + "File/getFile?FileId=" + fileId,
+                type: "GET",
+                headers: {
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
+                }
+            });
+        }
+
         var getLookup = function (tableNames) {
             return $.ajax({
                 url: apiURI + "SystemLookup/GetAllByTableNames?TableNames=" + tableNames,
@@ -20,17 +31,19 @@ var crimeIncidentReportDetailsController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
 
+
         return {
-            getById: getById,
+            getById: getById, 
+            getMediaFiles: getMediaFiles, 
             getLookup: getLookup
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var form,dataTableCrimeIncidentReportMedia;
     var appSettings = {
@@ -44,14 +57,14 @@ var crimeIncidentReportDetailsController = function() {
     var init = function (obj) {
         appSettings = $.extend(appSettings, obj);
         initEvent();
-        initLookup();
+        setTimeout(function () {
+            initLookup();
+        }, 1000);
     };
 
     var initLookup = function(){
         api.getLookup("CrimeIncidentCategory,CrimeIncidentReport,EnforcementStation").done(function (data) {
         	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
-
-            console.log(appSettings.lookup);
             initDetails();
         });
     }
@@ -64,7 +77,6 @@ var crimeIncidentReportDetailsController = function() {
 
     var initDetails = function(){
         api.getById(appSettings.CrimeIncidentReportId).done(function (data) {
-            console.log(data);
 
             var crimeIncidentReportDetailsTemplate = $.templates('#crimeIncidentReport-template');
 
@@ -80,15 +92,18 @@ var crimeIncidentReportDetailsController = function() {
             appSettings.model.CanApproveReportHeader = appSettings.CanApproveReportHeader;
             appSettings.model.Validated = true;
             appSettings.model.lookup = appSettings.lookup;
-            console.log(appSettings.model);
-            crimeIncidentReportDetailsTemplate.link("#reportView", appSettings.model);
 
 
             $(".select-simple").select2({
                 theme: "bootstrap",
                 minimumResultsForSearch: Infinity,
             });
-
+            let promises = [];
+            for (var i in appSettings.model.CrimeIncidentReportMedia) {
+                if (appSettings.model.CrimeIncidentReportMedia[i].File != undefined)
+                    appSettings.model.CrimeIncidentReportMedia[i].File.FileURL = app.appSettings.silupostWebAPIURI + "File/getFile?FileId=" + appSettings.model.CrimeIncidentReportMedia[i].File.FileId;
+            }
+            crimeIncidentReportDetailsTemplate.link("#reportView", appSettings.model);
             initCrimeIncidentReportMediaGallery();  
 
         });

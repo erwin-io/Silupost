@@ -63,6 +63,9 @@
     <Compile Include="Entity\LookupModel.cs" />
     <Compile Include="Entity\LookupTableModel.cs" />
     <Compile Include="Entity\EnforcementUnitModel.cs" />
+    <Compile Include="Entity\SystemTokenModel.cs" />
+    <Compile Include="Entity\SystemUserVerificationModel.cs" />
+    <Compile Include="Entity\SystemUserConfigModel.cs" />
     <Compile Include="Entity\SystemUserTypeModel.cs" />
     <Compile Include="Entity\EntityGenderModel.cs" />
     <Compile Include="Entity\EntityStatusModel.cs" />
@@ -78,6 +81,11 @@
     <Compile Include="Entity\SystemWebAdminRolePrivilegesModel.cs" />
     <Compile Include="Entity\SystemUserModel.cs" />
     <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
+    <Compile Include="Interface\ISystemUserVerificationRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemUserConfigRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemWebAdminMenuRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemWebAdminMenuModuleRepositoryDAC.cs" />
+    <Compile Include="SystemTokenDAC.cs" />
     <Compile Include="FileDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryRepositoryDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentReportMediaRepositoryDAC.cs" />
@@ -89,6 +97,7 @@
     <Compile Include="Interface\ILegalEntityRepository.cs" />
     <Compile Include="Interface\ILookupTableRepositoryDAC.cs" />
     <Compile Include="Interface\IEnforcementUnitRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemTokenRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRolesRepositoryDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentTypeRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminUserRolesRepositoryDAC.cs" />
@@ -98,9 +107,13 @@
     <Compile Include="LegalEntityDAC.cs" />
     <Compile Include="LookupTableDAC.cs" />
     <Compile Include="EnforcementUnitDAC.cs" />
+    <Compile Include="SystemUserVerificationDAC.cs" />
+    <Compile Include="SystemUserConfigDAC.cs" />
+    <Compile Include="SystemWebAdminMenuDAC.cs" />
     <Compile Include="SystemWebAdminMenurRolesDAC.cs" />
     <Compile Include="CrimeIncidentTypeDAC.cs" />
     <Compile Include="LegalEntityAddressDAC.cs" />
+    <Compile Include="SystemWebAdminMenuModuleDAC.cs" />
     <Compile Include="SystemWebAdminUserRolesDAC.cs" />
     <Compile Include="SystemUserDAC.cs" />
     <Compile Include="SystemWebAdminRoleDAC.cs" />

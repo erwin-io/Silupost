@@ -23,14 +23,15 @@ namespace SilupostWeb.Web.Models
             var appState = GlobalFunctions.GetAppState();
             var user = appState != null ? appState.User : null;
             var appStateUserView = GlobalFunctions.GetAppStateUserViewAccess();
-            var menuroles = appStateUserView.MenuRoles != null ? appStateUserView.MenuRoles : new List<UserViewAccess>();
+            var menuroles = appStateUserView != null ? appStateUserView : new List<UserViewAccess>();
+            //var menuroles = appState.UserViewAccess != null ? appState.UserViewAccess : new List<UserViewAccess>();
             var action = new ApplicationActionExcecutingContextModel();
 
             var isAllowed = false;
 
             var appError = new ApplicationErrorModel();
 
-            if (EnablePrivilegeFilter)
+            if (EnablePrivilegeFilter && !(Pagename.Equals("Dashboard") && appState.User != null && appState.User.IsWebAdminGuestUser))
             {
                 if (user != null)
                 {

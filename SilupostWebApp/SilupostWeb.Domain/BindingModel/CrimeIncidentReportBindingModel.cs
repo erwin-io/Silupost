@@ -23,7 +23,7 @@ namespace SilupostWeb.Domain.BindingModel
     {
         public string PostedBySystemUserId { get; set; }
         public DateTime DateReported { get; set; }
-        public List<CreateCrimeIncidentReportMediaBindingModel> CrimeIncidentReportMedia { get; set; }
+        public List<NewCrimeIncidentReportMediaBindingModel> CrimeIncidentReportMedia { get; set; }
     }
     public class UpdateCrimeIncidentReportBindingModel : CrimeIncidentReportBindingModel
     {

@@ -4,9 +4,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\inetpub\wwwroot\PetMingle\PetDatingAppAdmin</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\SilupostWeb\SilupostWeb.Web\</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>02/22/2013 08:43:40</publishTime>
+    </File>
     <File Include="bin/DataTables.Mvc.dll">
       <publishTime>10/15/2014 09:54:00</publishTime>
     </File>
@@ -21,6 +27,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.pdb">
       <publishTime>04/03/2019 07:20:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>09/13/2019 02:28:52</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
       <publishTime>01/13/2014 16:11:08</publishTime>
@@ -46,20 +55,41 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/POSWeb.pdb">
       <publishTime>11/21/2020 05:12:25</publishTime>
     </File>
+    <File Include="bin/SilupostWeb.Web.dll">
+      <publishTime>02/07/2021 23:40:29</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Web.pdb">
+      <publishTime>02/07/2021 23:40:29</publishTime>
+    </File>
     <File Include="bin/SimpleInjector.dll">
-      <publishTime>11/23/2019 16:33:26</publishTime>
+      <publishTime>06/10/2020 17:39:54</publishTime>
     </File>
     <File Include="bin/SimpleInjector.Integration.Web.dll">
-      <publishTime>11/23/2019 16:33:26</publishTime>
+      <publishTime>06/10/2020 17:39:56</publishTime>
     </File>
     <File Include="bin/SimpleInjector.Integration.Web.Mvc.dll">
-      <publishTime>11/23/2019 16:33:28</publishTime>
+      <publishTime>06/10/2020 17:39:56</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Extensions.dll">
+      <publishTime>07/24/2015 14:15:58</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>04/28/2020 14:07:26</publishTime>
+      <publishTime>07/24/2015 14:15:58</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Primitives.dll">
+      <publishTime>07/24/2015 14:15:58</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>09/18/2018 19:38:10</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/29/2018 15:39:20</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Common.dll">
+      <publishTime>02/16/2012 10:31:50</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>04/28/2020 14:07:28</publishTime>
@@ -68,28 +98,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/28/2020 14:07:28</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>01/28/2015 04:02:18</publishTime>
+      <publishTime>11/28/2018 12:59:46</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>01/28/2015 04:02:32</publishTime>
+      <publishTime>11/28/2018 13:00:12</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/WebActivator.dll">
       <publishTime>09/30/2011 00:24:00</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
-      <publishTime>11/24/2014 11:18:48</publishTime>
+      <publishTime>10/05/2016 13:11:52</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
       <publishTime>10/16/2020 16:23:07</publishTime>
@@ -98,16 +131,232 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/16/2020 16:23:07</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/16/2020 21:08:54</publishTime>
+      <publishTime>01/21/2021 21:28:17</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>10/10/2020 22:17:46</publishTime>
+      <publishTime>01/17/2021 17:54:58</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>10/10/2020 22:20:01</publishTime>
+      <publishTime>01/17/2021 18:21:07</publishTime>
     </File>
     <File Include="plugins/.npmignore">
       <publishTime>06/27/2020 00:24:52</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/.bower.json">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/bower.json">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/CODE_OF_CONDUCT.md">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/CONTRIBUTING.md">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-5.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-6.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-7.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/1-8.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/2-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/2-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/2-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/2-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/3-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/3-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/3-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/3-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/5-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/big/2-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/big/2-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/big/2-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/big/2-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/forkme-on-github-right.png">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/medium/2-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/medium/2-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/medium/2-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/medium/2-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/2-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/2-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/2-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/2-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/4-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/4-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/4-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/small/4-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-5.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-6.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-7.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/1-8.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/2-1.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/2-2.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/2-3.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/2-4.jpg">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/3-1.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/3-2.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/3-3.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/3-4.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/4-1.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/4-2.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/4-3.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/4-4.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/img/thumbs/5-1.jpg">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/index.html">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/demo/js/highlight.min.js">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/dist/baguetteBox.css">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/dist/baguetteBox.js">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/dist/baguetteBox.min.css">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/dist/baguetteBox.min.js">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/gulpfile.js">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/LICENSE">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/package-lock.json">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/package.json">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/README.md">
+      <publishTime>01/31/2021 17:07:29</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/src/baguetteBox.js">
+      <publishTime>01/31/2021 17:07:30</publishTime>
+    </File>
+    <File Include="plugins/baguettebox.js/src/baguetteBox.scss">
+      <publishTime>01/31/2021 17:07:30</publishTime>
     </File>
     <File Include="plugins/bs-stepper-1.7.0/css/bs-stepper.min.css">
       <publishTime>06/27/2020 00:24:58</publishTime>
@@ -665,7 +914,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2020 00:24:40</publishTime>
     </File>
     <File Include="plugins/Proppeller-Material-Design-Bootstrap/assets/css/site.css">
-      <publishTime>10/16/2020 16:33:45</publishTime>
+      <publishTime>01/21/2021 21:53:55</publishTime>
     </File>
     <File Include="plugins/Proppeller-Material-Design-Bootstrap/assets/fonts/material-design-icons/iconfont/codepoints">
       <publishTime>06/27/2020 00:24:40</publishTime>
@@ -1312,6 +1561,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="plugins/Proppeller-Material-Design-Bootstrap/components/utilities/css/utilities.css">
       <publishTime>05/05/2020 16:20:32</publishTime>
     </File>
+    <File Include="plugins/Proppeller-Material-Design-Bootstrap/favicon.ico">
+      <publishTime>02/07/2021 16:42:51</publishTime>
+    </File>
     <File Include="plugins/Proppeller-Material-Design-Bootstrap/themes/css/propeller-admin.css">
       <publishTime>06/27/2020 00:25:52</publishTime>
     </File>
@@ -1645,8 +1897,116 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="plugins/toastr/toastr.min.js">
       <publishTime>06/27/2020 00:25:50</publishTime>
     </File>
+    <File Include="plugins/webcamjs-master/bower.json">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/build.sh">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/basic.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/click-to-run.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/combo.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/constraints.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/continuous.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/crop-large.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/crop.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/events.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/flash-disabled.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/flash.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/flip-flash.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/flip.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/hd.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/ios-large.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/large.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/preview.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/reset.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/sfx.html">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/shutter.mp3">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/demos/shutter.ogg">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/DOCS.md">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/com/adobe/images/BitString.as">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/com/adobe/images/JPGEncoder.as">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/com/adobe/images/PNGEncoder.as">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/mx/utils/Base64Encoder.as">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/README.txt">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/Webcam.as">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/flash/Webcam.fla">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/LICENSE">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/package.json">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/README.md">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/webcam.js">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/webcam.min.js">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
+    <File Include="plugins/webcamjs-master/webcam.swf">
+      <publishTime>10/20/2019 08:32:37</publishTime>
+    </File>
     <File Include="Scripts/App/app.js">
-      <publishTime>10/11/2020 15:53:31</publishTime>
+      <publishTime>02/07/2021 17:49:15</publishTime>
     </File>
     <File Include="Scripts/App/dataFormat.js">
       <publishTime>06/27/2020 00:25:50</publishTime>
@@ -1655,7 +2015,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2020 00:25:50</publishTime>
     </File>
     <File Include="Scripts/App/jsrender.js">
-      <publishTime>06/27/2020 00:25:50</publishTime>
+      <publishTime>01/31/2021 19:04:54</publishTime>
     </File>
     <File Include="Scripts/App/modal.js">
       <publishTime>08/19/2020 22:51:54</publishTime>
@@ -1684,8 +2044,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/Controller/Account.js">
       <publishTime>06/27/2020 01:30:24</publishTime>
     </File>
+    <File Include="Scripts/Controller/CrimeIncidentCategory.js">
+      <publishTime>01/27/2021 21:56:18</publishTime>
+    </File>
     <File Include="Scripts/Controller/CrimeIncidentReport-Details.js">
-      <publishTime>01/30/2021 23:25:35</publishTime>
+      <publishTime>02/07/2021 23:33:31</publishTime>
+    </File>
+    <File Include="Scripts/Controller/CrimeIncidentReport.js">
+      <publishTime>01/31/2021 19:39:23</publishTime>
+    </File>
+    <File Include="Scripts/Controller/CrimeIncidentType.js">
+      <publishTime>01/24/2021 22:29:26</publishTime>
+    </File>
+    <File Include="Scripts/Controller/EnforcementStation.js">
+      <publishTime>01/25/2021 21:29:55</publishTime>
+    </File>
+    <File Include="Scripts/Controller/EnforcementType.js">
+      <publishTime>01/24/2021 22:29:17</publishTime>
+    </File>
+    <File Include="Scripts/Controller/EnforcementUnit.js">
+      <publishTime>01/30/2021 20:21:16</publishTime>
     </File>
     <File Include="Scripts/Controller/Home.js">
       <publishTime>11/21/2020 05:04:37</publishTime>
@@ -1716,6 +2094,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/Controller/Role.js">
       <publishTime>10/16/2020 16:23:08</publishTime>
+    </File>
+    <File Include="Scripts/Controller/SystemUser.js">
+      <publishTime>01/31/2021 06:05:28</publishTime>
+    </File>
+    <File Include="Scripts/Controller/SystemWebAdminMenuRoles.js">
+      <publishTime>01/21/2021 21:56:56</publishTime>
+    </File>
+    <File Include="Scripts/Controller/SystemWebAdminRole.js">
+      <publishTime>01/21/2021 21:56:43</publishTime>
     </File>
     <File Include="Scripts/Controller/User.js">
       <publishTime>10/16/2020 16:23:08</publishTime>
@@ -1763,10 +2150,58 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2020 00:25:52</publishTime>
     </File>
     <File Include="Scripts/Widget/LegalEntity.js">
-      <publishTime>06/27/2020 00:25:52</publishTime>
+      <publishTime>01/21/2021 20:59:54</publishTime>
+    </File>
+    <File Include="Scripts/Widget/MapBox.js">
+      <publishTime>01/24/2021 14:00:04</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>06/27/2020 00:25:52</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentCategory/Index.cshtml">
+      <publishTime>01/24/2021 01:25:08</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentCategory/_Table.cshtml">
+      <publishTime>01/23/2021 22:37:13</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentReport/Details.cshtml">
+      <publishTime>01/31/2021 17:33:22</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentReport/Index.cshtml">
+      <publishTime>01/31/2021 19:26:27</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentReport/_Details.cshtml">
+      <publishTime>02/07/2021 22:54:50</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentReport/_Table.cshtml">
+      <publishTime>01/31/2021 18:40:12</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentType/Index.cshtml">
+      <publishTime>01/24/2021 22:15:20</publishTime>
+    </File>
+    <File Include="Views/CrimeIncidentType/_Table.cshtml">
+      <publishTime>01/23/2021 21:33:21</publishTime>
+    </File>
+    <File Include="Views/EnforcementStation/Index.cshtml">
+      <publishTime>01/25/2021 21:28:09</publishTime>
+    </File>
+    <File Include="Views/EnforcementStation/_Table.cshtml">
+      <publishTime>01/25/2021 21:26:35</publishTime>
+    </File>
+    <File Include="Views/EnforcementType/Index.cshtml">
+      <publishTime>01/24/2021 22:28:59</publishTime>
+    </File>
+    <File Include="Views/EnforcementType/_Table.cshtml">
+      <publishTime>01/24/2021 22:13:00</publishTime>
+    </File>
+    <File Include="Views/EnforcementUnit/Index.cshtml">
+      <publishTime>01/30/2021 07:12:05</publishTime>
+    </File>
+    <File Include="Views/EnforcementUnit/_Details.cshtml">
+      <publishTime>01/31/2021 04:12:59</publishTime>
+    </File>
+    <File Include="Views/EnforcementUnit/_Table.cshtml">
+      <publishTime>01/30/2021 06:25:37</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>10/16/2020 16:23:08</publishTime>
@@ -1776,6 +2211,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>08/02/2020 00:32:48</publishTime>
+    </File>
+    <File Include="Views/LegalEntity/_LegalEntity.cshtml">
+      <publishTime>01/20/2021 23:07:49</publishTime>
     </File>
     <File Include="Views/Location/Index.cshtml">
       <publishTime>10/16/2020 16:23:08</publishTime>
@@ -1817,7 +2255,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2020 00:25:56</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/21/2020 05:08:00</publishTime>
+      <publishTime>02/07/2021 16:45:32</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/27/2020 00:25:56</publishTime>
@@ -1826,25 +2264,46 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2020 19:19:34</publishTime>
     </File>
     <File Include="Views/Shared/_NavBar.cshtml">
-      <publishTime>10/10/2020 22:17:33</publishTime>
+      <publishTime>01/17/2021 17:55:00</publishTime>
     </File>
     <File Include="Views/Shared/_SideBar.cshtml">
-      <publishTime>10/16/2020 15:43:37</publishTime>
+      <publishTime>01/30/2021 18:14:44</publishTime>
+    </File>
+    <File Include="Views/SystemUser/Index.cshtml">
+      <publishTime>01/30/2021 07:12:01</publishTime>
+    </File>
+    <File Include="Views/SystemUser/_Details.cshtml">
+      <publishTime>01/27/2021 21:23:14</publishTime>
+    </File>
+    <File Include="Views/SystemUser/_Table.cshtml">
+      <publishTime>01/30/2021 06:21:59</publishTime>
+    </File>
+    <File Include="Views/SystemWebAdminMenuRoles/Index.cshtml">
+      <publishTime>01/19/2021 20:55:34</publishTime>
+    </File>
+    <File Include="Views/SystemWebAdminMenuRoles/_Table.cshtml">
+      <publishTime>01/18/2021 20:09:21</publishTime>
+    </File>
+    <File Include="Views/SystemWebAdminRole/Index.cshtml">
+      <publishTime>01/21/2021 21:57:18</publishTime>
+    </File>
+    <File Include="Views/SystemWebAdminRole/_Table.cshtml">
+      <publishTime>01/17/2021 21:18:40</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>10/11/2020 21:59:35</publishTime>
+      <publishTime>01/17/2021 17:55:01</publishTime>
     </File>
     <File Include="Views/Widget/_CircularProgress.cshtml">
       <publishTime>06/27/2020 00:25:56</publishTime>
     </File>
     <File Include="Views/Widget/_Modal.cshtml">
-      <publishTime>10/16/2020 16:23:08</publishTime>
+      <publishTime>01/24/2021 16:38:16</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>06/27/2020 00:25:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/09/2020 19:29:05</publishTime>
+      <publishTime>01/31/2021 21:17:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <style>
+        .btn:focus, .btn:active, button:focus, button:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #image-gallery .modal-footer {
+            display: block;
+        }
+
+        .thumb {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #tab-page-crimeIncidentReportMedia img,
+        #tab-page-crimeIncidentReportMedia video {
+            width:100%;
+        }
+    </style>
+}
+<!-- Title -->
+<h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
+<!-- End Title -->
+<!--breadcrum start-->
+<ol class="breadcrumb text-left">
+    <li>
+        @ViewBag.Page.Module
+    </li>
+    @if (ViewBag.Page.ParentName != null)
+    {
+        <li><a href="@ViewBag.Page.ParentName">@ViewBag.Page.ParentTitle</a></li>
+    }
+    <li>
+        @ViewBag.Page.Title
+    </li>
+</ol><!--breadcrum end-->
+
+<div class="row ">
+    <!-- table card code and example -->
+    <div class="col-md-12">
+        <div class="component-box">
+            <!-- table card example -->
+            <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">@ViewBag.Page.Title</h2>
+                </div>
+                <div class="pmd-card-body">
+                    <div class="group-fields clearfix row">
+                        <div id="reportView" class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- table card example end -->
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script src="~/Scripts/Controller/CrimeIncidentReport-Details.js"></script>
+    <script>
+        crimeIncidentReportDetails.init(@Html.Raw(Json.Encode(ViewBag.AppSettings)));
+    </script>
+
+
+    @Html.Partial("_Details")
+}

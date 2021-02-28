@@ -8,13 +8,27 @@ namespace SilupostWeb.API.Helpers
 {
     public static class GlobalVariables
     {
+        public static string goAppHostName { get; set; }
         public static string goApplicationName { get; set; }
+        public static string goIssuer { get; set; }
+        public static string goAudienceId { get; set; }
+        public static string goAudienceSecret { get; set; }
+        public static string goClientId { get; set; }
         public static string goDefaultSystemUploadRootDirectory { get; set; }
         public static string goDefaultSystemUserProfilePicPath { get; set; }
         public static string goDefaultCrimeIncidentTypeIconFilePath { get; set; }
         public static string goDefaultEnforcementTypeIconFilePath { get; set; }
         public static string goDefaultEnforcementUnitIconFilePicPath { get; set; }
         public static string goDefaultEnforcementStationIconFilePath { get; set; }
+        //Email Service
+        public static string goEmailVerificationTempPath { get; set; }
+        public static string goChangePasswordTempPath { get; set; }
+        public static string goForgotPasswordTempPath { get; set; }
+        public static string goEmailTempProfilePath { get; set; }
+        public static string goSiteSupportEmail { get; set; }
+        public static string goSiteSupportEmailPassword { get; set; }
+        public static string goClientLandingPageWebsite { get; set; }
+        //End Email Service 
 
         public static string GetApplicationConfig(string pConfigurationkey)
         {

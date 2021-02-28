@@ -43,7 +43,7 @@ namespace SilupostWeb.Facade
                     foreach (var media in model.CrimeIncidentReportMedia)
                     {
                         //Start Saving file
-                        var addMedia = AutoMapperHelper<CreateCrimeIncidentReportMediaBindingModel, CrimeIncidentReportMediaModel>.Map(media);
+                        var addMedia = AutoMapperHelper<NewCrimeIncidentReportMediaBindingModel, CrimeIncidentReportMediaModel>.Map(media);
                         addMedia.CrimeIncidentReport = addReportModel;
                         addMedia.CrimeIncidentReport.CrimeIncidentReportId = id;
                         addMedia.File.SystemRecordManager = addReportModel.SystemRecordManager;
@@ -87,6 +87,20 @@ namespace SilupostWeb.Facade
             {
                 if (media.File != null && File.Exists(media.File.FileName))
                     media.File.FileContent = System.IO.File.ReadAllBytes(media.File.FileName);
+            }
+            return result;
+        }
+
+        public CrimeIncidentReportViewModel Find(string id, bool GetMediaFiles)
+        {
+            var result = AutoMapperHelper<CrimeIncidentReportModel, CrimeIncidentReportViewModel>.Map(_crimeIncidentReportRepositoryDAC.Find(id));
+            if (GetMediaFiles)
+            {
+                foreach (var media in result.CrimeIncidentReportMedia)
+                {
+                    if (media.File != null && File.Exists(media.File.FileName))
+                        media.File.FileContent = System.IO.File.ReadAllBytes(media.File.FileName);
+                }
             }
             return result;
         }
@@ -142,6 +156,19 @@ namespace SilupostWeb.Facade
             return result;
         } 
 
+        public PageResultsViewModel<CrimeIncidentReportViewModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize)
+        {
+            var result = new PageResultsViewModel<CrimeIncidentReportViewModel>();
+            var data = _crimeIncidentReportRepositoryDAC.GetPageByPostedBySystemUserId(PostedBySystemUserId, PageNo, PageSize);
+            result.Items = AutoMapperHelper<CrimeIncidentReportModel, CrimeIncidentReportViewModel>.MapList(data);
+            foreach (var item in result.Items)
+            {
+                if (item.PostedBySystemUser.ProfilePicture != null && File.Exists(item.PostedBySystemUser.ProfilePicture.FileName))
+                    item.PostedBySystemUser.ProfilePicture.FileContent = System.IO.File.ReadAllBytes(item.PostedBySystemUser.ProfilePicture.FileName);
+            }
+            result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows : 0;
+            return result;
+        }
         public bool Remove(string id, string LastUpdatedBy)
         {
             var success = false;

@@ -208,6 +208,73 @@ namespace SilupostWeb.Data
             }
         }
 
+        public List<CrimeIncidentReportModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize)
+        {
+            var results = new List<CrimeIncidentReportModel>();
+            try
+            {
+                var lookup = new Dictionary<string, CrimeIncidentReportModel>();
+
+                _dBConnection.Query("usp_crimeincidentreport_getPagedByPostedBySystemUserId",
+                new[]
+                {
+                    typeof(CrimeIncidentReportModel),
+                    typeof(CrimeIncidentCategoryModel),
+                    typeof(SystemUserModel),
+                    typeof(FileModel),
+                    typeof(LegalEntityModel),
+                    typeof(EntityApprovalStatusModel),
+                    typeof(PageResultsModel),
+                }, obj =>
+                {
+                    CrimeIncidentReportModel cir = obj[0] as CrimeIncidentReportModel;
+                    CrimeIncidentCategoryModel cic = obj[1] as CrimeIncidentCategoryModel;
+                    SystemUserModel p = obj[2] as SystemUserModel;
+                    FileModel suf = obj[3] as FileModel;
+                    LegalEntityModel le = obj[4] as LegalEntityModel;
+                    EntityApprovalStatusModel eas = obj[5] as EntityApprovalStatusModel;
+                    PageResultsModel pr = obj[6] as PageResultsModel;
+                    CrimeIncidentReportModel model;
+                    if (!lookup.TryGetValue(cir.CrimeIncidentReportId, out model))
+                        lookup.Add(cir.CrimeIncidentReportId, model = cir);
+
+                    if (model.CrimeIncidentCategory == null)
+                        model.CrimeIncidentCategory = new CrimeIncidentCategoryModel();
+                    if (model.PostedBySystemUser == null)
+                        model.PostedBySystemUser = new SystemUserModel();
+                    if (model.PostedBySystemUser.ProfilePicture == null)
+                        model.PostedBySystemUser.ProfilePicture = new FileModel();
+                    if (model.PostedBySystemUser.LegalEntity == null)
+                        model.PostedBySystemUser.LegalEntity = new LegalEntityModel();
+                    if (model.ApprovalStatus == null)
+                        model.ApprovalStatus = new EntityApprovalStatusModel();
+                    if (model.PageResult == null)
+                        model.PageResult = new PageResultsModel();
+                    model.CrimeIncidentCategory = cic;
+                    model.PostedBySystemUser = p;
+                    model.PostedBySystemUser.ProfilePicture = suf;
+                    model.PostedBySystemUser.LegalEntity = le;
+                    model.ApprovalStatus = eas;
+                    model.PageResult = pr;
+                    return model;
+                },
+                new
+                {
+                    PostedBySystemUserId = PostedBySystemUserId,
+                    PageNo = PageNo,
+                    PageSize = PageSize
+                }, splitOn: "CrimeIncidentReportId,CrimeIncidentCategoryId,SystemUserId,FileId,LegalEntityId,ApprovalStatusId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                if (lookup.Values.Any())
+                {
+                    results.AddRange(lookup.Values);
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public override bool Remove(string id) => throw new NotImplementedException();
 
         public bool Remove(string id, string LastUpdatedBy)

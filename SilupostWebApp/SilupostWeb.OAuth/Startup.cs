@@ -18,6 +18,7 @@ using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
 using SilupostWeb.Mapping;
+using SilupostWeb.OAuth.Helpers;
 
 [assembly: OwinStartup(typeof(SilupostWeb.OAuth.Startup))]
 namespace SilupostWeb.OAuth
@@ -33,6 +34,12 @@ namespace SilupostWeb.OAuth
         /// <param name="app"></param>
         public void Configuration(IAppBuilder app)
         {
+            GlobalVariables.goIssuer = GlobalVariables.GetApplicationConfig("Issuer");
+            GlobalVariables.goAudienceId = GlobalVariables.GetApplicationConfig("audienceID");
+            GlobalVariables.goAudienceSecret = GlobalVariables.GetApplicationConfig("audienceSecret");
+            GlobalVariables.goClientId = GlobalVariables.GetApplicationConfig("ClientId");
+            GlobalVariables.goRefreshTokenLifeTime = double.Parse(GlobalVariables.GetApplicationConfig("RefreshTokenLifeTime"));
+
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
             AutoMapperConfig.Configure("SilupostWeb.Mapping");
@@ -52,23 +59,24 @@ namespace SilupostWeb.OAuth
             IDbConnection dbConnection = new SqlConnection(connectionString);
             //DAC
             ISystemUserRepositoryDAC _systemUserRepository = new SystemUserDAC(dbConnection);
+            ISystemTokenRepositoryDAC _systemTokenRepositoryDAC = new SystemTokenDAC(dbConnection);
             //Facade
             IUserAuthFacade _userAuthFacade = new UserAuthFacade(_systemUserRepository);
+            ISystemTokenFacade systemTokenFacade = new SystemTokenFacade(_systemTokenRepositoryDAC);
 
+            var issuer = GlobalVariables.goIssuer;
 
-            var issuer = ConfigurationManager.AppSettings["Issuer"];
-            string audienceId = ConfigurationManager.AppSettings["audienceId"];
-            byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["audienceSecret"]);
+            var refreshTokenLifeTime = GlobalVariables.goRefreshTokenLifeTime;
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/oauth2/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(refreshTokenLifeTime),
                 Provider = new AppOAuthProvider(_userAuthFacade),
                 AccessTokenFormat = new AppOAuthJWTFormat(issuer),
-                RefreshTokenProvider = new AppRefreshTokenProvider()
+                RefreshTokenProvider = new AppRefreshTokenProvider(systemTokenFacade)
             };
 
             // OAuth 2.0 Bearer Access Token Generation

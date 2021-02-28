@@ -1,7 +1,7 @@
 ﻿
 var systemUserController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "SystemUser/" + Id + "/detail",
@@ -9,7 +9,7 @@ var systemUserController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -20,7 +20,7 @@ var systemUserController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,7 +32,7 @@ var systemUserController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -44,7 +44,7 @@ var systemUserController = function() {
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -56,7 +56,7 @@ var systemUserController = function() {
             getDefaultProfilePic: getDefaultProfilePic
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var form,formSystemWebAdminUserRoles,formLegalEntityAddress,dataTableSystemUser,dataTableLegalEntityAddress;
     var appSettings = {
@@ -66,10 +66,14 @@ var systemUserController = function() {
     };
     var init = function (obj) {
 
-        initDefaultProfilePic();
-        initEvent();
-        initGrid();
-        initLookup();
+        setTimeout(function () {
+            initDefaultProfilePic();
+            initLookup();
+            initFilter();
+            initGrid();
+            initEvent();
+        }, 1000);
+
         legalEntity.appSettings.forms = {
 	        Rules: {
                 FirstName: {
@@ -267,8 +271,37 @@ var systemUserController = function() {
                 }
             }
         });
-    }
 
+        $("#ApprovalStatus").on("change", function () {
+            dataTableSystemUser.ajax.reload();
+        });
+
+        $(".select-tags").select2({
+            tags: false,
+            theme: "bootstrap",
+        });
+    }
+    var initFilter = function(){
+        var systemUserFilterTemplate = $.templates('#systemUserFilter-select-template');
+        appSettings.FilterList = {
+            ApprovalStatusList : [
+                {
+                    Id:0,
+                    Name: "Pending"
+                },
+                {
+                    Id: 1,
+                    Name: "Approved"
+                },
+                {
+                    Id: 2,
+                    Name: "Show All"
+                },
+            ],
+            ApprovalStatus: 2
+        }
+        systemUserFilterTemplate.link("#filterView", appSettings.FilterList);
+    }
     var OpenWebCam = function(){
         $("#camera_View").removeClass("hidden");
         $("#modal-dialog-webcam #btnCapture").removeClass("hidden");
@@ -348,7 +381,7 @@ var systemUserController = function() {
             var sizeInKb=sizeInBytes/1000;
 
             
-            appSettings.model.ProfilePicture.FileName = "SILUPOST_CAPTURE_" + moment(new Date()).format("YYYY-MM-DD_HH:mm:ss.sss");
+            appSettings.model.ProfilePicture.FileName = "SILUPOST_CAPTURE_" + moment(new Date()).format("YYYY-MM-DD_HH:mm:ss.sss") + ".jpeg";
             appSettings.model.ProfilePicture.MimeType = "image/jpeg";
             appSettings.model.ProfilePicture.FileSize = parseInt(sizeInKb);
             // appSettings.model.ProfilePicture.IsDefault = false;
@@ -398,6 +431,9 @@ var systemUserController = function() {
                     targets: [0,7], width:1
                 },
                 {
+                    targets: [1], visible: false
+                },
+                {
 					className: 'control',
 					orderable: false,
 					targets:   0
@@ -410,11 +446,32 @@ var systemUserController = function() {
                     }
                 },
                 { "data": "SystemUserId","sortable":true, "orderable": true, "searchable": true},
+                {
+                    "data": null, "searchable": true, "orderable": false,
+                    render: function (data, type, full, meta) {
+                        var src = 'data:' + appSettings.DefaultProfilePic.MimeType + ';base64,' + appSettings.DefaultProfilePic.FileContent;
+                        if (data.ProfilePicture !== null && data.ProfilePicture !== undefined) {
+                            if (data.ProfilePicture.IsFromStorage) {
+                                src = app.appSettings.silupostWebAPIURI + "File/getFile?FileId=" + data.ProfilePicture.FileId;
+                            } else if (data.ProfilePicture.FileContent !== null && data.ProfilePicture.FileContent !== undefined && data.ProfilePicture.FileContent !== "") {
+                                src = 'data:' + data.ProfilePicture.MimeType + ';base64,' + data.ProfilePicture.FileContent;
+                            }
+                        }
+                        return '<image class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" style="width:50px;height:50px" src="' + src + '"></image>';
+                    }
+                },
                 { "data": "UserName" },
                 { "data": "LegalEntity.FullName" },
-                { "data": "LegalEntity.Gender.GenderName" },
-                { "data": "LegalEntity.EmailAddress" },
-                { "data": "LegalEntity.MobileNumber" },
+                {
+                    "data": null, "searchable": true, "orderable": false,
+                    render: function (data, type, full, meta) {
+                        if (data.IsWebAdminGuestUser) {
+                            return '<span class="badge badge-warning" style="padding: 10px">Pending fro approval</span>';
+                        } else {
+                            return '<span class="badge badge-info" style="padding: 10px">Approved</span>';
+                        }
+                    }
+                },
                 {
                     "data": null, "searchable": true, "orderable": false,
                     render: function (data, type, full, meta) {
@@ -425,6 +482,9 @@ var systemUserController = function() {
                         return userRoles.toString();
                     }
                 },
+                { "data": "LegalEntity.EmailAddress" },
+                { "data": "LegalEntity.MobileNumber" },
+                { "data": "LegalEntity.Gender.GenderName" },
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'
@@ -458,6 +518,7 @@ var systemUserController = function() {
                     var dataFilter = {
                         Draw: data.draw,
                         SystemUserType: 1,//default for web admin user
+                        ApprovalStatus: $("#ApprovalStatus").val(),//default is 2(all) | show pending and approved user
                         Search: data.search.value,
                         PageNo: data.start <= 0 ? data.start + 1 : (data.start / data.length) + 1,//must be added to 1
                         PageSize: data.length,
@@ -690,8 +751,6 @@ var systemUserController = function() {
             $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Update");
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
-            	console.log(data.Data);
-            	console.log(appSettings.DefaultProfilePic);
                 appSettings.model = {
                     SystemUserId: data.Data.SystemUserId,
                     UserName: data.Data.UserName,
@@ -705,7 +764,7 @@ var systemUserController = function() {
                 if (appSettings.model.ProfilePicture === null){
 
                     appSettings.model.ProfilePicture = {
-                        FileName: appSettings.DefaultProfilePic.FileId,
+                        FileId: appSettings.DefaultProfilePic.FileId,
                         FileName: appSettings.DefaultProfilePic.FileName,
                         MimeType: appSettings.DefaultProfilePic.MimeType,
                         FileSize: appSettings.DefaultProfilePic.FileSize,
@@ -720,7 +779,6 @@ var systemUserController = function() {
 
                 appSettings.model.ProfilePicture.FileData = 'data:' + appSettings.model.ProfilePicture.MimeType + ';base64,' + appSettings.model.ProfilePicture.FileContent;
 
-                console.log(appSettings.model);
                 appSettings.model.lookup = {
                     EntityGender: appSettings.lookup.EntityGender,
                     SystemWebAdminRole : []

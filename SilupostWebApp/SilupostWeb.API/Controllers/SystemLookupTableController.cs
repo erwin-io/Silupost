@@ -23,7 +23,7 @@ using System.Security.Claims;
 
 namespace SilupostWeb.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/v1/SystemLookup")]
     public class SystemLookupTableController : ApiController
     {

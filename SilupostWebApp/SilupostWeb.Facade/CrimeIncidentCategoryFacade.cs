@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Transactions;
 using System.Linq;
+using System.IO;
 
 namespace SilupostWeb.Facade
 {
@@ -44,6 +45,16 @@ namespace SilupostWeb.Facade
         }
 
         public CrimeIncidentCategoryViewModel Find(string id) => AutoMapperHelper<CrimeIncidentCategoryModel, CrimeIncidentCategoryViewModel>.Map(_crimeIncidentCategoryRepositoryDAC.Find(id));
+        public List<CrimeIncidentCategoryViewModel> GetAll()
+        {
+            var result = AutoMapperHelper<CrimeIncidentCategoryModel, CrimeIncidentCategoryViewModel>.MapList(_crimeIncidentCategoryRepositoryDAC.GetAll()).ToList();
+            foreach (var item in result)
+            {
+                if (item.CrimeIncidentType.IconFile != null && File.Exists(item.CrimeIncidentType.IconFile.FileName))
+                    item.CrimeIncidentType.IconFile.FileContent = System.IO.File.ReadAllBytes(item.CrimeIncidentType.IconFile.FileName);
+            }
+            return result;
+        }
 
         public PageResultsViewModel<CrimeIncidentCategoryViewModel> GetPage(string CrimeIncidentTypeId, string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir) 
         {

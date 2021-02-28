@@ -7,6 +7,10 @@ namespace SilupostWeb.Domain.BindingModel
         public long DocReportMediaTypeId { get; set; }
         public string Caption { get; set; }
     }
+    public class NewCrimeIncidentReportMediaBindingModel : CrimeIncidentReportMediaBindingModel
+    {
+        public FileBindingModel File { get; set; }
+    }
     public class CreateCrimeIncidentReportMediaBindingModel : CrimeIncidentReportMediaBindingModel
     {
         public FileBindingModel File { get; set; }

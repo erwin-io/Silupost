@@ -6,66 +6,123 @@
 
 <!-- Left sidebar -->
 <aside id="basicSidebar" class="pmd-sidebar sidebar-default pmd-sidebar-slide-push pmd-sidebar-left pmd-sidebar-open bg-fill-darkblue sidebar-with-icons basic-sub-menu-1" role="navigation">
-	<ul class="nav pmd-sidebar-nav">
-		
-        @*@Html.Partial("~/Views/Account/_UserNavigationInfo.cshtml")*@
+    <ul class="nav pmd-sidebar-nav">
 
-        <li> 
+        <li>
             @if (ViewBag.Page.MenuName.Equals("Dashboard"))
             {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-sm">dashboard</i><span class="media-body">Dashboard</span></a>}
             else
             {<a class="pmd-ripple-effect" href="/"><i class="material-icons media-left pmd-sm">dashboard</i> <span class="media-body">Dashboard</span></a>}
 
         </li>
-
-        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Configuration") ? "open" : "")"> 
-            @if (ViewBag.Page.Module.Equals("Configuration"))
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Report Library") ? "open" : "")">
+            @if (ViewBag.Page.Module.Equals("Report Library"))
             {
                 <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
-                    <i class="material-icons media-left pmd-sm">settings</i> <span class="media-body">Configuration</span>
-                </a> 
+                    <i class="material-icons media-left pmd-sm">library_books</i> <span class="media-body">Report Library</span>
+                </a>
             }
             else
             {
                 <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
-                    <i class="material-icons media-left pmd-sm">settings</i> 
-                    <span class="media-body">Configuration</span>
+                    <i class="material-icons media-left pmd-sm">library_books</i>
+                    <span class="media-body">Report Library</span>
                 </a>
-             }
-        <ul class="dropdown-menu">
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("Pet Group"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Group</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/PetGroup"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Group</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("Pet Type"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Type</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/PetType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Type</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("Pet Classification"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Classification</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/PetClassification"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Classification</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("Pet Ability"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Pet Ability</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/PetAbility"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Pet Ability</span></a>}
-            </li>
-            <li>
-                @if (ViewBag.Page.MenuName.Equals("Location Configuration"))
-                {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Location Configuration</span></a>}
-                else
-                {<a class="pmd-ripple-effect" href="/Location"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Location Configuration</span></a>}
-            </li>
-        </ul>
+            }
+            <ul class="dropdown-menu">
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Crime Incident Report"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Report</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/CrimeIncidentReport"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Report</span></a>}
+                </li>
+            </ul>
         </li>
-	</ul>
+
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Setup") ? "open" : "")">
+            @if (ViewBag.Page.Module.Equals("System Setup"))
+            {
+                <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">settings</i> <span class="media-body">System Setup</span>
+                </a>
+            }
+            else
+            {
+                <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">settings</i>
+                    <span class="media-body">System Setup</span>
+                </a>
+            }
+            <ul class="dropdown-menu">
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Crime Incident Category"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Category</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/CrimeIncidentCategory"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Category</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Enforcement Type"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Type</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/EnforcementType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Type</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Enforcement Station"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Station</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/EnforcementStation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Station</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("Enforcement Unit"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Unit</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/EnforcementUnit"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Unit</span></a>}
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Admin Security") ? "open" : "")">
+            @if (ViewBag.Page.Module.Equals("System Admin Security"))
+            {
+                <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">security</i> <span class="media-body">Security</span>
+                </a>
+            }
+            else
+            {
+                <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                    <i class="material-icons media-left pmd-sm">security</i>
+                    <span class="media-body">Security</span>
+                </a>
+            }
+            <ul class="dropdown-menu">
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System Role"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Role</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemWebAdminRole"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Role</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System User"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System User</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemUser"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System User</span></a>}
+                </li>
+                <li>
+                    @if (ViewBag.Page.MenuName.Equals("System Menu Roles"))
+                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Menu Roles</span></a>}
+                    else
+                    {<a class="pmd-ripple-effect" href="/SystemWebAdminMenuRoles"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Menu Roles</span></a>}
+                </li>
+            </ul>
+        </li>
+    </ul>
 </aside>
 <!-- End Left sidebar -->
 <!-- Sidebar Ends -->  

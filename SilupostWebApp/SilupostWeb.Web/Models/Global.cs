@@ -14,8 +14,6 @@ namespace SilupostWeb.Web.Models
 {
     public static class ApplicationSettings
     {
-        public static string gBranchId { get; set; }
-        public static string gConnectionString { get; set; }
         public static string MD5ServicePrividerKey { get; set; }
     }
 
@@ -72,7 +70,7 @@ namespace SilupostWeb.Web.Models
             var hasObj = false;
             try
             {
-                obj = jsonAppState != null ? JsonConvert.DeserializeObject<ApplicationStateModel>(jsonAppState.Value) : null;
+                obj = jsonAppState != null ? JsonConvert.DeserializeObject<ApplicationStateModel>(MD5ServiceProvider.Decrypt(jsonAppState.Value, ApplicationSettings.MD5ServicePrividerKey)) : null;
                 hasObj = true;
             }
             catch { }
@@ -85,28 +83,31 @@ namespace SilupostWeb.Web.Models
             ApplicationStateModel appState = new ApplicationStateModel();
             if (obj != null)
             {
-                appState.User = new ApplicationUserModel
-                {
-                    UserId = MD5ServiceProvider.Decrypt(obj.User.UserId.ToString(), ApplicationSettings.MD5ServicePrividerKey),
-                    LegalEntityId = MD5ServiceProvider.Decrypt(obj.User.LegalEntityId, ApplicationSettings.MD5ServicePrividerKey),
-                    Username = MD5ServiceProvider.Decrypt(obj.User.Username, ApplicationSettings.MD5ServicePrividerKey),
-                    Firstname = obj.User.Firstname,
-                    Middlename = obj.User.Middlename,
-                    Lastname = obj.User.Lastname,
-                    FullName = obj.User.FullName
-                };
+                appState = obj;
+                appState.UserViewAccess = GetAppStateUserViewAccess();
+                //appState.User = new ApplicationUserModel
+                //{
+                //    UserId = MD5ServiceProvider.Decrypt(obj.User.UserId.ToString(), ApplicationSettings.MD5ServicePrividerKey),
+                //    Username = MD5ServiceProvider.Decrypt(obj.User.Username, ApplicationSettings.MD5ServicePrividerKey),
+                //    UserId = obj.User.UserId,
+                //    Username = obj.User.Username,
+                //    Firstname = obj.User.Firstname,
+                //    Middlename = obj.User.Middlename,
+                //    Lastname = obj.User.Lastname,
+                //    FullName = obj.User.FullName
+                //};
             }
             return appState;
         }
 
-        public static ApplicationSateUserViewAccess GetAppStateUserViewAccess()
+        public static List<UserViewAccess> GetAppStateUserViewAccess()
         {
             var json = HttpContext.Current.Request.Cookies["ApplicationUserViewAccess"];
-            var obj = new ApplicationSateUserViewAccess();
+            var obj = new List<UserViewAccess>();
             var hasObj = false;
             try
             {
-                obj = json != null ? JsonConvert.DeserializeObject<ApplicationSateUserViewAccess>(json.Value) : null;
+                obj = json != null ? JsonConvert.DeserializeObject<List<UserViewAccess>>(MD5ServiceProvider.Decrypt(json.Value, ApplicationSettings.MD5ServicePrividerKey)) : null;
                 hasObj = true;
             }
             catch { }
@@ -116,42 +117,81 @@ namespace SilupostWeb.Web.Models
                 obj = null;
             }
 
-            var appSateView = new ApplicationSateUserViewAccess();
+            var appSateView = new List<UserViewAccess>();
             if (obj != null)
             {
-                if (obj.MenuRoles != null)
-                {
-                    appSateView.MenuRoles = new List<UserViewAccess>();
-                    foreach (var menurole in obj.MenuRoles)
-                    {
-                        var menu = new UserViewAccess
-                        {
-                            MenuRoleId = MD5ServiceProvider.Decrypt(menurole.MenuRoleId, ApplicationSettings.MD5ServicePrividerKey),
-                            MenuId = MD5ServiceProvider.Decrypt(menurole.MenuId, ApplicationSettings.MD5ServicePrividerKey),
-                            RoleId = MD5ServiceProvider.Decrypt(menurole.RoleId, ApplicationSettings.MD5ServicePrividerKey),
-                            ModuleName = MD5ServiceProvider.Decrypt(menurole.ModuleName, ApplicationSettings.MD5ServicePrividerKey),
-                            PageName = MD5ServiceProvider.Decrypt(menurole.PageName, ApplicationSettings.MD5ServicePrividerKey),
-                        };
-                        appSateView.MenuRoles.Add(menu);
-                    }
-                }
+                appSateView = obj;
+                //foreach (var menurole in obj.MenuRoles)
+                //{
+                //    var menu = new UserViewAccess
+                //    {
+                //        MenuRoleId = MD5ServiceProvider.Decrypt(menurole.MenuRoleId, ApplicationSettings.MD5ServicePrividerKey),
+                //        MenuId = MD5ServiceProvider.Decrypt(menurole.MenuId, ApplicationSettings.MD5ServicePrividerKey),
+                //        RoleId = MD5ServiceProvider.Decrypt(menurole.RoleId, ApplicationSettings.MD5ServicePrividerKey),
+                //        ModuleName = MD5ServiceProvider.Decrypt(menurole.ModuleName, ApplicationSettings.MD5ServicePrividerKey),
+                //        PageName = MD5ServiceProvider.Decrypt(menurole.PageName, ApplicationSettings.MD5ServicePrividerKey),
+                //    };
+                //    appSateView.MenuRoles.Add(menu);
+                //}
             }
             return appSateView;
         }
 
         public static void SetAppState(ApplicationStateModel appState)
         {
+            if(appState != null)
+            {
+                appState.ApplicationToken = null;
+                appState.UserViewAccess = null;
+            }
+            //appState.User.ProfilePictureSource = null;
             var json = appState != null ? JsonConvert.SerializeObject(appState) : null;
-            HttpCookie cookie = new HttpCookie("ApplicationSate", json);
+            HttpCookie cookie = new HttpCookie("ApplicationSate", MD5ServiceProvider.Encrypt(json, ApplicationSettings.MD5ServicePrividerKey));
+            cookie.Expires = DateTime.Now.AddYears(1);
+
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+        public static ApplicationTokenModel GetApplicationToken()
+        {
+            var jsonAppState = HttpContext.Current.Request.Cookies["ApplicationToken"];
+            var obj = new ApplicationTokenModel();
+            var hasObj = false;
+            try
+            {
+                obj = jsonAppState != null ? JsonConvert.DeserializeObject<ApplicationTokenModel>(MD5ServiceProvider.Decrypt(jsonAppState.Value, ApplicationSettings.MD5ServicePrividerKey)) : null;
+                hasObj = true;
+            }
+            catch { }
+
+            if (!hasObj)
+            {
+                obj = null;
+            }
+
+            ApplicationTokenModel appToken = new ApplicationTokenModel();
+            if (obj != null)
+            {
+                appToken = new ApplicationTokenModel()
+                {
+                    AccessToken = obj.AccessToken,
+                    RefreshToken = obj.RefreshToken,
+                };
+            }
+            return appToken;
+        }
+        public static void SetApplicationToken(ApplicationTokenModel ApplicationToken)
+        {
+            var json = ApplicationToken != null ? JsonConvert.SerializeObject(ApplicationToken) : null;
+            HttpCookie cookie = new HttpCookie("ApplicationToken", MD5ServiceProvider.Encrypt(json, ApplicationSettings.MD5ServicePrividerKey));
             cookie.Expires = DateTime.Now.AddYears(1);
 
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
 
-        public static void SetAppStateUserViewAccess(ApplicationSateUserViewAccess appSateUserView)
+        public static void SetAppStateUserViewAccess(List<UserViewAccess> appSateUserView)
         {
             var json = appSateUserView != null ? JsonConvert.SerializeObject(appSateUserView) : null;
-            HttpCookie cookie = new HttpCookie("ApplicationUserViewAccess", json);
+            HttpCookie cookie = new HttpCookie("ApplicationUserViewAccess", MD5ServiceProvider.Encrypt(json, ApplicationSettings.MD5ServicePrividerKey));
             cookie.Expires = DateTime.Now.AddYears(1);
 
             HttpContext.Current.Response.Cookies.Add(cookie);
@@ -164,7 +204,7 @@ namespace SilupostWeb.Web.Models
             var hasObj = false;
             try
             {
-                obj = json != null ? JsonConvert.DeserializeObject<ApplicationActionExcecutingContextModel>(json.Value) : null;
+                obj = json != null ? JsonConvert.DeserializeObject<ApplicationActionExcecutingContextModel>(MD5ServiceProvider.Decrypt(json.Value, ApplicationSettings.MD5ServicePrividerKey)) : null;
                 hasObj = true;
             }
             catch { }
@@ -185,7 +225,7 @@ namespace SilupostWeb.Web.Models
         public static void SetActionExecutingContext(ApplicationActionExcecutingContextModel appActionExcecuting)
         {
             var json = appActionExcecuting != null ? JsonConvert.SerializeObject(appActionExcecuting) : null;
-            HttpCookie cookie = new HttpCookie("ActionExecutingContext", json);
+            HttpCookie cookie = new HttpCookie("ActionExecutingContext", MD5ServiceProvider.Encrypt(json, ApplicationSettings.MD5ServicePrividerKey));
             cookie.Expires = DateTime.Now.AddYears(1);
 
             HttpContext.Current.Response.Cookies.Add(cookie);
@@ -251,24 +291,5 @@ namespace SilupostWeb.Web.Models
             HttpContext.Current.Application.UnLock();
         }
 
-        public async static void SetCloseLog()
-        {
-            //using (var client = new HttpClient())
-            //{
-            //    var itemGroup = new ItemGroupBindingModel()
-            //    {
-            //        Name = DateTime.Now.ToString("F"),
-            //        BranchId = ApplicationSettings.gBranchId,
-            //        CreatedBy = "1",
-            //    };
-            //    string _serialized = JsonConvert.SerializeObject(itemGroup);
-            //    StringContent _content = new StringContent(_serialized, Encoding.UTF8, "application/json");
-            //    HttpResponseMessage _result = await client.PostAsync("http://localhost:57275/ItemGroup/Create", _content);
-            //    if (!_result.IsSuccessStatusCode)
-            //    {
-            //        string _error = await _result.Content.ReadAsStringAsync();
-            //    }
-            //}
-        }
     }
 }

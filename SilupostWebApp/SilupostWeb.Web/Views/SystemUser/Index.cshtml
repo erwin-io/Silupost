@@ -47,6 +47,14 @@
                     <h2 class="pmd-card-title-text">@ViewBag.Page.Title</h2>
                 </div>
                 <div class="pmd-card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div id="filterView">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     @Html.Partial("_Table")
                 </div>
 
@@ -77,6 +85,17 @@
     <script src="~/Scripts/Controller/SystemUser.js"></script>
     <script>
         systemUser.init(@Html.Raw(Json.Encode(ViewBag.Lookup)));
+    </script>
+
+    <script id="systemUserFilter-select-template" type="text/x-jsrender">
+        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+            <label>Apporval Status</label>
+            <select id="ApprovalStatus" name="ApprovalStatus" data-link="ApprovalStatus"  class="select-simple form-control pmd-select2">
+                {^{for ApprovalStatusList}}
+                <option value="{{>Id}}">{{>Name}}</option>
+                {{/for}}
+            </select>
+        </div>
     </script>
 
     @Html.Partial("_Details")

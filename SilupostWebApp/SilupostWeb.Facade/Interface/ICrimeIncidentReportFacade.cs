@@ -12,6 +12,7 @@ namespace SilupostWeb.Facade.Interface
     {
         string Add(CreateCrimeIncidentReportBindingModel model, string CreatedBy);
         CrimeIncidentReportViewModel Find(string id);
+        CrimeIncidentReportViewModel Find(string id, bool GetMediaFiles);
         bool Remove(string id, string LastUpdatedBy);
         bool Update(UpdateCrimeIncidentReportBindingModel model, string LastUpdatedBy);
         PageResultsViewModel<CrimeIncidentReportViewModel> GetPage(string Search,
@@ -36,5 +37,7 @@ namespace SilupostWeb.Facade.Interface
                                                                    int PageSize,
                                                                    string OrderColumn,
                                                                    string OrderDir);
+
+        PageResultsViewModel<CrimeIncidentReportViewModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize);
     }
 }

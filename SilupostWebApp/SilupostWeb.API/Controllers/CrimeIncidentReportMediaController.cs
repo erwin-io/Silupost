@@ -29,7 +29,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly ICrimeIncidentReportMediaFacade _crimeIncidentReportMediaFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public CrimeIncidentReportMediaController(ICrimeIncidentReportMediaFacade crimeIncidentReportMediaFacade)
         {
@@ -95,7 +94,7 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
-                CrimeIncidentReportMediaViewModel result = _crimeIncidentReportMediaFacade.Find(id);
+                CrimeIncidentReportMediaViewModel result = _crimeIncidentReportMediaFacade.Find(id, false);
 
                 if (result != null)
                 {
@@ -141,7 +140,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var result = _crimeIncidentReportMediaFacade.Find(id);
+                    var result = _crimeIncidentReportMediaFacade.Find(id, false);
 
                     response.IsSuccess = true;
                     response.Message = Messages.Created;
@@ -231,7 +230,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var result = _crimeIncidentReportMediaFacade.Find(id);
+                    var result = _crimeIncidentReportMediaFacade.Find(id, false);
 
                     try
                     {
@@ -293,7 +292,7 @@ namespace SilupostWeb.API.Controllers
                 {
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
-                var result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId);
+                var result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId, false);
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "Crime Incident Report Media");
@@ -304,7 +303,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (success)
                 {
-                    result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId);
+                    result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId, false);
                     response.Message = Messages.Updated;
                     response.Data = result;
                     return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportMediaViewModel>>(Request, HttpStatusCode.OK, response);
@@ -391,7 +390,7 @@ namespace SilupostWeb.API.Controllers
                 Directory.CreateDirectory(storageDirectory);
 
 
-                var result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId);
+                var result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId, false);
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "Crime Incident Report Media");
@@ -402,7 +401,7 @@ namespace SilupostWeb.API.Controllers
 
                 if (success)
                 {
-                    result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId);
+                    result = _crimeIncidentReportMediaFacade.Find(model.CrimeIncidentReportMediaId, false);
 
                     try
                     {
@@ -462,7 +461,7 @@ namespace SilupostWeb.API.Controllers
                     RecordedBy = identity.FindFirst("SystemUserId").Value;
                 }
 
-                var result = _crimeIncidentReportMediaFacade.Find(id);
+                var result = _crimeIncidentReportMediaFacade.Find(id, false);
                 if (result == null)
                 {
                     response.Message = string.Format(Messages.InvalidId, "Crime Incident Report Media");

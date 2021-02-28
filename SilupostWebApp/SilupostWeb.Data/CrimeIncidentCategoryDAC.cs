@@ -70,7 +70,46 @@ namespace SilupostWeb.Data
             }
         }
 
-        public override List<CrimeIncidentCategoryModel> GetAll() => throw new NotImplementedException();
+        public override List<CrimeIncidentCategoryModel> GetAll()
+        {
+            var results = new List<CrimeIncidentCategoryModel>();
+            try
+            {
+                var lookup = new Dictionary<string, CrimeIncidentCategoryModel>();
+
+                _dBConnection.Query("usp_crimeincidentcategory_getAll",
+                new[]
+                {
+                    typeof(CrimeIncidentCategoryModel),
+                    typeof(CrimeIncidentTypeModel),
+                    typeof(FileModel),
+                }, obj =>
+                {
+                    CrimeIncidentCategoryModel cic = obj[0] as CrimeIncidentCategoryModel;
+                    CrimeIncidentTypeModel cit = obj[1] as CrimeIncidentTypeModel;
+                    FileModel citf = obj[2] as FileModel;
+                    CrimeIncidentCategoryModel model;
+                    if (!lookup.TryGetValue(cic.CrimeIncidentCategoryId, out model))
+                        lookup.Add(cic.CrimeIncidentCategoryId, model = cic);
+                    if (model.CrimeIncidentType == null)
+                        model.CrimeIncidentType = new CrimeIncidentTypeModel();
+                    if (model.CrimeIncidentType.IconFile == null)
+                        model.CrimeIncidentType.IconFile = new FileModel();
+                    model.CrimeIncidentType = cit;
+                    model.CrimeIncidentType.IconFile = citf;
+                    return model;
+                }, splitOn: "CrimeIncidentCategoryId,CrimeIncidentTypeId,FileId", commandType: CommandType.StoredProcedure).ToList();
+                if (lookup.Values.Any())
+                {
+                    results.AddRange(lookup.Values);
+                }
+                return results;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public List<CrimeIncidentCategoryModel> GetPage(string CrimeIncidentTypeId, string Search,  int PageNo, int PageSize, string OrderColumn, string OrderDir)
         {

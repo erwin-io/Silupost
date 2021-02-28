@@ -1,7 +1,7 @@
 ﻿
 var crimeIncidentReportController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "CrimeIncidentReport/" + Id + "/detail",
@@ -9,7 +9,7 @@ var crimeIncidentReportController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -20,7 +20,7 @@ var crimeIncidentReportController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,7 +32,7 @@ var crimeIncidentReportController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -43,7 +43,7 @@ var crimeIncidentReportController = function() {
             getLookup: getLookup
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var form,formLegalEntityAddress,dataTableCrimeIncidentReport,dataTableLegalEntityAddress;
     var appSettings = {
@@ -53,7 +53,9 @@ var crimeIncidentReportController = function() {
         IsAdvanceSearchMode: false
     };
     var init = function (obj) {
-        initLookup();
+        setTimeout(function () {
+            initLookup();
+        }, 1000);
         $(window).resize(function () {
             if ($("#table-crimeIncidentReport").hasClass('collapsed')) {
                 $("#btnMore").removeClass("hidden");
@@ -115,8 +117,6 @@ var crimeIncidentReportController = function() {
             GeoCountry: ""
         };
         advanceSearchModeTemplate.link("#advanceSearchView", appSettings.AdvanceSearchModel);
-
-        console.log(appSettings.AdvanceSearchModel);
         initGrid();
     }
 
@@ -277,7 +277,7 @@ var crimeIncidentReportController = function() {
                 bLengthChange: true,
                 "serverSide": true,
                 "ajax": {
-                    "url": app.appSettings.silupostWebAPIURI + "CrimeIncidentReport/GetPage",
+                    "url": app.appSettings.silupostWebAPIURI + "CrimeIncidentReport/GetTablePage",
                     "type": "GET",
                     "datatype": "json",
                     contentType: 'application/json;charset=utf-8',
@@ -310,7 +310,6 @@ var crimeIncidentReportController = function() {
                             GeoProvince: appSettings.AdvanceSearchModel.GeoProvince,
                             GeoCountry: appSettings.AdvanceSearchModel.GeoCountry
                         }
-                        console.log(dataFilter);
                         return dataFilter;
                     }
                 },
@@ -342,7 +341,6 @@ var crimeIncidentReportController = function() {
             dataTableCrimeIncidentReport.columns.adjust();
         }
         catch(err) {
-            console.log(err);
             Swal.fire("Error", err, 'error');
         }
     };

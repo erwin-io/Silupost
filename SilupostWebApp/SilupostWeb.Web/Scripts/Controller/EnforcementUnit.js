@@ -1,7 +1,7 @@
 ﻿
 var enforcementUnitController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "EnforcementUnit/" + Id + "/detail",
@@ -9,7 +9,7 @@ var enforcementUnitController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -20,7 +20,7 @@ var enforcementUnitController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,11 +32,11 @@ var enforcementUnitController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
-        var getDefaultProfilePic = function (Id) {
+        var getDefaultProfilePic = function () {
             return $.ajax({
                 url: apiURI + "File/getDefaultEnforcementUnitProfilePic",
                 data: null,
@@ -44,7 +44,7 @@ var enforcementUnitController = function() {
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -56,7 +56,7 @@ var enforcementUnitController = function() {
             getDefaultProfilePic: getDefaultProfilePic
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var form,formLegalEntityAddress,dataTableEnforcementUnit,dataTableLegalEntityAddress;
     var appSettings = {
@@ -66,10 +66,14 @@ var enforcementUnitController = function() {
     };
     var init = function (obj) {
 
-        initDefaultProfilePic();
         initEvent();
-        initGrid();
-        initLookup();
+        setTimeout(function () {
+            initDefaultProfilePic();
+            initGrid();
+            initLookup();
+        }, 1000);
+
+
         legalEntity.appSettings.forms = {
 	        Rules: {
                 FirstName: {
@@ -611,7 +615,6 @@ var enforcementUnitController = function() {
             $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Update");
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
-            	console.log(data.Data);
                 appSettings.model = {
                     EnforcementUnitId: data.Data.EnforcementUnitId,
                     EnforcementTypeId: data.Data.EnforcementType.EnforcementTypeId,
@@ -638,7 +641,6 @@ var enforcementUnitController = function() {
 
                 appSettings.model.ProfilePicture.FileData = 'data:' + appSettings.model.ProfilePicture.MimeType + ';base64,' + appSettings.model.ProfilePicture.FileContent;
 
-                console.log(appSettings.model);
                 appSettings.model.lookup = {
                     EntityGender: appSettings.lookup.EntityGender,
                     EnforcementType: appSettings.lookup.EnforcementType,

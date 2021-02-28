@@ -16,6 +16,7 @@ namespace SilupostWeb.Web.Controllers
 
         //
         // GET: /Home/
+        [AuthorizationPrivilegeFilter(Pagename = "Crime Incident Report", DisplayName = "Crime Incident Report", EnablePrivilegeFilter = true)]
         public ActionResult Index()
         {
             var page = new PageModel();
@@ -25,6 +26,7 @@ namespace SilupostWeb.Web.Controllers
             ViewBag.Page = page;
             return View();
         }
+        [AuthorizationPrivilegeFilter(Pagename = "Crime Incident Report", DisplayName = "Crime Incident Report", EnablePrivilegeFilter = true)]
         public ActionResult Details(string id)
         {
             var page = new PageModel();

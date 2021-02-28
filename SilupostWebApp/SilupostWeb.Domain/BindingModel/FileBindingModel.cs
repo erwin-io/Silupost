@@ -5,6 +5,7 @@ namespace SilupostWeb.Domain.BindingModel
     public class FileBindingModel
     {
         public bool IsDefault { get; set; }
+        public bool IsFromStorage { get; set; }
         public string FileName { get; set; }
         public string MimeType { get; set; }
         public byte[] FileContent { get; set; }

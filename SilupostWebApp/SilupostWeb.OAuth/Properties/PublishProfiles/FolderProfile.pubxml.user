@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\inetpub\wwwroot\PetMingle\PetDatingAppWebAPI</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\SilupostWeb\SilupostWeb.OAuth\</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -20,7 +20,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/17/2018 10:14:56</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
-      <publishTime>05/16/2018 18:40:30</publishTime>
+      <publishTime>11/17/2020 09:58:48</publishTime>
     </File>
     <File Include="bin/DataTables.Mvc.dll">
       <publishTime>10/15/2014 09:54:00</publishTime>
@@ -178,6 +178,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
+    <File Include="bin/Microsoft.AspNet.Authorization.dll">
+      <publishTime>11/16/2015 16:03:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Http.Features.dll">
+      <publishTime>11/16/2015 16:03:40</publishTime>
+    </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
       <publishTime>04/03/2019 00:30:56</publishTime>
     </File>
@@ -190,6 +196,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.pdb">
       <publishTime>04/03/2019 07:20:50</publishTime>
     </File>
+    <File Include="bin/Microsoft.AspNetCore.Metadata.dll">
+      <publishTime>12/01/2020 23:20:48</publishTime>
+    </File>
     <File Include="bin/Microsoft.Build.Framework.dll">
       <publishTime>07/07/2015 00:51:38</publishTime>
     </File>
@@ -201,6 +210,30 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Configuration.Abstractions.dll">
+      <publishTime>11/16/2015 16:03:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Configuration.Binder.dll">
+      <publishTime>11/16/2015 16:03:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Configuration.dll">
+      <publishTime>11/16/2015 16:03:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Options.dll">
+      <publishTime>10/19/2020 18:48:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.OptionsModel.dll">
+      <publishTime>11/16/2015 16:03:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Primitives.dll">
+      <publishTime>10/19/2020 18:48:14</publishTime>
     </File>
     <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.dll">
       <publishTime>10/05/2018 19:35:36</publishTime>
@@ -538,6 +571,36 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ru/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
+    <File Include="bin/SilupostWeb.Data.dll">
+      <publishTime>02/18/2021 22:22:50</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Data.pdb">
+      <publishTime>02/18/2021 22:22:50</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Domain.dll">
+      <publishTime>02/18/2021 22:22:48</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Domain.pdb">
+      <publishTime>02/18/2021 22:22:48</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Facade.dll">
+      <publishTime>02/18/2021 22:22:52</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Facade.pdb">
+      <publishTime>02/18/2021 22:22:52</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Mapping.dll">
+      <publishTime>02/18/2021 22:22:51</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.Mapping.pdb">
+      <publishTime>02/18/2021 22:22:51</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.OAuth.dll">
+      <publishTime>02/18/2021 22:26:03</publishTime>
+    </File>
+    <File Include="bin/SilupostWeb.OAuth.pdb">
+      <publishTime>02/18/2021 22:26:03</publishTime>
+    </File>
     <File Include="bin/SimpleInjector.dll">
       <publishTime>12/01/2018 17:29:08</publishTime>
     </File>
@@ -548,7 +611,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/11/2020 13:18:31</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
-      <publishTime>02/14/2016 10:33:10</publishTime>
+      <publishTime>10/28/2016 09:03:50</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
     </File>
     <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
       <publishTime>10/05/2018 19:34:54</publishTime>
@@ -556,8 +622,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.IdentityModel.Tokens.Jwt.pdb">
       <publishTime>10/05/2018 19:26:08</publishTime>
     </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
+    </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>11/28/2018 13:00:36</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 13:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/19/2020 18:46:30</publishTime>
     </File>
     <File Include="bin/System.ValueTuple.dll">
       <publishTime>05/15/2018 13:29:52</publishTime>
@@ -570,6 +645,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>11/28/2018 13:01:00</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>11/28/2018 13:01:48</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>11/28/2018 13:02:56</publishTime>
@@ -591,6 +669,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/Thinktecture.IdentityModel.dll">
+      <publishTime>12/12/2013 09:39:16</publishTime>
+    </File>
+    <File Include="bin/Thinktecture.IdentityModel.pdb">
+      <publishTime>12/12/2013 09:39:16</publishTime>
     </File>
     <File Include="bin/VSLangProj.dll">
       <publishTime>06/11/2020 13:18:31</publishTime>
@@ -659,7 +743,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2020 03:47:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/26/2020 09:01:45</publishTime>
+      <publishTime>02/14/2021 15:59:17</publishTime>
     </File>
   </ItemGroup>
 </Project>
