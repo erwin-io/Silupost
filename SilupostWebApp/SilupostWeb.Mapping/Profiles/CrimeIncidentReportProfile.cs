@@ -33,6 +33,14 @@ namespace SilupostWeb.Mapping.Profiles
                     }))
                 .ForPath(dest => dest.SystemRecordManager, opt => opt.MapFrom(src =>
                     new SystemRecordManagerModel()));
+            CreateMap<UpdateCrimeIncidentReportStatusBindingModel, CrimeIncidentReportModel>()
+                .ForPath(dest => dest.ApprovalStatus, opt => opt.MapFrom(src =>
+                    new EntityApprovalStatusModel()
+                    {
+                        ApprovalStatusId = src.ApprovalStatusId
+                    }))
+                .ForPath(dest => dest.SystemRecordManager, opt => opt.MapFrom(src =>
+                    new SystemRecordManagerModel()));
         }
     }
 }

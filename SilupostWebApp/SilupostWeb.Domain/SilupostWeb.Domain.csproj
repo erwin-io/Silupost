@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModel\EnforcementReportValidationBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentReportBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentReportMediaBindingModel.cs" />
     <Compile Include="BindingModel\EnforcementStationBindingModel.cs" />
@@ -64,11 +65,13 @@
     <Compile Include="Enumerations\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CrimeIncidentCategoryViewModel.cs" />
+    <Compile Include="ViewModel\EnforcementReportValidationViewModel.cs" />
     <Compile Include="ViewModel\CrimeIncidentReportViewModel.cs" />
     <Compile Include="ViewModel\EnforcementStationViewModel.cs" />
     <Compile Include="ViewModel\CrimeIncidentReportMediaViewModel.cs" />
     <Compile Include="ViewModel\EnforcementTypeViewModel.cs" />
     <Compile Include="ViewModel\CrimeIncidentTypeViewModel.cs" />
+    <Compile Include="ViewModel\ReportValidationStatusViewModel.cs" />
     <Compile Include="ViewModel\EntityApprovalStatusViewModel.cs" />
     <Compile Include="ViewModel\DocReportMediaTypeViewModel.cs" />
     <Compile Include="ViewModel\EntityGenderViewModel.cs" />

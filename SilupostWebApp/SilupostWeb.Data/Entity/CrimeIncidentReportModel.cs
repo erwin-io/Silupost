@@ -20,6 +20,7 @@ namespace SilupostWeb.Data.Entity
         public string GeoCountry { get; set; }
         public float GeoTrackerLatitude { get; set; }
         public float GeoTrackerLongitude { get; set; }
+        public bool Validated { get; set; }
         public EntityApprovalStatusModel ApprovalStatus { get; set; }
         public bool IsReviewActionEnable { get; set; }
         public bool IsReviewCommentEnable { get; set; }

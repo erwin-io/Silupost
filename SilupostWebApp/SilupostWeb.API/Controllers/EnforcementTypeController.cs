@@ -29,7 +29,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly IEnforcementTypeFacade _enforcementTypeFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public EnforcementTypeController(IEnforcementTypeFacade enforcementTypeFacade)
         {

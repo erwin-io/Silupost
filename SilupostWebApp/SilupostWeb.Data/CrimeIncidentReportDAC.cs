@@ -303,7 +303,9 @@ namespace SilupostWeb.Data
             return success;
         }
 
-        public override bool Update(CrimeIncidentReportModel model)
+        public override bool Update(CrimeIncidentReportModel model) => throw new NotImplementedException();
+
+        public bool Update(CrimeIncidentReportModel model, string LastUpdatedBy)
         {
             bool success = false;
             try
@@ -323,7 +325,34 @@ namespace SilupostWeb.Data
                     model.GeoCountry,
                     model.GeoTrackerLatitude,
                     model.GeoTrackerLongitude,
-                    model.SystemRecordManager.LastUpdatedBy
+                    LastUpdatedBy = LastUpdatedBy
+                }, commandType: CommandType.StoredProcedure));
+
+                if (result.Contains("Error"))
+                    throw new Exception(result);
+
+                affectedRows = Convert.ToInt32(result);
+                success = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return success;
+        }
+
+        public bool UpdateStatus(CrimeIncidentReportModel model, string LastUpdatedBy)
+        {
+            bool success = false;
+            try
+            {
+                int affectedRows = 0;
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_crimeincidentreport_updateStatus", new
+                {
+                    model.CrimeIncidentReportId,
+                    model.ApprovalStatus.ApprovalStatusId,
+                    LastUpdatedBy = LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 
                 if (result.Contains("Error"))

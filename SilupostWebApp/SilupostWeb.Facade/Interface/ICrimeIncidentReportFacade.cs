@@ -15,6 +15,7 @@ namespace SilupostWeb.Facade.Interface
         CrimeIncidentReportViewModel Find(string id, bool GetMediaFiles);
         bool Remove(string id, string LastUpdatedBy);
         bool Update(UpdateCrimeIncidentReportBindingModel model, string LastUpdatedBy);
+        bool UpdateStatus(UpdateCrimeIncidentReportStatusBindingModel model, string LastUpdatedBy);
         PageResultsViewModel<CrimeIncidentReportViewModel> GetPage(string Search,
                                                                    bool IsAdvanceSearchMode,
                                                                    long ApprovalStatusId,

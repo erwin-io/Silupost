@@ -29,4 +29,9 @@ namespace SilupostWeb.Domain.BindingModel
     {
         public string CrimeIncidentReportId { get; set; }
     }
+    public class UpdateCrimeIncidentReportStatusBindingModel
+    {
+        public string CrimeIncidentReportId { get; set; }
+        public long? ApprovalStatusId { get; set; }
+    }
 }

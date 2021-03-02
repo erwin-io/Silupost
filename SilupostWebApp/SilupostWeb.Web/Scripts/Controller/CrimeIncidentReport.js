@@ -175,14 +175,21 @@ var crimeIncidentReportController = function() {
             format: 'MM/DD/YYYY'
         });
 
+        // START Time picker only
+        $('#PossibleTimeFrom').datetimepicker({
+            format: 'LT'
+        });
+        $('#PossibleTimeTo').datetimepicker({
+            format: 'LT'
+        });
+        // END Time picker only
+
         $('#DateReportedFrom').parent().addClass('pmd-textfield-floating-label-completed');
         $('#DateReportedTo').parent().addClass('pmd-textfield-floating-label-completed');
         $('#PossibleDateFrom').parent().addClass('pmd-textfield-floating-label-completed');
         $('#PossibleDateTo').parent().addClass('pmd-textfield-floating-label-completed');
-
-        $('#PossibleDateTo').datetimepicker({
-            format: 'MM/DD/YYYY'
-        })
+        $('#PossibleTimeFrom').parent().addClass('pmd-textfield-floating-label-completed');
+        $('#PossibleTimeTo').parent().addClass('pmd-textfield-floating-label-completed');
 
 
         $("#DateReportedFrom").on("focusout", function() {
@@ -196,6 +203,12 @@ var crimeIncidentReportController = function() {
         });
         $("#PossibleDateTo").on("focusout", function() {
            appSettings.AdvanceSearchModel.PossibleDateTo = $(this).val();
+        });
+        $("#PossibleTimeFrom").on("focusout", function () {
+            appSettings.AdvanceSearchModel.PossibleTimeFrom = $(this).val();
+        });
+        $("#PossibleTimeTo").on("focusout", function () {
+            appSettings.AdvanceSearchModel.PossibleTimeTo = $(this).val();
         });
     }
 
@@ -301,8 +314,8 @@ var crimeIncidentReportController = function() {
                             DateReportedTo: appSettings.AdvanceSearchModel.DateReportedTo,
                             PossibleDateFrom: appSettings.AdvanceSearchModel.PossibleDateFrom,
                             PossibleDateTo: appSettings.AdvanceSearchModel.PossibleDateTo,
-                            PossibleTimeFrom: appSettings.AdvanceSearchModel.PossibleTimeFrom,
-                            PossibleTimeTo: appSettings.AdvanceSearchModel.PossibleTimeTo,
+                            PossibleTimeFrom: moment(appSettings.AdvanceSearchModel.PossibleTimeFrom, ["h:mm A"]).format("HH:mm"),
+                            PossibleTimeTo: moment(appSettings.AdvanceSearchModel.PossibleTimeTo, ["h:mm A"]).format("HH:mm"),
                             Description: appSettings.AdvanceSearchModel.Description,
                             GeoStreet: appSettings.AdvanceSearchModel.GeoStreet,
                             GeoDistrict: appSettings.AdvanceSearchModel.GeoDistrict,

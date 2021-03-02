@@ -277,6 +277,7 @@
     <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EnforcementReportValidationtController.cs" />
     <Compile Include="Controllers\CrimeIncidentReportMediaController.cs" />
     <Compile Include="Controllers\CrimeIncidentReportController.cs" />
     <Compile Include="Controllers\EnforcementStationController.cs" />

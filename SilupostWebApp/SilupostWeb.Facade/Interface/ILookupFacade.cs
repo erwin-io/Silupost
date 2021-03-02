@@ -11,5 +11,6 @@ namespace SilupostWeb.Facade.Interface
     public interface ILookupFacade
     {
         List<LookupTableViewModel> FindLookupByTableNames(string TableNames);
+        List<LookupTableViewModel> FindEnforcementUnitByEnforcementStationId(string EnforcementStationId);
     }
 }

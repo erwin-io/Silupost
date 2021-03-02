@@ -30,7 +30,6 @@ namespace SilupostWeb.API.Controllers
         private readonly IEnforcementUnitFacade _enforcementUnitFacade;
         private readonly ILegalEntityAddressFacade _legalEntityAddressFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public EnforcementUnitController(IEnforcementUnitFacade enforcementUnitFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
         {
