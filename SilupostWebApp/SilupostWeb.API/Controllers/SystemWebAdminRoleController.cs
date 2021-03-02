@@ -27,7 +27,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly ISystemWebAdminRoleFacade _systemWebAdminRoleFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public SystemWebAdminRoleController(ISystemWebAdminRoleFacade systemWebAdminRoleFacade)
         {

@@ -29,7 +29,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly ICrimeIncidentReportFacade _crimeIncidentReportFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public CrimeIncidentReportController(ICrimeIncidentReportFacade crimeIncidentReportFacade)
         {
@@ -323,6 +322,62 @@ namespace SilupostWeb.API.Controllers
                     return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
                 bool success = _crimeIncidentReportFacade.Update(model, RecordedBy);
+                response.IsSuccess = success;
+
+                if (success)
+                {
+                    result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId, false);
+                    response.Message = Messages.Updated;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.Failed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadGateway, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+
+        [Route("UpdateStatus")]
+        [HttpPut]
+        [ValidateModel]
+        [SwaggerOperation("update")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult UpdateStatus([FromBody] UpdateCrimeIncidentReportStatusBindingModel model)
+        {
+            AppResponseModel<CrimeIncidentReportViewModel> response = new AppResponseModel<CrimeIncidentReportViewModel>();
+
+            if (model != null && string.IsNullOrEmpty(model.CrimeIncidentReportId))
+            {
+                response.Message = string.Format(Messages.InvalidId, "Crime Incident Report");
+                return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+                var identity = User.Identity as ClaimsIdentity;
+                if (identity != null)
+                {
+                    RecordedBy = identity.FindFirst("SystemUserId").Value;
+                }
+                var result = _crimeIncidentReportFacade.Find(model.CrimeIncidentReportId, false);
+                if (result == null)
+                {
+                    response.Message = string.Format(Messages.InvalidId, "Crime Incident Report");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentReportViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+                bool success = _crimeIncidentReportFacade.UpdateStatus(model, RecordedBy);
                 response.IsSuccess = success;
 
                 if (success)

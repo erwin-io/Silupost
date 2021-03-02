@@ -23,6 +23,7 @@ namespace SilupostWeb.Domain.ViewModel
         public string GeoCountry { get; set; }
         public float GeoTrackerLatitude { get; set; }
         public float GeoTrackerLongitude { get; set; }
+        public bool Validated { get; set; }
         public List<CrimeIncidentReportMediaViewModel> CrimeIncidentReportMedia { get; set; }
         public EntityApprovalStatusViewModel ApprovalStatus { get; set; }
         public bool IsReviewActionEnable { get; set; }

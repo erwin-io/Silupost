@@ -31,7 +31,6 @@ namespace SilupostWeb.API.Controllers
         private readonly ISystemUserFacade _systemUserFacade;
         private readonly ILegalEntityAddressFacade _legalEntityAddressFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public SystemUserController(ISystemUserFacade systemUserFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
         {

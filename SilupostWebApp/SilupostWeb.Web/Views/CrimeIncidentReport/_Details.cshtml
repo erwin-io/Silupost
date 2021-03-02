@@ -2,14 +2,26 @@
 
     <div class="group-fields clearfix row">
         <div class="col-xs-12">
+            <div class="pull-left">
+                <h4>Approval Status</h4>
+                {^{if IsApproved}}
+                <span class="badge badge-info" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
+                {{/if}}
+                {^{if IsDeclined}}
+                <span class="badge badge-error" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
+                {{/if}}
+                {^{if IsPending}}
+                <span class="badge badge-warning" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
+                {{/if}}
+            </div>
             <div class="pull-right">
-                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" data-link="disabled{:Validated}">
-                    <i class="material-icons pmd-sm">present_to_all</i>
+                <button id="btnEnforcementReportValidation" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" >
+                    <i class="material-icons pmd-sm">assignment</i>
                 </button>
-                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-link="disabled{:!Validated}">
+                <button id="btnApproved" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-link="disabled{:!CanApprove}">
                     <i class="material-icons pmd-sm">check</i>
                 </button>
-                <button id="btnAdd" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" data-link="disabled{:Validated}">
+                <button id="btnDeclined" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" data-link="disabled{:!CanDecline}">
                     <i class="material-icons pmd-sm">close</i>
                 </button>
             </div>
@@ -110,7 +122,7 @@
                     </div>
                     <div class="group-fields clearfix row">
                         <div class="col-xs-12">
-                            <div class="form -group pmd-textfield pmd-textfield-floating-label">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
                                 <label class="form-group pure-material-textfield-outlined">
                                     <textarea id="Description" name="Description" data-link="readonly{:!CanEditReportHeader} value{:Description}" placeholder=" "></textarea>
                                     <span>Description</span>
@@ -141,13 +153,13 @@
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                         {^{if DocReportMediaType.DocReportMediaTypeId == 1}}
                         @*<a class="thumbnail text-center" href="#" data-image-id="{{>File.FileId}}" data-toggle="modal" data-title="{{>Caption}}"
-           data-image="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
-           data-target="#image-gallery">
-            <img class="img-thumbnail"
-                 src="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
-                 alt="{{>File.FileName}}">
-            {{>Caption}}
-        </a>*@
+                               data-image="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
+                               data-target="#image-gallery">
+                                <img class="img-thumbnail"
+                                     src="data:{{>File.MimeType}};base64,{{>File.FileContent}}"
+                                     alt="{{>File.FileName}}">
+                                {{>Caption}}
+                            </a>*@
 
                         <a class="thumbnail text-center" href="#" data-image-id="{{>File.FileId}}" data-toggle="modal" data-title="{{>Caption}}"
                            data-image="{{>File.FileURL}}"
@@ -160,12 +172,12 @@
 
                         {{else DocReportMediaType.DocReportMediaTypeId == 2}}
                         @*<a class="thumbnail text-center" data-toggle="modal" data-title="{{>Caption}}"
-                           data-target="#video-gallery">
-                            <video controls>
-                                <source type="{{>File.MimeType}}" src="data:{{>File.MimeType}};base64,{{>File.FileContent}}">
-                            </video>
-                            {{>Caption}}
-                        </a>*@
+                               data-target="#video-gallery">
+                                <video controls>
+                                    <source type="{{>File.MimeType}}" src="data:{{>File.MimeType}};base64,{{>File.FileContent}}">
+                                </video>
+                                {{>Caption}}
+                            </a>*@
 
 
                         <a class="thumbnail text-center" data-toggle="modal" data-title="{{>Caption}}"
@@ -192,7 +204,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img id="image-gallery-image" class="img-responsive col-md-12" src=""/>
+                                <img id="image-gallery-image" class="img-responsive col-md-12" src="" />
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
@@ -213,7 +225,6 @@
 </script>
 
 
-
 <script id="legalEntityAddress-template" type="text/x-jsrender">
     <form id="form-legalEntityAddress">
         <div class="group-fields clearfix row hidden">
@@ -232,5 +243,71 @@
                 </label>
             </div>
         </div>
+    </form>
+</script>
+
+
+<script id="manageEnforcementReportValidation-template" type="text/x-jsrender">
+    <form id="form-newEnforcementReportValidation">
+        <div class="group-fields clearfix row hidden">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <input id="EnforcementReportValidationId" name="EnforcementReportValidationId" data-link="EnforcementReportValidationId" placeholder=" " />
+                    <span>EnforcementReport Validation Id</span>
+                </label>
+            </div>
+        </div>
+        <div class="group-fields clearfix row">
+            <div class="col-xs-4">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                    <label>Enforcement Station</label>
+                    <select id="EnforcementStationId" name="EnforcementStationId" data-link="disabled{:IsViewOnly} value{:EnforcementStationId}" class="select-simple form-control pmd-select2">
+                        {^{for lookup.EnforcementStation}}
+                        <option value="{{>Id}}">{{>Name}}</option>
+                        {{/for}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="group-fields clearfix row">
+            <div class="col-xs-4">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                    <label>Enforcement Unit</label>
+                    <select id="EnforcementUnitId" name="EnforcementUnitId" data-link="disabled{:IsViewOnly} value{:EnforcementUnitId}" class="select-simple form-control pmd-select2">
+                        {^{for lookup.EnforcementUnit}}
+                        <option value="{{>Id}}">{{>Name}}</option>
+                        {{/for}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        {^{if IsViewOnly}}
+        <div class="group-fields clearfix row">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <textarea id="ReportNotes" name="ReportNotes" data-link="ReportNotes" placeholder=" " readonly></textarea>
+                    <span>Submission Report Notes</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="group-fields clearfix row">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <textarea id="ValidationNotes" name="ValidationNotes" data-link="ValidationNotes" placeholder=" " readonly></textarea>
+                    <span>Validation Notes</span>
+                </label>
+            </div>
+        </div>
+        {{else}}
+        <div class="group-fields clearfix row">
+            <div class="col-xs-12">
+                <label class="form-group pure-material-textfield-outlined">
+                    <textarea id="ReportNotes" name="ReportNotes" data-link="ReportNotes" placeholder=" "></textarea>
+                    <span>Submission Report Notes</span>
+                </label>
+            </div>
+        </div>
+        {{/if}}
     </form>
 </script>

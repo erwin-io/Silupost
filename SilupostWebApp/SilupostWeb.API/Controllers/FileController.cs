@@ -30,7 +30,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly IFileFacade _fileFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public FileController(IFileFacade fileFacade)
         {

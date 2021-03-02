@@ -19,6 +19,10 @@
             width: 1px !important;
         }
 
+        ..bootstrap-datetimepicker-widget .list-unstyled .timepicker-picker .ampmview{
+            cursor: pointer!important;
+        }
+
     </style>
 }
 <!-- Title -->
@@ -80,7 +84,7 @@
             <div class="group-fields clearfix row">
                 <div class="col-xs-4">
                     <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                        <label>Filter By ApprovalStatus Id</label>
+                        <label>Filter By ApprovalStatus</label>
                         <select id="ApprovalStatusId" name="ApprovalStatusId" data-link="ApprovalStatusId" class="select-simple form-control pmd-select2">
                             {^{for lookup.EntityApprovalStatus}}
                             <option value="{{>Id}}">{{>Name}}</option>
@@ -141,16 +145,16 @@
                     </div>
                 </div>
                 <div class="col-xs-2">
-                    <label class="form-group pure-material-textfield-outlined">
-                        <input id="PossibleTimeFrom" name="PossibleTimeFrom" data-link="PossibleTimeFrom" placeholder=" " />
-                        <span>Possible Time From</span>
-                    </label>
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="PossibleTimeFrom" class="control-label">Possible Time From</label>
+                        <input type="text" id="PossibleTimeFrom" class="form-control" />
+                    </div>
                 </div>
                 <div class="col-xs-2">
-                    <label class="form-group pure-material-textfield-outlined">
-                        <input id="PossibleTimeTo" name="PossibleTimeTo" data-link="PossibleTimeTo" placeholder=" " />
-                        <span>Possible Time To</span>
-                    </label>
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="PossibleTimeTo" class="control-label">Possible Time To</label>
+                        <input type="text" id="PossibleTimeTo" class="form-control" />
+                    </div>
                 </div>
                 <div class="col-xs-3">
                     <label class="form-group pure-material-textfield-outlined">

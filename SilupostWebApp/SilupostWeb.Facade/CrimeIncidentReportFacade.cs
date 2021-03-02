@@ -39,7 +39,8 @@ namespace SilupostWeb.Facade
                     id = _crimeIncidentReportRepositoryDAC.Add(addReportModel);
                     if (string.IsNullOrEmpty(id))
                         throw new Exception("Error Saving Crime Incident Report");
-
+                    if (model.CrimeIncidentReportMedia == null)
+                        model.CrimeIncidentReportMedia = new List<NewCrimeIncidentReportMediaBindingModel>();
                     foreach (var media in model.CrimeIncidentReportMedia)
                     {
                         //Start Saving file
@@ -188,7 +189,21 @@ namespace SilupostWeb.Facade
             {
                 var updateModel = AutoMapperHelper<UpdateCrimeIncidentReportBindingModel, CrimeIncidentReportModel>.Map(model);
                 updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
-                success = _crimeIncidentReportRepositoryDAC.Update(updateModel);
+                success = _crimeIncidentReportRepositoryDAC.Update(updateModel, LastUpdatedBy);
+                if (success)
+                    scope.Complete();
+            }
+            return success;
+        }
+
+        public bool UpdateStatus(UpdateCrimeIncidentReportStatusBindingModel model, string LastUpdatedBy)
+        {
+            var success = false;
+            using (var scope = new TransactionScope())
+            {
+                var updateModel = AutoMapperHelper<UpdateCrimeIncidentReportStatusBindingModel, CrimeIncidentReportModel>.Map(model);
+                updateModel.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                success = _crimeIncidentReportRepositoryDAC.UpdateStatus(updateModel, LastUpdatedBy);
                 if (success)
                     scope.Complete();
             }

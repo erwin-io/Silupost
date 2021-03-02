@@ -48,15 +48,18 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\RepositoryBase.cs" />
     <Compile Include="CrimeIncidentCategoryDAC.cs" />
+    <Compile Include="EnforcementReportValidationDAC.cs" />
     <Compile Include="CrimeIncidentReportMediaDAC.cs" />
     <Compile Include="CrimeIncidentReportDAC.cs" />
     <Compile Include="EnforcementStationDAC.cs" />
     <Compile Include="EnforcementTypeDAC.cs" />
     <Compile Include="Entity\CrimeIncidentCategoryModel.cs" />
+    <Compile Include="Entity\EnforcementReportValidationModel.cs" />
     <Compile Include="Entity\CrimeIncidentReportModel.cs" />
     <Compile Include="Entity\EnforcementStationModel.cs" />
     <Compile Include="Entity\CrimeIncidentReportMediaModel.cs" />
     <Compile Include="Entity\EnforcementTypeModel.cs" />
+    <Compile Include="Entity\ReportValidationStatusModel.cs" />
     <Compile Include="Entity\EntityApprovalStatusModel.cs" />
     <Compile Include="Entity\DocReportMediaTypeModel.cs" />
     <Compile Include="Entity\LegalEntityAddressModel.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Entity\SystemWebAdminRolePrivilegesModel.cs" />
     <Compile Include="Entity\SystemUserModel.cs" />
     <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
+    <Compile Include="Interface\IEnforcementReportValidationRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemUserVerificationRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemUserConfigRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRepositoryDAC.cs" />

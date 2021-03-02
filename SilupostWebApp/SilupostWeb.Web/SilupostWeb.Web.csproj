@@ -806,6 +806,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controller\CrimeIncidentCategory.js" />
     <Content Include="Scripts\Controller\CrimeIncidentReport-Details.js" />
+    <Content Include="Scripts\Controller\EnforcementReportValidation.js" />
     <Content Include="Scripts\Controller\EnforcementStation.js" />
     <Content Include="Scripts\Controller\EnforcementType.js" />
     <Content Include="Scripts\Controller\CrimeIncidentReport.js" />
@@ -845,6 +846,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CrimeIncidentCategoryController.cs" />
+    <Compile Include="Controllers\EnforcementReportValidationController.cs" />
     <Compile Include="Controllers\CrimeIncidentReportController.cs" />
     <Compile Include="Controllers\EnforcementUnitController.cs" />
     <Compile Include="Controllers\EnforcementStationController.cs" />
@@ -923,6 +925,8 @@
     <Content Include="Views\MobileController\Index.cshtml" />
     <Content Include="Views\MobileController\Details.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\EnforcementReportValidation\_Table.cshtml" />
+    <Content Include="Views\EnforcementReportValidation\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

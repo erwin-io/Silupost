@@ -54,6 +54,7 @@
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="Profiles\CrimeIncidentCategoryProfile.cs" />
+    <Compile Include="Profiles\EnforcementReportValidationProfile.cs" />
     <Compile Include="Profiles\CrimeIncidentReportProfile.cs" />
     <Compile Include="Profiles\CrimeIncidentReportMediaProfile.cs" />
     <Compile Include="Profiles\EnforcementStationProfile.cs" />

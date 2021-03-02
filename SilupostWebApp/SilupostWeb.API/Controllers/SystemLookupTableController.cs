@@ -29,7 +29,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly ILookupFacade _lookupFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public SystemLookupTableController(ILookupFacade lookupFacade)
         {
@@ -55,6 +54,53 @@ namespace SilupostWeb.API.Controllers
             try
             {
                 var data = _lookupFacade.FindLookupByTableNames(TableNames);
+                var result = new Dictionary<string, object>();
+                foreach (var item in data)
+                {
+                    result.Add(item.LookupName, item.LookupData);
+                }
+
+                if (result != null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.NotFound, response);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
+
+        [Route("GetEnforcementUnitByEnforcementStationId")]
+        [HttpGet]
+        [SwaggerOperation("GetEnforcementUnitByEnforcementStationId")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetEnforcementUnitByEnforcementStationId(string EnforcementStationId)
+        {
+            AppResponseModel<Dictionary<string, object>> response = new AppResponseModel<Dictionary<string, object>>();
+
+            if (string.IsNullOrEmpty(EnforcementStationId))
+            {
+                response.Message = string.Format(Messages.InvalidId, "System Lookup EnforcementStationId");
+                return new SilupostAPIHttpActionResult<AppResponseModel<Dictionary<string, object>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+                var data = _lookupFacade.FindEnforcementUnitByEnforcementStationId(EnforcementStationId);
                 var result = new Dictionary<string, object>();
                 foreach (var item in data)
                 {

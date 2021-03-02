@@ -53,18 +53,28 @@
                                     <span class="media-body">Report Library</span>
                                 </a>
                             }
-                            <ul class="dropdown-menu">
-                                <li>
+                        <ul class="dropdown-menu">
+                            <li>
 
-                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Report")))
-                                    {
-                                        if (ViewBag.Page.MenuName.Equals("Crime Incident Report"))
-                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Report</span></a>}
-                                        else
-                                        {<a class="pmd-ripple-effect" href="/CrimeIncidentReport"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Report</span></a>}
-                                    }
-                                </li>
-                            </ul>
+                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Report")))
+                                {
+                                    if (ViewBag.Page.MenuName.Equals("Crime Incident Report"))
+                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Report</span></a>}
+                                    else
+                                    {<a class="pmd-ripple-effect" href="/CrimeIncidentReport"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Report</span></a>}
+                                }
+                            </li>
+                            <li>
+
+                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Report Validation")))
+                                {
+                                    if (ViewBag.Page.MenuName.Equals("Enforcement Report Validation"))
+                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Report Validation</span></a>}
+                                    else
+                                    {<a class="pmd-ripple-effect" href="/EnforcementReportValidation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Report Validation</span></a>}
+                                }
+                            </li>
+                        </ul>
                         </li>
                     }
 

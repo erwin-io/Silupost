@@ -31,7 +31,6 @@ namespace SilupostWeb.API.Controllers
         private readonly ISystemUserFacade _systemUserFacade;
         private readonly ISystemUserVerificationFacade _systemUserVerificationFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public SystemUserVerificationController(ISystemUserVerificationFacade systemUserVerificationFacade, ISystemUserFacade systemUserFacade)
         {

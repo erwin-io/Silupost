@@ -29,7 +29,6 @@ namespace SilupostWeb.API.Controllers
     {
         private readonly ICrimeIncidentTypeFacade _crimeIncidentTypeFacade;
         private string RecordedBy { get; set; }
-        private long LocationId { get; set; }
         #region CONSTRUCTORS
         public CrimeIncidentTypeController(ICrimeIncidentTypeFacade crimeIncidentTypeFacade)
         {

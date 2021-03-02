@@ -44,10 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrimeIncidentCategoryFacade.cs" />
+    <Compile Include="EnforcementReportValidationFacade.cs" />
     <Compile Include="CrimeIncidentReportMediaFacade.cs" />
     <Compile Include="CrimeIncidentReportFacade.cs" />
     <Compile Include="EnforcementStationFacade.cs" />
     <Compile Include="EnforcementTypeFacade.cs" />
+    <Compile Include="Interface\IEnforcementReportValidationFacade.cs" />
     <Compile Include="Interface\ISystemUserVerificationFacade.cs" />
     <Compile Include="SystemUserVerificationFacade.cs" />
     <Compile Include="SystemTokenFacade.cs" />
