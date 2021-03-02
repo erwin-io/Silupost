@@ -129,7 +129,11 @@
 
     <script src="~/Scripts/Controller/CrimeIncidentReport-Details.js"></script>
     <script>
-        crimeIncidentReportDetails.init(@Html.Raw(Json.Encode(ViewBag.AppSettings)));
+        var model = @Html.Raw(Json.Encode(ViewBag.AppSettings));
+        model.ShowEnforcementReportValidation = true;
+        model.ShowApprovalControls = true;
+        model.ShowApprovalStatus = true;
+        crimeIncidentReportDetails.init(model);
     </script>
 
 
@@ -147,7 +151,7 @@
 
                     <div class="group-fields row clearfix">
                         <div class="pull-right">
-                            <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="btnToggleAdvanceSearchEnforcementValidation">
+                            <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-tooltip" type="button" id="btnToggleAdvanceSearchEnforcementValidation" data-toggle="tooltip" data-placement="left" title="Advance search mode">
                                 <i class="material-icons pmd-sm">filter_list</i>
                             </button>
                         </div>

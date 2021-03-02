@@ -81,10 +81,16 @@ var crimeIncidentReportDetailsController = function() {
         CanApproveReportHeader:false
     };
     var init = function (obj) {
-        appSettings = $.extend(appSettings, obj);
-        setTimeout(function () {
-            initLookup();
-        }, 1000);
+        circleProgress.show(true);
+        try {
+            appSettings = $.extend(appSettings, obj);
+            setTimeout(function () {
+                initLookup();
+            }, 1000);
+        }
+        catch (err) {
+            Swal.fire("Error", err, 'error');
+        }
     };
 
     var initLookup = function () {
@@ -201,11 +207,11 @@ var crimeIncidentReportDetailsController = function() {
                     EnforcementStationId: data.Data.EnforcementUnit.EnforcementStation.EnforcementStationId,
                     ValidationNotes: data.Data.ValidationNotes,
                     ReportNotes: data.Data.ReportNotes,
-                    ReportValidationStatusId: 4, //canceled status
+                    ReportValidationStatusId: data.Data.ReportValidationStatus.ReportValidationStatusId, //canceled status
                     IsViewOnly: false
                 };
                 api.getLookupEnforcementUnitByEnforcementStationId(model.EnforcementStationId).done(function (data) {
-                    appSettings.lookup = $.extend(appSettings.lookup, data.Data);
+                    appSettings.lookup.EnforcementUnit = data.Data.EnforcementUnit;
                     EditEnforcementReportValidation(model);
                 });
             });
@@ -219,11 +225,12 @@ var crimeIncidentReportDetailsController = function() {
                     EnforcementStationId: data.Data.EnforcementUnit.EnforcementStation.EnforcementStationId,
                     ValidationNotes: data.Data.ValidationNotes,
                     ReportNotes: data.Data.ReportNotes,
-                    ReportValidationStatusId: 4, //canceled status
+                    ReportValidationStatusId: data.Data.ReportValidationStatus.ReportValidationStatusId, //canceled status
                     IsViewOnly: true
                 };
                 api.getLookupEnforcementUnitByEnforcementStationId(model.EnforcementStationId).done(function (data) {
-                    appSettings.lookup = $.extend(appSettings.lookup, data.Data);
+                    //appSettings.lookup = $.extend(appSettings.lookup, data.Data);
+                    appSettings.lookup.EnforcementUnit = data.Data.EnforcementUnit;
                     EditEnforcementReportValidation(model);
                 });
             });
@@ -248,6 +255,9 @@ var crimeIncidentReportDetailsController = function() {
             appSettings.model.CanEditReportHeader = appSettings.CanEditReportHeader;
             appSettings.model.CanEditReportMedia = appSettings.CanEditReportMedia;
             appSettings.model.CanApproveReportHeader = appSettings.CanApproveReportHeader;
+            appSettings.model.ShowEnforcementReportValidation = appSettings.ShowEnforcementReportValidation;
+            appSettings.model.ShowApprovalControls = appSettings.ShowApprovalControls;
+            appSettings.model.ShowApprovalStatus = appSettings.ShowApprovalStatus;
             //appSettings.model.Validated = false;
 
 
@@ -288,30 +298,36 @@ var crimeIncidentReportDetailsController = function() {
             crimeIncidentReportDetailsTemplate.link("#reportView", appSettings.model);
             initCrimeIncidentReportMediaGallery();  
 
+            appSettings.ShowEnforcementReportValidation
 
-            var advanceSearchEnforcementReportValidationTemplate = $.templates('#advanceSearchEnforcementReportValidation-template');
+            if (appSettings.model.ShowEnforcementReportValidation) {
 
-            var date = new Date();
+                var advanceSearchEnforcementReportValidationTemplate = $.templates('#advanceSearchEnforcementReportValidation-template');
 
-            var _dateFrom = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-            var _dateTo = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                var date = new Date();
 
-            appSettings.EnforcementReportValidationFilterSearchModel = {
-                lookup: appSettings.lookup,
-                CrimeIncidentReportId: appSettings.CrimeIncidentReportId,
-                EnforcementUnitName: "",
-                DateSubmittedFrom: moment(_dateFrom).format("MM/DD/YYYY"),
-                DateSubmittedTo: moment(_dateTo).format("MM/DD/YYYY"),
-                ReportValidationStatusId: 3
-            };
-            advanceSearchEnforcementReportValidationTemplate.link("#advanceSearchEnforcementValidationView", appSettings.EnforcementReportValidationFilterSearchModel);
+                var _dateFrom = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                var _dateTo = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
 
-            var filterReportValidationStatusTemplate = $.templates('#filterReportValidationStatus-template');
-            filterReportValidationStatusTemplate.link("#filterReportValidationStatusView", appSettings.EnforcementReportValidationFilterSearchModel);
+                appSettings.EnforcementReportValidationFilterSearchModel = {
+                    lookup: appSettings.lookup,
+                    CrimeIncidentReportId: appSettings.CrimeIncidentReportId,
+                    EnforcementUnitName: "",
+                    DateSubmittedFrom: moment(_dateFrom).format("MM/DD/YYYY"),
+                    DateSubmittedTo: moment(_dateTo).format("MM/DD/YYYY"),
+                    ReportValidationStatusId: 3
+                };
+                advanceSearchEnforcementReportValidationTemplate.link("#advanceSearchEnforcementValidationView", appSettings.EnforcementReportValidationFilterSearchModel);
 
-            appSettings.IsAdvanceSearchMode = false;
-            initGridEnforcementReportValidation();
+                var filterReportValidationStatusTemplate = $.templates('#filterReportValidationStatus-template');
+                filterReportValidationStatusTemplate.link("#filterReportValidationStatusView", appSettings.EnforcementReportValidationFilterSearchModel);
+
+                appSettings.IsAdvanceSearchMode = false;
+                initGridEnforcementReportValidation();
+            }
             initEvent();
+            circleProgress.close();
+            $('[data-toggle="tooltip"]').tooltip();
         });
     }
 
@@ -613,6 +629,7 @@ var crimeIncidentReportDetailsController = function() {
     }
 
     var AddEnforcementReportValidation = function (model) {
+        appSettings.lookup.EnforcementUnit = [];
         appSettings.EnforcementReportValidationModel = {
             CrimeIncidentReportId: appSettings.CrimeIncidentReportId,
             lookup: appSettings.lookup,
@@ -633,25 +650,9 @@ var crimeIncidentReportDetailsController = function() {
         formValidationSubmissionEnforcementReport = $("#form-newEnforcementReportValidation");
         InitFormValidationSubmissionEnforcementReport();
 
-        $("#EnforcementStationId").on("change", function () {
-            var model = $.extend(appSettings.EnforcementReportValidationModel, {});
-            model.EnforcementStationId = $(this).val();
-            api.getLookupEnforcementUnitByEnforcementStationId($(this).val()).done(function (data) {
-                appSettings.lookup = $.extend(appSettings.lookup, data.Data);
-                appSettings.EnforcementReportValidationModel = model;
-                appSettings.EnforcementReportValidationModel.lookup = $.extend(appSettings.EnforcementReportValidationModel.lookup, appSettings.lookup);
-                manageEnforcementReportValidationTemplate.link("#modal-dialog-ManageEnforcementReportValidation .modal-body", appSettings.EnforcementReportValidationModel);
-
-
-                $(".select-simple").select2({
-                    theme: "bootstrap",
-                    minimumResultsForSearch: Infinity,
-                });
-                $('.pmd-textfield').addClass('pmd-textfield-floating-label-completed');
-                $("#EnforcementUnitId").on("change", function () {
-                    appSettings.EnforcementReportValidationModel.EnforcementUnitId = $(this).val();
-                });
-            });
+        $("#EnforcementStationId").on("change", EnforcementStationCahnge);
+        $("#EnforcementUnitId").on("change", function () {
+            appSettings.EnforcementReportValidationModel.EnforcementUnitId = $(this).val();
         });
         $("#modal-dialog-ManageEnforcementReportValidation #btnSave").on("click", CreateSubmissionEnforcementReportValidation);
     }
@@ -674,7 +675,44 @@ var crimeIncidentReportDetailsController = function() {
         formValidationSubmissionEnforcementReport = $("#form-newEnforcementReportValidation");
         InitFormValidationSubmissionEnforcementReport();
 
+        $("#EnforcementStationId").on("change", EnforcementStationCahnge);
+        $("#EnforcementUnitId").on("change", function () {
+            appSettings.EnforcementReportValidationModel.EnforcementUnitId = $(this).val();
+        });
         $("#modal-dialog-ManageEnforcementReportValidation #btnSave").on("click", UpdateSubmissionEnforcementReportValidation);
+    }
+
+    var EnforcementStationCahnge = function () {
+        var enforcementStationId = $(this).val();
+        var manageEnforcementReportValidationTemplate = $.templates('#manageEnforcementReportValidation-template');
+        api.getLookupEnforcementUnitByEnforcementStationId(enforcementStationId).done(function (data) {
+            appSettings.lookup.EnforcementUnit = data.Data.EnforcementUnit;
+            var model = {
+                lookup: appSettings.lookup,
+                CrimeIncidentReportId: appSettings.CrimeIncidentReportId,
+                EnforcementReportValidationId: appSettings.EnforcementReportValidationModel.EnforcementReportValidationId,
+                EnforcementStationId: enforcementStationId,
+                ValidationNotes: appSettings.EnforcementReportValidationModel.ValidationNotes,
+                ReportNotes: appSettings.EnforcementReportValidationModel.ReportNotes,
+                ReportValidationStatusId: appSettings.EnforcementReportValidationModel.ReportValidationStatusId,
+                IsViewOnly: false
+            }
+            appSettings.EnforcementReportValidationModel = model;
+            manageEnforcementReportValidationTemplate.link("#modal-dialog-ManageEnforcementReportValidation .modal-body", appSettings.EnforcementReportValidationModel);
+
+
+            $("#EnforcementStationId").on("change", EnforcementStationCahnge);
+            $(".select-simple").select2({
+                theme: "bootstrap",
+                minimumResultsForSearch: Infinity,
+            });
+            $('.pmd-textfield').addClass('pmd-textfield-floating-label-completed');
+            $("#EnforcementUnitId").on("change", function () {
+                appSettings.EnforcementReportValidationModel.EnforcementUnitId = $(this).val();
+            });
+            formValidationSubmissionEnforcementReport = $("#form-newEnforcementReportValidation");
+            InitFormValidationSubmissionEnforcementReport();
+        });
     }
 
     var CancelSubmissionEnforcementReportValidation = function (model) {
@@ -819,6 +857,7 @@ var crimeIncidentReportDetailsController = function() {
                                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                                     datatableEnforcementReportValidation.ajax.reload();
                                     circleProgress.close();
+                                    $("#modal-dialog-ManageEnforcementReportValidation").modal('hide');
                                 });
                             } else {
                                 Swal.fire("Error!", result.Message, "error").then((result) => {
@@ -850,9 +889,6 @@ var crimeIncidentReportDetailsController = function() {
         formValidationSubmissionEnforcementReport.validate({
             ignore: [],
             rules: {
-                EnforcementReportValidationId: {
-                    required: true
-                },
                 EnforcementStationId: {
                     required: false
                 },

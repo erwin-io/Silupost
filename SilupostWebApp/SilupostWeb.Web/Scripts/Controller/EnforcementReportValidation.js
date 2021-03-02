@@ -14,6 +14,7 @@ var enforcementReportValidationController = function() {
                 }
             });
         }
+
         var getDefaultIconPic = function (Id) {
             return $.ajax({
                 url: apiURI + "File/getDefaultCrimeIncidentTypeProfilePic",
@@ -46,7 +47,7 @@ var enforcementReportValidationController = function() {
     }
     var api = new apiService(app.appSettings.silupostWebAPIURI);
 
-    var dataTable;
+    var dataTable,form;
     var appSettings = {
         model: {},
         status:{ IsNew:false},
@@ -92,7 +93,7 @@ var enforcementReportValidationController = function() {
                 EnforcementUnitName: "",
                 DateSubmittedFrom: moment(_dateFrom).format("MM/DD/YYYY"),
                 DateSubmittedTo: moment(_dateTo).format("MM/DD/YYYY"),
-                ReportValidationStatusId: 3
+                ReportValidationFilterStatusId: 3
             };
             advanceSearchEnforcementReportValidationTemplate.link("#advanceSearchEnforcementValidationView", appSettings.EnforcementReportValidationFilterSearchModel);
 
@@ -162,11 +163,11 @@ var enforcementReportValidationController = function() {
             }
         });
 
-        $("#ReportValidationStatusId").on("change", function () {
+        $("#ReportValidationFilterStatusId").on("change", function () {
 
             try {
 
-                appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = $(this).val();
+                appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationFilterStatusId = $(this).val();
                 dataTable.ajax.reload();
             }
             catch (err) {
@@ -212,7 +213,7 @@ var enforcementReportValidationController = function() {
             },
             columnDefs: [
                 {
-                    targets: [0, 1], width: 1
+                    targets: [0, 1,5], width: 1
                 },
                 {
                     className: 'control',
@@ -295,7 +296,7 @@ var enforcementReportValidationController = function() {
                         CrimeIncidentCategoryName: appSettings.EnforcementReportValidationFilterSearchModel.CrimeIncidentCategoryNameFilter,
                         DateSubmittedFrom: appSettings.EnforcementReportValidationFilterSearchModel.DateSubmittedFrom,
                         DateSubmittedTo: appSettings.EnforcementReportValidationFilterSearchModel.DateSubmittedTo,
-                        ReportValidationStatusId: appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId
+                        ReportValidationStatusId: appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationFilterStatusId
                     }
                     return dataFilter;
                 }
@@ -328,9 +329,221 @@ var enforcementReportValidationController = function() {
     };
 
     var OpenEnforcementReportValidation = function () {
+        circleProgress.show(true);
         if (appSettings.currentId !== null && appSettings.currentId !== undefined && appSettings.currentId !== "") {
-            
+            api.getById(appSettings.currentId).done(function (data) {
+                appSettings.model = {
+                    lookup: appSettings.lookup,
+                    EnforcementReportValidationId: data.Data.EnforcementReportValidationId,
+                    EnforcementUnitId: data.Data.EnforcementUnit.EnforcementUnitId,
+                    EnforcementStationId: data.Data.EnforcementUnit.EnforcementStation.EnforcementStationId,
+                    ValidationNotes: data.Data.ValidationNotes,
+                    ReportNotes: data.Data.ReportNotes,
+                    ReportValidationStatusId: data.Data.ReportValidationStatus.ReportValidationStatusId,
+                    ReportValidationStatusName: data.Data.ReportValidationStatus.ReportValidationStatusName,
+                    ApprovalStatusName: data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusName
+                };
+                appSettings.model.IsValidated = false;
+                appSettings.model.IsRejected = false;
+                appSettings.model.IsPending = false;
+                appSettings.model.Canceled = false;
+
+                appSettings.model.CanValidate = false;
+                appSettings.model.CanReject = false;
+                appSettings.model.IsViewOnly = false;
+
+
+                appSettings.model.IsReportApproved = false;
+                appSettings.model.IsReportDeclined = false;
+                appSettings.model.IsReportPending = false;
+
+                if (appSettings.model.ReportValidationStatusId === 1) {
+                    appSettings.model.IsValidated = true;
+                    appSettings.model.IsViewOnly = true;
+                }
+                if (appSettings.model.ReportValidationStatusId === 2) {
+                    appSettings.model.IsRejected = true;
+                    appSettings.model.IsViewOnly = true;
+                }
+                if (appSettings.model.ReportValidationStatusId === 3) {
+                    appSettings.model.IsPending = true;
+                    appSettings.model.IsViewOnly = false;
+                }
+                if (appSettings.model.ReportValidationStatusId === 4) {
+                    appSettings.model.Canceled = true;
+                    appSettings.model.IsViewOnly = true;
+                }
+
+                if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 1) {
+                    appSettings.model.IsViewOnly = true;
+                    appSettings.model.CanValidate = false;
+                    appSettings.model.CanReject = false;
+                    appSettings.model.IsReportApproved = true;
+                }
+                else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 2) {
+                    appSettings.model.IsViewOnly = true;
+                    appSettings.model.CanValidate = false;
+                    appSettings.model.CanReject = false;
+                    appSettings.model.IsReportDeclined = true;
+                }
+                else {
+                    appSettings.model.CanValidate = true;
+                    appSettings.model.CanReject = true;
+                    appSettings.model.IsReportPending = true;
+                }
+
+                if (appSettings.model.IsViewOnly) {
+                    $("#modal-dialog #btnValidate").addClass("hidden");
+                    $("#modal-dialog #btnReject").addClass("hidden");
+                } else {
+                    $("#modal-dialog #btnValidate").removeClass("hidden");
+                    $("#modal-dialog #btnReject").removeClass("hidden");
+                }
+
+                var enforcementReportValidationTemplate = $.templates('#enforcementReportValidation-template');
+                $("#modal-dialog").find('.modal-title').html('Submission Enforcement Report Validation');
+                enforcementReportValidationTemplate.link("#modal-dialog .modal-body", appSettings.model);
+                $("#modal-dialog").modal('show');
+
+                $('.pmd-textfield').addClass('pmd-textfield-floating-label-completed');
+
+                circleProgress.close();
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $("#modal-dialog #btnShowReport").on("click", function () {
+                    circleProgress.show(true);
+                    var model = {
+                        CrimeIncidentReportId: data.Data.CrimeIncidentReport.CrimeIncidentReportId,
+                        ShowEnforcementReportValidation: false,
+                        ShowApprovalControls: false,
+                        ShowApprovalStatus: false,
+                    };
+                    $("#modal-dialog-reportView").find('.modal-title').html('Crime Incident Report Details');
+                    crimeIncidentReportDetails.init(model);
+                    $("#modal-dialog-reportView").modal('show');
+                });
+
+
+                $("#modal-dialog #btnValidate").on("click", function () {
+                    appSettings.model.ReportValidationStatusId = 1;
+                    form = $("#form-enforcementReportValidation");
+                    form.validate({
+                        ignore: [],
+                        rules: {
+                            ValidationNotes: {
+                                required: true
+                            },
+                        },
+                        messages: {
+                            ValidationNotes: "Please enter Validation Notes",
+                        },
+                        errorElement: 'span',
+                        errorPlacement: function (error, element) {
+                            error.addClass('help-block');
+                            element.closest('.form-group').append(error);
+                        },
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').addClass('has-error');
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').removeClass('has-error');
+                        },
+                    });
+                    Update();
+                });
+
+                $("#modal-dialog #btnReject").on("click", function () {
+                    appSettings.model.ReportValidationStatusId = 2;
+                    form = $("#form-enforcementReportValidation");
+                    form.validate({
+                        ignore: [],
+                        rules: {
+                        },
+                        messages: {
+                        },
+                        errorElement: 'span',
+                        errorPlacement: function (error, element) {
+                            error.addClass('help-block');
+                            element.closest('.form-group').append(error);
+                        },
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').addClass('has-error');
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').removeClass('has-error');
+                        },
+                    });
+                    Update();
+                });
+            });
         }
+    }
+    var Update = function () {
+        if (!form.valid())
+            return;
+        var message;
+        if (appSettings.model.ReportValidationStatusId === 1) {
+            message = 'Set Report as Validated';
+        } else if (appSettings.model.ReportValidationStatusId === 2) {
+            message = 'Set Report as Rejected';
+        }
+        Swal.fire({
+            title: message,
+            text: "Do you want to continue!",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            allowOutsideClick: false
+        })
+        .then((result) => {
+            if (result.value) {
+                $(".content").find("input,button,a").prop("disabled", true).addClass("disabled");
+                circleProgress.show(true);
+                $.ajax({
+                    url: app.appSettings.silupostWebAPIURI + "/EnforcementReportValidation/",
+                    type: "PUT",
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(appSettings.model),
+                    dataType: "json",
+                    headers: {
+                        Authorization: 'Bearer ' + app.appSettings.apiToken
+                    },
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            circleProgress.close();
+                            Swal.fire("Success!", result.Message, "success").then((prompt) => {
+                                $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
+                                dataTable.ajax.reload();
+                                circleProgress.close();
+                                $("#modal-dialog").modal('hide');
+                            });
+                        } else {
+                            Swal.fire("Error!", result.Message, "error").then((result) => {
+                                $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        var errormessage = "";
+                        var errorTitle = "";
+                        if (data.responseJSON.Message != null) {
+                            errorTitle = "Error!";
+                            errormessage = data.responseJSON.Message;
+                        }
+                        if (data.responseJSON.DeveloperMessage != null && data.responseJSON.DeveloperMessage.includes("Cannot insert duplicate")) {
+                            errorTitle = "Not Allowed!";
+                            errormessage = "Already exist!";
+                        }
+                        $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
+                        Swal.fire(errorTitle, errormessage, 'error');
+                        circleProgress.close();
+                    }
+                });
+                }
+            });
     }
 
     return  {

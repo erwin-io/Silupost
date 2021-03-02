@@ -2,6 +2,7 @@
 
     <div class="group-fields clearfix row">
         <div class="col-xs-12">
+            {^{if ShowApprovalStatus}}
             <div class="pull-left">
                 <h4>Approval Status</h4>
                 {^{if IsApproved}}
@@ -14,16 +15,21 @@
                 <span class="badge badge-warning" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
                 {{/if}}
             </div>
+            {{/if}}
             <div class="pull-right">
-                <button id="btnEnforcementReportValidation" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning" >
+                {^{if ShowEnforcementReportValidation}}
+                <button id="btnEnforcementReportValidation" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View Enforcement Report Validation">
                     <i class="material-icons pmd-sm">assignment</i>
                 </button>
-                <button id="btnApproved" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-link="disabled{:!CanApprove}">
-                    <i class="material-icons pmd-sm">check</i>
+                {{/if}}
+                {^{if ShowApprovalControls}}
+                <button id="btnApproved" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary pmd-tooltip" data-toggle="tooltip" data-placement="left" title="Approve this report" data-link="disabled{:!CanApprove}">
+                    <i class="material-icons pmd-sm">thumb_up_off_alt</i>
                 </button>
-                <button id="btnDeclined" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger" data-link="disabled{:!CanDecline}">
-                    <i class="material-icons pmd-sm">close</i>
+                <button id="btnDeclined" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger pmd-tooltip" data-toggle="tooltip" data-placement="left" title="Decline this report" data-link="disabled{:!CanDecline}">
+                    <i class="material-icons pmd-sm">thumb_down_off_alt</i>
                 </button>
+                {{/if}}
             </div>
         </div>
     </div>

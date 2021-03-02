@@ -61,6 +61,9 @@
     <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/datetimepicker/css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
     <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/datetimepicker/css/pmd-datetimepicker.css" type="text/css" rel="stylesheet" />
 
+    <!-- Propeller tooltip -->
+    <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/tooltip/css/tooltip.css" type="text/css" rel="stylesheet" />
+
     <!-- Site Theme -->
     <link rel="stylesheet" type="text/css" href="~/plugins/Proppeller-Material-Design-Bootstrap/assets/css/progress-circular.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/Proppeller-Material-Design-Bootstrap/assets/css/site.css">
@@ -155,7 +158,7 @@
     <!-- Jquery Loading Indicator Initialize -->
     <script src="~/plugins/Proppeller-Material-Design-Bootstrap/assets/js/progress-circular.js"></script>
     <!-- Jquery Loading Indicator Initialize -->
-    <script src="~/plugins/webcamjs-master/webcam.min.js"accesskey=""></script>
+    <script src="~/plugins/webcamjs-master/webcam.min.js" accesskey=""></script>
 
     <script src="~/Scripts/App/app.js"></script>
     <script src="~/Scripts/App/globalConfig.js"></script>
@@ -166,6 +169,11 @@
     <script src="~/Scripts/App/dataFormat.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
     <script>app.init()</script>
     @RenderSection("scripts", required: false)
     <div class="lastDivTag"></div>
