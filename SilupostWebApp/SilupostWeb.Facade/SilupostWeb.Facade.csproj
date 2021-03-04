@@ -51,6 +51,7 @@
     <Compile Include="EnforcementTypeFacade.cs" />
     <Compile Include="Interface\IEnforcementReportValidationFacade.cs" />
     <Compile Include="Interface\ISystemUserVerificationFacade.cs" />
+    <Compile Include="Interface\ISystemWebAdminRolePrivilegesFacade.cs" />
     <Compile Include="SystemUserVerificationFacade.cs" />
     <Compile Include="SystemTokenFacade.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryFacade.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="LookupFacade.cs" />
     <Compile Include="LegalEntityAddressFacade.cs" />
     <Compile Include="EnforcementUnitFacade.cs" />
+    <Compile Include="SystemWebAdminRolePrivilegesFacade.cs" />
     <Compile Include="SystemWebAdminMenuRolesFacade.cs" />
     <Compile Include="CrimeIncidentTypeFacade.cs" />
     <Compile Include="UserAuthFacade.cs" />

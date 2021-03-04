@@ -75,5 +75,30 @@ namespace SilupostWeb.Data
         public override bool Remove(string id) => throw new NotImplementedException();
 
         public override bool Update(SystemUserVerificationModel model) => throw new NotImplementedException();
+
+        public bool VerifyUser(long id)
+        {
+            bool success = false;
+            try
+            {
+                int affectedRows = 0;
+                var result = Convert.ToString(_dBConnection.ExecuteScalar("usp_systemuserverification_verifyUser", new
+                {
+                    Id = id
+                }, commandType: CommandType.StoredProcedure));
+
+                if (result.Contains("Error"))
+                    throw new Exception(result);
+
+                affectedRows = Convert.ToInt32(result);
+                success = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return success;
+        }
     }
 }

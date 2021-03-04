@@ -811,12 +811,14 @@
     <Content Include="Scripts\Controller\EnforcementType.js" />
     <Content Include="Scripts\Controller\CrimeIncidentReport.js" />
     <Content Include="Scripts\Controller\EnforcementUnit.js" />
+    <Content Include="Scripts\Controller\ReportTracker.js" />
     <Content Include="Scripts\Controller\MobileUser-Details.js" />
     <Content Include="Scripts\Controller\ResetPassword.js" />
     <Content Include="Scripts\Controller\Register.js" />
     <Content Include="Scripts\Controller\Login.js" />
     <Content Include="Scripts\Controller\Account.js" />
     <Content Include="Scripts\Controller\MobileUser.js" />
+    <Content Include="Scripts\Controller\SystemWebAdminRolePrivileges.js" />
     <Content Include="Scripts\Controller\SystemWebAdminMenuRoles.js" />
     <Content Include="Scripts\Controller\SystemUser.js" />
     <Content Include="Scripts\Controller\CrimeIncidentType.js" />
@@ -855,7 +857,9 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LegalEntityController.cs" />
     <Compile Include="Controllers\CrimeIncidentTypeController.cs" />
+    <Compile Include="Controllers\ReportTrackerController.cs" />
     <Compile Include="Controllers\MobileControllerController.cs" />
+    <Compile Include="Controllers\SystemWebAdminRolePrivilegesController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
@@ -927,6 +931,9 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\EnforcementReportValidation\_Table.cshtml" />
     <Content Include="Views\EnforcementReportValidation\Index.cshtml" />
+    <Content Include="Views\ReportTracker\Index.cshtml" />
+    <Content Include="Views\SystemWebAdminRolePrivileges\_Table.cshtml" />
+    <Content Include="Views\SystemWebAdminRolePrivileges\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

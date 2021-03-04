@@ -210,6 +210,13 @@ var crimeIncidentReportController = function() {
         $("#PossibleTimeTo").on("focusout", function () {
             appSettings.AdvanceSearchModel.PossibleTimeTo = $(this).val();
         });
+
+        $(".select-simple").select2({
+            theme: "bootstrap",
+            minimumResultsForSearch: Infinity,
+        });
+        $('.select-simple').parent().addClass('pmd-textfield-floating-label-completed');
+
     }
 
     var initGrid = function() {

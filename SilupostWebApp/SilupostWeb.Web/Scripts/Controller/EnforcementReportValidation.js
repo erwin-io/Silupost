@@ -400,6 +400,18 @@ var enforcementReportValidationController = function() {
                     $("#modal-dialog #btnReject").removeClass("hidden");
                 }
 
+
+                appSettings.model.AllowedToValidateEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 4).length > 0;
+                appSettings.model.AllowedToRejectEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 5).length > 0;
+                if (!appSettings.model.AllowedToValidateEnforcementReport) {
+                    $("#modal-dialog #btnValidate").addClass("hidden");
+                    $("#modal-dialog #btnValidate").attr("disabled", "true");
+                }
+                if (!appSettings.model.AllowedToRejectEnforcementReport) {
+                    $("#modal-dialog #btnReject").addClass("hidden");
+                    $("#modal-dialog #btnReject").attr("disabled", "true");
+                }
+
                 var enforcementReportValidationTemplate = $.templates('#enforcementReportValidation-template');
                 $("#modal-dialog").find('.modal-title').html('Submission Enforcement Report Validation');
                 enforcementReportValidationTemplate.link("#modal-dialog .modal-body", appSettings.model);

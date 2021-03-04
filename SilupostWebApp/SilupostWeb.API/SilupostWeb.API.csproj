@@ -289,6 +289,7 @@
     <Compile Include="Controllers\EnforcementUnitController.cs" />
     <Compile Include="Controllers\SystemUserVerificationController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
+    <Compile Include="Controllers\SystemWebAdminRolePrivilegesController.cs" />
     <Compile Include="Controllers\SystemWebAdminMenuRolesController.cs" />
     <Compile Include="Controllers\SystemWebAdminRoleController.cs" />
     <Compile Include="Filters\SilupostAPIHttpActionResult.cs" />

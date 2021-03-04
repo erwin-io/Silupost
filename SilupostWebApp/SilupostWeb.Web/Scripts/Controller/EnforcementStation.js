@@ -43,8 +43,8 @@ var enforcementStationController = function() {
     var init = function (obj) {
         initEvent();
         setTimeout(function () {
-            initGrid();
             initDefaultIconPic();
+            initGrid();
         }, 1000);
 
         
@@ -147,7 +147,12 @@ var enforcementStationController = function() {
                 {
                     "data": null, "searchable": false, "orderable": false,
                     render: function (data, type, full, meta) {
-                        var fileData = 'data:' + full.IconFile.MimeType + ';base64,' + full.IconFile.FileContent;
+                        var fileData = '';
+                        if (full.IconFile === undefined || full.IconFile === null) {
+                            fileData = 'data:image/png;base64,' + appSettings.DefaultIconPic.FileContent;
+                        } else {
+                            fileData = 'data:' + full.IconFile.MimeType + ';base64,' + full.IconFile.FileContent;
+                        }
                         return '<image class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" style="width:50px;height:50px" src="' + fileData + '"></image>'
                     }
                 },
@@ -546,11 +551,19 @@ var enforcementStationController = function() {
                                 });
                             }
                         },
-                        error: function (errormessage) {
+                        error: function (result) {
+                            var errormessage = "";
+                            var errorTitle = "";
+                            if (result.responseJSON.Message != null) {
+                                erroTitle = "Error!";
+                                errormessage = result.responseJSON.Message;
+                            }
+                            if (result.responseJSON.DeveloperMessage != null && result.responseJSON.DeveloperMessage.includes("Cannot delete")) {
+                                erroTitle = "Not Allowed!";
+                                errormessage = "Data in used!";
+                            }
                             $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                            target.empty();
-                            target.html(targetName);
-                            Swal.fire('Error!',errormessage.Message,'error');
+                            Swal.fire('Error!', errormessage, 'error');
                             circleProgress.close();
                         }
                     });

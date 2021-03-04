@@ -30,5 +30,16 @@ namespace SilupostWeb.Data.Interface
                                                int PageSize,
                                                string OrderColumn,
                                                string OrderDir);
+        List<EnforcementReportValidationModel> GetPageByEnforcementStationId(string Search,
+                                               bool IsAdvanceSearchMode,
+                                               string EnforcementStationId,
+                                               string CrimeIncidentCategoryName,
+                                               DateTime DateSubmittedFrom,
+                                               DateTime DateSubmittedTo,
+                                               string ReportValidationStatusId,
+                                               int PageNo,
+                                               int PageSize,
+                                               string OrderColumn,
+                                               string OrderDir);
     }
 }

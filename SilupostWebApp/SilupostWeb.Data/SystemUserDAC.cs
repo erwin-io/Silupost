@@ -31,6 +31,7 @@ namespace SilupostWeb.Data
                     ProfilePictureFile = model.ProfilePicture.FileId,
                     model.UserName,
                     model.Password,
+                    model.EnforcementStation.EnforcementStationId,
                     model.IsEnforcementUnit,
                     model.EnforcementUnit.EnforcementUnitId,
                     model.SystemRecordManager.CreatedBy,
@@ -79,7 +80,6 @@ namespace SilupostWeb.Data
                             model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                         model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
 
-
                         result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
                         {
                             SystemWebAdminMenuModel systemWebAdminMenuModel;
@@ -91,6 +91,10 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminMenus == null)
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.SystemWebAdminPrivileges = result.Read<SystemWebAdminPrivilegesModel>().ToList();
+                        if (model.SystemWebAdminPrivileges == null)
+                            model.SystemWebAdminPrivileges = new List<SystemWebAdminPrivilegesModel>();
 
                         model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
                         if (model.EnforcementUnit == null)
@@ -170,6 +174,10 @@ namespace SilupostWeb.Data
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
 
+                        model.SystemWebAdminPrivileges = result.Read<SystemWebAdminPrivilegesModel>().ToList();
+                        if (model.SystemWebAdminPrivileges == null)
+                            model.SystemWebAdminPrivileges = new List<SystemWebAdminPrivilegesModel>();
+
                         model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
                         if (model.EnforcementUnit == null)
                         {
@@ -232,7 +240,6 @@ namespace SilupostWeb.Data
                             model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                         model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
 
-
                         result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
                         {
                             SystemWebAdminMenuModel systemWebAdminMenuModel;
@@ -244,6 +251,10 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminMenus == null)
                             model.SystemWebAdminMenus = new List<SystemWebAdminMenuModel>();
                         model.SystemWebAdminMenus.AddRange(lookupSystemWebAdminMenus.Values);
+
+                        model.SystemWebAdminPrivileges = result.Read<SystemWebAdminPrivilegesModel>().ToList();
+                        if (model.SystemWebAdminPrivileges == null)
+                            model.SystemWebAdminPrivileges = new List<SystemWebAdminPrivilegesModel>();
 
                         model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
                         if (model.EnforcementUnit == null)
@@ -409,6 +420,7 @@ namespace SilupostWeb.Data
                 {
                     model.SystemUserId,
                     model.IsWebAdminGuestUser,
+                    model.EnforcementStation.EnforcementStationId,
                     model.IsEnforcementUnit,
                     model.EnforcementUnit.EnforcementUnitId,
                     ProfilePictureFile = model?.ProfilePicture?.FileId,
@@ -440,7 +452,8 @@ namespace SilupostWeb.Data
                     model.LegalEntity.LegalEntityId,
                     model.UserName,
                     model.Password,
-                    model.IsWebAdminGuestUser
+                    model.IsWebAdminGuestUser,
+                    model.EnforcementStation.EnforcementStationId
                 }, commandType: CommandType.StoredProcedure));
 
                 if (id.Contains("Error"))

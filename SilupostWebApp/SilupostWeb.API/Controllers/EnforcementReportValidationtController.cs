@@ -150,6 +150,64 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+
+        [Route("GetPageByEnforcementStationId")]
+        [HttpGet]
+        [SwaggerOperation("getPage")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetPageByEnforcementStationId(int Draw,
+                                                                        string Search,
+                                                                        bool IsAdvanceSearchMode,
+                                                                        string EnforcementStationId,
+                                                                        string CrimeIncidentCategoryName,
+                                                                        DateTime DateSubmittedFrom,
+                                                                        DateTime DateSubmittedTo,
+                                                                        string ReportValidationStatusId,
+                                                                        int PageNo,
+                                                                        int PageSize,
+                                                                        string OrderColumn,
+                                                                        string OrderDir)
+        {
+            DataTableResponseModel<IList<EnforcementReportValidationViewModel>> response = new DataTableResponseModel<IList<EnforcementReportValidationViewModel>>();
+
+            try
+            {
+                long recordsFiltered = 0;
+                long recordsTotal = 0;
+                var pageResults = _enforcementReportValidationFacade.GetPageByEnforcementStationId(
+                                                            (Search = string.IsNullOrEmpty(Search) ? string.Empty : Search),
+                                                             IsAdvanceSearchMode,
+                                                             EnforcementStationId,
+                                                             (CrimeIncidentCategoryName = string.IsNullOrEmpty(CrimeIncidentCategoryName) ? string.Empty : CrimeIncidentCategoryName),
+                                                             DateSubmittedFrom,
+                                                             DateSubmittedTo,
+                                                             ReportValidationStatusId,
+                                                             PageNo,
+                                                             PageSize,
+                                                             OrderColumn,
+                                                             OrderDir);
+                var records = pageResults.Items.ToList();
+                recordsTotal = pageResults.TotalRows;
+                recordsFiltered = pageResults.TotalRows;
+
+                response.draw = Draw;
+                response.recordsFiltered = recordsFiltered;
+                response.recordsTotal = recordsTotal;
+                response.data = pageResults.Items.ToList();
+
+                return new SilupostAPIHttpActionResult<DataTableResponseModel<IList<EnforcementReportValidationViewModel>>>(Request, HttpStatusCode.OK, response);
+            }
+            catch (Exception ex)
+            {
+                var exception = new AppResponseModel<object>();
+                exception.DeveloperMessage = ex.Message;
+                exception.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<object>>(Request, HttpStatusCode.OK, exception);
+            }
+        }
+
         [Route("{id}/detail")]
         [HttpGet]
         [SwaggerOperation("get")]

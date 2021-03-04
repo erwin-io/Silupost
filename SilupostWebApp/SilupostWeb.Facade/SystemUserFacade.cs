@@ -16,6 +16,7 @@ namespace SilupostWeb.Facade
     public class SystemUserFacade : ISystemUserFacade
     {
         private readonly ISystemUserRepositoryDAC _systemUserRepository;
+        private readonly ISystemUserVerificationRepositoryDAC _systemUserVerificationRepositoryDAC;
         private readonly ISystemUserConfigRepositoryDAC _systemUserConfigRepositoryDAC;
         private readonly ILegalEntityRepository _legalEntityRepository;
         private readonly ILegalEntityAddressRepositoryDAC _legalEntityAddressRepositoryDAC;
@@ -25,6 +26,7 @@ namespace SilupostWeb.Facade
 
         #region CONSTRUCTORS
         public SystemUserFacade(ISystemUserRepositoryDAC systemUserRepository,
+            ISystemUserVerificationRepositoryDAC systemUserVerificationRepositoryDAC,
             ISystemUserConfigRepositoryDAC systemUserConfigRepositoryDAC,
             ILegalEntityRepository legalEntityRepository,
             ILegalEntityAddressRepositoryDAC legalEntityAddressRepositoryDAC,
@@ -33,6 +35,7 @@ namespace SilupostWeb.Facade
             IEnforcementUnitRepositoryDAC enforcementUnitRepositoryDAC)
         {
             _systemUserRepository = systemUserRepository ?? throw new ArgumentNullException(nameof(systemUserRepository));
+            _systemUserVerificationRepositoryDAC = systemUserVerificationRepositoryDAC ?? throw new ArgumentNullException(nameof(systemUserVerificationRepositoryDAC));
             _systemUserConfigRepositoryDAC = systemUserConfigRepositoryDAC ?? throw new ArgumentNullException(nameof(systemUserConfigRepositoryDAC));
             _legalEntityRepository = legalEntityRepository ?? throw new ArgumentNullException(nameof(legalEntityRepository));
             _legalEntityAddressRepositoryDAC = legalEntityAddressRepositoryDAC ?? throw new ArgumentNullException(nameof(legalEntityAddressRepositoryDAC));
@@ -116,6 +119,8 @@ namespace SilupostWeb.Facade
                     if (model.IsEnforcementUnit)
                     {
                         addModel.EnforcementUnit.ProfilePicture = addModel.ProfilePicture;
+                        addModel.EnforcementUnit.LegalEntity = addModel.LegalEntity;
+                        addModel.EnforcementUnit.SystemRecordManager = addModel.SystemRecordManager;
                         addModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(addModel.EnforcementUnit);
                         if (string.IsNullOrEmpty(addModel.EnforcementUnit.EnforcementUnitId))
                         {
@@ -198,6 +203,7 @@ namespace SilupostWeb.Facade
                     }
                     //End Saving LegalEntity
 
+                    //Start Saving User Config
                     addModel.SystemUserConfig.SystemUser.SystemUserId = id;
                     addModel.SystemUserConfig.IsUserEnable = true;
                     addModel.SystemUserConfig.IsUserAllowToPostNextReport = true;
@@ -206,6 +212,15 @@ namespace SilupostWeb.Facade
                     {
                         throw new Exception("Error Creating System User Settings");
                     }
+                    //End Saving User Config
+
+                    //Start Saving User Verification
+                    var verification = _systemUserVerificationRepositoryDAC.FindBySender(model.EmailAddress, model.VerificationCode);
+                    if (!_systemUserVerificationRepositoryDAC.VerifyUser(verification.Id))
+                    {
+                        throw new Exception("Error Verifying User");
+                    }
+                    //End Saving User Verification
                     scope.Complete();
                 }
                 return id;
@@ -273,8 +288,9 @@ namespace SilupostWeb.Facade
                     {
                         throw new Exception("Error Creating System User");
                     }
-                    //End Saving LegalEntity
+                    //End Saving User
 
+                    //Start Saving User Config
                     addModel.SystemUserConfig.SystemUser.SystemUserId = id;
                     addModel.SystemUserConfig.IsUserEnable = true;
                     addModel.SystemUserConfig.IsUserAllowToPostNextReport = true;
@@ -283,6 +299,15 @@ namespace SilupostWeb.Facade
                     {
                         throw new Exception("Error Creating System User Settings");
                     }
+                    //End Saving User
+
+                    //Start Saving User Verification
+                    var verification = _systemUserVerificationRepositoryDAC.FindBySender(model.EmailAddress, model.VerificationCode);
+                    if (!_systemUserVerificationRepositoryDAC.VerifyUser(verification.Id))
+                    {
+                        throw new Exception("Error Verifying User");
+                    }
+                    //End Saving User Verification
                     scope.Complete();
                 }
                 return id;

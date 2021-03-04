@@ -11,7 +11,6 @@ namespace SilupostWeb.Domain.BindingModel
     public class CreateEnforcementReportValidationBindingModel : EnforcementReportValidationBindingModel
     {
         public string CrimeIncidentReportId { get; set; }
-        public DateTime DateSubmitted { get; set; }
     }
     public class UpdateEnforcementReportValidationBindingModel : EnforcementReportValidationBindingModel
     {

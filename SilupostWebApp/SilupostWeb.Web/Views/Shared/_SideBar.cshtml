@@ -226,6 +226,15 @@
 
                                     }
                                 </li>
+                                <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("System Role Privileges")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("System Role Privileges"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">System Role Privileges</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/SystemWebAdminRolePrivileges"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">System Role Privileges</span></a>}
+                                    }
+                                </li>
                             </ul>
                         </li>
                     }

@@ -9,6 +9,7 @@ namespace SilupostWeb.Data.Entity
         public string VerificationSender { get; set; }
         public string VerificationTypeId { get; set; }
         public string VerificationCode { get; set; }
+        public bool IsVerified { get; set; }
         public EntityStatusModel EntityStatus { get; set; }
     }
 }

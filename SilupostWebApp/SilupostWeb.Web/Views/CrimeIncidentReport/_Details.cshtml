@@ -23,12 +23,18 @@
                 </button>
                 {{/if}}
                 {^{if ShowApprovalControls}}
+                
+                {^{if AllowedToApproveReport}}
                 <button id="btnApproved" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary pmd-tooltip" data-toggle="tooltip" data-placement="left" title="Approve this report" data-link="disabled{:!CanApprove}">
                     <i class="material-icons pmd-sm">thumb_up_off_alt</i>
                 </button>
+                {{/if}}
+                
+                {^{if AllowedToDeclineReport}}
                 <button id="btnDeclined" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger pmd-tooltip" data-toggle="tooltip" data-placement="left" title="Decline this report" data-link="disabled{:!CanDecline}">
                     <i class="material-icons pmd-sm">thumb_down_off_alt</i>
                 </button>
+                {{/if}}
                 {{/if}}
             </div>
         </div>
