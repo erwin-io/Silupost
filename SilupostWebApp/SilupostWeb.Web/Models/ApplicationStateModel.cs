@@ -11,6 +11,7 @@ namespace SilupostWeb.Web.Models
         public ApplicationUserModel User { get; set; }
         public ApplicationTokenModel ApplicationToken { get; set; }
         public List<UserViewAccess> UserViewAccess { get; set; }
+        public List<UserPrivilegeModel> Privileges { get; set; }
     }
 
     public class ApplicationUserModel
@@ -25,6 +26,8 @@ namespace SilupostWeb.Web.Models
         public string FullName { get; set; }
         public string ProfilePictureSource { get; set; }
         public bool IsWebAdminGuestUser { get; set; }
+        public bool IsEnforcementUnit { get; set; }
+        public string EnforcementStationId { get; set; }
         public ApplicationUserConfigModel SystemUserConfig { get; set; }
     }
 
@@ -73,6 +76,12 @@ namespace SilupostWeb.Web.Models
         public string RoleId { get; set; }
         public string ModuleName { get; set; }
         public string PageName { get; set; }
+    }
+
+    public class UserPrivilegeModel
+    {
+        public long? SystemWebAdminPrivilegeId { get; set; }
+        public string SystemWebAdminPrivilegeName { get; set; }
     }
 
     public class ApplicationActionExcecutingContextModel

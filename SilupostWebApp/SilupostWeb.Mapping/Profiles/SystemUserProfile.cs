@@ -40,6 +40,11 @@ namespace SilupostWeb.Mapping.Profiles
                             Gender = new EntityGenderModel() { GenderId = src.GenderId },
                         }
                     }))
+                .ForPath(dest => dest.EnforcementStation, opt => opt.MapFrom(src =>
+                    new EnforcementStationModel
+                    {
+                        EnforcementStationId = src.EnforcementStationId
+                    }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel
                     {
@@ -65,6 +70,37 @@ namespace SilupostWeb.Mapping.Profiles
                         MiddleName = src.MiddleName,
                         EmailAddress = src.EmailAddress,
                         Gender = new EntityGenderModel() { GenderId = src.GenderId },
+                    }))
+                .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
+                    new SystemUserConfigModel
+                    {
+                        SystemUser = new SystemUserModel()
+                    }))
+                .ForPath(dest => dest.SystemUserType, opt => opt.MapFrom(src =>
+                    new SystemUserTypeModel()))
+                .ForPath(dest => dest.ProfilePicture, opt => opt.MapFrom(src =>
+                    new FileModel()));
+
+
+            CreateMap<CreateWebAccountSystemUserBindingModel, SystemUserModel>()
+                .ForPath(dest => dest.LegalEntity, opt => opt.MapFrom(src =>
+                    new LegalEntityModel
+                    {
+                        FirstName = src.FirstName,
+                        LastName = src.LastName,
+                        MiddleName = src.MiddleName,
+                        EmailAddress = src.EmailAddress,
+                        Gender = new EntityGenderModel() { GenderId = src.GenderId },
+                    }))
+                .ForPath(dest => dest.EnforcementStation, opt => opt.MapFrom(src =>
+                    new EnforcementStationModel
+                    {
+                        EnforcementStationId = src.EnforcementStationId
+                    }))
+                .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
+                    new SystemUserConfigModel
+                    {
+                        SystemUser = new SystemUserModel()
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel
@@ -104,6 +140,11 @@ namespace SilupostWeb.Mapping.Profiles
                             BirthDate = src.BirthDate,
                             Gender = new EntityGenderModel() { GenderId = src.GenderId },
                         }
+                    }))
+                .ForPath(dest => dest.EnforcementStation, opt => opt.MapFrom(src =>
+                    new EnforcementStationModel
+                    {
+                        EnforcementStationId = src.EnforcementStationId
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel

@@ -514,11 +514,19 @@ var crimeIncidentCategoryController = function() {
                                 });
                             }
                         },
-                        error: function (errormessage) {
+                        error: function (result) {
+                            var errormessage = "";
+                            var errorTitle = "";
+                            if (result.responseJSON.Message != null) {
+                                erroTitle = "Error!";
+                                errormessage = result.responseJSON.Message;
+                            }
+                            if (result.responseJSON.DeveloperMessage != null && result.responseJSON.DeveloperMessage.includes("Cannot delete")) {
+                                erroTitle = "Not Allowed!";
+                                errormessage = "Data in used!";
+                            }
                             $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                            target.empty();
-                            target.html(targetName);
-                            Swal.fire('Error!',errormessage.Message,'error');
+                            Swal.fire('Error!', errormessage, 'error');
                             circleProgress.close();
                         }
                     });

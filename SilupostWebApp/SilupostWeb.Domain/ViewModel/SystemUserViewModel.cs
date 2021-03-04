@@ -20,6 +20,7 @@ namespace SilupostWeb.Domain.ViewModel
         public SystemUserConfigViewModel SystemUserConfig { get; set; }
         public List<SystemWebAdminUserRolesViewModel> SystemWebAdminUserRoles { get; set; }
         public List<SystemWebAdminMenuViewModel> SystemWebAdminMenus { get; set; }
+        public List<SystemWebAdminPrivilegesViewModel> SystemWebAdminPrivileges { get; set; }
         public SystemRecordManagerViewModel SystemRecordManager { get; set; }
         public EntityStatusViewModel EntityStatus { get; set; }
         public SystemTokenViewModel Token { get; set; }

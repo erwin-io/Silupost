@@ -29,12 +29,26 @@ var systemWebAdminRoleController = function() {
     };
     var init = function (obj) {
         initEvent();
-
         setTimeout(function () {
+            initPrivileges();
             initGrid();
         }, 1000);
 
     };
+
+    var initPrivileges = function () {
+        appSettings.AllowedToAddWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 10).length > 0;
+        appSettings.AllowedToUpdateWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 11).length > 0;
+        appSettings.AllowedToDeleteWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 12).length > 0;
+
+        if (!appSettings.AllowedToAddWebAdminRole) {
+            $("#btnAdd").addClass("hidden");
+            $("#btnAdd").attr("disabled", "true");
+        } else {
+            $("#btnAdd").removeClass("hidden");
+            $("#btnAdd").removeAttr("disabled");
+        }
+    }
 
     var iniValidation = function() {
         form.validate({
@@ -85,16 +99,33 @@ var systemWebAdminRoleController = function() {
                 { "data": "SystemWebAdminRoleId","sortable":false, "orderable": false, "searchable": false},
                 { "data": "RoleName" },
                 { "data": null, "searchable": false, "orderable": false, 
-                    render: function(data, type, full, meta){
-                        return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.SystemWebAdminRoleId+'" data-toggle="dropdown" aria-expanded="true">'
-                                    +'<i class="material-icons pmd-sm">more_vert</i>'
-                                +'</button>'
-                                +'<ul aria-labelledby="drop-role-'+full.SystemWebAdminRoleId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
-                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.SystemWebAdminRoleId+'" role="menuitem">Edit</a></li>'
-                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.SystemWebAdminRoleId+'" role="menuitem">Remove</a></li>'
-                                +'</ul>'
-                                +'</span>'
+                    render: function (data, type, full, meta) {
+                        var editCtrl = '<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemWebAdminRoleId + '" role="menuitem">Edit</a></li>';
+                        var deleteCtrl = '<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemWebAdminRoleId + '" role="menuitem">Remove</a></li>';
+                        
+                        if (!appSettings.AllowedToUpdateWebAdminRole) {
+                            editCtrl = '';
+                        }
+                        if (!appSettings.AllowedToDeleteWebAdminRole) {
+                            deleteCtrl = '';
+                        }
+                        var controls = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                            + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.SystemWebAdminRoleId + '" data-toggle="dropdown" aria-expanded="true">'
+                            + '<i class="material-icons pmd-sm">more_vert</i>'
+                            + '</button>'
+                            + '<ul aria-labelledby="drop-role-' + full.SystemWebAdminRoleId + '" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                            + editCtrl
+                            + deleteCtrl
+                            + '</ul>'
+                            + '</span>';
+                        if (!appSettings.AllowedToUpdateWebAdminRole && !appSettings.AllowedToDeleteWebAdminRole) {
+                            controls = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                            + '<button disabled class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.SystemWebAdminRoleId + '" data-toggle="dropdown" aria-expanded="true">'
+                            + '<i class="material-icons pmd-sm">more_vert</i>'
+                            + '</button>'
+                            + '</span>';
+                        }
+                        return controls;
                     }
                 }
             ],

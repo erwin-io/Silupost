@@ -102,14 +102,19 @@
                                 Lastname: result.Data.LegalEntity.LastName,
                                 FullName: result.Data.LegalEntity.MiddleName,
                                 IsWebAdminGuestUser: result.Data.IsWebAdminGuestUser,
+                                IsEnforcementUnit: result.Data.IsEnforcementUnit,
                                 SystemUserConfig: result.Data.SystemUserConfig
                             },
                             ApplicationToken: {
                                 AccessToken: result.Data.Token.access_token,
                                 RefreshToken: result.Data.Token.refresh_token
                             },
-                            UserViewAccess: []
+                            UserViewAccess: [],
+                            Privileges: result.Data.SystemWebAdminPrivileges,
                         };
+                        if (appState.User.IsEnforcementUnit) {
+                            appState.User.EnforcementStationId = result.Data.EnforcementUnit.EnforcementStation.EnforcementStationId;
+                        }
                         //if (result.Data.ProfilePicture.IsFromStorage) {
                         //    appState.User.ProfilePictureSource = app.appSettings.silupostWebAPIURI + "File/getFile?FileId=" + result.Data.ProfilePicture.FileId;
                         //} else {

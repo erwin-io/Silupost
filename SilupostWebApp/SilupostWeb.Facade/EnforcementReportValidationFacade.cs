@@ -115,6 +115,35 @@ namespace SilupostWeb.Facade
             result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows : 0;
             return result;
         }
+
+        public PageResultsViewModel<EnforcementReportValidationViewModel> GetPageByEnforcementStationId(string Search,
+                                                                                                           bool IsAdvanceSearchMode,
+                                                                                                           string EnforcementStationId,
+                                                                                                           string CrimeIncidentCategoryName,
+                                                                                                           DateTime DateSubmittedFrom,
+                                                                                                           DateTime DateSubmittedTo,
+                                                                                                           string ReportValidationStatusId,
+                                                                                                           int PageNo,
+                                                                                                           int PageSize,
+                                                                                                           string OrderColumn,
+                                                                                                           string OrderDir)
+        {
+            var result = new PageResultsViewModel<EnforcementReportValidationViewModel>();
+            var data = _enforcementReportValidationRepositoryDAC.GetPageByEnforcementStationId(Search,
+                                                                                                 IsAdvanceSearchMode,
+                                                                                                 EnforcementStationId,
+                                                                                                 CrimeIncidentCategoryName,
+                                                                                                 DateSubmittedFrom,
+                                                                                                 DateSubmittedTo,
+                                                                                                 ReportValidationStatusId,
+                                                                                                 PageNo,
+                                                                                                 PageSize,
+                                                                                                 OrderColumn,
+                                                                                                 OrderDir);
+            result.Items = AutoMapperHelper<EnforcementReportValidationModel, EnforcementReportValidationViewModel>.MapList(data);
+            result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows : 0;
+            return result;
+        }
         public bool Remove(string id, string LastUpdatedBy)
         {
             var success = false;

@@ -61,6 +61,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemWebAdminRoleRepositoryDAC, SystemWebAdminRoleDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminUserRolesRepositoryDAC, SystemWebAdminUserRolesDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesRepositoryDAC, SystemWebAdminMenurRolesDAC>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminRolePrivilegesRepositoryDAC, SystemWebAdminRolePrivilegesDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRepositoryDAC, SystemWebAdminMenuDAC>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuModuleRepositoryDAC, SystemWebAdminMenuModuleDAC>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeRepositoryDAC, CrimeIncidentTypeDAC>(Lifestyle.Scoped);
@@ -82,6 +83,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ISystemUserFacade, SystemUserFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminRoleFacade, SystemWebAdminRoleFacade>(Lifestyle.Scoped);
             container.Register<ISystemWebAdminMenuRolesFacade, SystemWebAdminMenuRolesFacade>(Lifestyle.Scoped);
+            container.Register<ISystemWebAdminRolePrivilegesFacade, SystemWebAdminRolePrivilegesFacade>(Lifestyle.Scoped);
             container.Register<IUserAuthFacade, UserAuthFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentTypeFacade, CrimeIncidentTypeFacade>(Lifestyle.Scoped);
             container.Register<ICrimeIncidentCategoryFacade, CrimeIncidentCategoryFacade>(Lifestyle.Scoped);

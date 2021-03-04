@@ -112,10 +112,23 @@ namespace SilupostWeb.Facade
                 success = _crimeIncidentTypeRepositoryDAC.Update(updateModel);
                 if (success)
                 {
+
                     //Start Saving file
-                    updateModel.IconFile.FileContent = System.Convert.FromBase64String(model.IconFile.FileFromBase64String);
-                    updateModel.IconFile.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
-                    success = _fileRepositoryDAC.Update(updateModel.IconFile);
+                    if (model.IconFile == null || string.IsNullOrEmpty(model.IconFile.FileId))
+                    {
+                        updateModel.IconFile.FileContent = System.Convert.FromBase64String(model.IconFile.FileFromBase64String);
+                        updateModel.IconFile.SystemRecordManager.CreatedBy = LastUpdatedBy;
+                        var fileId = _fileRepositoryDAC.Add(updateModel.IconFile);
+                        if (string.IsNullOrEmpty(fileId))
+                            throw new Exception("Error Saving File");
+                        updateModel.IconFile.FileId = fileId;
+                    }
+                    else
+                    {
+                        updateModel.IconFile.FileContent = System.Convert.FromBase64String(model.IconFile.FileFromBase64String);
+                        updateModel.IconFile.SystemRecordManager.LastUpdatedBy = LastUpdatedBy;
+                        success = _fileRepositoryDAC.Update(updateModel.IconFile);
+                    }
                     //End Saving file
 
                     //start store file directory

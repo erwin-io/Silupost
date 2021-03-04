@@ -199,11 +199,11 @@ namespace SilupostWeb.API.Controllers
                 response.Message = string.Format(Messages.CustomError, "Icon file");
                 return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementStationViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
-            if (string.IsNullOrEmpty(model.IconFile.FileId) || string.IsNullOrEmpty(model.IconFile.FileFromBase64String) || string.IsNullOrEmpty(model.IconFile.FileName) || model.IconFile.FileSize <= 0)
-            {
-                response.Message = string.Format(Messages.CustomError, "Icon file");
-                return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementStationViewModel>>(Request, HttpStatusCode.BadRequest, response);
-            }
+            //if (string.IsNullOrEmpty(model.IconFile.FileId) || string.IsNullOrEmpty(model.IconFile.FileFromBase64String) || string.IsNullOrEmpty(model.IconFile.FileName) || model.IconFile.FileSize <= 0)
+            //{
+            //    response.Message = string.Format(Messages.CustomError, "Icon file");
+            //    return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementStationViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            //}
 
             try
             {

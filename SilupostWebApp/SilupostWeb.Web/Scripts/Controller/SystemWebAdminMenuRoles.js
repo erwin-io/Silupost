@@ -45,6 +45,7 @@ var systemWebAdminMenuRolesController = function() {
 
         setTimeout(function () {
             initLookup();
+            initPrivileges();
             setTimeout(function () {
                 appSettings.model.SystemWebAdminMenuRoles = {};
                 var selectTemplate = $.templates('#systemWebAdminMenuRoles-select-template');
@@ -63,6 +64,19 @@ var systemWebAdminMenuRolesController = function() {
         	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
         	appSettings.model = $.extend(appSettings.lookup, data.Data);
         });
+    }
+
+
+    var initPrivileges = function () {
+        appSettings.AllowedToUpdateWebAdminMenuRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 13).length > 0;
+
+        if (!appSettings.AllowedToUpdateWebAdminMenuRole) {
+            $("#btn-save").addClass("hidden");
+            $("#btn-save").attr("disabled", "true");
+        } else {
+            $("#btn-save").removeClass("hidden");
+            $("#btn-save").removeAttr("disabled");
+        }
     }
 
     var iniValidation = function() {
@@ -125,11 +139,18 @@ var systemWebAdminMenuRolesController = function() {
                 { "data": "SystemWebAdminMenuId","sortable":false, "orderable": false, "searchable": false},
                 { "data": "SystemWebAdminMenuName"},
                 { "data": null, "searchable": false, "orderable": false,
-                    render: function(data, type, full, meta){
-                        return '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
-                                    +'<input data-link="'+full.SystemWebAdminMenuId+'" type="checkbox" '+(full.IsAllowed ? 'checked="checked"' : '')+' class="pm-ini">'
-                                    +'<span class="pmd-checkbox-label"></span>'
-                                +'</label>'
+                    render: function (data, type, full, meta) {
+                        var controls = '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
+                                        + '<input data-link="' + full.SystemWebAdminMenuId + '" type="checkbox" ' + (full.IsAllowed ? 'checked="checked"' : '') + ' class="pm-ini">'
+                                        + '<span class="pmd-checkbox-label"></span>'
+                                        + '</label>';
+                        if (!appSettings.AllowedToUpdateWebAdminMenuRole) {
+                            controls = '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
+                                        + '<input disabled data-link="' + full.SystemWebAdminMenuId + '" type="checkbox" ' + (full.IsAllowed ? 'checked="checked"' : '') + ' class="pm-ini">'
+                                        + '<span class="pmd-checkbox-label"></span>'
+                                        + '</label>';
+                        }
+                        return controls;
                     }
                 }
             ],
@@ -157,9 +178,6 @@ var systemWebAdminMenuRolesController = function() {
                 });
             }
         });
-        for(var i in appSettings.MenuRoles){
-
-        }
     };
 
     var loadSystemWebAdminMenuRoles = function(){ 

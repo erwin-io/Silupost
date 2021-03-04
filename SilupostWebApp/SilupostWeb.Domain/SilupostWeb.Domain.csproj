@@ -56,6 +56,7 @@
     <Compile Include="BindingModel\EnforcementUnitBindingModel.cs" />
     <Compile Include="BindingModel\SystemUserVerificationBindingModel.cs" />
     <Compile Include="BindingModel\SystemUserConfigBindingModel.cs" />
+    <Compile Include="BindingModel\SystemWebAdminRolePrivilegesBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminMenuRolesBindingModel.cs" />
     <Compile Include="BindingModel\CrimeIncidentTypeBindingModel.cs" />
     <Compile Include="BindingModel\SystemWebAdminRoleBindingModel.cs" />
@@ -87,6 +88,8 @@
     <Compile Include="ViewModel\SystemRefreshTokenViewModel.cs" />
     <Compile Include="ViewModel\SystemUserConfigViewModel.cs" />
     <Compile Include="ViewModel\SystemUserVerificationViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminPrivilegesViewModel.cs" />
+    <Compile Include="ViewModel\SystemWebAdminRolePrivilegesViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuRolesViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminMenuViewModel.cs" />
     <Compile Include="ViewModel\SystemWebAdminModuleViewModel.cs" />

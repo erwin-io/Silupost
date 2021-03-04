@@ -67,6 +67,7 @@ var systemUserController = function() {
     var init = function (obj) {
 
         setTimeout(function () {
+            initPrivileges();
             initDefaultProfilePic();
             initLookup();
             initFilter();
@@ -139,6 +140,34 @@ var systemUserController = function() {
             }
         });
     };
+
+    var initPrivileges = function () {
+        appSettings.AllowedToAddUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 7).length > 0;
+        appSettings.AllowedToUpdateUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 8).length > 0;
+        appSettings.AllowedToDeleteUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 9).length > 0;
+
+        if (!appSettings.AllowedToAddUser) {
+            $("#btnAdd").addClass("hidden");
+            $("#btnAdd").attr("disabled", "true");
+        } else {
+            $("#btnAdd").removeClass("hidden");
+            $("#btnAdd").removeAttr("disabled");
+        }
+        if (!appSettings.AllowedToUpdateUser) {
+            $("#btnEdit").addClass("hidden");
+            $("#btnEdit").attr("disabled", "true");
+        } else {
+            $("#btnEdit").removeClass("hidden");
+            $("#btnEdit").removeAttr("disabled");
+        }
+        if (!appSettings.AllowedToDeleteUser) {
+            $("#btnDelete").addClass("hidden");
+            $("#btnDelete").attr("disabled", "true");
+        } else {
+            $("#btnDelete").removeClass("hidden");
+            $("#btnDelete").removeAttr("disabled");
+        }
+    }
 
     var initDefaultProfilePic = function () {
         api.getDefaultProfilePic().done(function (data) {
@@ -842,13 +871,7 @@ var systemUserController = function() {
                     $("#form-enforcementUnit").removeClass("hidden");
                 }
 
-                $("#IsEnforcementUnit").on("change", function () {
-                    if (!$(this).is(':checked')) {
-                        $("#form-enforcementUnit").addClass("hidden");
-                    } else {
-                        $("#form-enforcementUnit").removeClass("hidden");
-                    }
-                });
+                $("#IsEnforcementUnit").on("change", EnforcementToggleChange);
 
                 formEnforcementUnit = $("#form-enforcementUnit");
                 initValidationEnforcementUnit();
@@ -1063,6 +1086,14 @@ var systemUserController = function() {
                     initValidationLegalEntityAddress();
                 });
             });
+        }
+    }
+
+    var EnforcementToggleChange = function () {
+        if (!$(this).is(':checked')) {
+            $("#form-enforcementUnit").addClass("hidden");
+        } else {
+            $("#form-enforcementUnit").removeClass("hidden");
         }
     }
 

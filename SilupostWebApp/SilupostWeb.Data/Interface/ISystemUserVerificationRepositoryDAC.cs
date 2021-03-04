@@ -7,5 +7,6 @@ namespace SilupostWeb.Data.Interface
     public interface ISystemUserVerificationRepositoryDAC : IRepository<SystemUserVerificationModel>
     {
         SystemUserVerificationModel FindBySender(string sender, string code);
+        bool VerifyUser(long id);
     }
 }

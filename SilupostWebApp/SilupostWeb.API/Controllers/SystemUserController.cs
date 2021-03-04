@@ -29,13 +29,17 @@ namespace SilupostWeb.API.Controllers
     public class SystemUserController : ApiController
     {
         private readonly ISystemUserFacade _systemUserFacade;
+        private readonly ISystemUserVerificationFacade _systemUserVerificationFacade;
         private readonly ILegalEntityAddressFacade _legalEntityAddressFacade;
+        private readonly IEnforcementStationFacade _enforcementStationFacade;
         private string RecordedBy { get; set; }
         #region CONSTRUCTORS
-        public SystemUserController(ISystemUserFacade systemUserFacade, ILegalEntityAddressFacade legalEntityAddressFacade)
+        public SystemUserController(ISystemUserFacade systemUserFacade, ISystemUserVerificationFacade systemUserVerificationFacade, ILegalEntityAddressFacade legalEntityAddressFacade, IEnforcementStationFacade enforcementStationFacade)
         {
             _systemUserFacade = systemUserFacade ?? throw new ArgumentNullException(nameof(systemUserFacade));
+            _systemUserVerificationFacade = systemUserVerificationFacade ?? throw new ArgumentNullException(nameof(systemUserVerificationFacade));
             _legalEntityAddressFacade = legalEntityAddressFacade ?? throw new ArgumentNullException(nameof(legalEntityAddressFacade));
+            _enforcementStationFacade = enforcementStationFacade ?? throw new ArgumentNullException(nameof(enforcementStationFacade));
         }
         #endregion
 
@@ -303,6 +307,27 @@ namespace SilupostWeb.API.Controllers
 
             try
             {
+                if (string.IsNullOrEmpty(model.VerificationCode))
+                {
+                    response.Message = string.Format(Messages.InvalidId, "Verification Code");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
+                var verification = _systemUserVerificationFacade.FindBySender(model.EmailAddress, model.VerificationCode);
+
+                if (verification == null)
+                {
+                    response.Message = "User is not verified";
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+                else
+                {
+                    if (verification.IsVerified)
+                    {
+                        response.Message = "Username or Email already in used";
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    }
+                }
                 FileBindingModel profilePic = null;
                 string fileName = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUserProfilePicPath);
                 var fileSize = new FileInfo(fileName).Length;
@@ -364,12 +389,48 @@ namespace SilupostWeb.API.Controllers
         [SwaggerOperation("create")]
         [SwaggerResponse(HttpStatusCode.Created)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
-        public IHttpActionResult CreateWebAdminAccount([FromBody] CreateAccountSystemUserBindingModel model)
+        public IHttpActionResult CreateWebAdminAccount([FromBody] CreateWebAccountSystemUserBindingModel model)
         {
             AppResponseModel<SystemUserViewModel> response = new AppResponseModel<SystemUserViewModel>();
 
             try
             {
+                if (string.IsNullOrEmpty(model.VerificationCode))
+                {
+                    response.Message = string.Format(Messages.InvalidId, "Verification Code");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
+                var verification = _systemUserVerificationFacade.FindBySender(model.EmailAddress, model.VerificationCode);
+
+                if (verification == null)
+                {
+                    response.Message = "User is not verified";
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+                else
+                {
+                    if (verification.IsVerified)
+                    {
+                        response.Message = "Username or Email already in used";
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    }
+                }
+
+                if (string.IsNullOrEmpty(model.EnforcementStationId))
+                {
+                    response.Message = string.Format(Messages.InvalidId, "Enforcement Station");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
+                var inforcementStation = _enforcementStationFacade.Find(model.EnforcementStationId);
+
+                if (inforcementStation == null)
+                {
+                    response.Message = string.Format("{0} {1}", Messages.NoRecord, "Enforcement Station");
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                }
+
                 FileBindingModel profilePic = null;
                 string fileName = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUserProfilePicPath);
                 var fileSize = new FileInfo(fileName).Length;

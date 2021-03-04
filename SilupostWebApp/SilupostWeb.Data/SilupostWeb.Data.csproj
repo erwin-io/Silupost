@@ -75,6 +75,7 @@
     <Compile Include="Entity\FileModel.cs" />
     <Compile Include="Entity\LegalEntityModel.cs" />
     <Compile Include="Entity\PageResultsModel.cs" />
+    <Compile Include="Entity\SystemWebAdminPrivilegesModel.cs" />
     <Compile Include="Entity\SystemWebAdminModuleModel.cs" />
     <Compile Include="Entity\SystemWebAdminMenuRolesModel.cs" />
     <Compile Include="Entity\SystemRecordManagerModel.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Interface\ISystemUserConfigRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuModuleRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemWebAdminRolePrivilegesRepositoryDAC.cs" />
     <Compile Include="SystemTokenDAC.cs" />
     <Compile Include="FileDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryRepositoryDAC.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="SystemUserVerificationDAC.cs" />
     <Compile Include="SystemUserConfigDAC.cs" />
     <Compile Include="SystemWebAdminMenuDAC.cs" />
+    <Compile Include="SystemWebAdminRolePrivilegesDAC.cs" />
     <Compile Include="SystemWebAdminMenurRolesDAC.cs" />
     <Compile Include="CrimeIncidentTypeDAC.cs" />
     <Compile Include="LegalEntityAddressDAC.cs" />

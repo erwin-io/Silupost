@@ -11,6 +11,7 @@ namespace SilupostWeb.Data.Entity
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool IsEnforcementUnit { get; set; }
+        public EnforcementStationModel EnforcementStation { get; set; }
         public EnforcementUnitModel EnforcementUnit { get; set; }
         public bool HasFirstLogin { get; set; }
         public DateTime LasteDateTimeActive { get; set; }
@@ -20,6 +21,7 @@ namespace SilupostWeb.Data.Entity
         public SystemUserConfigModel SystemUserConfig { get; set; }
         public List<SystemWebAdminUserRolesModel> SystemWebAdminUserRoles { get; set; }
         public List<SystemWebAdminMenuModel> SystemWebAdminMenus { get; set; }
+        public List<SystemWebAdminPrivilegesModel> SystemWebAdminPrivileges { get; set; }
         public SystemRecordManagerModel SystemRecordManager { get; set; }
         public EntityStatusModel EntityStatus { get; set; }
         public PageResultsModel PageResult { get; set; }

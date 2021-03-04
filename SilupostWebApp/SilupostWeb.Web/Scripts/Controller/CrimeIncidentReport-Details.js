@@ -264,6 +264,11 @@ var crimeIncidentReportDetailsController = function() {
             appSettings.model.IsPending = false;
             appSettings.model.IsDeclined = false;
             appSettings.model.IsApproved = false;
+
+            appSettings.model.AllowedToApproveReport = false;
+            appSettings.model.AllowedToDeclineReport = false;
+            appSettings.model.AllowedToCancelReport = false;
+
             appSettings.model.PossibleTime = moment(appSettings.model.PossibleTime, ["HH:mm"]).format("h: mm A");
             if (data.Data.ApprovalStatus.ApprovalStatusId === 1) {
                 appSettings.model.IsApproved = true;
@@ -284,6 +289,11 @@ var crimeIncidentReportDetailsController = function() {
                 appSettings.model.CanSubmissionEnforcementReportValidation = (!appSettings.model.Validated);
             }
             appSettings.model.lookup = appSettings.lookup;
+
+
+            appSettings.model.AllowedToApproveReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 2).length > 0;
+            appSettings.model.AllowedToDeclineReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 3).length > 0;
+            appSettings.model.AllowedToCancelReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 6).length > 0;
 
 
             $(".select-simple").select2({
@@ -496,16 +506,28 @@ var crimeIncidentReportDetailsController = function() {
                     "data": null, "searchable": false, "orderable": false,
                     render: function (data, type, full, meta) {
                         var control = '';
-                        if (full.ReportValidationStatus.ReportValidationStatusId === 3)
-                            control = '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.EnforcementReportValidationId + '" data-toggle="dropdown" aria-expanded="true">'
-                                + '<i class="material-icons pmd-sm">more_vert</i>'
-                                + '</button>'
-                                + '<ul aria-labelledby="drop-role-' + full.EnforcementReportValidationId + '" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
-                                + '<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.EnforcementReportValidationId + '" role="menuitem">Edit</a></li>'
-                                + '<li role="presentation"><a class="cancel" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.EnforcementReportValidationId + '" role="menuitem">Cancel</a></li>'
-                                + '</ul>'
-                                + '</span>';
+                        if (full.ReportValidationStatus.ReportValidationStatusId === 3) {
+                            if (appSettings.model.AllowedToCancelReport) {
+                                control = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                                    + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.EnforcementReportValidationId + '" data-toggle="dropdown" aria-expanded="true">'
+                                    + '<i class="material-icons pmd-sm">more_vert</i>'
+                                    + '</button>'
+                                    + '<ul aria-labelledby="drop-role-' + full.EnforcementReportValidationId + '" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                                    + '<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.EnforcementReportValidationId + '" role="menuitem">Edit</a></li>'
+                                    + '<li role="presentation"><a class="cancel" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.EnforcementReportValidationId + '" role="menuitem">Cancel</a></li>'
+                                    + '</ul>'
+                                    + '</span>';
+                            } else {
+                                control = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                                    + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.EnforcementReportValidationId + '" data-toggle="dropdown" aria-expanded="true">'
+                                    + '<i class="material-icons pmd-sm">more_vert</i>'
+                                    + '</button>'
+                                    + '<ul aria-labelledby="drop-role-' + full.EnforcementReportValidationId + '" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                                    + '<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.EnforcementReportValidationId + '" role="menuitem">Edit</a></li>'
+                                    + '</ul>'
+                                    + '</span>';
+                            }
+                        }
                         else
                             control = '<span class="dropdown pmd-dropdown dropup clearfix">'
                                 + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.EnforcementReportValidationId + '" data-toggle="dropdown" aria-expanded="true">'

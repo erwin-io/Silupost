@@ -269,6 +269,82 @@ namespace SilupostWeb.Data
                 throw ex;
             }
         }
+
+        public List<EnforcementReportValidationModel> GetPageByEnforcementStationId(string Search,
+                                               bool IsAdvanceSearchMode,
+                                               string EnforcementStationId,
+                                               string CrimeIncidentCategoryName,
+                                               DateTime DateSubmittedFrom,
+                                               DateTime DateSubmittedTo,
+                                               string ReportValidationStatusId,
+                                               int PageNo,
+                                               int PageSize,
+                                               string OrderColumn,
+                                               string OrderDir)
+        {
+            var results = new List<EnforcementReportValidationModel>();
+            try
+            {
+                var lookup = new Dictionary<string, EnforcementReportValidationModel>();
+
+                _dBConnection.Query("usp_enforcementreportvalidation_getPagedByEnforcementStationId",
+                new[]
+                {
+                    typeof(EnforcementReportValidationModel),
+                    typeof(CrimeIncidentReportModel),
+                    typeof(CrimeIncidentCategoryModel),
+                    typeof(ReportValidationStatusModel),
+                    typeof(PageResultsModel),
+                }, obj =>
+                {
+                    EnforcementReportValidationModel erv = obj[0] as EnforcementReportValidationModel;
+                    CrimeIncidentReportModel cir = obj[1] as CrimeIncidentReportModel;
+                    CrimeIncidentCategoryModel cic = obj[2] as CrimeIncidentCategoryModel;
+                    ReportValidationStatusModel rvs = obj[3] as ReportValidationStatusModel;
+                    PageResultsModel pr = obj[4] as PageResultsModel;
+                    EnforcementReportValidationModel model;
+                    if (!lookup.TryGetValue(erv.EnforcementReportValidationId, out model))
+                        lookup.Add(erv.EnforcementReportValidationId, model = erv);
+
+                    if (model.CrimeIncidentReport == null)
+                        model.CrimeIncidentReport = new CrimeIncidentReportModel();
+                    if (model.CrimeIncidentReport.CrimeIncidentCategory == null)
+                        model.CrimeIncidentReport.CrimeIncidentCategory = new CrimeIncidentCategoryModel();
+                    if (model.ReportValidationStatus == null)
+                        model.ReportValidationStatus = new ReportValidationStatusModel();
+                    if (model.PageResult == null)
+                        model.PageResult = new PageResultsModel();
+                    model.CrimeIncidentReport = cir;
+                    model.CrimeIncidentReport.CrimeIncidentCategory = cic;
+                    model.ReportValidationStatus = rvs;
+                    model.PageResult = pr;
+                    return model;
+                },
+                new
+                {
+                    Search = Search,
+                    IsAdvanceSearchMode = IsAdvanceSearchMode,
+                    EnforcementStationId = EnforcementStationId,
+                    CrimeIncidentCategoryName = CrimeIncidentCategoryName,
+                    DateSubmittedFrom = DateSubmittedFrom,
+                    DateSubmittedTo = DateSubmittedTo,
+                    ReportValidationStatusId = ReportValidationStatusId,
+                    PageNo = PageNo,
+                    PageSize = PageSize,
+                    OrderColumn = OrderColumn,
+                    OrderDir = OrderDir
+                }, splitOn: "EnforcementReportValidationId,CrimeIncidentReportId,CrimeIncidentCategoryId,ReportValidationStatusId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                if (lookup.Values.Any())
+                {
+                    results.AddRange(lookup.Values);
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public override bool Remove(string id) => throw new NotImplementedException();
 
         public bool Remove(string id, string LastUpdatedBy)

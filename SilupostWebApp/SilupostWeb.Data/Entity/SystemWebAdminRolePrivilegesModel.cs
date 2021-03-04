@@ -8,12 +8,11 @@ namespace SilupostWeb.Data.Entity
 {
     public class SystemWebAdminRolePrivilegesModel
     {
-        public string SystemWebAdminRolePrivilegesId { get; set; }
+        public string SystemWebAdminRolePrivilegeId { get; set; }
         public SystemWebAdminRoleModel SystemWebAdminRole { get; set; }
+        public SystemWebAdminPrivilegesModel SystemWebAdminPrivilege { get; set; }
         public bool IsAllowed { get; set; }
-        public SystemRecordManagerModel CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public SystemRecordManagerModel UpdatedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public SystemRecordManagerModel SystemRecordManager { get; set; }
+        public EntityStatusModel EntityStatus { get; set; }
     }
 }
