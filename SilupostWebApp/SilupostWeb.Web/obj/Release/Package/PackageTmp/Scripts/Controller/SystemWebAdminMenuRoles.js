@@ -1,7 +1,7 @@
 ﻿
 var systemWebAdminMenuRolesController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getLookup = function (tableNames) {
             return $.ajax({
                 url: apiURI + "SystemLookup/GetAllByTableNames?TableNames=" + tableNames,
@@ -9,7 +9,7 @@ var systemWebAdminMenuRolesController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -20,7 +20,7 @@ var systemWebAdminMenuRolesController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -30,7 +30,7 @@ var systemWebAdminMenuRolesController = function() {
             getLookup: getLookup
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable,form,systemWebAdminMenuRolesTemplate;
     var appSettings = {
@@ -42,16 +42,20 @@ var systemWebAdminMenuRolesController = function() {
         appSettings = $.extend(appSettings, obj);
         form = $("#form-systemWebAdminMenuRoles");
         circleProgress.show(false);
-		initLookup();
-        setTimeout(function(){
-		    appSettings.model.SystemWebAdminMenuRoles = {};
-            var selectTemplate = $.templates('#systemWebAdminMenuRoles-select-template');
-            selectTemplate.link(".select-container", appSettings.model);
-            iniValidation();
-            initEvent();
-            initGrid();
-            loadSystemWebAdminMenuRoles();
-	        circleProgress.close();
+
+        setTimeout(function () {
+            initLookup();
+            initPrivileges();
+            setTimeout(function () {
+                appSettings.model.SystemWebAdminMenuRoles = {};
+                var selectTemplate = $.templates('#systemWebAdminMenuRoles-select-template');
+                selectTemplate.link(".select-container", appSettings.model);
+                iniValidation();
+                initEvent();
+                initGrid();
+                loadSystemWebAdminMenuRoles();
+                circleProgress.close();
+            }, 1000);
         }, 1000);
     };
 
@@ -60,6 +64,21 @@ var systemWebAdminMenuRolesController = function() {
         	appSettings.lookup = $.extend(appSettings.lookup, data.Data);
         	appSettings.model = $.extend(appSettings.lookup, data.Data);
         });
+    }
+
+
+    var initPrivileges = function () {
+        appSettings.AllowedToUpdateWebAdminMenuRole = false;
+        if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null)
+            appSettings.AllowedToUpdateWebAdminMenuRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 13).length > 0;
+
+        if (!appSettings.AllowedToUpdateWebAdminMenuRole) {
+            $("#btn-save").addClass("hidden");
+            $("#btn-save").attr("disabled", "true");
+        } else {
+            $("#btn-save").removeClass("hidden");
+            $("#btn-save").removeAttr("disabled");
+        }
     }
 
     var iniValidation = function() {
@@ -122,11 +141,18 @@ var systemWebAdminMenuRolesController = function() {
                 { "data": "SystemWebAdminMenuId","sortable":false, "orderable": false, "searchable": false},
                 { "data": "SystemWebAdminMenuName"},
                 { "data": null, "searchable": false, "orderable": false,
-                    render: function(data, type, full, meta){
-                        return '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
-                                    +'<input data-link="'+full.SystemWebAdminMenuId+'" type="checkbox" '+(full.IsAllowed ? 'checked="checked"' : '')+' class="pm-ini">'
-                                    +'<span class="pmd-checkbox-label"></span>'
-                                +'</label>'
+                    render: function (data, type, full, meta) {
+                        var controls = '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
+                                        + '<input data-link="' + full.SystemWebAdminMenuId + '" type="checkbox" ' + (full.IsAllowed ? 'checked="checked"' : '') + ' class="pm-ini">'
+                                        + '<span class="pmd-checkbox-label"></span>'
+                                        + '</label>';
+                        if (!appSettings.AllowedToUpdateWebAdminMenuRole) {
+                            controls = '<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">'
+                                        + '<input disabled data-link="' + full.SystemWebAdminMenuId + '" type="checkbox" ' + (full.IsAllowed ? 'checked="checked"' : '') + ' class="pm-ini">'
+                                        + '<span class="pmd-checkbox-label"></span>'
+                                        + '</label>';
+                        }
+                        return controls;
                     }
                 }
             ],
@@ -154,21 +180,15 @@ var systemWebAdminMenuRolesController = function() {
                 });
             }
         });
-        for(var i in appSettings.MenuRoles){
-
-        }
     };
 
     var loadSystemWebAdminMenuRoles = function(){ 
-    	console.log(appSettings.model);
         if(appSettings.model.SystemWebAdminRoleId != undefined && appSettings.model.SystemWebAdminModuleId != undefined){
             circleProgress.show(false);
             api.getAll(appSettings.model.SystemWebAdminRoleId,appSettings.model.SystemWebAdminModuleId).done(function(data){
                 dataTable.clear().draw();
-                console.log(data.Data);
                 appSettings.model.SystemWebAdminMenuRoles.SystemWebAdminRoleId = appSettings.model.SystemWebAdminRoleId;
                 appSettings.model.SystemWebAdminMenuRoles.SystemWebAdminMenu = [];
-                console.log(appSettings.model.SystemWebAdminMenuRoles);
                 for(var i in data.Data){
                     if (data.Data[i].SystemWebAdminMenu.SystemWebAdminMenuId != undefined)
                     {
@@ -196,7 +216,6 @@ var systemWebAdminMenuRolesController = function() {
     }
 
     var Save = function(e){
-    	console.log(appSettings.model);
         if(!form.valid())
             return;
         else{

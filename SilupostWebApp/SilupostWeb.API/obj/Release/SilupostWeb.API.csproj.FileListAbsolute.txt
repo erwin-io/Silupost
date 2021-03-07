@@ -268,17 +268,3 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Rele
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Auth.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Auth.PlatformServices.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Core.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Drive.v3.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.PlatformServices.dll
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.xml
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Auth.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Auth.xml
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Core.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Core.xml
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Drive.v3.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Google.Apis.Drive.v3.xml

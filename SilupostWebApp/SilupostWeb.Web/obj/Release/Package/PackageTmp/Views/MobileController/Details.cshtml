@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <style>
+    </style>
+}
+<!-- Title -->
+<h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
+<!-- End Title -->
+<!--breadcrum start-->
+<ol class="breadcrumb text-left">
+    <li>
+        @ViewBag.Page.Module
+    </li>
+    @if (ViewBag.Page.ParentName != null)
+    {
+        <li><a href="@ViewBag.Page.ParentName">@ViewBag.Page.ParentTitle</a></li>
+    }
+    <li>
+        @ViewBag.Page.Title
+    </li>
+</ol><!--breadcrum end-->
+
+<div class="row ">
+    <!-- table card code and example -->
+    <div class="col-md-12">
+        <div class="component-box">
+            <!-- table card example -->
+            <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text pull-left">@ViewBag.Page.Title</h2>
+                    <div class="pull-right">
+                        <span class="dropdown pmd-dropdown clearfix">
+                            <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="dropdownMenuBottomRight" data-toggle="dropdown" aria-expanded="true"><i class="material-icons pmd-sm">more_vert</i></button>
+                            <ul aria-labelledby="dropdownMenuDivider" role="menu" class="dropdown-menu dropdown-menu-right">
+                                <li role="presentation"><a id="btnBlockUserFromPostingReport" href="javascript:void(0);" tabindex="-1" role="menuitem">Block user account from posting report</a></li>
+                                <li role="presentation"><a id="btnDisableUser" href="javascript:void(0);" tabindex="-1" role="menuitem">Disable user</a></li>
+                            </ul>
+                        </span>
+                    </div>
+                    <br/>
+                </div>
+                <div class="pmd-card-body">
+                    <div class="group-fields clearfix row">
+                        <button id="btn-alert-BlockUserFromPostingReport" data-duration="10000" type="button" data-positionX="right" data-positionY="top" data-effect="fadeInUp" data-message="User account is currently blocked from posting report!" data-type="error" class="btn pmd-ripple-effect btn-danger pmd-z-depth pmd-alert pmd-alert-toggle hidden">Alert Error</button>
+                        <button id="btn-alert-DisableUser" data-duration="10000" type="button" data-positionX="right" data-positionY="top" data-effect="fadeInUp" data-message="User account is currently disabled!" data-type="error" class="btn pmd-ripple-effect btn-danger pmd-z-depth pmd-alert pmd-alert-toggle hidden">Alert Error</button>
+                        <div id="userView" class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- table card example end -->
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script src="~/Scripts/Widget/LegalEntity.js"></script>
+    <script src="~/Scripts/Controller/MobileUser-Details.js"></script>
+    <script>
+        mobileUserDetails.init(@Html.Raw(Json.Encode(ViewBag.AppSettings)));
+    </script>
+
+
+    @Html.Partial("_Details")
+
+}

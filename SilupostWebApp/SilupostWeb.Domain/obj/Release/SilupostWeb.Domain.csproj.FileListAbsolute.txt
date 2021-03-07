@@ -2,7 +2,6 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\R
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\SilupostWeb.Domain.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\Newtonsoft.Json.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\Newtonsoft.Json.xml
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csprojAssemblyReference.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.dll
