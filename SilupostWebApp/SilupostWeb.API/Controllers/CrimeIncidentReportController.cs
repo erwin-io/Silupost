@@ -126,6 +126,74 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Route("GetPageByTracker")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IHttpActionResult GetPageByTracker(string TrackerRadiusInKM,
+                                                                string TrackerPointLatitude,
+                                                                string TrackerPointLongitude,
+                                                                long ApprovalStatusId,
+                                                                string CrimeIncidentCategoryIds,
+                                                                DateTime DateReportedFrom,
+                                                                DateTime DateReportedTo,
+                                                                DateTime PossibleDateFrom,
+                                                                DateTime PossibleDateTo,
+                                                                string PossibleTimeFrom,
+                                                                string PossibleTimeTo)
+        {
+            AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>> response = new AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>();
+
+            if (string.IsNullOrEmpty(PossibleTimeFrom) || !GlobalFunctions.IsValidTimeFormat(PossibleTimeFrom))
+            {
+                response.Message = string.Format(Messages.CustomError, "Invalid time format : PossibleTimeFrom");
+                return new SilupostAPIHttpActionResult<AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+            if (string.IsNullOrEmpty(PossibleTimeTo) || !GlobalFunctions.IsValidTimeFormat(PossibleTimeTo))
+            {
+                response.Message = string.Format(Messages.CustomError, "Invalid time format : PossibleTimeTo");
+                return new SilupostAPIHttpActionResult<AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+
+            try
+            {
+
+                var result = _crimeIncidentReportFacade.GetByTracker(TrackerRadiusInKM,
+                                                                        TrackerPointLatitude,
+                                                                        TrackerPointLongitude,
+                                                                        ApprovalStatusId,
+                                                                        CrimeIncidentCategoryIds,
+                                                                        DateReportedFrom,
+                                                                        DateReportedTo,
+                                                                        PossibleDateFrom,
+                                                                        PossibleDateTo,
+                                                                        PossibleTimeFrom,
+                                                                        PossibleTimeTo);
+
+                if (result != null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = result;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    response.Message = Messages.NoRecord;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.NotFound, response);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<PageResultsViewModel<CrimeIncidentReportViewModel>>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
+
         [Route("GetTablePageByPostedBySystemUserId")]
         [HttpGet]
         [SwaggerOperation("get")]

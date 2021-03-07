@@ -194,7 +194,7 @@ namespace SilupostWeb.API.Controllers
                 SystemUserViewModel result = null;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:8200/");
+                    client.BaseAddress = new Uri(GlobalVariables.goOAuthURI);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage responseMessage = new HttpResponseMessage();
                     List<KeyValuePair<string, string>> allIputParams = new List<KeyValuePair<string, string>>();
@@ -515,20 +515,44 @@ namespace SilupostWeb.API.Controllers
                     response.Message = string.Format(Messages.InvalidId, "System User");
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
-
-                //if(model.ProfilePicture != null && string.IsNullOrEmpty(model.ProfilePicture.FileId) && model.ProfilePicture.FileContent == null)
-                //{
-                //    var root = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUploadRootDirectory);
-
-                //    var storageDirectory = Path.Combine(root, @"Storage\", string.Format(@"{0}\", model.SystemUserId));
-                //    var newFileName = string.Format("{0}{1}-{2}-{3}{4}", storageDirectory, model.SystemUserId, DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH-mm"), GlobalFunctions.GetFileExtensionByFileRawFormat(model.ProfilePicture.MimeType));
-                //    model.ProfilePicture.FileName = newFileName;
-                //    Directory.CreateDirectory(storageDirectory);
-                //}
-                if(model.ProfilePicture != null)
+                if (model.ProfilePicture != null)
                 {
                     model.ProfilePicture.IsFromStorage = false;
                 }
+
+
+                if (model.ProfilePicture == null || string.IsNullOrEmpty(model.ProfilePicture.FileId) && model.ProfilePicture.FileContent == null)
+                {
+
+                    UpdateFileBindingModel profilePic = null;
+                    string fileName = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultSystemUserProfilePicPath);
+                    var fileSize = new FileInfo(fileName).Length;
+                    using (Image image = Image.FromFile(fileName))
+                    {
+                        using (MemoryStream m = new MemoryStream())
+                        {
+                            image.Save(m, image.RawFormat);
+                            byte[] imageBytes = m.ToArray();
+                            profilePic = new UpdateFileBindingModel()
+                            {
+                                FileName = fileName,
+                                MimeType = image.RawFormat.ToString(),
+                                FileContent = imageBytes,
+                                IsDefault = true,
+                                IsFromStorage = false
+                            };
+
+                        }
+                    }
+
+                    if (profilePic == null)
+                    {
+                        response.Message = string.Format(Messages.CustomError, "There is a problem ecountered while creating System User, Default ProfilePic not found");
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    }
+                    model.ProfilePicture = profilePic;
+                }
+
                 bool success = _systemUserFacade.Update(model, RecordedBy);
                 response.IsSuccess = success;
 
@@ -1041,7 +1065,7 @@ namespace SilupostWeb.API.Controllers
                 SystemUserViewModel result = null;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:8200/");
+                    client.BaseAddress = new Uri(GlobalVariables.goOAuthURI);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage responseMessage = new HttpResponseMessage();
                     List<KeyValuePair<string, string>> allIputParams = new List<KeyValuePair<string, string>>();

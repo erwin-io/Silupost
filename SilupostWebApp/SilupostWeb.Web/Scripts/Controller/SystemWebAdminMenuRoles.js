@@ -68,7 +68,9 @@ var systemWebAdminMenuRolesController = function() {
 
 
     var initPrivileges = function () {
-        appSettings.AllowedToUpdateWebAdminMenuRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 13).length > 0;
+        appSettings.AllowedToUpdateWebAdminMenuRole = false;
+        if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null)
+            appSettings.AllowedToUpdateWebAdminMenuRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 13).length > 0;
 
         if (!appSettings.AllowedToUpdateWebAdminMenuRole) {
             $("#btn-save").addClass("hidden");

@@ -37,6 +37,7 @@ namespace SilupostWeb.API.App_Start
             string connectionString = Configuration.ConnectionString();
 
             GlobalVariables.goAppHostName = GlobalVariables.GetApplicationConfig("AppHostName");
+            GlobalVariables.goOAuthURI = GlobalVariables.GetApplicationConfig("OAuthURI");
             GlobalVariables.goApplicationName = GlobalVariables.GetApplicationConfig("ApplicationName");
             GlobalVariables.goDefaultSystemUserProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultSystemUserProfilePic");
             GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeIconfilePic");
@@ -44,6 +45,7 @@ namespace SilupostWeb.API.App_Start
             GlobalVariables.goDefaultEnforcementUnitIconFilePicPath = GlobalVariables.GetApplicationConfig("DefaultEnforcementUnitIconfilePic");
             GlobalVariables.goDefaultEnforcementStationIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementStationIconfilePic");
             GlobalVariables.goDefaultSystemUploadRootDirectory = GlobalVariables.GetApplicationConfig("DefaultSystemUploadRootDirectory");
+            GlobalVariables.goDefaultCrimeReportMarkerIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeReportMarkerIconFilePath");
 
             GlobalVariables.goEmailVerificationTempPath = GlobalVariables.GetApplicationConfig("EmailVerificationTempPath");
             GlobalVariables.goChangePasswordTempPath = GlobalVariables.GetApplicationConfig("ChangePasswordTempPath");
@@ -51,6 +53,7 @@ namespace SilupostWeb.API.App_Start
             GlobalVariables.goEmailTempProfilePath = GlobalVariables.GetApplicationConfig("EmailTempProfilePath");
             GlobalVariables.goSiteSupportEmail = GlobalVariables.GetApplicationConfig("SiteSupportEmail");
             GlobalVariables.goSiteSupportEmailPassword = GlobalVariables.GetApplicationConfig("SiteSupportEmailPassword");
+
             GlobalVariables.goClientLandingPageWebsite = GlobalVariables.GetApplicationConfig("ClientLandingPageWebsite");
             #region DAL
             container.Register<IDbConnection>(() => new SqlConnection(connectionString), Lifestyle.Scoped);

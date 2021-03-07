@@ -29,6 +29,17 @@ namespace SilupostWeb.Data.Interface
                                                int PageSize, 
                                                string OrderColumn, 
                                                string OrderDir);
+        List<CrimeIncidentReportModel> GetByTracker(string TrackerRadiusInKM,
+                                               string TrackerPointLatitude,
+                                               string TrackerPointLongitude,
+                                               long ApprovalStatusId,
+                                               string CrimeIncidentCategoryIds,
+                                               DateTime DateReportedFrom,
+                                               DateTime DateReportedTo,
+                                               DateTime PossibleDateFrom,
+                                               DateTime PossibleDateTo,
+                                               string PossibleTimeFrom,
+                                               string PossibleTimeTo);
         bool Remove(string id, string LastUpdatedBy);
         List<CrimeIncidentReportModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize);
         bool Update(CrimeIncidentReportModel model, string LastUpdatedBy);

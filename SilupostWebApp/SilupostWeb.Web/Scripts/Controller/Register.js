@@ -322,6 +322,7 @@
         appSettings.credentialsModel = {};
         appSettings.credentialsModel = appSettings.verificationModel;
         appSettings.credentialsModel.EmailAddress = appSettings.verificationModel.IsEmail ? appSettings.verificationModel.EmailVerification : "";
+        appSettings.credentialsModel.VerificationCode = appSettings.confirmVerificationModel.VerificationCode;
         var credentialsTemplate = $.templates('#credentials-template');
         credentialsTemplate.link("#accountcard", appSettings.credentialsModel);
         initValidationCredentials();
@@ -337,6 +338,7 @@
         } else {
             appSettings.model.Password = appSettings.credentialsModel.Password;
             appSettings.model.EmailAddress = appSettings.credentialsModel.EmailAddress;
+            appSettings.model.VerificationCode = appSettings.confirmVerificationModel.VerificationCode;
         }
         appSettings.model.lookup = {
             EntityGender: appSettings.lookup.EntityGender

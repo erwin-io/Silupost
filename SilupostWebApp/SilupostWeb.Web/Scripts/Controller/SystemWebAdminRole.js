@@ -37,9 +37,17 @@ var systemWebAdminRoleController = function() {
     };
 
     var initPrivileges = function () {
-        appSettings.AllowedToAddWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 10).length > 0;
-        appSettings.AllowedToUpdateWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 11).length > 0;
-        appSettings.AllowedToDeleteWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 12).length > 0;
+
+        appSettings.AllowedToAddWebAdminRole = false;
+        appSettings.AllowedToUpdateWebAdminRole = false;
+        appSettings.AllowedToDeleteWebAdminRole = false;
+
+        if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null) {
+            appSettings.AllowedToAddWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 10).length > 0;
+            appSettings.AllowedToUpdateWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 11).length > 0;
+            appSettings.AllowedToDeleteWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 12).length > 0;
+        }
+
 
         if (!appSettings.AllowedToAddWebAdminRole) {
             $("#btnAdd").addClass("hidden");

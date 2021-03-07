@@ -208,6 +208,86 @@ namespace SilupostWeb.Data
             }
         }
 
+        public List<CrimeIncidentReportModel> GetByTracker(string TrackerRadiusInKM,
+                                               string TrackerPointLatitude,
+                                               string TrackerPointLongitude,
+                                               long ApprovalStatusId,
+                                               string CrimeIncidentCategoryIds,
+                                               DateTime DateReportedFrom,
+                                               DateTime DateReportedTo,
+                                               DateTime PossibleDateFrom,
+                                               DateTime PossibleDateTo,
+                                               string PossibleTimeFrom,
+                                               string PossibleTimeTo)
+        {
+            var results = new List<CrimeIncidentReportModel>();
+            try
+            {
+                var lookup = new Dictionary<string, CrimeIncidentReportModel>();
+
+                _dBConnection.Query("usp_crimeincidentreport_getByTracker",
+                new[]
+                {
+                    typeof(CrimeIncidentReportModel),
+                    typeof(CrimeIncidentCategoryModel),
+                    typeof(SystemUserModel),
+                    typeof(LegalEntityModel),
+                    typeof(EntityApprovalStatusModel),
+                    typeof(PageResultsModel),
+                }, obj =>
+                {
+                    CrimeIncidentReportModel cir = obj[0] as CrimeIncidentReportModel;
+                    CrimeIncidentCategoryModel cic = obj[1] as CrimeIncidentCategoryModel;
+                    SystemUserModel p = obj[2] as SystemUserModel;
+                    LegalEntityModel le = obj[3] as LegalEntityModel;
+                    EntityApprovalStatusModel eas = obj[4] as EntityApprovalStatusModel;
+                    PageResultsModel pr = obj[5] as PageResultsModel;
+                    CrimeIncidentReportModel model;
+                    if (!lookup.TryGetValue(cir.CrimeIncidentReportId, out model))
+                        lookup.Add(cir.CrimeIncidentReportId, model = cir);
+
+                    if (model.CrimeIncidentCategory == null)
+                        model.CrimeIncidentCategory = new CrimeIncidentCategoryModel();
+                    if (model.PostedBySystemUser == null)
+                        model.PostedBySystemUser = new SystemUserModel();
+                    if (model.PostedBySystemUser.LegalEntity == null)
+                        model.PostedBySystemUser.LegalEntity = new LegalEntityModel();
+                    if (model.ApprovalStatus == null)
+                        model.ApprovalStatus = new EntityApprovalStatusModel();
+                    if (model.PageResult == null)
+                        model.PageResult = new PageResultsModel();
+                    model.CrimeIncidentCategory = cic;
+                    model.PostedBySystemUser = p;
+                    model.PostedBySystemUser.LegalEntity = le;
+                    model.ApprovalStatus = eas;
+                    model.PageResult = pr;
+                    return model;
+                },
+                new
+                {
+                    TrackerRadiusInKM = TrackerRadiusInKM,
+                    TrackerPointLatitude = TrackerPointLatitude,
+                    TrackerPointLongitude = TrackerPointLongitude,
+                    ApprovalStatusId = ApprovalStatusId,
+                    CrimeIncidentCategoryIds = CrimeIncidentCategoryIds,
+                    DateReportedFrom = DateReportedFrom,
+                    DateReportedTo = DateReportedTo,
+                    PossibleDateFrom = PossibleDateFrom,
+                    PossibleDateTo = PossibleDateTo,
+                    PossibleTimeFrom = PossibleTimeFrom,
+                    PossibleTimeTo = PossibleTimeTo,
+                }, splitOn: "CrimeIncidentReportId,CrimeIncidentCategoryId,SystemUserId,LegalEntityId,ApprovalStatusId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                if (lookup.Values.Any())
+                {
+                    results.AddRange(lookup.Values);
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<CrimeIncidentReportModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize)
         {
             var results = new List<CrimeIncidentReportModel>();

@@ -53,56 +53,56 @@
                                     <span class="media-body">Report Library</span>
                                 </a>
                             }
-                        <ul class="dropdown-menu">
-                            <li>
+                            <ul class="dropdown-menu">
+                                <li>
 
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Report")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Crime Incident Report"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Report</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/CrimeIncidentReport"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Report</span></a>}
-                                }
-                            </li>
-                            <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Report")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Crime Incident Report"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Report</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/CrimeIncidentReport"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Report</span></a>}
+                                    }
+                                </li>
+                                <li>
 
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Report Validation")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Enforcement Report Validation"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Report Validation</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/EnforcementReportValidation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Report Validation</span></a>}
-                                }
-                            </li>
-                        </ul>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Report Validation")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Enforcement Report Validation"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Report Validation</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/EnforcementReportValidation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Report Validation</span></a>}
+                                    }
+                                </li>
+                            </ul>
                         </li>
                     }
 
-                    if (appState.UserViewAccess.Any(x => x.ModuleName.Equals("Mobile Controller")))
+                    if (appState.UserViewAccess.Any(x => x.ModuleName.Equals("Report Tracker")))
                     {
-                        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Mobile Controller") ? "open" : "")">
-                            @if (ViewBag.Page.Module.Equals("Mobile Controller"))
+                        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Report Tracker") ? "open" : "")">
+                            @if (ViewBag.Page.Module.Equals("Report Tracker"))
                             {
                                 <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
-                                    <i class="material-icons media-left pmd-sm">phone_android</i> <span class="media-body">Mobile Controller</span>
+                                    <i class="material-icons media-left pmd-sm">pin_drop</i> <span class="media-body">Report Tracker</span>
                                 </a>
                             }
                             else
                             {
                                 <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
-                                    <i class="material-icons media-left pmd-sm">phone_android</i>
-                                    <span class="media-body">Mobile Controller</span>
+                                    <i class="material-icons media-left pmd-sm">pin_drop</i>
+                                    <span class="media-body">Report Tracker</span>
                                 </a>
                             }
                             <ul class="dropdown-menu">
                                 <li>
 
-                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Mobile Controller")))
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Report Tracker")))
                                     {
-                                        if (ViewBag.Page.MenuName.Equals("Mobile Controller"))
-                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Mobile Controller</span></a>}
+                                        if (ViewBag.Page.MenuName.Equals("Report Tracker"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Report Tracker</span></a>}
                                         else
-                                        {<a class="pmd-ripple-effect" href="/MobileController"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Mobile Controller</span></a>}
+                                        {<a class="pmd-ripple-effect" href="/ReportTracker"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Report Tracker</span></a>}
                                     }
                                 </li>
                             </ul>
@@ -125,57 +125,57 @@
                                     <span class="media-body">System Setup</span>
                                 </a>
                             }
-                        <ul class="dropdown-menu">
-                            <li>
+                            <ul class="dropdown-menu">
+                                <li>
 
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Type")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
-                                }
-                            </li>
-                            <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Type")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Crime Incident Type"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Type</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/CrimeIncidentType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Type</span></a>}
+                                    }
+                                </li>
+                                <li>
 
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Category")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Crime Incident Category"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Category</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/CrimeIncidentCategory"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Category</span></a>}
-                                }
-                            </li>
-                            <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Crime Incident Category")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Crime Incident Category"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Crime Incident Category</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/CrimeIncidentCategory"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Crime Incident Category</span></a>}
+                                    }
+                                </li>
+                                <li>
 
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Type")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Enforcement Type"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Type</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/EnforcementType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Type</span></a>}
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Type")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Enforcement Type"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Type</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/EnforcementType"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Type</span></a>}
 
-                                }
-                            </li>
-                            <li>
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Unit")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Enforcement Unit"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Unit</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/EnforcementUnit"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Unit</span></a>}
-                                }
-                            </li>
-                            <li>
-                                @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Station")))
-                                {
-                                    if (ViewBag.Page.MenuName.Equals("Enforcement Station"))
-                                    {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Station</span></a>}
-                                    else
-                                    {<a class="pmd-ripple-effect" href="/EnforcementStation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Station</span></a>}
-                                }
-                            </li>
-                        </ul>
+                                    }
+                                </li>
+                                <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Unit")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Enforcement Unit"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Unit</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/EnforcementUnit"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Unit</span></a>}
+                                    }
+                                </li>
+                                <li>
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Enforcement Station")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Enforcement Station"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Enforcement Station</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/EnforcementStation"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Enforcement Station</span></a>}
+                                    }
+                                </li>
+                            </ul>
                         </li>
                     }
 

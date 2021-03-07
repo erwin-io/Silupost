@@ -39,6 +39,18 @@ namespace SilupostWeb.Facade.Interface
                                                                    string OrderColumn,
                                                                    string OrderDir);
 
+        PageResultsViewModel<CrimeIncidentReportViewModel> GetByTracker(string TrackerRadiusInKM,
+                                                                       string TrackerPointLatitude,
+                                                                       string TrackerPointLongitude,
+                                                                       long ApprovalStatusId,
+                                                                       string CrimeIncidentCategoryIds,
+                                                                       DateTime DateReportedFrom,
+                                                                       DateTime DateReportedTo,
+                                                                       DateTime PossibleDateFrom,
+                                                                       DateTime PossibleDateTo,
+                                                                       string PossibleTimeFrom,
+                                                                       string PossibleTimeTo);
+
         PageResultsViewModel<CrimeIncidentReportViewModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize);
     }
 }

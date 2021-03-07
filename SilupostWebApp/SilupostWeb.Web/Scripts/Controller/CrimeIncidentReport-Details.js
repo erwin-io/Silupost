@@ -290,10 +290,16 @@ var crimeIncidentReportDetailsController = function() {
             }
             appSettings.model.lookup = appSettings.lookup;
 
+            appSettings.AllowedToApproveReport = false;
+            appSettings.AllowedToDeclineReport = false;
+            appSettings.AllowedToCancelReport = false;
 
-            appSettings.model.AllowedToApproveReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 2).length > 0;
-            appSettings.model.AllowedToDeclineReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 3).length > 0;
-            appSettings.model.AllowedToCancelReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 6).length > 0;
+            if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null) {
+                appSettings.model.AllowedToApproveReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 2).length > 0;
+                appSettings.model.AllowedToDeclineReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 3).length > 0;
+                appSettings.model.AllowedToCancelReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 6).length > 0;
+            }
+
 
 
             $(".select-simple").select2({

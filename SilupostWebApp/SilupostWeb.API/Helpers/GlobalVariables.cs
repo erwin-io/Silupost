@@ -9,6 +9,7 @@ namespace SilupostWeb.API.Helpers
     public static class GlobalVariables
     {
         public static string goAppHostName { get; set; }
+        public static string goOAuthURI { get; set; }
         public static string goApplicationName { get; set; }
         public static string goIssuer { get; set; }
         public static string goAudienceId { get; set; }
@@ -20,6 +21,7 @@ namespace SilupostWeb.API.Helpers
         public static string goDefaultEnforcementTypeIconFilePath { get; set; }
         public static string goDefaultEnforcementUnitIconFilePicPath { get; set; }
         public static string goDefaultEnforcementStationIconFilePath { get; set; }
+        public static string goDefaultCrimeReportMarkerIconFilePath { get; set; }
         //Email Service
         public static string goEmailVerificationTempPath { get; set; }
         public static string goChangePasswordTempPath { get; set; }
