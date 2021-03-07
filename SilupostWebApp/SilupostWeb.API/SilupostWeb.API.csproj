@@ -254,7 +254,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
@@ -266,7 +265,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DefaultFiles\CrimeIncidentType\4me-icon-alert.png" />
+    <Content Include="App_Data\DefaultFiles\CrimeReportMarker\SILUPOST_REPORT_MARKER.png" />
+    <Content Include="App_Data\DefaultFiles\EnforcementStation\police-station-pngrepo-com.png" />
+    <Content Include="App_Data\DefaultFiles\EnforcementType\icon-law-enforcement2x.png" />
+    <Content Include="App_Data\DefaultFiles\EnforcementUnit\Icon-2.png" />
+    <Content Include="App_Data\DefaultFiles\SystemUser\icons8_user_90_gray.png" />
+    <Content Include="App_Data\EmailTemp\ChangePasswordTemp.html" />
+    <Content Include="App_Data\EmailTemp\EmailVerificationTemp.html" />
+    <Content Include="App_Data\EmailTemp\ForgotPasswordTemp.html" />
+    <Content Include="App_Data\EmailTemp\SILUPOST_ICON.png" />
     <Content Include="Global.asax" />
+    <Content Include="App_Data\credentials.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <EmbeddedResource Include="Scripts\CustomSwagger.js" />
     <Content Include="Web.config">
