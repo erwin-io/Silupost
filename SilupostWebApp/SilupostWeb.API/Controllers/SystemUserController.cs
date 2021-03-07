@@ -398,6 +398,7 @@ namespace SilupostWeb.API.Controllers
                 if (string.IsNullOrEmpty(model.VerificationCode))
                 {
                     response.Message = string.Format(Messages.InvalidId, "Verification Code");
+                    response.DeveloperMessage = response.Message;
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
@@ -406,6 +407,7 @@ namespace SilupostWeb.API.Controllers
                 if (verification == null)
                 {
                     response.Message = "User is not verified";
+                    response.DeveloperMessage = response.Message;
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
                 else
@@ -413,21 +415,24 @@ namespace SilupostWeb.API.Controllers
                     if (verification.IsVerified)
                     {
                         response.Message = "Username or Email already in used";
+                        response.DeveloperMessage = response.Message;
                         return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                     }
                 }
 
-                if (string.IsNullOrEmpty(model.EnforcementStationId))
+                if (string.IsNullOrEmpty(model.EnforcementStationGuestCode))
                 {
                     response.Message = string.Format(Messages.InvalidId, "Enforcement Station");
+                    response.DeveloperMessage = response.Message;
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
-                var inforcementStation = _enforcementStationFacade.Find(model.EnforcementStationId);
+                var inforcementStation = _enforcementStationFacade.FindByGuestCode(model.EnforcementStationGuestCode);
 
                 if (inforcementStation == null)
                 {
                     response.Message = string.Format("{0} {1}", Messages.NoRecord, "Enforcement Station");
+                    response.DeveloperMessage = response.Message;
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
 
@@ -455,6 +460,7 @@ namespace SilupostWeb.API.Controllers
                 if (profilePic == null)
                 {
                     response.Message = string.Format(Messages.CustomError, "There is a problem ecountered while creating System User, Default ProfilePic not found");
+                    response.DeveloperMessage = response.Message;
                     return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserViewModel>>(Request, HttpStatusCode.BadRequest, response);
                 }
 

@@ -95,7 +95,7 @@ namespace SilupostWeb.Mapping.Profiles
                 .ForPath(dest => dest.EnforcementStation, opt => opt.MapFrom(src =>
                     new EnforcementStationModel
                     {
-                        EnforcementStationId = src.EnforcementStationId
+                        EnforcementStationGuestCode = src.EnforcementStationGuestCode
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel

@@ -39,7 +39,7 @@ namespace SilupostWeb.Domain.BindingModel
 
     public class CreateWebAccountSystemUserBindingModel : CreateAccountSystemUserBindingModel
     {
-        public string EnforcementStationId { get; set; }
+        public string EnforcementStationGuestCode { get; set; }
     }
     public class UpdateSystemUserBindingModel : SystemUserBindingModel
     {

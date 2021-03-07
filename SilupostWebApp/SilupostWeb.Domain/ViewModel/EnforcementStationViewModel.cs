@@ -10,6 +10,7 @@ namespace SilupostWeb.Domain.ViewModel
     {
         public string EnforcementStationId { get; set; }
         public string EnforcementStationName { get; set; }
+        public string EnforcementStationGuestCode { get; set; }
         public FileViewModel IconFile { get; set; }
         public SystemRecordManagerViewModel SystemRecordManager { get; set; }
         public EntityStatusViewModel EntityStatus { get; set; }
