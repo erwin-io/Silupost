@@ -1,7 +1,7 @@
 ﻿
 var crimeIncidentCategoryController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "CrimeIncidentCategory/" + Id + "/detail",
@@ -10,7 +10,7 @@ var crimeIncidentCategoryController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -21,7 +21,7 @@ var crimeIncidentCategoryController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,7 +32,7 @@ var crimeIncidentCategoryController = function() {
             getLookup: getLookup
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable;
     var appSettings = {
@@ -42,11 +42,13 @@ var crimeIncidentCategoryController = function() {
     };
     var init = function (obj) {
         initEvent();
-		appSettings.CrimeIncidentType = {
-			CrimeIncidentTypeId : "",
-			lookup : []
-		};
-		initLookup();
+        appSettings.CrimeIncidentType = {
+            CrimeIncidentTypeId: "",
+            lookup: []
+        };
+        setTimeout(function () {
+            initLookup();
+        }, 1000);
 
 
         $(window).resize(function () {
@@ -311,7 +313,6 @@ var crimeIncidentCategoryController = function() {
 
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if(!form.valid())
             return;
         if(appSettings.status.IsNew){
@@ -342,7 +343,6 @@ var crimeIncidentCategoryController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {
@@ -514,11 +514,19 @@ var crimeIncidentCategoryController = function() {
                                 });
                             }
                         },
-                        error: function (errormessage) {
+                        error: function (result) {
+                            var errormessage = "";
+                            var errorTitle = "";
+                            if (result.responseJSON.Message != null) {
+                                erroTitle = "Error!";
+                                errormessage = result.responseJSON.Message;
+                            }
+                            if (result.responseJSON.DeveloperMessage != null && result.responseJSON.DeveloperMessage.includes("Cannot delete")) {
+                                erroTitle = "Not Allowed!";
+                                errormessage = "Data in used!";
+                            }
                             $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                            target.empty();
-                            target.html(targetName);
-                            Swal.fire('Error!',errormessage.Message,'error');
+                            Swal.fire('Error!', errormessage, 'error');
                             circleProgress.close();
                         }
                     });

@@ -1,0 +1,281 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <style>
+        .btn:focus, .btn:active, button:focus, button:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #image-gallery .modal-footer {
+            display: block;
+        }
+
+        .thumb {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        #tab-page-crimeIncidentReportMedia img,
+        #tab-page-crimeIncidentReportMedia video {
+            width: 100%;
+        }
+
+        hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+}
+<!-- Title -->
+<h1 class="section-title" id="services"><span>@ViewBag.Page.Title</span></h1>
+<!-- End Title -->
+<!--breadcrum start-->
+<ol class="breadcrumb text-left">
+    <li>
+        @ViewBag.Page.Module
+    </li>
+    @if (ViewBag.Page.ParentName != null)
+    {
+        <li><a href="@ViewBag.Page.ParentName">@ViewBag.Page.ParentTitle</a></li>
+    }
+    <li>
+        @ViewBag.Page.Title
+    </li>
+</ol><!--breadcrum end-->
+
+<div class="row ">
+    <!-- table card code and example -->
+    <div class="col-md-12">
+        <div class="component-box">
+            <!-- table card example -->
+            <div class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">@ViewBag.Page.Title</h2>
+                </div>
+                <div class="pmd-card-body">
+
+
+                    <div class="group-fields row clearfix">
+                        <div class="pull-right">
+                            <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary pmd-tooltip" type="button" id="btnToggleAdvanceSearchEnforcementValidation" data-toggle="tooltip" data-placement="left" title="Advance search mode">
+                                <i class="material-icons pmd-sm">filter_list</i>
+                            </button>
+                        </div>
+                        <div class="col-xs-8 pull-left" id="filterReportValidationStatusView">
+                        </div>
+                    </div>
+                    <div class="group-fields row clearfix">
+                        <div class="col-xs-12">
+                            <div id="advanceSearchEnforcementValidationView"></div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="group-fields row clearfix">
+                        <div class="col-xs-12">
+
+                            @Html.Partial("_Table")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- table card example end -->
+
+        </div>
+    </div>
+    <!-- table card code and example end -->
+    <div class="custom-floating-action">
+        <button id="btnOpen" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary">
+            <i class="material-icons pmd-sm">open_in_new</i>
+        </button>
+    </div>
+</div>
+
+
+
+@Html.Partial("~/Views/CrimeIncidentReport/_Details.cshtml")
+<div class="modal fade" id="modal-dialog" tabindex="-1" area-labelledby="modal-title" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a id="btnValidate" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary pmd-tooltip" data-link="disabled{:!CanValidate}" data-toggle="tooltip" data-placement="left" title="Set report as Valid report">
+                    <i class="material-icons pmd-sm">check_circle_outline</i>
+                </a>
+                <a id="btnReject" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-danger pmd-tooltip" data-link="disabled{:!CanReject}" data-toggle="tooltip" data-placement="left" title="Reject this Report">
+                    <i class="material-icons pmd-sm">cancel</i>
+                </a>
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-dialog-reportView" tabindex="-1" area-labelledby="modal-title" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="group-fields row clearfix">
+                    <div class="col-xs-12">
+                        <div id="reportView"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/Controller/CrimeIncidentReport-Details.js"></script>
+    <script src="~/Scripts/Controller/EnforcementReportValidation.js"></script>
+
+    <script>
+        enforcementReportValidation.init();
+    </script>
+
+    <script id="enforcementReportValidation-template" type="text/x-jsrender">
+        <form id="form-enforcementReportValidation">
+            <div class="group-fields clearfix row hidden">
+                <div class="col-xs-12">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="EnforcementReportValidationId" name="EnforcementReportValidationId" data-link="EnforcementReportValidationId" placeholder=" " />
+                        <span>EnforcementReport Validation Id</span>
+                    </label>
+                </div>
+            </div>
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    {^{if IsReportApproved}}
+                    <div class="pull-left">
+                        <h4>Report Status</h4>
+                        <span class="badge badge-success" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                    </div>
+                    {{/if}}
+                    {^{if IsReportDeclined}}
+                    <div class="pull-left">
+                        <h4>Report Status</h4>
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                    </div>
+                    {{/if}}
+                    {^{if IsReportPending}}
+                    <div class="pull-left">
+                        <h4>Validation Status</h4>
+                        {^{if IsValidated}}
+                        <span class="badge badge-success" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if IsRejected}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if Canceled}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if IsPending}}
+                        <span class="badge badge-warning" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    <div class="pull-right">
+                        <a id="btnShowReport" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View report details">
+                            <i class="material-icons pmd">info</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <textarea id="ReportNotes" name="ReportNotes" data-link="ReportNotes" placeholder=" " disabled></textarea>
+                        <span>Submission Report Notes</span>
+                    </label>
+                </div>
+            </div>
+            <hr />
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    {^{if IsViewOnly}}
+                    <label class="form-group pure-material-textfield-outlined">
+                        <textarea id="ValidationNotes" name="ValidationNotes" data-link="ValidationNotes" placeholder=" " disabled></textarea>
+                        <span>Add Validation Notes</span>
+                    </label>
+                    {{else}}
+                    <label class="form-group pure-material-textfield-outlined">
+                        <textarea id="ValidationNotes" name="ValidationNotes" data-link="ValidationNotes" placeholder=" "></textarea>
+                        <span>Add Validation Notes</span>
+                    </label>
+                    {{/if}}
+                </div>
+            </div>
+        </form>
+    </script>
+    <script id="filterReportValidationStatus-template" type="text/x-jsrender">
+        <form id="form-filterReportValidationStatus">
+
+            <div class="group-fields clearfix row">
+                <div class="col-xs-6">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label>Filter By Report Validation Status</label>
+                        <select id="ReportValidationFilterStatusId" name="ReportValidationFilterStatusId" data-link="ReportValidationFilterStatusId" class="select-simple form-control pmd-select2">
+                            {^{for lookup.ReportValidationStatus}}
+                            <option value="{{>Id}}">{{>Name}}</option>
+                            {{/for}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script id="advanceSearchEnforcementReportValidation-template" type="text/x-jsrender">
+
+        <form id="form-advanceSearchEnforcementReportValidation" class="hidden table-bordered" style="padding: 0px 10px;">
+            <div class="group-fields clearfix row">
+                <div class="col-xs-12">
+                    <h5>Advance Search</h5>
+                </div>
+                <div class="col-xs-4">
+                    <label class="form-group pure-material-textfield-outlined">
+                        <input id="CrimeIncidentCategoryNameFilter" name="CrimeIncidentCategoryNameFilter" data-link="CrimeIncidentCategoryName" placeholder=" " />
+                        <span>CrimeIncident Category Name</span>
+                    </label>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="DateSubmittedFrom" class="control-label">Date Submitted From</label>
+                        <input type="text" id="DateSubmittedFrom" name="DateSubmittedFrom" data-link="{formatDate:DateSubmittedFrom}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                        <label for="DateSubmittedTo" class="control-label">Date Submitted To</label>
+                        <input type="text" id="DateSubmittedTo" name="DateSubmittedTo" data-link="{formatDate:DateSubmittedTo}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-xs-2 pull-right">
+                    <label class="form-group">
+                        <a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" id="btnAdvanceSearch">
+                            <i class="material-icons pmd-sm">search</i>
+                        </a>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </script>
+}

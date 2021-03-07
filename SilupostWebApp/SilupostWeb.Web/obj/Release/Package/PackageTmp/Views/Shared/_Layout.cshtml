@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="DLMovieNow Admin Dashboard">
+    <meta name="description" content="SILUPOST WEB ADMIN">
     <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
     <title>@ViewBag.Page.Title - SILUPOST WEB ADMIN</title>
 
@@ -59,9 +59,16 @@
 
     <!-- Propeller bootstrap datetimepicker -->
     <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/datetimepicker/css/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
-
-    <!-- ProDatatable -->
     <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/datetimepicker/css/pmd-datetimepicker.css" type="text/css" rel="stylesheet" />
+
+    <!-- Propeller tooltip -->
+    <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/tooltip/css/tooltip.css" type="text/css" rel="stylesheet" />
+
+    <!-- Range Slider css -->
+    <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/range-slider/css/nouislider.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Nouislider css-->
+    <link href="~/plugins/Proppeller-Material-Design-Bootstrap/components/range-slider/css/range-slider.css" type="text/css" rel="stylesheet" />
 
     <!-- Site Theme -->
     <link rel="stylesheet" type="text/css" href="~/plugins/Proppeller-Material-Design-Bootstrap/assets/css/progress-circular.css">
@@ -157,7 +164,10 @@
     <!-- Jquery Loading Indicator Initialize -->
     <script src="~/plugins/Proppeller-Material-Design-Bootstrap/assets/js/progress-circular.js"></script>
     <!-- Jquery Loading Indicator Initialize -->
-    <script src="~/plugins/webcamjs-master/webcam.min.js"accesskey=""></script>
+    <script src="~/plugins/webcamjs-master/webcam.min.js" accesskey=""></script>
+    <!-- Slider js -->
+    <script src="~/plugins/Proppeller-Material-Design-Bootstrap/components/range-slider/js/wNumb.js"></script>
+    <script src="~/plugins/Proppeller-Material-Design-Bootstrap/components/range-slider/js/nouislider.js"></script>
 
     <script src="~/Scripts/App/app.js"></script>
     <script src="~/Scripts/App/globalConfig.js"></script>
@@ -168,6 +178,11 @@
     <script src="~/Scripts/App/dataFormat.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
     <script>app.init()</script>
     @RenderSection("scripts", required: false)
     <div class="lastDivTag"></div>

@@ -1,7 +1,7 @@
 ﻿
 var systemWebAdminRoleController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "SystemWebAdminRole/" + Id + "/detail",
@@ -10,7 +10,7 @@ var systemWebAdminRoleController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -19,7 +19,7 @@ var systemWebAdminRoleController = function() {
             getById: getById
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable;
     var appSettings = {
@@ -29,8 +29,34 @@ var systemWebAdminRoleController = function() {
     };
     var init = function (obj) {
         initEvent();
-        initGrid();
+        setTimeout(function () {
+            initPrivileges();
+            initGrid();
+        }, 1000);
+
     };
+
+    var initPrivileges = function () {
+
+        appSettings.AllowedToAddWebAdminRole = false;
+        appSettings.AllowedToUpdateWebAdminRole = false;
+        appSettings.AllowedToDeleteWebAdminRole = false;
+
+        if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null) {
+            appSettings.AllowedToAddWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 10).length > 0;
+            appSettings.AllowedToUpdateWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 11).length > 0;
+            appSettings.AllowedToDeleteWebAdminRole = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 12).length > 0;
+        }
+
+
+        if (!appSettings.AllowedToAddWebAdminRole) {
+            $("#btnAdd").addClass("hidden");
+            $("#btnAdd").attr("disabled", "true");
+        } else {
+            $("#btnAdd").removeClass("hidden");
+            $("#btnAdd").removeAttr("disabled");
+        }
+    }
 
     var iniValidation = function() {
         form.validate({
@@ -81,16 +107,33 @@ var systemWebAdminRoleController = function() {
                 { "data": "SystemWebAdminRoleId","sortable":false, "orderable": false, "searchable": false},
                 { "data": "RoleName" },
                 { "data": null, "searchable": false, "orderable": false, 
-                    render: function(data, type, full, meta){
-                        return '<span class="dropdown pmd-dropdown dropup clearfix">'
-                                +'<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-'+full.SystemWebAdminRoleId+'" data-toggle="dropdown" aria-expanded="true">'
-                                    +'<i class="material-icons pmd-sm">more_vert</i>'
-                                +'</button>'
-                                +'<ul aria-labelledby="drop-role-'+full.SystemWebAdminRoleId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
-                                    +'<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.SystemWebAdminRoleId+'" role="menuitem">Edit</a></li>'
-                                    +'<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.SystemWebAdminRoleId+'" role="menuitem">Remove</a></li>'
-                                +'</ul>'
-                                +'</span>'
+                    render: function (data, type, full, meta) {
+                        var editCtrl = '<li role="presentation"><a class="edit" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemWebAdminRoleId + '" role="menuitem">Edit</a></li>';
+                        var deleteCtrl = '<li role="presentation"><a class="remove" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemWebAdminRoleId + '" role="menuitem">Remove</a></li>';
+                        
+                        if (!appSettings.AllowedToUpdateWebAdminRole) {
+                            editCtrl = '';
+                        }
+                        if (!appSettings.AllowedToDeleteWebAdminRole) {
+                            deleteCtrl = '';
+                        }
+                        var controls = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                            + '<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.SystemWebAdminRoleId + '" data-toggle="dropdown" aria-expanded="true">'
+                            + '<i class="material-icons pmd-sm">more_vert</i>'
+                            + '</button>'
+                            + '<ul aria-labelledby="drop-role-' + full.SystemWebAdminRoleId + '" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
+                            + editCtrl
+                            + deleteCtrl
+                            + '</ul>'
+                            + '</span>';
+                        if (!appSettings.AllowedToUpdateWebAdminRole && !appSettings.AllowedToDeleteWebAdminRole) {
+                            controls = '<span class="dropdown pmd-dropdown dropup clearfix">'
+                            + '<button disabled class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="drop-role-' + full.SystemWebAdminRoleId + '" data-toggle="dropdown" aria-expanded="true">'
+                            + '<i class="material-icons pmd-sm">more_vert</i>'
+                            + '</button>'
+                            + '</span>';
+                        }
+                        return controls;
                     }
                 }
             ],
@@ -202,7 +245,6 @@ var systemWebAdminRoleController = function() {
     }
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if(!form.valid())
             return;
         if(appSettings.status.IsNew){
@@ -233,7 +275,6 @@ var systemWebAdminRoleController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {

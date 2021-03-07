@@ -21,11 +21,7 @@ using System.Net.Http.Formatting;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 using System.Net.Http.Headers;
-using Google.Apis.Drive.v3;
-using Google.Apis.Services;
-using Google.Apis.Auth.OAuth2;
 using System.Threading;
-using Google.Apis.Util.Store;
 
 namespace SilupostWeb.API.Controllers
 {

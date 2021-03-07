@@ -1,18 +1,147 @@
-var appController = function(){
+var appController = function () {
 
-	var appSettings = {
-		silupostWebAPIURI: "http://localhost:8100/api/v1/",
-		apiToken: "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJTeXN0ZW1Vc2VySWQiOiJTVS0wMDAwMDAwMDAxIiwibmJmIjoxNjEyNjkxMjk1LCJleHAiOjE2MTI3Nzc2OTUsImlzcyI6Imh0dHA6Ly93d3cuY3JpbWVyZXBvcnRhcHAuY29tIiwiYXVkIjoiQUU0OUEyQ0NCMkM1M0MyQUYyMTY1QjYwODc0RDcxOTEifQ.iXEDwaMxqT3lnlqCPPNYiRTaal5Jym7CLcxWA9O4Rlg",
-		mapBoxToken: "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg"
-	}
+    var apiService = function () {
+        var getRefreshToken = function (refreshToken) {
+            return $.ajax({
+                url: appSettings.silupostWebAPIURI + "SystemUser/GetRefreshToken?RefreshToken=" + refreshToken,
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json",
+            });
+        }
 
-	var init = function(){
-		initEvent();
-		removeSomeDiv();
-	}
+        var getAppRefreshToken = function () {
+            return $.ajax({
+                url: "/Account/GetApplicationState/",
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json"
+            });
+        }
+        var getApplicationState = function () {
+            return $.ajax({
+                url: "/Account/GetApplicationState",
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json"
+            });
+        }
+        var setAppRefreshToken = function (ApplicationToken) {
+            return $.ajax({
+                url: "/Account/SetApplicationToken",
+                type: "POST",
+                data: JSON.stringify({ ApplicationToken: ApplicationToken }),
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json",
+            });
+        }
+        var setApplicationState = function (applicationState) {
+            return $.ajax({
+                url: "/Account/SetApplicationState",
+                data: JSON.stringify({ ApplicationState: applicationState }),
+                type: "POST",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json",
+            });
+        }
 
-	var initEvent = function (event) {
+        return {
+            getRefreshToken: getRefreshToken,
+            getAppRefreshToken: getAppRefreshToken,
+            getApplicationState: getApplicationState,
+            setAppRefreshToken: setAppRefreshToken,
+            setApplicationState: setApplicationState
+        };
+    }
+    var api = new apiService();
+
+    var appSettings = {
+        //silupostWebAPIURI: "http://silupostweb-001-site1.htempurl.com/api/v1/",
+        silupostWebAPIURI: "http://localhost:8100/api/v1/",
+        apiToken: "",
+        authorized: false,
+        apiRefreshToken: "",
+        refreshTokenInterval: 30000,
+        apiCLient: "silupost",
+        mapBoxToken: "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg"
+    }
+
+    var init = function () {
+        initAppUser();
+        removeSomeDiv();
+        initEvent();
+    }
+
+    var initEvent = function () {
+        $("#btnLogout").on("click", function () {
+            api.setAppRefreshToken(null).done(function () {
+                api.setApplicationState(null).done(function () {
+                    window.location.replace("/Account/Login");
+                });
+            });
+        });
     };
+
+    var initAppUser = function () {
+        if (window.location.pathname === "/Account/Login") {
+            appSettings.authorized = false;
+        } else if (window.location.pathname === "/Account/Register") {
+            appSettings.authorized = false;
+        } else if (window.location.pathname === "/Account/ResetPassword") {
+            appSettings.authorized = false;
+        }else {
+            api.getApplicationState().done(function (result) {
+                if (result.Success) {
+                    appSettings.appState = result.Data;
+                    appSettings.apiToken = result.Data.ApplicationToken.AccessToken;
+                    appSettings.apiRefreshToken = result.Data.ApplicationToken.RefreshToken;
+                    appSettings.authorized = true;
+                }
+                if (appSettings.authorized) {
+                    api.getRefreshToken(appSettings.apiRefreshToken).done(function (result) {
+                        appSettings.apiToken = result.Data.access_token;
+                        appSettings.apiRefreshToken = result.Data.refresh_token;
+                        var appToken = {
+                            AccessToken: appSettings.apiToken,
+                            RefreshToken: appSettings.apiRefreshToken,
+                        }
+                        api.setAppRefreshToken(appToken).done(function (result) {
+                            setInterval(getRefreshToken, appSettings.refreshTokenInterval);
+                        }).error(function (result) {
+                            window.location.replace("/Account/Login");
+                        });
+                    }).error(function (result) {
+                        window.location.replace("/Account/Login");
+                    });
+                }
+                else {
+                    window.location.replace("/Account/Login");
+                }
+            }).error(function (result) {
+                window.location.replace("/Account/Login");
+            });
+        }
+    }
+
+    var getRefreshToken = function () {
+        if (appSettings.authorized) {
+            api.getRefreshToken(appSettings.apiRefreshToken).done(function (data) {
+                appSettings.apiToken = data.Data.access_token;
+                appSettings.apiRefreshToken = data.Data.refresh_token;
+                var appToken = {
+                    AccessToken: appSettings.apiRefreshToken,
+                    RefreshToken: appSettings.apiRefreshToken,
+                }
+                api.setAppRefreshToken(appToken).error(function (result) {
+                    window.location.replace("/Account/Login");
+                });
+            }).error(function (result) {
+                window.location.replace("/Account/Login");
+            });
+        } else {
+            window.location.replace("/Account/Login");
+        }
+    }
 
 	var removeSomeDiv = function(){
 		$(document).ready(function(){

@@ -1,7 +1,7 @@
 ﻿
 var crimeIncidentTypeController = function() {
 
-    var apiService = function (apiURI,apiToken) {
+    var apiService = function (apiURI) {
         var getById = function (Id) {
             return $.ajax({
                 url: apiURI + "CrimeIncidentType/" + Id + "/detail",
@@ -10,7 +10,7 @@ var crimeIncidentTypeController = function() {
                 contentType: 'application/json;charset=utf-8',
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -22,7 +22,7 @@ var crimeIncidentTypeController = function() {
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 headers: {
-                    Authorization: 'Bearer ' + apiToken
+                    Authorization: 'Bearer ' + app.appSettings.apiToken
                 }
             });
         }
@@ -32,7 +32,7 @@ var crimeIncidentTypeController = function() {
             getDefaultIconPic: getDefaultIconPic
         };
     }
-    var api = new apiService(app.appSettings.silupostWebAPIURI,app.appSettings.apiToken);
+    var api = new apiService(app.appSettings.silupostWebAPIURI);
 
     var dataTable;
     var appSettings = {
@@ -42,8 +42,10 @@ var crimeIncidentTypeController = function() {
     };
     var init = function (obj) {
         initEvent();
-        initGrid();
-        initDefaultIconPic();
+        setTimeout(function () {
+            initGrid();
+            initDefaultIconPic();
+        }, 1000);
 
         
 
@@ -70,7 +72,6 @@ var crimeIncidentTypeController = function() {
     var initDefaultIconPic = function () {
         api.getDefaultIconPic().done(function (data) {
             appSettings.DefaultIconPic = data.Data;
-            console.log(data.Data);
         });
     }
 
@@ -233,7 +234,6 @@ var crimeIncidentTypeController = function() {
         $("#modal-dialog").find('.modal-footer #btnSave').html('Save');
         $("#modal-dialog").find('.modal-footer #btnSave').attr("data-name","Save");
 
-        console.log(appSettings.DefaultIconPic);
         //reset model 
         appSettings.model = {
             IconFile: {
@@ -280,7 +280,6 @@ var crimeIncidentTypeController = function() {
                         FileFromBase64String: fileFromBase64String,
                         IsDefault: false
                     }
-                    console.log(appSettings.model);
                 }
             }
             reader.readAsDataURL(file);
@@ -297,7 +296,6 @@ var crimeIncidentTypeController = function() {
             circleProgress.show(true);
             api.getById(appSettings.currentId).done(function (data) {
                 appSettings.model = data.Data;
-                console.log(appSettings.model);
                 if(appSettings.model.IconFile == null){
                     appSettings.model.IconFile = {
                         FileName: appSettings.DefaultIconPic.FileName,
@@ -310,7 +308,6 @@ var crimeIncidentTypeController = function() {
 
                 appSettings.model.IconFile.FileData = 'data:' + appSettings.model.IconFile.MimeType + ';base64,' + appSettings.model.IconFile.FileContent;
                 appSettings.model.IconFile.FileFromBase64String = appSettings.model.IconFile.FileContent;
-                console.log(appSettings.model);
 
                 //render template
                 crimeIncidentTypeTemplate.link("#modal-dialog .modal-body", appSettings.model);
@@ -369,7 +366,6 @@ var crimeIncidentTypeController = function() {
 
     //Save Data Function 
     var Save = function(e){
-        console.log(appSettings.model);
         if(!form.valid())
             return;
         if(appSettings.status.IsNew){
@@ -400,7 +396,6 @@ var crimeIncidentTypeController = function() {
                         },
                         data: JSON.stringify(appSettings.model),
                         success: function (result) {
-                            console.log(result);
                             if (result.IsSuccess) {
                                 circleProgress.close();
                                 Swal.fire("Success!", result.Message, "success").then((prompt) => {
@@ -560,11 +555,19 @@ var crimeIncidentTypeController = function() {
                                 });
                             }
                         },
-                        error: function (errormessage) {
+                        error: function (result) {
+                            var errormessage = "";
+                            var errorTitle = "";
+                            if (result.responseJSON.Message != null) {
+                                erroTitle = "Error!";
+                                errormessage = result.responseJSON.Message;
+                            }
+                            if (result.responseJSON.DeveloperMessage != null && result.responseJSON.DeveloperMessage.includes("Cannot delete")) {
+                                erroTitle = "Not Allowed!";
+                                errormessage = "Data in used!";
+                            }
                             $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                            target.empty();
-                            target.html(targetName);
-                            Swal.fire('Error!',errormessage.Message,'error');
+                            Swal.fire('Error!', errormessage, 'error');
                             circleProgress.close();
                         }
                     });
