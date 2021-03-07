@@ -386,7 +386,10 @@ namespace SilupostWeb.Facade
                 {
                     if (model.ProfilePicture.IsDefault)
                     {
-                        updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                        if(!string.IsNullOrEmpty(model.ProfilePicture.FileFromBase64String))
+                        {
+                            updateModel.ProfilePicture.FileContent = System.Convert.FromBase64String(model.ProfilePicture.FileFromBase64String);
+                        }
                         updateModel.ProfilePicture.SystemRecordManager.CreatedBy = LastUpdatedBy;
                         var fileId = _fileRepositoryDAC.Add(updateModel.ProfilePicture);
                         if (string.IsNullOrEmpty(fileId))

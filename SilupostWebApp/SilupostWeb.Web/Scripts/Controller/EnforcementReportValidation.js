@@ -400,9 +400,15 @@ var enforcementReportValidationController = function() {
                     $("#modal-dialog #btnReject").removeClass("hidden");
                 }
 
+                appSettings.AllowedToValidateEnforcementReport = false;
+                appSettings.AllowedToRejectEnforcementReport = false;
 
-                appSettings.model.AllowedToValidateEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 4).length > 0;
-                appSettings.model.AllowedToRejectEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 5).length > 0;
+                if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null) {
+                    appSettings.model.AllowedToValidateEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 4).length > 0;
+                    appSettings.model.AllowedToRejectEnforcementReport = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 5).length > 0;
+                }
+
+
                 if (!appSettings.model.AllowedToValidateEnforcementReport) {
                     $("#modal-dialog #btnValidate").addClass("hidden");
                     $("#modal-dialog #btnValidate").attr("disabled", "true");

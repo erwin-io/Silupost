@@ -112,7 +112,7 @@ namespace SilupostWeb.API.Controllers
                     {
                         response.IsSuccess = true;
                         response.Message = Messages.Created;
-                        response.Data = result;
+                        response.Data = new SystemUserVerificationViewModel() { VerificationSender = model.VerificationSender };
                         return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.Created, response);
                     }
                     else
@@ -159,6 +159,11 @@ namespace SilupostWeb.API.Controllers
                 {
 
                     var result = _systemUserFacade.FindByUsername(model.VerificationSender);
+                    if(result == null)
+                    {
+                        response.Message = Messages.NoRecord;
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.NotFound, response);
+                    }
                     var verification = _systemUserVerificationFacade.FindById(id);
 
                     var success = EmailService.SendEmailChangePassword(model.VerificationSender, result.SystemUserId, code);

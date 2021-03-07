@@ -21,10 +21,15 @@ using System.Net.Http.Formatting;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 using System.Net.Http.Headers;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
+using Google.Apis.Auth.OAuth2;
+using System.Threading;
+using Google.Apis.Util.Store;
 
 namespace SilupostWeb.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/v1/File")]
     public class FileController : ApiController
     {
@@ -37,7 +42,7 @@ namespace SilupostWeb.API.Controllers
         }
 
         #endregion
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [Route("getFile")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -293,5 +298,41 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<FileViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+
+
+        [Route("GetDefaultCrimeReportMarkerIcon")]
+        [HttpGet]
+        [SwaggerOperation("get")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        public IHttpActionResult GetDefaultCrimeReportMarkerIcon()
+        {
+            IHttpActionResult response;
+
+            try
+            {
+                HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goDefaultCrimeReportMarkerIconFilePath);
+                string fileName = Path.GetFileName(filePath);
+                Stream fileStream = new MemoryStream(System.IO.File.ReadAllBytes(filePath));
+                responseMessage.Content = new StreamContent(fileStream);
+                var cd = new System.Net.Mime.ContentDisposition
+                {
+                    FileName = fileName,
+                    Inline = false,
+                };
+                responseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue(cd.DispositionType.ToString());
+                responseMessage.Content.Headers.ContentDisposition.FileName = fileName;
+                responseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                response = ResponseMessage(responseMessage);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

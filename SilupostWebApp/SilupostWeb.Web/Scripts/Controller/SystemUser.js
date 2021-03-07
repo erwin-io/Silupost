@@ -142,9 +142,15 @@ var systemUserController = function() {
     };
 
     var initPrivileges = function () {
-        appSettings.AllowedToAddUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 7).length > 0;
-        appSettings.AllowedToUpdateUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 8).length > 0;
-        appSettings.AllowedToDeleteUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 9).length > 0;
+
+        appSettings.AllowedToAddUser = false;
+        appSettings.AllowedToUpdateUser = false;
+        appSettings.AllowedToDeleteUser = false;
+        if (app.appSettings.appState.Privileges !== undefined && app.appSettings.appState.Privileges !== null) {
+            appSettings.AllowedToAddUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 7).length > 0;
+            appSettings.AllowedToUpdateUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 8).length > 0;
+            appSettings.AllowedToDeleteUser = app.appSettings.appState.Privileges.filter(p => p.SystemWebAdminPrivilegeId === 9).length > 0;
+        }
 
         if (!appSettings.AllowedToAddUser) {
             $("#btnAdd").addClass("hidden");

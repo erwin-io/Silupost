@@ -155,7 +155,38 @@ namespace SilupostWeb.Facade
             result.Items = AutoMapperHelper<CrimeIncidentReportModel, CrimeIncidentReportViewModel>.MapList(data);
             result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows: 0;
             return result;
-        } 
+        }
+
+
+
+        public PageResultsViewModel<CrimeIncidentReportViewModel> GetByTracker(string TrackerRadiusInKM,
+                                                                       string TrackerPointLatitude,
+                                                                       string TrackerPointLongitude,
+                                                                       long ApprovalStatusId,
+                                                                       string CrimeIncidentCategoryIds,
+                                                                       DateTime DateReportedFrom,
+                                                                       DateTime DateReportedTo,
+                                                                       DateTime PossibleDateFrom,
+                                                                       DateTime PossibleDateTo,
+                                                                       string PossibleTimeFrom,
+                                                                       string PossibleTimeTo)
+        {
+            var result = new PageResultsViewModel<CrimeIncidentReportViewModel>();
+            var data = _crimeIncidentReportRepositoryDAC.GetByTracker(TrackerRadiusInKM, 
+                                                                        TrackerPointLatitude, 
+                                                                        TrackerPointLongitude, 
+                                                                        ApprovalStatusId, 
+                                                                        CrimeIncidentCategoryIds, 
+                                                                        DateReportedFrom, 
+                                                                        DateReportedTo, 
+                                                                        PossibleDateFrom, 
+                                                                        PossibleDateTo,
+                                                                        PossibleTimeFrom,
+                                                                        PossibleTimeTo);
+            result.Items = AutoMapperHelper<CrimeIncidentReportModel, CrimeIncidentReportViewModel>.MapList(data);
+            result.TotalRows = data.Count > 0 ? data.FirstOrDefault().PageResult.TotalRows : 0;
+            return result;
+        }
 
         public PageResultsViewModel<CrimeIncidentReportViewModel> GetPageByPostedBySystemUserId(string PostedBySystemUserId, int PageNo, int PageSize)
         {
