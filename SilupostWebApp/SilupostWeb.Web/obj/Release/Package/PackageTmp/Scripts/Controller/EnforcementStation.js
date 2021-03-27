@@ -78,14 +78,18 @@ var enforcementStationController = function() {
 
     var iniValidation = function() {
         form.validate({
-            ignore:[],
+            ignore: [],
             rules: {
                 EnforcementStationName: {
                     required: true
-                }
+                },
+                EnforcementStationGuestCode: {
+                    required: true
+                },
             },
             messages: {
                 EnforcementStationName: "Please enter Enforcement Station Name",
+                EnforcementStationGuestCode: "Please enter Enforcement Station Guest Code",
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -157,6 +161,7 @@ var enforcementStationController = function() {
                     }
                 },
                 { "data": "EnforcementStationName" },
+                { "data": "EnforcementStationGuestCode" },
                 { "data": null, "searchable": false, "orderable": false, 
                     render: function(data, type, full, meta){
                         return '<span class="dropdown pmd-dropdown dropup clearfix">'

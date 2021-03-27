@@ -1,0 +1,290 @@
+﻿@{
+    Layout = "~/Views/Shared/_MapLayoutMobile.cshtml";
+}
+
+@section Styles
+{
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        .mapboxgl-popup {
+            max-width: 400px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mapVeiw {
+            right: 0;
+            top: 0;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        .custom-floating-action button {
+            cursor: pointer !important;
+        }
+
+        .mapboxgl-canvas-container {
+            height: 100vh;
+        }
+
+        .mapboxgl-control-container {
+            display: none !important;
+        }
+
+        .mapboxgl-popup-content {
+            -webkit-box-shadow: 16px 23px 15px 5px rgba(0,0,0,0.57);
+            -moz-box-shadow: 16px 23px 15px 5px rgba(0,0,0,0.57);
+            box-shadow: 16px 23px 15px 5px rgba(0,0,0,0.57);
+            border-radius: 2px;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .mapboxgl-popup-close-button {
+            padding: 10px !important;
+            font-size: 20px !important;
+        }
+
+
+        .mapbox-modal-title {
+            color: #f14424!important;
+        }
+        .mapbox-modal-title:hover {
+            color: #f15c24;
+        }
+
+        .mapboxgl-popup-content {
+        }
+
+            .mapboxgl-popup-content p {
+                margin: 0 0 10px;
+                font-family: Roboto;
+                font-size: 1rem;
+                line-height: 1.4;
+                color: #333;
+            }
+
+
+        .pmd-range-slider .noUi-tooltip,
+        .noUi-handle.noUi-active,
+        .pmd-range-slider.noUi-connect,
+        .pmd-range-slider .noUi-handle:before,
+        .pmd-range-slider.noUi-vertical.noUi-connect,
+        .pmd-range-slider.noUi-horizontal .noUi-handle-upper .noUi-tooltip:before,
+        .pmd-range-slider.noUi-horizontal .noUi-handle-lower .noUi-tooltip:before,
+        .pmd-range-slider.noUi-vertical .noUi-handle-upper .noUi-tooltip:before,
+        .pmd-range-slider.noUi-vertical .noUi-handle-lower .noUi-tooltip:before {
+            background: #4285f4 !important;
+        }
+    </style>
+}
+
+<div class="pmd-sidebar-overlay"></div>
+<aside id="basicSidebar" class="pmd-sidebar sidebar-default pmd-sidebar-slide-push pmd-sidebar-left pmd-sidebar-open bg-fill-darkblue sidebar-with-icons basic-sub-menu-1" role="navigation">
+    <ul class="nav pmd-sidebar-nav">
+
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">list</i>
+                <span class="media-body">Crime/Incident Category</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="group-fields clearfix row" style="padding:20px!important">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Crime/Incident Category</label>
+                                <select id="CrimeIncidentTypes" class="form-control select-tags pmd-select2-tags" multiple>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown hidden">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">thumbs_up_down</i>
+                <span class="media-body">Approval Status</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="group-fields clearfix row" style="padding:20px!important">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label>Filter By ApprovalStatus</label>
+                                <select id="ApprovalStatusId" name="ApprovalStatusId" class="select-simple form-control pmd-select2">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">zoom_out_map</i>
+                <span class="media-body">Tracker Radius</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="group-fields clearfix row" style="padding:20px!important">
+                        <div class="col-xs-12">
+                            <div id="TrackerRadiusInKM" class="pmd-range-slider"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown pmd-dropdown hidden">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">place</i>
+                <span class="media-body">Tracker Point</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="group-fields clearfix row" style="padding:20px!important">
+                        <div class="col-xs-12">
+                            <label class="form-group pure-material-textfield-outlined">
+                                <input id="TrackerPointLatitude" readonly name="TrackerPointLatitude" placeholder=" " />
+                                <span>Tracker Point Latitude</span>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="group-fields clearfix row" style="padding:20px!important">
+                        <div class="col-xs-12">
+                            <label class="form-group pure-material-textfield-outlined">
+                                <input id="TrackerPointLongitude" readonly name="TrackerPointLongitude" placeholder=" " />
+                                <span>Tracker Point Longitude</span>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">date_range</i>
+                <span class="media-body">Posted Date</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="DateReportedFrom" class="control-label">Date Reported From</label>
+                                <input type="text" id="DateReportedFrom" name="DateReportedFrom" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="DateReportedTo" class="control-label">Date Reported To</label>
+                                <input type="text" id="DateReportedTo" name="DateReportedTo" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">date_range</i>
+                <span class="media-body">Possible Date</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="PossibleDateFrom" class="control-label">Possible Date From</label>
+                                <input type="text" id="PossibleDateFrom" name="PossibleDateFrom" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="PossibleDateTo" class="control-label">Possible Date To</label>
+                                <input type="text" id="PossibleDateTo" name="PossibleDateTo" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+            </ul>
+        </li>
+
+
+
+        <li class="dropdown pmd-dropdown">
+            <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                <i class="material-icons media-left pmd-sm">access_time</i>
+                <span class="media-body">Possible Time</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="PossibleTimeFrom" class="control-label">Possible Date From</label>
+                                <input type="text" id="PossibleTimeFrom" name="PossibleTimeFrom" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+                <li>
+                    <di class="group-fields clearfix row">
+                        <div class="col-xs-12">
+                            <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                <label for="PossibleTimeTo" class="control-label">Possible Date To</label>
+                                <input type="text" id="PossibleTimeTo" name="PossibleTimeTo" class="form-control" />
+                            </div>
+                        </div>
+                    </di>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</aside>
+
+
+<div id="mapVeiw"></div>
+
+<div class="custom-floating-action">
+    <button id="btnToggleFilter" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary margin-r8 pmd-sidebar-toggle" data-target="basicSidebar" data-placement="left" data-position="slidepush" is-open="true" is-open-width="1200">
+        <i class="material-icons pmd-sm">filter_list</i>
+    </button>
+    <button id="btnGetCurrentLocation" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary">
+        <i class="material-icons pmd-sm">location_on</i>
+    </button>
+</div>
+
+
+@section Scripts{
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+    <script src="~/Scripts/Controller/ReportTrackerMobile.js"></script>
+
+    <script>
+        @*var obj = @Html.Raw(Json.Encode(ViewBag.Lookup));
+        obj.MobileView = true;
+        reportTracker.init(obj);*@
+    </script>
+
+}

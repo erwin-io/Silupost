@@ -57,7 +57,7 @@ var appController = function () {
 
     var appSettings = {
         //silupostWebAPIURI: "http://silupostweb-001-site1.htempurl.com/api/v1/",
-        silupostWebAPIURI: "http://localhost:8100/api/v1/",
+        silupostWebAPIURI: "http://192.168.43.93:9100/api/v1/",
         apiToken: "",
         authorized: false,
         apiRefreshToken: "",
@@ -66,8 +66,12 @@ var appController = function () {
         mapBoxToken: "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg"
     }
 
-    var init = function () {
-        initAppUser();
+    var init = function (obj) {
+        appSettings = $.extend(appSettings, obj);
+        if (appSettings.AllowAnonymous === undefined || appSettings.AllowAnonymous !== null) {
+            if (!appSettings.AllowAnonymous)
+                initAppUser();
+        }
         removeSomeDiv();
         initEvent();
     }

@@ -3,19 +3,6 @@ var reportTrackerController = function() {
 
     var apiService = function (apiURI) {
 
-        //var getPageByTracker = function (filter) {
-        //    return $.ajax({
-        //        url: apiURI + "CrimeIncidentReport/GetPageByTracker?TrackerRadiusInKM=" + filter.TrackerRadiusInKM + "&TrackerPointLatitude=" + filter.TrackerPointLatitude + "&TrackerPointLongitude=" + filter.TrackerPointLongitude + "&ApprovalStatusId=" + filter.ApprovalStatusId + "&CrimeIncidentCategoryIds=" + filter.CrimeIncidentCategoryIds + "&DateReportedFrom=" + filter.DateReportedFrom + "&DateReportedTo=" + filter.DateReportedTo + "&PossibleDateFrom=" + filter.PossibleDateFrom + "&PossibleDateTo=" + filter.PossibleDateTo + "&PossibleTimeFrom=" + filter.PossibleTimeFrom + "&PossibleTimeFrom=" + filter.PossibleTimeFrom,
-        //        type: "GET",
-        //        contentType: 'application/json;charset=utf-8',
-        //        dataType: "json",
-        //        headers: {
-        //            Authorization: 'Bearer ' + app.appSettings.apiToken
-        //        }
-        //    });
-        //}
-
-
         var getPageByTracker = function (filter) {
             return $.ajax({
                 url: apiURI + "CrimeIncidentReport/GetPageByTracker?",
@@ -60,7 +47,8 @@ var reportTrackerController = function() {
         features: [],
     };
     var init = function (obj) {
-        //circleProgress.show(true);
+        appSettings = $.extend(appSettings, obj);
+        circleProgress.show(true);
         setTimeout(function () {
             initLookup();
         }, 1000);
@@ -79,7 +67,8 @@ var reportTrackerController = function() {
         var height = $(window).height();
         if (!appSettings.IsMapMoving) {
             if (width > 0 && height > 0) {
-                var sideBarWidth = $("#basicSidebar").width();
+                var sideBarPosition = $("#basicSidebar").position();
+                var sideBarWidth = sideBarPosition.left >= 0 ? $("#basicSidebar").width() : 0;
                 var navBarHeight = $(".navbar").height();
                 $("#" + appSettings.container).css("width", (width - sideBarWidth));
                 $("#" + appSettings.container).css("height", (height - navBarHeight));
@@ -209,7 +198,6 @@ var reportTrackerController = function() {
                 });
         });
         initMapEvent(); 
-        appSettings.IsMapLoaded = true;
 
         //center location picker
         locationPicker = new mapboxgl.Marker({ "color": "#FF5252" });
@@ -253,6 +241,7 @@ var reportTrackerController = function() {
         });
 
         circleProgress.close();
+        appSettings.IsMapLoaded = true;
     }
 
     var iniTrackerFilter = function () {
@@ -352,25 +341,27 @@ var reportTrackerController = function() {
         TrackerRadiusInKM.noUiSlider.on('set.one', function () {
             appSettings.trackerFilterMapModel.TrackerRadiusInKM = TrackerRadiusInKM.noUiSlider.get();
 
-            map.getSource('source_circle_500').setData({
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [appSettings.center.lng, appSettings.center.lat],
-                    }
-                }]
-            });
+            if (appSettings.IsMapLoaded) {
+                map.getSource('source_circle_500').setData({
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [appSettings.center.lng, appSettings.center.lat],
+                        }
+                    }]
+                });
 
-            appSettings.circleRadius = {
-                stops: [
-                    [0, 0],
-                    [20, KMToPixelsAtMaxZoom(appSettings.trackerFilterMapModel.TrackerRadiusInKM, appSettings.center.lat)]
-                ],
-                base: 2
-            };
-            map.setPaintProperty('circle500', 'circle-radius', appSettings.circleRadius);
+                appSettings.circleRadius = {
+                    stops: [
+                        [0, 0],
+                        [20, KMToPixelsAtMaxZoom(appSettings.trackerFilterMapModel.TrackerRadiusInKM, appSettings.center.lat)]
+                    ],
+                    base: 2
+                };
+                map.setPaintProperty('circle500', 'circle-radius', appSettings.circleRadius);
+            }
 
             Search();
         });
@@ -490,7 +481,7 @@ var reportTrackerController = function() {
                     {
                         'title': crimeIncidentCategoryName,
                         'description':
-                            '<h2><a href="/CrimeIncidentReport/Details/' + crimeIncidentReportId + '" target="_blank"  class="pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View Crime/Incident Report details">' + crimeIncidentCategoryName + '</a></h2>' +
+                            '<h2><a href="/CrimeIncidentReport/Details/' + crimeIncidentReportId + '" target="_blank"  class="mapbox-modal-title pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View Crime/Incident Report details">' + crimeIncidentCategoryName + '</a></h2>' +
                             '<hr/>' +
                             '<p><strong><h5>Status </h5></strong> <h5>' + reportStatus + '</h5></p>' +
                             '<p><strong><h5>Date Reported: </h5></strong> <h5>' + dateReported + '</h5></p>' +
@@ -506,10 +497,13 @@ var reportTrackerController = function() {
                 });
             }
             appSettings.features = features;
-            map.getSource("crimeLocation").setData({
-                "type": "FeatureCollection",
-                "features": appSettings.features
-            });
+            var source = map.getSource("crimeLocation");
+            if (appSettings.IsMapLoaded && source !== null && source !== undefined) {
+                map.getSource("crimeLocation").setData({
+                    "type": "FeatureCollection",
+                    "features": appSettings.features
+                });
+            }
             $('[data-toggle="tooltip"]').tooltip();
         });
 

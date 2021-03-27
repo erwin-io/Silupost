@@ -25,6 +25,7 @@ namespace SilupostWeb.API.Utility
                 string MailText = str.ReadToEnd();
                 str.Close();
 
+                MailText = MailText.Replace("[APP_VERIFICATION_HOSTNAME]", GlobalVariables.goAppHostName);
                 MailText = MailText.Replace("[APP_NAME]", GlobalVariables.goApplicationName);
                 MailText = MailText.Replace("[SUPPORT_EMAIL_ID]", GlobalVariables.goSiteSupportEmail);
                 MailText = MailText.Replace("[EMAIL_ID]", recieverEmail);

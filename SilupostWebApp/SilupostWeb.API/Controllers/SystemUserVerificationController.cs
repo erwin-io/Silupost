@@ -172,7 +172,7 @@ namespace SilupostWeb.API.Controllers
                     {
                         response.IsSuccess = true;
                         response.Message = Messages.Created;
-                        response.Data = verification;
+                        response.Data = new SystemUserVerificationViewModel() { VerificationSender = model.VerificationSender };
                         return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.Created, response);
                     }
                     else

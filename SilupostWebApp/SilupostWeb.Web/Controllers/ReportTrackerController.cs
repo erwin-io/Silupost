@@ -24,5 +24,15 @@ namespace SilupostWeb.Web.Controllers
             ViewBag.Page = page;
             return View();
         }
+
+        public ActionResult MobileView()
+        {
+            var page = new PageModel();
+            page.MenuName = "Report Tracker";
+            page.Module = "Report Tracker";
+            page.Title = "Report Tracker";
+            ViewBag.Page = page;
+            return View();
+        }
     }
 }

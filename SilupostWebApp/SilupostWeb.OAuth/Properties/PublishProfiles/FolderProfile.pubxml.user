@@ -572,34 +572,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.dll">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/07/2021 20:04:09</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.pdb">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/07/2021 20:04:09</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.dll">
-      <publishTime>03/07/2021 08:53:25</publishTime>
+      <publishTime>03/07/2021 10:44:41</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.pdb">
-      <publishTime>03/07/2021 08:53:25</publishTime>
+      <publishTime>03/07/2021 10:44:41</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.dll">
-      <publishTime>03/07/2021 08:53:28</publishTime>
+      <publishTime>03/07/2021 20:04:11</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.pdb">
-      <publishTime>03/07/2021 08:53:28</publishTime>
+      <publishTime>03/07/2021 20:04:11</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.dll">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/07/2021 20:04:11</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.pdb">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/07/2021 20:04:11</publishTime>
     </File>
     <File Include="bin/SilupostWeb.OAuth.dll">
-      <publishTime>03/07/2021 09:00:00</publishTime>
+      <publishTime>03/07/2021 20:06:46</publishTime>
     </File>
     <File Include="bin/SilupostWeb.OAuth.pdb">
-      <publishTime>03/07/2021 09:00:00</publishTime>
+      <publishTime>03/07/2021 20:06:46</publishTime>
     </File>
     <File Include="bin/SimpleInjector.dll">
       <publishTime>12/01/2018 17:29:08</publishTime>

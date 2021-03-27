@@ -29,13 +29,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/24/2021 20:34:51</publishTime>
     </File>
     <File Include="App_Data/EmailTemp/ChangePasswordTemp.html">
-      <publishTime>02/28/2021 08:38:15</publishTime>
+      <publishTime>03/21/2021 15:38:08</publishTime>
     </File>
     <File Include="App_Data/EmailTemp/EmailVerificationTemp.html">
-      <publishTime>03/04/2021 09:44:28</publishTime>
+      <publishTime>03/21/2021 14:20:30</publishTime>
     </File>
     <File Include="App_Data/EmailTemp/ForgotPasswordTemp.html">
-      <publishTime>02/28/2021 08:38:11</publishTime>
+      <publishTime>03/21/2021 15:37:55</publishTime>
     </File>
     <File Include="App_Data/EmailTemp/SILUPOST_ICON.png">
       <publishTime>02/07/2021 11:48:38</publishTime>
@@ -635,34 +635,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.dll">
-      <publishTime>03/07/2021 09:00:41</publishTime>
+      <publishTime>03/28/2021 00:55:44</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.pdb">
-      <publishTime>03/07/2021 09:00:41</publishTime>
+      <publishTime>03/28/2021 00:55:44</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.dll">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/28/2021 00:55:36</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.pdb">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/28/2021 00:55:36</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.dll">
-      <publishTime>03/07/2021 08:53:25</publishTime>
+      <publishTime>03/28/2021 00:55:33</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.pdb">
-      <publishTime>03/07/2021 08:53:25</publishTime>
+      <publishTime>03/28/2021 00:55:33</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.dll">
-      <publishTime>03/07/2021 08:53:28</publishTime>
+      <publishTime>03/28/2021 00:55:38</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.pdb">
-      <publishTime>03/07/2021 08:53:28</publishTime>
+      <publishTime>03/28/2021 00:55:38</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.dll">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/28/2021 00:55:37</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.pdb">
-      <publishTime>03/07/2021 08:53:27</publishTime>
+      <publishTime>03/28/2021 00:55:37</publishTime>
     </File>
     <File Include="bin/SimpleInjector.dll">
       <publishTime>12/01/2018 17:29:08</publishTime>
@@ -806,7 +806,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2020 03:47:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/07/2021 08:56:38</publishTime>
+      <publishTime>03/20/2021 17:05:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

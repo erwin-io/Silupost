@@ -1118,7 +1118,6 @@ namespace SilupostWeb.API.Controllers
         }
 
 
-
         [Route("UpdateSystemUserConfig")]
         [HttpPut]
         [ValidateModel]
