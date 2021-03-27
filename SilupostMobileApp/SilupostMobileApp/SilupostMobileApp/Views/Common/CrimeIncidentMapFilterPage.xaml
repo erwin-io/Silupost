@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Common.CrimeIncidentMapFilterPage"
+             Appearing="ContentPage_Appearing">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="icons8_back_to_96.png" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TitleBackButton_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="20,20,20,0" VerticalScrollBarVisibility="Always">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+                    <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" Margin="0,0,0,30">
+                        <Button
+                                    Clicked="SelectCategory_Clicked"
+                                    FontSize="15"
+                                    Text="Select Category"
+                                    CornerRadius="30" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="40"
+                                    TextColor="White"
+                                    BackgroundColor="#546e7a"/>
+                        <flv:FlowListView 
+                                    FlowColumnCount="2"
+                                    SeparatorVisibility="None" 
+                                    HasUnevenRows="False"
+                                    RowHeight="50"
+                                    Margin="0"
+                                    FlowItemsSource="{Binding CrimeIncidentCategorySource}"
+                                    HeightRequest="120"
+                                    HorizontalOptions="FillAndExpand">
+                            <flv:FlowListView.FlowEmptyTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout 
+                                                    HorizontalOptions="CenterAndExpand" 
+                                                    VerticalOptions="Center" >
+                                            <Label Text="No Crime/Incident Category Selected." HorizontalTextAlignment="Center" FontSize="20"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </flv:FlowListView.FlowEmptyTemplate>
+                            <flv:FlowListView.FlowColumnTemplate>
+                                <DataTemplate>
+                                    <StackLayout HorizontalOptions="FillAndExpand" 
+                                                     VerticalOptions="FillAndExpand"
+                                                     Margin="2">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnCrimeIncidentCategoryItemSelected"></TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                        <material:MaterialChips 
+                                                        IsSelected="false" 
+                                                        IsEnabled="true" 
+                                                        TrailingIcon="icons8_cancel_480_BLACK.png" 
+                                                        SelectedBackgroundColor="LightGray" 
+                                                        BackgroundColor="LightGray" 
+                                                        SelectedTextColor="Black" 
+                                                        TextColor="Black" 
+                                                        IsSelectedChanged="OnCrimeIncidentCategoryItemSelected"
+                                                        Text="{Binding CrimeIncidentCategoryName}">
+                                        </material:MaterialChips>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </flv:FlowListView.FlowColumnTemplate>
+                        </flv:FlowListView>
+                    </StackLayout>
+                    <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" Margin="0,0,0,30">
+                        <Label Text="Tracker Radius(KM)" FontSize="15" Grid.Column="0" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label x:Name="RadiusLabeValue" Text="0" HorizontalOptions="Start" FontSize="20" HorizontalTextAlignment="Center" VerticalOptions="Start" Margin="0" Padding="0">
+                            <Label.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="15,0" />
+                                    <On Platform="Android" Value="10,0" />
+                                </OnPlatform>
+                            </Label.Margin>
+                        </Label>
+                        <Slider Maximum="100" Value="{Binding TrackerRadiusInKM}" Minimum="0" MaximumTrackColor="Black" MinimumTrackColor="SkyBlue" ThumbColor="SkyBlue" HorizontalOptions="FillAndExpand"
+                                            ValueChanged="Slider_ValueChanged" Margin="0">
+                        </Slider>
+                    </StackLayout>
+                    <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" Margin="0,0,0,30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <material:MaterialDatePicker 
+                                    Date="{Binding DateReportedFrom}"
+                                    Type="Filled" 
+                                    LabelText="Possible Date From" 
+                                    Format="ddd dd MMM yyyy" 
+                                    Grid.Column="0" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_timeline_week_96.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                            <material:MaterialDatePicker 
+                                    Date="{Binding DateReportedTo}"
+                                    Type="Filled" 
+                                    LabelText="Possible Date To" 
+                                    Format="ddd dd MMM yyyy" 
+                                    Grid.Column="1" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_timeline_week_96.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" Margin="0,0,0,30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <material:MaterialDatePicker 
+                                    Date="{Binding PossibleDateFrom}"
+                                    Type="Filled" 
+                                    LabelText="Possible Date From" 
+                                    Format="ddd dd MMM yyyy" 
+                                    Grid.Column="0" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_timeline_week_96.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                            <material:MaterialDatePicker 
+                                    Date="{Binding PossibleDateTo}"
+                                    Type="Filled" 
+                                    LabelText="Possible Date To" 
+                                    Format="ddd dd MMM yyyy" 
+                                    Grid.Column="1" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_timeline_week_96.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" Margin="0,0,0,30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <material:MaterialTimePicker 
+                                    Time="{Binding PossibleTimeFrom}"
+                                    Type="Filled" 
+                                    LabelText="Possible Time From" 
+                                    Format="HH:mm tt" 
+                                    Grid.Column="0"
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_clock_384_BLACK.png" 
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black"
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                            <material:MaterialTimePicker 
+                                    Time="{Binding PossibleTimeTo}"
+                                    Type="Filled" 
+                                    LabelText="Possible Time To" 
+                                    Format="HH:mm tt" 
+                                    Grid.Column="1"
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_clock_384_BLACK.png" 
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black"
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout HorizontalOptions="FillAndExpand" Margin="20,10,20,20">
+                <Button
+                    Text="Apply"
+                    TextColor="{Binding ButtonFontColor}"
+                    BackgroundColor="{Binding ButtonBackgroundColor}"
+                    Clicked="ButtonApply_Clicked"
+                    CornerRadius="5"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

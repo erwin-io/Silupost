@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:converter="clr-namespace:SilupostMobileApp.Common" 
+             xmlns:behaviors="clr-namespace:SilupostMobileApp.Behavior"
+             x:Class="SilupostMobileApp.Views.Account.UserProfilePage"
+             Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="icons8_back_to_96.png" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TitleBackButton_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                <Image Source="icons8_settings_384_WHITE.png" Margin="0" HorizontalOptions="Start" WidthRequest="30" HeightRequest="30" Grid.Column="2">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TitleSettingsButton_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,100">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
+                        <Grid VerticalOptions="FillAndExpand" Padding="0,30,0,30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.15*"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
+                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                    <ImageButton Source="{Binding SystemUser.ProfilePicture.ImageSource}" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" BackgroundColor="White" CornerRadius="100"></ImageButton>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Row="1" Grid.Column="0" Margin="0" BackgroundColor="Transparent">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Text="{Binding SystemUser.LegalEntity.FullName}"/>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

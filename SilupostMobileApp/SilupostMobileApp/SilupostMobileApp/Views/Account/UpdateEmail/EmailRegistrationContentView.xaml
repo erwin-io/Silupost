@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:behaviors="clr-namespace:SilupostMobileApp.Behavior" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Account.UpdateEmail.EmailRegistrationContentView" 
+             VerticalOptions="FillAndExpand" 
+             HorizontalOptions="FillAndExpand">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout IsVisible="{Binding IsEmailUpdateddSuccess}" HorizontalOptions="FillAndExpand" Padding="20" VerticalOptions="CenterAndExpand" >
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.Row="0" WidthRequest="30" HeightRequest="30" Source="icons8_ok_480_GREEN.png"/>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="20" TextColor="Gray" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">Email successfully updated, login is required to continue!</Label>
+                </Grid>
+                <Button
+                        Text="Login"
+                        TextColor="{Binding ButtonFontColor}"
+                        BackgroundColor="{Binding ButtonBackgroundColor}"
+                        Clicked="ButtonGotoLogin_Clicked"
+                        VerticalOptions="Center"
+                        CornerRadius="5"></Button> 
+            </StackLayout>
+            <Grid VerticalOptions="FillAndExpand" IsVisible="{Binding IsEmailUpdateddSuccess, Converter={StaticResource InverseBoolConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+                <ScrollView Grid.Row="0" Padding="20">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalOptions="FillAndExpand">Enter your new email address to get started</Label>
+                        <StackLayout Margin="0,0,0,30">
+                            <material:MaterialEntry 
+                                LeadingIcon="icons8_new_post_96_GRAY.png"
+                                Type="Outlined" 
+                                Text="{Binding Email.Value}"
+                                LabelText="Email"
+                                Placeholder="Enter your new Email"
+                                BackgroundColor="Transparent"
+                                AssistiveTextColor="Black"
+                                ClearIconIsVisible="True"
+                                ClearIcon="icons8_cancel_96_gray.png"
+                                FocusedBorderColor="#039be5"
+                                BorderColor="{Binding Email.BorderColor}">
+                                <material:MaterialEntry.Behaviors>
+                                    <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="Email" />
+                                </material:MaterialEntry.Behaviors>
+                            </material:MaterialEntry>
+                            <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               TextColor="{Binding Email.BorderColor}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Grid.Row="1" Margin="20">
+                    <Button
+                        Text="Submit"
+                        TextColor="{Binding ButtonFontColor}"
+                        BackgroundColor="{Binding ButtonBackgroundColor}"
+                        Clicked="ButtonSubmitEmail_Clicked"
+                        VerticalOptions="Center"
+                        CornerRadius="5"></Button>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

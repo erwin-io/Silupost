@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Emergency.CallHistoryPage"
+             Title="{Binding Title}"
+             Appearing="ContentPage_Appearing">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_trash_480.png" IsEnabled="{Binding IsEnabledClearEmergencyCallLog}" Command="{Binding ClearEmergencyCallLogCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DateConverter x:Key="DateConverter" />
+            <converter:TimeConverter x:Key="TimeConverter" />
+            <converter:TimeSpanConverter x:Key="TimeSpanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding GroupedPhoneCallLogs}"
+                      CachingStrategy="RetainElement"
+                      HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="StartAndExpand"
+                      HasUnevenRows="True"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupShortNameBinding="{Binding Key}"
+                      SelectionMode="None">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="25">
+                            <StackLayout VerticalOptions="FillAndExpand" Padding="5" BackgroundColor="#3498DB">
+                                <Label Text="{Binding Key, Converter={StaticResource DateConverter}}" TextColor="White" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" Padding="0" Margin="10,0,10,0">
+                                <Grid VerticalOptions="CenterAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.4*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="0.4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Row="0" Grid.RowSpan="1" Padding="20" Margin="0" Grid.Column="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Image HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="icons8_outgoing_call_96_GRAY.png" BackgroundColor="Transparent"/>
+                                    </StackLayout>
+                                    <Label Grid.Row="0" Grid.Column="1" Padding="0" Margin="0" Text="Emergency Call" VerticalTextAlignment="End" FontSize="20" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Padding="0" Margin="0" Text="{Binding ContactNumber}" VerticalTextAlignment="Start" FontSize="20"/>
+                                    <Label Grid.Row="0" Padding="0" Margin="0" Grid.Column="2" Text="{Binding DateAndTime, Converter={StaticResource DateConverter}}" VerticalTextAlignment="End"/>
+                                    <Label Grid.Row="1" Padding="0" Margin="0" Grid.Column="2" Text="{Binding DateAndTime, StringFormat='{}{0:hh\\:mm tt}'}" VerticalTextAlignment="Start"/>
+                                </Grid>
+                            </StackLayout>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

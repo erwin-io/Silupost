@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SilupostMobileApp.Models
+{
+    public class SystemUserVerificationModel
+    {
+        public long Id { get; set; }
+        public string VerificationSender { get; set; }
+        public string VerificationTypeId { get; set; }
+        public string VerificationCode { get; set; }
+        public bool IsVerified { get; set; }
+    }
+}

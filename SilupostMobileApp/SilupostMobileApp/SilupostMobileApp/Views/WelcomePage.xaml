@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.WelcomePage" NavigationPage.HasNavigationBar="False"
+             Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <ScrollView.Content>
+                    <StackLayout WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,40,40,40">
+                        <StackLayout WidthRequest="80" HeightRequest="80">
+                            <Image Source="SILUPOST_ICON.png" WidthRequest="50" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Margin="0,0,0,30">
+                            <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding ShowTitle}">Welcome to SILUPOST</Label>
+                        </StackLayout>
+
+                        <StackLayout Padding="10" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowSuccessMessage}">
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Grid.Row="0" WidthRequest="30" HeightRequest="30" Source="icons8_ok_480_GREEN.png"/>
+                                <Label Grid.Column="0" Grid.Row="1" FontSize="20" TextColor="Gray" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center">Success! Please click continue</Label>
+                            </Grid>
+                            <Button
+                                Text="CONTINUE"
+                                TextColor="{Binding ButtonFontColor}"
+                                BackgroundColor="{Binding ButtonBackgroundColor}"
+                                HorizontalOptions="FillAndExpand"
+                                CornerRadius="5"
+                                Clicked="ButtonOpenModule_Clicked"></Button>
+                        </StackLayout>
+                        
+                        <StackLayout IsVisible="{Binding ShowAuthControls}">
+                            <Button
+                                Text="LOG IN"
+                                TextColor="{Binding ButtonFontColor}"
+                                BackgroundColor="{Binding ButtonBackgroundColor}"
+                                Clicked="ButtonGotoLogin_Clicked"
+                                CornerRadius="5"></Button>
+
+                            <Label Text="OR" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+
+                            <Button
+                                Text="CREATE ACCOUNT"
+                                TextColor="{Binding ButtonBackgroundColor}"
+                                BackgroundColor="{Binding ButtonFontColor}"
+                                BorderColor="{Binding ButtonBackgroundColor}"
+                                BorderWidth="2"
+                                Clicked="ButtonGotoRegister_Clicked"
+                                CornerRadius="5"></Button>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView.Content>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
