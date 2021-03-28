@@ -53,6 +53,12 @@ namespace SilupostMobileApp.ViewModels
             get => _imageSource;
             set => SetProperty(ref _imageSource, value);
         }
+        bool _showCrimeReportList;
+        public bool ShowCrimeReportList
+        {
+            get => _showCrimeReportList;
+            set => SetProperty(ref _showCrimeReportList, value);
+        }
         #endregion
 
         #region COMMANDS
@@ -79,8 +85,17 @@ namespace SilupostMobileApp.ViewModels
 
                 foreach (var report in result)
                 {
-                    report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
-                    CrimeIncidentReport.Add(report);
+                    if (!CrimeIncidentReport.Any(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId))
+                    {
+                        report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
+                        CrimeIncidentReport.Add(report);
+                    }
+                    else
+                    {
+                        int i = CrimeIncidentReport.ToList().FindIndex(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId);
+                        report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
+                        CrimeIncidentReport[i] = report;
+                    }
                 }
 
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>();
@@ -91,6 +106,7 @@ namespace SilupostMobileApp.ViewModels
 
                 //create a new collection of groups
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>(sorted);
+                this.ShowCrimeReportList = this.GroupedCrimeIncidentReport.Count > 0;
                 IsProcessingRefresh = false;
             }
             catch (Exception ex)
@@ -114,6 +130,11 @@ namespace SilupostMobileApp.ViewModels
                         report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
                         CrimeIncidentReport.Add(report);
                     }
+                    else
+                    {
+                        int i = CrimeIncidentReport.ToList().FindIndex(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId);
+                        CrimeIncidentReport[i] = report;
+                    }
                 }
 
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>();
@@ -124,6 +145,7 @@ namespace SilupostMobileApp.ViewModels
 
                 //create a new collection of groups
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>(sorted);
+                this.ShowCrimeReportList = this.GroupedCrimeIncidentReport.Count > 0;
                 IsProcessingRefresh = false;
             }
             catch (Exception ex)

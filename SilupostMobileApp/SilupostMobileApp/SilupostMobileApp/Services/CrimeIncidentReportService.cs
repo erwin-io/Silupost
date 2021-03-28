@@ -77,7 +77,36 @@ namespace SilupostMobileApp.Services
 
         public async Task<bool> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+
+                    client.BaseAddress = new Uri(AppSettingsHelper.goSILUPOST_WEBAPI_URI);
+                    string _paramString = AppSettingsHelper.AppSettings.AppToken.AccessToken;
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _paramString);
+
+                    HttpResponseMessage _responseMessage = new HttpResponseMessage();
+                    _responseMessage = await client.DeleteAsync(string.Format("{0}CrimeIncidentReport/{1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, id));
+                    string _json = await _responseMessage.Content.ReadAsStringAsync();
+
+                    var response = new SillupostWebAPIResponseModel<CrimeIncidentReportMediaModel>();
+                    JObject obj = JsonConvert.DeserializeObject<JObject>(_json);
+                    response = obj.ToObject<SillupostWebAPIResponseModel<CrimeIncidentReportMediaModel>>();
+                    if (response.IsSuccess)
+                    {
+                        return response.IsSuccess;
+                    }
+                    else
+                    {
+                        throw new Exception(response.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<IEnumerable<CrimeIncidentReportModel>> GetAllAsync()

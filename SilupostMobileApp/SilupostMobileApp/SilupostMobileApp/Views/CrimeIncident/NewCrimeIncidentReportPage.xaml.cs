@@ -29,11 +29,21 @@ namespace SilupostMobileApp.Views.CrimeIncident
 
             MessagingCenter.Subscribe<MapContentPage, GeoLocationModel>(this, "SelectLocation", async (obj, geoLocation) =>
             {
-                this.viewModel.GeoLocation = geoLocation;
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{this.viewModel.GeoLocation.GeoLatitude}';");
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{this.viewModel.GeoLocation.GeoLongitude}';");
-                await MapWebView.EvaluateJavaScriptAsync($"FlyToLocation();");
-                this.viewModel.ProgressDialog.Hide();
+                try
+                {
+                    this.viewModel.GeoLocation = geoLocation;
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('AccessToken').value = '{this.viewModel.Token}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"LoadMap();");
+
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{this.viewModel.GeoLocation.GeoLatitude}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{this.viewModel.GeoLocation.GeoLongitude}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"FlyToLocation();");
+                    this.viewModel.ProgressDialog.Hide();
+                }
+                catch(Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex, string.Format("Oops! Error loading map {0}", ex.Message));
+                }
             });
 
             this.viewModel.Init();
@@ -165,19 +175,31 @@ namespace SilupostMobileApp.Views.CrimeIncident
         }
         async void OpenLargeMap_Clicked(object sender, EventArgs e)
         {
-            if (this.viewModel.IsExecuting)
-                return;
-            var mapConfig = new MapConfigModel()
+            try
             {
-                Latitude = this.viewModel.GeoLocation.GeoLatitude,
-                Longitude = this.viewModel.GeoLocation.GeoLongitude,
-                Radius = 0,
-                LookupType = SilupostMapLookupTypeEnums.ADDRESS,
-            };
-            var _viewModel = new MapContentViewModel(this.Navigation, mapConfig);
-            this.viewModel.IsExecuting = true;
-            await this.Navigation.PushAsync(new MapContentPage(_viewModel), true);
-            this.viewModel.IsExecuting = false;
+                if (!this.viewModel.IsMapLoaded)
+                {
+                    throw new Exception("Map is still loading please wait...");
+                }
+                if (this.viewModel.IsExecuting)
+                    return;
+                var mapConfig = new MapConfigModel()
+                {
+                    Latitude = this.viewModel.GeoLocation.GeoLatitude,
+                    Longitude = this.viewModel.GeoLocation.GeoLongitude,
+                    Radius = 0,
+                    LookupType = SilupostMapLookupTypeEnums.ADDRESS,
+                };
+                var _viewModel = new MapContentViewModel(this.Navigation, mapConfig);
+                this.viewModel.IsExecuting = true;
+                await this.Navigation.PushAsync(new MapContentPage(_viewModel), true);
+                this.viewModel.IsExecuting = false;
+            }
+            catch (Exception ex)
+            {
+                this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex, string.Format("Oops! {0}", ex.Message));
+            }
         }
 
         protected override bool OnBackButtonPressed()
@@ -217,6 +239,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
                     GeoAddress = placemark.Formatted ?? string.Empty,
                 };
                 this.viewModel.ProgressDialog.Hide();
+                this.viewModel.IsMapLoaded = true;
             }
             catch (Exception ex)
             {

@@ -433,9 +433,21 @@ var reportTrackerController = function() {
 
     var getCurrentLocation = function () {
         if (appSettings.IsMapLoaded) {
-            $(".mapboxgl-ctrl-geolocate").trigger("click");
+            //$(".mapboxgl-ctrl-geolocate").trigger("click");
+            document.querySelector(".mapboxgl-ctrl-geolocate").click();
         }
     }
+
+    var toggleFilter = function () {
+        $("#basicSidebar").addClass("pmd-sidebar-open");
+        if ($("#basicSidebar").hasClass("pmd-sidebar-open")) {
+            $("#basicSidebar").removeClass("pmd-sidebar-open")
+        }
+        else {
+            $("#basicSidebar").addClass("pmd-sidebar-open");
+        }
+    }
+
 
     var crimeLocationClick = function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();

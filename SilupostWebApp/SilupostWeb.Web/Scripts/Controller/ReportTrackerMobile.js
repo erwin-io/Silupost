@@ -71,7 +71,7 @@ var reportTrackerController = function() {
                 var sideBarPosition = $("#basicSidebar").position();
                 var sideBarWidth = sideBarPosition.left >= 0 ? $("#basicSidebar").width() : 0;
                 var navBarHeight = $(".navbar").height();
-                $("#" + appSettings.container).css("width", (width - sideBarWidth));
+                $("#" + appSettings.container).css("width", (width));
                 $("#" + appSettings.container).css("height", (height - navBarHeight));
                 $("#" + appSettings.container).css("right", 0);
                 $("#" + appSettings.container).css("bottom", 0);
@@ -496,7 +496,6 @@ var reportTrackerController = function() {
                         'description':
                             '<h2><a href="/CrimeIncidentReport/Details/' + crimeIncidentReportId + '" target="_blank"  class="mapbox-modal-title pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View Crime/Incident Report details">' + crimeIncidentCategoryName + '</a></h2>' +
                             '<hr/>' +
-                            '<p><strong><h5>Status </h5></strong> <h5>' + reportStatus + '</h5></p>' +
                             '<p><strong><h5>Date Reported: </h5></strong> <h5>' + dateReported + '</h5></p>' +
                             '<p><strong><h5>Actual Date and Time: </h5></strong> <h5>' + possibleDate + ' @' + possibleTime + '</h5></p>' +
                             '<p><strong><h5>Details: </h5></strong> <h5>' + description + '</h5></p>'
@@ -521,8 +520,17 @@ var reportTrackerController = function() {
         });
 
     }
+
+    var flyToLocation = function(lat,lng) {
+        map.flyTo({
+            center: [lng, lat],
+            essential: false // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    }
     return {
         appSettings: appSettings,
+        flyToLocation: flyToLocation,
+        Search: Search,
         init: init
     };
 }

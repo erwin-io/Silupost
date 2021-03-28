@@ -24,6 +24,7 @@
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_find_clinic_96_WHITE.png" Clicked="NewReport_CLiked"/>
         <ToolbarItem Icon="icons8_slider_96.png" Clicked="ToggleFilter_CLiked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

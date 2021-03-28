@@ -33,7 +33,14 @@ namespace SilupostMobileApp.Views.CrimeIncident
         }
         async void WebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
-            await LoadMap();
+            try
+            {
+                await LoadMap();
+            }
+            catch(Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
 
         async Task LoadMap()
@@ -59,6 +66,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.apiToken = '{AppSettingsHelper.AppSettings.AppToken.AccessToken}';");
                 this.viewModel.CrimeIncidentMapFilter.CrimeIncidentCategoryIds = string.Join(",", this.viewModel.CrimeIncidentMapFilter.SelectedCrimeIncidentCategory.Select(x=>x.CrimeIncidentCategoryId).ToArray());
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.trackerFilterMapModel.CrimeIncidentCategoryIds = '{this.viewModel.CrimeIncidentMapFilter.CrimeIncidentCategoryIds}'");
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.trackerFilterMapModel.TrackerRadiusInKM = '{this.viewModel.CrimeIncidentMapFilter.TrackerRadiusInKM}'");
@@ -144,28 +152,62 @@ namespace SilupostMobileApp.Views.CrimeIncident
 
         private void MapWebView_Navigating(object sender, WebNavigatingEventArgs e)
         {
-            var soure = e.Url.ToLower();
-            var mapUri = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH).ToLower();
-            if (!soure.Equals(mapUri))
+            try
             {
-                if (soure.Contains(SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH.ToLower()))
+                var soure = e.Url.ToLower();
+                var mapUri = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH).ToLower();
+                if (!soure.Equals(mapUri))
                 {
-                    var id = soure.Replace(string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH).ToLower(), "");
-                    OpenReport(id);
+                    if (soure.Contains(SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH.ToLower()))
+                    {
+                        var id = soure.Replace(string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH).ToLower(), "");
+                        OpenReport(id);
+                    }
+                    e.Cancel = true;
                 }
-                e.Cancel = true;
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex, string.Format("{0} {1}", "Oops! Error loading map please try again.", ex.Message));
             }
         }
 
         async void OpenReport(string id)
         {
-            if (this.viewModel.IsExecuting)
-                return;
-            this.viewModel.IsExecuting = true;
-            var _viewModel = new ViewCrimeIncidentReportViewModel(this.Navigation, id);
-            _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
-            await Navigation.PushModalAsync(new NavigationPage(new ViewCrimeIncidentReportPage(_viewModel)), true);
-            this.viewModel.IsExecuting = false;
+            try
+            {
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                var _viewModel = new ViewCrimeIncidentReportViewModel(this.Navigation, id);
+                _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                await Navigation.PushModalAsync(new NavigationPage(new ViewCrimeIncidentReportPage(_viewModel)), true);
+                this.viewModel.IsExecuting = false;
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex, string.Format("{0} {1}", "Oops! ", ex.Message));
+            }
+        }
+
+        async void NewReport_CLiked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                var _viewModel = new NewCrimeIncidentReportViewModel(this.Navigation);
+                _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                await Navigation.PushModalAsync(new NavigationPage(new NewCrimeIncidentReportPage(_viewModel)), true);
+                this.viewModel.IsExecuting = false;
+                _viewModel.ProgressDialog.Hide();
+            }
+            catch (Exception ex)
+            {
+                this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
     }
 }

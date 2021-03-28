@@ -98,7 +98,7 @@ namespace SilupostMobileApp.Views.Common.MapBox
                     await MapWebView.EvaluateJavaScriptAsync($"ShowMarker();");
                 }
 
-                DoneButton.BorderColor = Color.FromHex("FF5252");
+                DoneButton.BorderColor = Color.FromHex("006db3");
                 DoneButton.IsEnabled = true;
             }
             catch(Exception ex)
@@ -147,19 +147,19 @@ namespace SilupostMobileApp.Views.Common.MapBox
 
         async void DoneButton_Clicked(object sender, EventArgs e)
         {
-            if (!this.viewModel.IsMapLoaded)
-                return;
-            if (this.viewModel.IsExecuting)
-                return;
-            this.viewModel.IsExecuting = true;
-            this.viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
-            var _latitude = await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value;");
-            var _longitude = await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value;");
-
-            var placemarks = await this.viewModel.GeoCodeOpenCageDataService.GetGeoAddressAsync(_latitude??"0", _longitude?? "0");
-            var _radius = this.viewModel.MapConfig.Radius;
             try
             {
+                if (!this.viewModel.IsMapLoaded)
+                    return;
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                this.viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                var _latitude = await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value;");
+                var _longitude = await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value;");
+
+                var placemarks = await this.viewModel.GeoCodeOpenCageDataService.GetGeoAddressAsync(_latitude ?? "0", _longitude ?? "0");
+                var _radius = this.viewModel.MapConfig.Radius;
                 var placemark = placemarks.Results?.FirstOrDefault();
                 if (placemark != null)
                 {

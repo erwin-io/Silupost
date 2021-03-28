@@ -31,6 +31,9 @@
             <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_trash_480.png" Clicked="DeleteReport_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <Grid Padding="0" Margin="0" VerticalOptions="FillAndExpand">
@@ -431,7 +434,7 @@
                             <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <Button Text="Cancel" CornerRadius="50" Grid.Column="0" Grid.Row="0" BackgroundColor="#006db3" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Cancel_Cliked" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
-                        <Button Text="Submit Report" CornerRadius="50" Grid.Column="1" Grid.Row="0" BackgroundColor="#006db3" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding SaveCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+                        <Button Text="Save" CornerRadius="50" Grid.Column="1" Grid.Row="0" BackgroundColor="#006db3" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding SaveCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
                     </Grid>
                 </StackLayout>
             </Grid>

@@ -36,6 +36,20 @@ namespace SilupostMobileApp.Views
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             CurrentPageChanged += CurrentPageHasChanged;
 
+            MessagingCenter.Subscribe<NewCrimeIncidentReportViewModel, int>(this, "SelectTab", async (obj, tabIndex) =>
+            {
+                try
+                {
+                    //this.CurrentPage.TabIndex = tabIndex;
+                    CurrentPage = Children[tabIndex];
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+
+
             MessagingCenter.Subscribe<LoginPage, SystemUserModel>(this, "AuthenticateUser", async (obj, model) =>
             {
                 try

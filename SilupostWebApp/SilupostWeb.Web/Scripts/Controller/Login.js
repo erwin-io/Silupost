@@ -148,7 +148,7 @@
                 }).error(function (result) {
                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                     if (result.responseJSON !== undefined) {
-                        Swal.fire('Error!', result.responseJSON, 'error');
+                        Swal.fire('Error!', result.responseJSON.Message, 'error');
                     } else if (result.statusText && result.statusText.includes("Invalid URL")) {
                         Swal.fire('Error!', 'Unable to connect to server!', 'error');
                     } else {

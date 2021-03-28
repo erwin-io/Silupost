@@ -79,7 +79,7 @@ namespace SilupostMobileApp.Common
     public class SilupostMapControlIconSource
     {
         public const string CURRENT_LOCATION_ON = "icons8_location_on_96_blue.png";
-        public const string CURRENT_LOCATION_OFF = "icons8_location_on_96_blue.png";
+        public const string CURRENT_LOCATION_OFF = "icons8_location_on_96_black.png";
     }
     public class SilupostServiceMediaSelectAction
     {

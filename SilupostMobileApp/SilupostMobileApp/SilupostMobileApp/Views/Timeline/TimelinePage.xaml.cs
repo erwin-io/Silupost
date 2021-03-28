@@ -26,12 +26,54 @@ namespace SilupostMobileApp.Views.Timeline
             InitializeComponent();
             BindingContext = viewModel = new TimelineViewModel(this.Navigation);
             viewModel.Title = SilupostPageTitle.TIMELINE;
+            InitReportList();
+        }
+
+        public async Task InitReportList()
+        {
+            await this.viewModel.WaitAndExecute(1000, async () =>
+            {
+                await viewModel.InitSystemUserTimeline();
+            });
         }
 
         async void ContentPage_Appearing(object sender, EventArgs e)
         {
+            MessagingCenter.Subscribe<NewCrimeIncidentReportViewModel>(this, "ReloadReportList", async (obj) =>
+            {
+                try
+                {
+                    await viewModel.InitSystemUserTimeline();
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+            MessagingCenter.Subscribe<ViewCrimeIncidentReportViewModel>(this, "ReloadReportList", async (obj) =>
+            {
+                try
+                {
+                    await viewModel.InitSystemUserTimeline();
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+            MessagingCenter.Subscribe<ViewCrimeIncidentReportPage>(this, "ReloadReportList", async (obj) =>
+            {
+                try
+                {
+                    await viewModel.InitSystemUserTimeline();
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+
             this.viewModel.ImageSource = string.Format("{0}File/getFile?FileId={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, AppSettingsHelper.AppSettings.UserSettings.ProfilePictureFileId ?? string.Empty);
-            await viewModel.InitSystemUserTimeline();
         }
 
         async void LoadMore_Clicked(object sender, EventArgs e)
@@ -41,27 +83,43 @@ namespace SilupostMobileApp.Views.Timeline
 
         async void OnItemSelected(object sender, EventArgs args)
         {
-            if (this.viewModel.IsExecuting)
-                return;
-            this.viewModel.IsExecuting = true;
-            var layout = (BindableObject)sender;
-            var report = (CrimeIncidentReportModel)layout.BindingContext;
-            var _viewModel = new ViewCrimeIncidentReportViewModel(this.Navigation, report.CrimeIncidentReportId);
-            _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
-            await Navigation.PushModalAsync(new NavigationPage(new ViewCrimeIncidentReportPage(_viewModel)), true);
-            this.viewModel.IsExecuting = false;
+            try
+            {
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                var layout = (BindableObject)sender;
+                var report = (CrimeIncidentReportModel)layout.BindingContext;
+                var _viewModel = new ViewCrimeIncidentReportViewModel(this.Navigation, report.CrimeIncidentReportId);
+                _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                await Navigation.PushModalAsync(new NavigationPage(new ViewCrimeIncidentReportPage(_viewModel)), true);
+                this.viewModel.IsExecuting = false;
+            }
+            catch(Exception ex)
+            {
+                this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
 
         async void Add(object sender, EventArgs args)
         {
-            if (this.viewModel.IsExecuting)
-                return;
-            this.viewModel.IsExecuting = true;
-            var _viewModel = new NewCrimeIncidentReportViewModel(this.Navigation);
-            _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
-            await Navigation.PushModalAsync(new NavigationPage(new NewCrimeIncidentReportPage(_viewModel)), true);
-            this.viewModel.IsExecuting = false;
-            _viewModel.ProgressDialog.Hide();
+            try
+            {
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                var _viewModel = new NewCrimeIncidentReportViewModel(this.Navigation);
+                _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                await Navigation.PushModalAsync(new NavigationPage(new NewCrimeIncidentReportPage(_viewModel)), true);
+                this.viewModel.IsExecuting = false;
+                _viewModel.ProgressDialog.Hide();
+            }
+            catch(Exception ex)
+            {
+                this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
         protected override bool OnBackButtonPressed()
         {

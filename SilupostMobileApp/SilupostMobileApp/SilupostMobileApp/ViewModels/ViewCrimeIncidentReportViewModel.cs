@@ -176,50 +176,58 @@ namespace SilupostMobileApp.ViewModels
         {
             await this.WaitAndExecute(1000, async () =>
             {
-                this.CrimeIncidentReport = await CrimeIncidentReportService.GetAsync(this.CrimeIncidentReportId);
-                this.CanModifyReport = this.CrimeIncidentReport.PostedBySystemUser.SystemUserId.Equals(AppSettingsHelper.AppSettings.UserSettings.SystemUserId);
-                this.CrimeIncidentCategory = this.CrimeIncidentReport.CrimeIncidentCategory;
-                this.CrimeIncidentReportMediaCollection = new ObservableCollection<CrimeIncidentReportMediaModel>();
-                foreach (var media in CrimeIncidentReport.CrimeIncidentReportMedia)
+                try
                 {
-                    var fileUrl = string.Format("{0}File/getFile?FileId={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, media.File.FileId);
-                    media.File.SourceURL = fileUrl;
-                    if (media.DocReportMediaType.DocReportMediaTypeId == (int)SilupostDocReportMediaTypeEnums.VIDEO)
+                    this.CrimeIncidentReport = await CrimeIncidentReportService.GetAsync(this.CrimeIncidentReportId);
+                    this.CanModifyReport = this.CrimeIncidentReport.PostedBySystemUser.SystemUserId.Equals(AppSettingsHelper.AppSettings.UserSettings.SystemUserId);
+                    this.CrimeIncidentCategory = this.CrimeIncidentReport.CrimeIncidentCategory;
+                    this.CrimeIncidentReportMediaCollection = new ObservableCollection<CrimeIncidentReportMediaModel>();
+                    foreach (var media in CrimeIncidentReport.CrimeIncidentReportMedia)
                     {
-                        var thumbnail = MediaHelpers.GenerateThumbImageWeb(fileUrl, 1);
-                        media.File.ImageSource = thumbnail;
+                        var fileUrl = string.Format("{0}File/getFile?FileId={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, media.File.FileId);
+                        media.File.SourceURL = fileUrl;
+                        if (media.DocReportMediaType.DocReportMediaTypeId == (int)SilupostDocReportMediaTypeEnums.VIDEO)
+                        {
+                            var thumbnail = MediaHelpers.GenerateThumbImageWeb(fileUrl, 1);
+                            media.File.ImageSource = thumbnail;
+                        }
+                        else
+                        {
+                            var image = new Image { Source = fileUrl };
+                            media.File.ImageSource = image.Source;
+                        }
+                        switch ((SilupostDocReportMediaTypeEnums)media.DocReportMediaType.DocReportMediaTypeId)
+                        {
+                            case SilupostDocReportMediaTypeEnums.AUDIO:
+                                media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.AUDIO;
+                                break;
+                            case SilupostDocReportMediaTypeEnums.VIDEO:
+                                media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.VIDEO;
+                                break;
+                            case SilupostDocReportMediaTypeEnums.IMAGE:
+                                media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.IMAGE;
+                                break;
+                        }
+                        CrimeIncidentReportMediaCollection.Add(media);
                     }
-                    else
+                    this.MediaListControlHeight = GetNewHeightAsync();
+
+                    string url = BaseUrl.Get();
+                    string TempUrl = Path.Combine(url, "mapbox.html");
+                    WebViewSource = new UrlWebViewSource();
+                    WebViewSource.Url = TempUrl;
+
+                    await this.WaitAndExecute(1000, async () =>
                     {
-                        var image = new Image { Source = fileUrl };
-                        media.File.ImageSource = image.Source;
-                    }
-                    switch ((SilupostDocReportMediaTypeEnums)media.DocReportMediaType.DocReportMediaTypeId)
-                    {
-                        case SilupostDocReportMediaTypeEnums.AUDIO:
-                            media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.AUDIO;
-                            break;
-                        case SilupostDocReportMediaTypeEnums.VIDEO:
-                            media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.VIDEO;
-                            break;
-                        case SilupostDocReportMediaTypeEnums.IMAGE:
-                            media.DocReportMediaType.IconSource = SilupostMediaTypeIconSource.IMAGE;
-                            break;
-                    }
-                    CrimeIncidentReportMediaCollection.Add(media);
+                        ProgressDialog.Hide();
+                        this.IsBusy = false;
+                    });
                 }
-                this.MediaListControlHeight = GetNewHeightAsync();
-
-                string url = BaseUrl.Get();
-                string TempUrl = Path.Combine(url, "mapbox.html");
-                WebViewSource = new UrlWebViewSource();
-                WebViewSource.Url = TempUrl;
-
-                await this.WaitAndExecute(1000, async () =>
+                catch(Exception ex)
                 {
-                    ProgressDialog.Hide();
-                    this.IsBusy = false;
-                });
+                    SilupostExceptionLogger.GetError(ex);
+                    await this.Navigation.PopModalAsync(true);
+                }
             });
         }
 
@@ -233,17 +241,21 @@ namespace SilupostMobileApp.ViewModels
 
         public async Task Save()
         {
-            if (this.IsBusy)
-                return;
-            var result = await Application.Current.MainPage.DisplayAlert("Update", "Do you want to continue?", "Yes", "No");
-            if (!result)
-                return;
-            if (this.IsExecuting)
-                return;
-            ProgressDialog = UserDialogs.Instance.Loading("Saving please wait...", null, "OK", true, MaskType.Gradient);
-            this.IsExecuting = true;
             try
             {
+                if (!this.IsMapLoaded)
+                {
+                    throw new Exception("Map is still loading please wait...");
+                }
+                if (this.IsBusy)
+                    return;
+                var result = await Application.Current.MainPage.DisplayAlert("Update", "Do you want to continue?", "Yes", "No");
+                if (!result)
+                    return;
+                if (this.IsExecuting)
+                    return;
+                ProgressDialog = UserDialogs.Instance.Loading("Saving please wait...", null, "OK", true, MaskType.Gradient);
+                this.IsExecuting = true;
                 var model = new UpdateCrimeIncidentReportBindingModel()
                 {
                     CrimeIncidentReportId = this.CrimeIncidentReport.CrimeIncidentReportId,
@@ -305,6 +317,10 @@ namespace SilupostMobileApp.ViewModels
                     CrossToastPopUp.Current.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
                     this.IsExecuting = false;
                     await this.Navigation.PopModalAsync(true);
+                    await this.WaitAndExecute(1000, async () =>
+                    {
+                        MessagingCenter.Send(this, "ReloadReportList");
+                    });
                 }
                 else
                 {
@@ -317,9 +333,21 @@ namespace SilupostMobileApp.ViewModels
             catch(Exception ex)
             {
                 ProgressDialog.Hide();
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostExceptionLogger.GetError(ex, string.Format("Oops!  {0}", ex.Message));
                 this.IsExecuting = false;
                 return;
+            }
+        }
+
+        public async Task<bool> DeleteReport()
+        {
+            try
+            {
+                return await CrimeIncidentReportService.DeleteAsync(this.CrimeIncidentReportId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
         }
     }

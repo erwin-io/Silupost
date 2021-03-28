@@ -28,11 +28,21 @@ namespace SilupostMobileApp.Views.CrimeIncident
             this.viewModel.Title = SilupostPageTitle.CRIMEINCIDENT_VIEW_REPORT;
             MessagingCenter.Subscribe<MapContentPage, GeoLocationModel>(this, "SelectLocation", async (obj, geoLocation) =>
             {
-                this.viewModel.GeoLocation = geoLocation;
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{this.viewModel.GeoLocation.GeoLatitude}';");
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{this.viewModel.GeoLocation.GeoLongitude}';");
-                await MapWebView.EvaluateJavaScriptAsync($"FlyToLocation();");
-                this.viewModel.ProgressDialog.Hide();
+                try
+                {
+                    this.viewModel.GeoLocation = geoLocation;
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('AccessToken').value = '{this.viewModel.Token}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"LoadMap();");
+
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{this.viewModel.GeoLocation.GeoLatitude}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{this.viewModel.GeoLocation.GeoLongitude}';");
+                    await MapWebView.EvaluateJavaScriptAsync($"FlyToLocation();");
+                    this.viewModel.ProgressDialog.Hide();
+                }
+                catch(Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
             });
         }
 
@@ -207,6 +217,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
                     GeoAddress = this.viewModel.CrimeIncidentReport.GeoAddress ?? string.Empty,
                 };
                 this.viewModel.ProgressDialog.Hide();
+                this.viewModel.IsMapLoaded = true;
             }
             catch (Exception ex)
             {
@@ -214,10 +225,15 @@ namespace SilupostMobileApp.Views.CrimeIncident
                 SilupostExceptionLogger.GetError(ex, string.Format("{0} {1}", "Oops! Error loading map please try again.", ex.Message));
             }
         }
+
         async void OpenLargeMap_Clicked(object sender, EventArgs e)
         {
             try
             {
+                if (!this.viewModel.IsMapLoaded)
+                {
+                    throw new Exception("Map is still loading please wait...");
+                }
                 if (!this.viewModel.CanModifyReport)
                     return;
                 if (this.viewModel.IsExecuting)
@@ -237,7 +253,33 @@ namespace SilupostMobileApp.Views.CrimeIncident
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage("Error loading map please try again." + string.Format(" {0}", ex.Message));
+                SilupostExceptionLogger.GetError(ex, string.Format("Oops! {0}", ex.Message));
+            }
+        }
+
+        async void DeleteReport_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!this.viewModel.CanModifyReport)
+                    return;
+                var result = await Application.Current.MainPage.DisplayAlert("Delete this report", "Do you want to continue?", "Yes", "No");
+                if (!result)
+                    return;
+                if (this.viewModel.IsExecuting)
+                    return;
+                await this.viewModel.DeleteReport();
+                this.viewModel.IsExecuting = false;
+                await this.Navigation.PopModalAsync(true);
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    MessagingCenter.Send(this, "ReloadReportList");
+                });
+            }
+            catch (Exception ex)
+            {
+                this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex, string.Format("Oops! {0}", ex.Message));
             }
         }
     }

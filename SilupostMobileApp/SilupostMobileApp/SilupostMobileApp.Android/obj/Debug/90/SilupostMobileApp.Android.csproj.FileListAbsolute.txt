@@ -107,6 +107,14 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\Sil
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_ok_480_green.png
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_pin_code_96_gray.png
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_new_post_96_gray.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_edit_384_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_settings_384_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_admin_settings_male_96_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_email_96_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_password_1_96_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_user_96_white.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_location_on_96_black.png
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_location_on_96_blue.png
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\uploadflags.txt
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\resolvedassemblies.hash
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\android\assets\Acr.UserDialogs.dll
@@ -657,9 +665,3 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\Sil
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_edit_384_white.png
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_settings_384_white.png
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_admin_settings_male_96_white.png
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_email_96_white.png
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_password_1_96_white.png
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp.Android\obj\Debug\90\res\drawable\icons8_user_96_white.png

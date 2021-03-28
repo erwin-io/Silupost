@@ -259,6 +259,11 @@ namespace SilupostMobileApp.ViewModels
                     CrossToastPopUp.Current.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
                     this.IsExecuting = false;
                     await this.Navigation.PopModalAsync(true);
+                    await this.WaitAndExecute(1000, async () =>
+                    {
+                        MessagingCenter.Send(this, "ReloadReportList");
+                        MessagingCenter.Send(this, "SelectTab", 2);
+                    });
                 }
                 else
                 {
