@@ -32,4 +32,9 @@ namespace SilupostWeb.Domain.Enumerations
         VIDEO = 2,
         AUDIO = 3
     }
+    public enum SilupostServerStatusEnums
+    {
+        ACTIVE = 1,
+        DISABLED = 2,
+    }
 }

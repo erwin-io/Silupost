@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:emergencyViews="clr-namespace:SilupostMobileApp.Views.Emergency"
+            xmlns:crimeIncidentViews="clr-namespace:SilupostMobileApp.Views.CrimeIncident"
+            xmlns:timelineViews="clr-namespace:SilupostMobileApp.Views.Timeline"
+            xmlns:accountViews="clr-namespace:SilupostMobileApp.Views.Account"
+            x:Class="SilupostMobileApp.Views.MainPage" 
+            NavigationPage.HasNavigationBar="False"
+            Appearing="TabbedPage_Appearing">
+</TabbedPage>

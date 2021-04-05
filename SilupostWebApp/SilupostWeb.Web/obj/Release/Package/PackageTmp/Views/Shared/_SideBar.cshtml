@@ -109,6 +109,38 @@
                         </li>
                     }
 
+
+                    if (appState.UserViewAccess.Any(x => x.ModuleName.Equals("Mobile Controller")))
+                    {
+                        <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("Mobile Controller") ? "open" : "")">
+                            @if (ViewBag.Page.Module.Equals("Mobile Controller"))
+                            {
+                                <a aria-expanded="true" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media active" data-sidebar="true" href="javascript:void(0);">
+                                    <i class="material-icons media-left pmd-sm">phone_android</i> <span class="media-body">Mobile Controller</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a aria-expanded="false" data-toggle="dropdown" class="btn-user pmd-ripple-effect dropdown-toggle media" data-sidebar="true" href="javascript:void(0);">
+                                    <i class="material-icons media-left pmd-sm">phone_android</i>
+                                    <span class="media-body">Mobile Controller</span>
+                                </a>
+                            }
+                            <ul class="dropdown-menu">
+                                <li>
+
+                                    @if (appState.UserViewAccess.Any(x => x.PageName.Equals("Mobile Controller")))
+                                    {
+                                        if (ViewBag.Page.MenuName.Equals("Mobile Controller"))
+                                        {<a class="pmd-ripple-effect active" href="#"><i class="material-icons media-left pmd-xs md-dark">radio_button_checked</i><span class="media-body">Mobile Controller</span></a>}
+                                        else
+                                        {<a class="pmd-ripple-effect" href="/MobileController"><i class="material-icons media-left pmd-xs md-light md-inactive">radio_button_unchecked</i> <span class="media-body">Mobile Controller</span></a>}
+                                    }
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
                     if (appState.UserViewAccess.Any(x => x.ModuleName.Equals("System Setup")))
                     {
                         <li class="dropdown pmd-dropdown @(ViewBag.Page.Module.Equals("System Setup") ? "open" : "")">

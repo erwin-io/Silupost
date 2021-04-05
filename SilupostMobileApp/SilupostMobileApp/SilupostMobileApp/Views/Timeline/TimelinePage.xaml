@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Timeline.TimelinePage"
+             xmlns:pluginMaterial="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             Title="{Binding Title}"
+             Appearing="ContentPage_Appearing">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:MonthConverter x:Key="MonthConverter" />
+            <converter:DateConverter x:Key="DateConverter" />
+            <converter:TimeConverter x:Key="TimeConverter" />
+            <converter:TimeSpanConverter x:Key="TimeSpanConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout HorizontalOptions="Start" Margin="0" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <ImageButton Source="{Binding ImageSource}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="100" HeightRequest="35" WidthRequest="35" Aspect="AspectFill" BackgroundColor="Transparent" Clicked="UserProfile_Clicked" ></ImageButton>
+                </StackLayout>
+                <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_user_90_gray.png"/>
+    </ContentPage.ToolbarItems>-->
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                    <ListView ItemsSource="{Binding GroupedCrimeIncidentReport}"
+                              CachingStrategy="RecycleElementAndDataTemplate"
+                              HorizontalOptions="FillAndExpand" 
+                              VerticalOptions="StartAndExpand"
+                              HasUnevenRows="True"
+                              SelectionMode="None"
+                              IsGroupingEnabled="True"
+                              GroupDisplayBinding="{Binding Key}"
+                              GroupShortNameBinding="{Binding Key}"
+                              IsPullToRefreshEnabled="True" 
+                              IsVisible="{Binding HasError, Converter={StaticResource InverseBoolConverter}}"
+                              IsRefreshing="{Binding IsProcessingRefresh, Mode=TwoWay}"
+                              RefreshCommand="{Binding RefreshCommand}">
+                        <ListView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="25">
+                                    <StackLayout VerticalOptions="FillAndExpand" Padding="5" BackgroundColor="#3498DB">
+                                        <Label TextColor="White" VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Reported : " ></Span>
+                                                    <Span Text="{Binding Key, Converter={StaticResource MonthConverter}}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.GroupHeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="10,0,10,0">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                        <StackLayout HorizontalOptions="FillAndExpand" Margin="0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="120"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.4*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Grid.Row="0" Padding="0">
+                                                    <ImageButton CornerRadius="100" Source="{Binding CrimeIncidentCategory.CrimeIncidentType.IconFile.ImageSource}" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"></ImageButton>
+                                                </StackLayout>
+                                                <Label Grid.Row="0" Padding="0" Margin="0" Grid.Column="1" Text="" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span FontAttributes="Bold" FontSize="20" Text="{Binding CrimeIncidentCategory.CrimeIncidentCategoryName}"></Span>
+                                                            <Span Text=" - " FontSize="20"></Span>
+                                                            <Span Text="{Binding GeoAddress}" FontSize="20"></Span>
+                                                            <Span Text=" - " FontSize="20"></Span>
+                                                            <Span Text="{Binding PossibleDate, Converter={StaticResource DateConverter}}" TextColor="Red" FontSize="20"></Span>
+                                                            <Span Text=" at " TextColor="Red" FontSize="20"></Span>
+                                                            <Span Text="{Binding PossibleTime, Converter={StaticResource TimeConverter}}" TextColor="Red" FontSize="20"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </Grid>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackLayout VerticalOptions="FillAndExpand" IsVisible="{Binding HasError}">
+                        <StackLayout VerticalOptions="CenterAndExpand" Padding="30,0,30,0">
+                            <Image Source="{Binding ErrorImageSource}" HorizontalOptions="CenterAndExpand"/>
+                            <Label FontSize="30" Text="Oops!" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label FontSize="20" Text="{Binding ErrorMessage}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                            <Button Text="Retry" HorizontalOptions="CenterAndExpand" Clicked="Retry_Clicked"/>
+                            <Button Text="+" Padding="20" FontSize="Large" HorizontalOptions="CenterAndExpand" Clicked="Add" WidthRequest="80" HeightRequest="80" CornerRadius="100" Margin="0,40,0,0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding HasError, Converter={StaticResource InverseBoolConverter}}" Grid.Row="1">
+                    <Button Text="Show more" FontSize="15" FontAttributes="Bold" TextColor="#006db3" Clicked="LoadMore_Clicked" BackgroundColor="Transparent" Margin="0"/>
+                </StackLayout>
+                <StackLayout
+                        IsVisible="{Binding HasError, Converter={StaticResource InverseBoolConverter}}"
+                        Margin="0,0,10,10" 
+                        WidthRequest="70" 
+                        HeightRequest="70" 
+                        Padding="0"
+                        HorizontalOptions="End" 
+                        VerticalOptions="End">
+                    <Frame
+                        CornerRadius="100"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand">
+                        <ImageButton 
+                            Source="icons8_find_clinic_96_WHITE.png"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Margin="0"
+                            Padding="15"
+                            BackgroundColor="#006db3" 
+                            Clicked="Add"/>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

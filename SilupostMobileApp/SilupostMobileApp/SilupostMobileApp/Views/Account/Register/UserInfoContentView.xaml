@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:behaviors="clr-namespace:SilupostMobileApp.Behavior" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Account.Register.UserInfoContentView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <ScrollView Grid.Row="0" Padding="20">
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Label FontSize="20" FontAttributes="Bold" Margin="0,0,0,40">Basic Information</Label>
+                        <StackLayout Margin="0,0,0,10">
+                            <material:MaterialEntry 
+                                Type="Outlined" 
+                                Text="{Binding FirstName.Value}"
+                                LabelText="First Name"
+                                Placeholder="Enter your First Name"
+                                BackgroundColor="Transparent"
+                                AssistiveTextColor="Black"
+                                ClearIconIsVisible="True"
+                                ClearIcon="icons8_cancel_96_gray.png"
+                                FocusedBorderColor="#039be5"
+                                BorderColor="{Binding FirstName.BorderColor}">
+                                <material:MaterialEntry.Behaviors>
+                                    <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="FirstName" />
+                                </material:MaterialEntry.Behaviors>
+                            </material:MaterialEntry>
+                            <Label Text="{Binding FirstName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding FirstName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               TextColor="{Binding FirstName.BorderColor}"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,0,0,10">
+                            <material:MaterialEntry 
+                                Type="Outlined" 
+                                Text="{Binding MiddleName.Value}"
+                                LabelText="Middle Name"
+                                Placeholder="Enter your Middle Name"
+                                BackgroundColor="Transparent"
+                                AssistiveTextColor="Black"
+                                ClearIconIsVisible="True"
+                                ClearIcon="icons8_cancel_96_gray.png"
+                                FocusedBorderColor="#039be5" 
+                                BorderColor="{Binding MiddleName.BorderColor}">
+                                <material:MaterialEntry.Behaviors>
+                                    <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="MiddleName" />
+                                </material:MaterialEntry.Behaviors>
+                            </material:MaterialEntry>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,0,0,10">
+                            <material:MaterialEntry 
+                                Type="Outlined" 
+                                Text="{Binding LastName.Value}"
+                                LabelText="Last Name"
+                                Placeholder="Enter your Last Name"
+                                BackgroundColor="Transparent"
+                                AssistiveTextColor="Black"
+                                ClearIconIsVisible="True"
+                                ClearIcon="icons8_cancel_96_gray.png"
+                                FocusedBorderColor="#039be5" 
+                                BorderColor="{Binding LastName.BorderColor}">
+                                <material:MaterialEntry.Behaviors>
+                                    <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="LastName" />
+                                </material:MaterialEntry.Behaviors>
+                            </material:MaterialEntry>
+                            <Label Text="{Binding LastName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding LastName.IsValid, Converter={StaticResource InverseBoolConverter}}" 
+                               TextColor="{Binding LastName.BorderColor}"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,0,0,10">
+                            <Label Text="Gender" Margin="15,0,0,0"/>
+                            <Picker
+                                ItemsSource="{Binding GenderList}" 
+                                SelectedItem="{Binding SelectedGender.Value}" 
+                                ItemDisplayBinding="{Binding GenderName}"
+                                BackgroundColor="Transparent"
+                                SelectedIndexChanged="SelectedGender_Change"
+                                />
+                            <Label Text="{Binding SelectedGender.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding SelectedGender.IsValid, Converter={StaticResource InverseBoolConverter}}" 
+                               TextColor="{Binding SelectedGender.BorderColor}"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,0,0,10">
+                            <material:MaterialDatePicker 
+                                Date="{Binding BirthDay.Value}"
+                                Type="Filled" 
+                                LabelText="Birthday" 
+                                Format="ddd dd MMM yyyy" 
+                                CornerRadius="5"
+                                LeadingIcon="icons8_timeline_week_96.png"
+                                TextColor="Black"
+                                BackgroundColor="White"
+                                BorderColor="{Binding BirthDay.BorderColor}"
+                                />
+                            <Label Text="{Binding BirthDay.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding BirthDay.IsValid, Converter={StaticResource InverseBoolConverter}}" 
+                               TextColor="{Binding BirthDay.BorderColor}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Grid.Row="1" Margin="20">
+                    <Button
+                        Text="SAVE"
+                        TextColor="{Binding ButtonFontColor}"
+                        BackgroundColor="{Binding ButtonBackgroundColor}"
+                        Clicked="ButtonSaveUserInfo_Clicked"
+                        VerticalOptions="Center"
+                        CornerRadius="5"></Button>
+
+                    <Button
+                        Text="Back"
+                        TextColor="{Binding ButtonBackgroundColor}"
+                        BackgroundColor="{Binding ButtonFontColor}"
+                        BorderColor="{Binding ButtonBackgroundColor}"
+                        BorderWidth="2"
+                        Clicked="ButtonBackToCredentials_Clicked"
+                        CornerRadius="5"></Button>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

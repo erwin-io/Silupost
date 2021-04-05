@@ -57,3 +57,4 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debu
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csprojAssemblyReference.cache

@@ -25,6 +25,7 @@ using System.Net.Http.Headers;
 
 namespace SilupostWeb.API.Controllers
 {
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/SystemUserVerification")]
     public class SystemUserVerificationController : ApiController
     {
@@ -136,7 +137,58 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+        
+        [AllowAnonymous]
+        [Route("SendVerificationMailKit")]
+        [HttpPost]
+        [ValidateModel]
+        [SwaggerOperation("create")]
+        [SwaggerResponse(HttpStatusCode.Created)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        public IHttpActionResult SendVerificationMailKit([FromBody] SystemUserVerificationBindingModel model)
+        {
+            AppResponseModel<SystemUserVerificationViewModel> response = new AppResponseModel<SystemUserVerificationViewModel>();
 
+            try
+            {
+                string code = EmailService.GenerateVerificationCode();
+                string id = _systemUserVerificationFacade.Add(model, code);
+
+                if (!string.IsNullOrEmpty(id))
+                {
+
+                    var result = _systemUserVerificationFacade.FindById(id);
+
+                    var success = EmailService.SendEmailVerificationMailKit(model.VerificationSender, result.VerificationCode);
+
+                    if (success)
+                    {
+                        response.IsSuccess = true;
+                        response.Message = Messages.Created;
+                        response.Data = new SystemUserVerificationViewModel() { VerificationSender = model.VerificationSender };
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.Created, response);
+                    }
+                    else
+                    {
+                        response.Message = Messages.Failed;
+                        return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.BadRequest, response);
+                    }
+                }
+                else
+                {
+                    response.Message = Messages.Failed;
+                    return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.BadRequest, response);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                response.DeveloperMessage = ex.Message;
+                response.Message = Messages.ServerError;
+                //TODO Logging of exceptions
+                return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.BadRequest, response);
+            }
+        }
 
         [AllowAnonymous]
         [Route("sendEmailChangePasswordRequest")]
@@ -172,7 +224,7 @@ namespace SilupostWeb.API.Controllers
                     {
                         response.IsSuccess = true;
                         response.Message = Messages.Created;
-                        response.Data = verification;
+                        response.Data = new SystemUserVerificationViewModel() { VerificationSender = model.VerificationSender };
                         return new SilupostAPIHttpActionResult<AppResponseModel<SystemUserVerificationViewModel>>(Request, HttpStatusCode.Created, response);
                     }
                     else

@@ -5,6 +5,7 @@ namespace SilupostWeb.Domain.BindingModel
     public class EnforcementStationBindingModel
     {
         public string EnforcementStationName { get; set; }
+        public string EnforcementStationGuestCode { get; set; }
     }
     public class CreateEnforcementStationBindingModel : EnforcementStationBindingModel
     {

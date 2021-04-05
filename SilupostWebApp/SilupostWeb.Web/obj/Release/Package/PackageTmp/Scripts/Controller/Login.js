@@ -89,7 +89,6 @@
                 .done(function (result) {
                     if (result.IsSuccess) {
                         $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                        circleProgress.close();
                         console.log(result);
                         var appState = {
                             User: {
@@ -135,8 +134,10 @@
                         api.setApplicationState(appState).done(function (result) {
                             if (result.Success) {
                                 window.location.replace("/");
+                                circleProgress.close();
                             } else {
                                 Swal.fire('Error!', result.Message, 'error');
+                                circleProgress.close();
                             }
                         });
                     } else {
@@ -146,7 +147,13 @@
                     }
                 }).error(function (result) {
                     $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
-                    Swal.fire('Error!', result.responseJSON.Message, 'error');
+                    if (result.responseJSON !== undefined) {
+                        Swal.fire('Error!', result.responseJSON.Message, 'error');
+                    } else if (result.statusText && result.statusText.includes("Invalid URL")) {
+                        Swal.fire('Error!', 'Unable to connect to server!', 'error');
+                    } else {
+                        Swal.fire('Error!', 'Unable to connect to server!', 'error');
+                    }
                     circleProgress.close();
                 });
         }

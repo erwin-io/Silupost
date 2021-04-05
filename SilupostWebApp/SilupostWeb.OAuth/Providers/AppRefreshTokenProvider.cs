@@ -73,7 +73,7 @@ namespace SilupostWeb.OAuth.Providers
 
             SystemRefreshTokenViewModel token = await Task.Run(() => this._systemTokenFacade.Find(hashedTokenId));
 
-            if (!string.IsNullOrEmpty(token.ProtectedTicket))
+            if (token != null && !string.IsNullOrEmpty(token.ProtectedTicket))
             {
                 context.DeserializeTicket(token.ProtectedTicket);
             }

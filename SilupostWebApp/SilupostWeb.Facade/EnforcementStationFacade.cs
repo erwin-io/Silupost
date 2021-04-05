@@ -76,7 +76,14 @@ namespace SilupostWeb.Facade
                 result.IconFile.FileContent = System.IO.File.ReadAllBytes(result.IconFile.FileName);
             return result;
         }
+        public EnforcementStationViewModel FindByGuestCode(string EnforcementStationGuestCode)
+        {
+            var result = AutoMapperHelper<EnforcementStationModel, EnforcementStationViewModel>.Map(_enforcementTypeRepositoryDAC.FindByGuestCode(EnforcementStationGuestCode));
 
+            if (result != null && result.IconFile != null && File.Exists(result.IconFile.FileName))
+                result.IconFile.FileContent = System.IO.File.ReadAllBytes(result.IconFile.FileName);
+            return result;
+        }
         public PageResultsViewModel<EnforcementStationViewModel> GetPage(string Search, int PageNo, int PageSize, string OrderColumn, string OrderDir) 
         {
             var result = new PageResultsViewModel<EnforcementStationViewModel>();

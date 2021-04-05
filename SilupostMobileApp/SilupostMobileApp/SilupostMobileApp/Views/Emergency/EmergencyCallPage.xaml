@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Emergency.EmergencyCallPage"
+             Title="{Binding Title}"
+             Appearing="ContentPage_Appearing">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Margin="0" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <ImageButton Source="{Binding ImageSource}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="100" HeightRequest="35" WidthRequest="35" Aspect="AspectFill" BackgroundColor="Transparent" Clicked="UserProfile_Clicked" ></ImageButton>
+                </StackLayout>
+                <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_clock_384.png" Clicked="CallHistory_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <Label Text="Emergency help needed?" 
+                   HorizontalOptions="CenterAndExpand" 
+                   FontSize="30" 
+                   FontAttributes="Bold"
+                   Padding="50,0,50,0" 
+                   HorizontalTextAlignment="Center">
+            </Label>
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions/>
+                    <Grid.ColumnDefinitions/>
+                    <Image Grid.Column="0"
+                           Grid.Row="0"
+                           Source="button_bg_call_911.png" 
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand"
+                           Margin="50,0,50,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="EmergencyCall_Clicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

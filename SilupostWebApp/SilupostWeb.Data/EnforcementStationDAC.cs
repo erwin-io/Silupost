@@ -27,6 +27,7 @@ namespace SilupostWeb.Data
                 var id = Convert.ToString(_dBConnection.ExecuteScalar("usp_enforcementstation_add", new
                 {
                     model.EnforcementStationName,
+                    model.EnforcementStationGuestCode,
                     IconFileId = model.IconFile.FileId,
                     model.SystemRecordManager.CreatedBy,
                 }, commandType: CommandType.StoredProcedure));
@@ -67,6 +68,33 @@ namespace SilupostWeb.Data
                 throw ex;
             }
         }
+
+        public EnforcementStationModel FindByGuestCode(string EnforcementStationGuestCode)
+        {
+            try
+            {
+                using (var result = _dBConnection.QueryMultiple("usp_enforcementstation_getByGuestCode", new
+                {
+                    EnforcementStationGuestCode = EnforcementStationGuestCode,
+                }, commandType: CommandType.StoredProcedure))
+                {
+                    var model = result.Read<EnforcementStationModel>().FirstOrDefault();
+                    if (model != null)
+                    {
+                        model.IconFile = result.Read<FileModel>().FirstOrDefault();
+                        model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
+                        model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+                    }
+
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public override List<EnforcementStationModel> GetAll() => throw new NotImplementedException();
 
@@ -153,6 +181,7 @@ namespace SilupostWeb.Data
                 {
                     model.EnforcementStationId,
                     model.EnforcementStationName,
+                    model.EnforcementStationGuestCode,
                     model.SystemRecordManager.LastUpdatedBy
                 }, commandType: CommandType.StoredProcedure));
 

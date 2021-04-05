@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:pluginMaterial="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients" xmlns:customRender="clr-namespace:SilupostMobileApp.CustomRender" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             x:Class="SilupostMobileApp.Views.CrimeIncident.ViewCrimeIncidentReportPage">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="icons8_back_to_96.png" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TitleBackButton_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_trash_480.png" Clicked="DeleteReport_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid Padding="0" Margin="0" VerticalOptions="FillAndExpand" IsVisible="{Binding HasError, Converter={StaticResource InverseBoolConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <ScrollView Padding="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0">
+                    <StackLayout HorizontalOptions="FillAndExpand" Padding="0,0,0,30">
+                        <!-- MAP -->
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" HeightRequest="150" Margin="0" Padding="0">
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <customRender:GeoWebView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" x:Name="MapWebView" HorizontalOptions="FillAndExpand" BackgroundColor="Red" VerticalOptions="FillAndExpand" Navigated="WebView_Navigated" Source="{Binding WebViewSource}" IsEnabled="False" Margin="0"></customRender:GeoWebView>
+                                <magic:GradientView HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="FillAndExpand"
+                                                    Grid.Column="0"
+                                                    Grid.Row="0">
+                                    <magic:LinearGradient>
+                                        <magic:GradientStop Color="#9e9e9e" />
+                                        <magic:GradientStop Color="Transparent" />
+                                    </magic:LinearGradient>
+                                </magic:GradientView>
+                                <magic:GradientView HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="FillAndExpand"
+                                                    Grid.Column="0"
+                                                    Grid.Row="2">
+                                    <magic:LinearGradient>
+                                        <magic:GradientStop Color="Transparent" />
+                                        <magic:GradientStop Color="#9e9e9e" />
+                                    </magic:LinearGradient>
+                                </magic:GradientView>
+                                <Button Grid.Column="0" 
+                                        Grid.Row="0" 
+                                        Grid.RowSpan="3" 
+                                        HorizontalOptions="FillAndExpand" 
+                                        VerticalOptions="FillAndExpand" 
+                                        Padding="0" 
+                                        Margin="0"
+                                        Clicked="OpenLargeMap_Clicked"
+                                        BackgroundColor="Transparent"/>
+                            </Grid>
+                        </StackLayout>
+                        <!-- MAP END -->
+
+                        <!-- LOCATION -->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            HeightRequest="50" 
+                            IsVisible="False"
+                            Padding="10,0,10,0">
+                            <Grid VerticalOptions="CenterAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <pluginMaterial:MaterialEntry 
+                                    Text="{Binding GeoLocation.GeoTrackerLatitude}"
+                                    Type="Filled" 
+                                    LabelText="Latitude" 
+                                    IsEnabled="False"
+                                    Grid.Column="0" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_marker_96_BLACK.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    DisabledBackgroundColor="White"
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderColor}"
+                                    BackgroundColor="White"
+                                    />
+                                <pluginMaterial:MaterialEntry 
+                                    Text="{Binding GeoLocation.GeoTrackerLongitude}"
+                                    Type="Filled" 
+                                    LabelText="Longitude"
+                                    IsEnabled="False"
+                                    Grid.Column="1" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_marker_96_BLACK.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    DisabledBackgroundColor="White"
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderColor}"
+                                    BackgroundColor="White"
+                                    />
+                            </Grid>
+                        </StackLayout>
+                        <!-- LOCATION END -->
+
+                        <!-- LOCATION ADDRESS -->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            HeightRequest="100" 
+                            Padding="10,0,10,0">
+                            <pluginMaterial:MaterialEditor 
+                                Type="Outlined"
+                                Text="{Binding GeoLocation.GeoAddress}"
+                                LabelText="Address"
+                                Placeholder="Enter Address"
+                                BackgroundColor="White"
+                                Padding="5"
+                                CornerRadius="5"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                LeadingIcon="icons8_marker_96_BLACK.png"
+                                TextColor="Black"
+                                IsEnabled="False"
+                                DisabledTextColor="Black"
+                                AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                BorderColor="{Binding TextEntryBorderColor}"
+                                FocusedTextColor="Black"
+                                DisabledBackgroundColor="White"
+                                FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                DisabledBorderColor="{Binding TextEntryBorderColor}"
+                                />
+                        </StackLayout>
+                        <!-- LOCATION ADDRESS END -->
+
+                        <!-- POSSIBLE DATE AND TIME-->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            HeightRequest="100"
+                            Padding="10,0,10,0">
+                            <Grid VerticalOptions="CenterAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <pluginMaterial:MaterialDatePicker 
+                                    Date="{Binding CrimeIncidentReport.PossibleDate}"
+                                    Type="Filled" 
+                                    IsEnabled="{Binding CanModifyReport}"
+                                    LabelText="Possible Date" 
+                                    Format="ddd dd MMM yyyy" 
+                                    Grid.Column="0" 
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_timeline_week_96.png"
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black" 
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                                <pluginMaterial:MaterialTimePicker 
+                                    Time="{Binding CrimeIncidentReport.PossibleTimeSpan}"
+                                    Type="Filled" 
+                                    LabelText="Possible Time" 
+                                    IsEnabled="{Binding CanModifyReport}"
+                                    Format="HH:mm tt" 
+                                    Grid.Column="1"
+                                    Grid.Row="0" 
+                                    CornerRadius="5"
+                                    LeadingIcon="icons8_clock_384_BLACK.png" 
+                                    TextColor="Black"
+                                    AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                    BorderColor="{Binding TextEntryBorderColor}"
+                                    FocusedTextColor="Black"
+                                    FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                    FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                    DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                    BackgroundColor="White"
+                                    />
+                            </Grid>
+                        </StackLayout>
+                        <!-- POSSIBLE DATE AND TIME END -->
+
+                        <!-- CRIME TYPE CATEGORY -->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            HeightRequest="80"
+                            Padding="10,0,10,0">
+                            <pluginMaterial:MaterialLabel Text="Crime/Incident Type Category"/>
+                            <Button
+                                FontSize="20"
+                                IsEnabled="{Binding CanModifyReport}"
+                                Text="{Binding CrimeIncidentCategory.CrimeIncidentCategoryName}"
+                                CornerRadius="50" 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="FillAndExpand" 
+                                TextColor="White"
+                                BackgroundColor="#006db3"
+                                Clicked="SelectCategory_Clicked"
+                                />
+                        </StackLayout>
+                        <!-- TYPE CATEGORY END -->
+
+                        <!-- DETAILS -->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            HeightRequest="200"
+                            Padding="10,0,10,10">
+                            <pluginMaterial:MaterialEditor 
+                                Text="{Binding CrimeIncidentReport.Description}"
+                                Type="Filled" 
+                                IsEnabled="{Binding CanModifyReport}"
+                                LabelText="Details" 
+                                LeadingIcon="icons8_info_480_BLACK.png" 
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                TextColor="Black"
+                                Placeholder="Enter Details"
+                                AssistiveTextColor="{Binding TextEntryBorderColor}"
+                                BorderColor="{Binding TextEntryBorderColor}"
+                                FocusedTextColor="Black"
+                                FocusedLabelTextColor="{Binding TextEntryLabelFocusColor}"
+                                FocusedBorderColor="{Binding TextEntryBorderFocusColor}"
+                                DisabledBorderColor="{Binding TextEntryBorderDisabledColor}"
+                                BackgroundColor="White"/>
+                        </StackLayout>
+                        <!-- DETAILS END -->
+
+                        <!-- MEDIA -->
+                        <StackLayout 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="StartAndExpand" 
+                            Padding="10,0,10,0">
+                            <Frame 
+                                HasShadow="False" 
+                                BorderColor="LightGray"
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="FillAndExpand" >
+                                <StackLayout>
+                                    <Button
+                                        IsVisible="{Binding CanModifyReport}"
+                                        IsEnabled="{Binding CanModifyReport}"
+                                        Clicked="NewMedia_Clicked"
+                                        FontSize="20"
+                                        Text="+ Add Photos/Videos"
+                                        CornerRadius="30" 
+                                        HorizontalOptions="FillAndExpand" 
+                                        HeightRequest="50"
+                                        TextColor="White"
+                                        BackgroundColor="#546e7a"/>
+                                    <flv:FlowListView 
+                                        FlowColumnCount="2"
+                                        SeparatorVisibility="None" 
+                                        HasUnevenRows="False"
+                                        RowHeight="140"
+                                        Margin="0"
+                                        FlowItemsSource="{Binding CrimeIncidentReportMediaCollection}"
+                                        MinimumHeightRequest="600"
+                                        HeightRequest="{Binding MediaListControlHeight}"
+                                        HorizontalOptions="FillAndExpand">
+                                        <flv:FlowListView.FlowEmptyTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <StackLayout 
+                                                        HorizontalOptions="CenterAndExpand" 
+                                                        VerticalOptions="Center" >
+                                                        <Label Text="No Photos/Video added." HorizontalTextAlignment="Center" FontSize="20"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </flv:FlowListView.FlowEmptyTemplate>
+                                        <flv:FlowListView.FlowColumnTemplate>
+                                            <DataTemplate>
+                                                <StackLayout HorizontalOptions="FillAndExpand" 
+                                                             VerticalOptions="FillAndExpand"
+                                                             BackgroundColor="LightGray" 
+                                                             Margin="2">
+                                                    <Grid 
+                                                        HorizontalOptions="FillAndExpand" 
+                                                        VerticalOptions="FillAndExpand">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="1*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Source="{Binding File.ImageSource}"
+                                                               Aspect="AspectFill" 
+                                                               HorizontalOptions="FillAndExpand" 
+                                                               VerticalOptions="FillAndExpand" 
+                                                               Grid.Column="0" 
+                                                               Grid.Row="0">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Media_Clicked"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                        <StackLayout 
+                                                            HorizontalOptions="FillAndExpand" 
+                                                            VerticalOptions="FillAndExpand" 
+                                                            Grid.Column="0" 
+                                                            Grid.Row="0">
+                                                            <Grid
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    VerticalOptions="FillAndExpand">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="1*"/>
+                                                                    <RowDefinition Height="0.5*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="1*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <magic:GradientView
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    VerticalOptions="FillAndExpand"
+                                                                    Grid.Column="0"
+                                                                    Grid.Row="2"
+                                                                    Grid.RowSpan="3">
+                                                                    <magic:LinearGradient>
+                                                                        <magic:GradientStop Color="Transparent" />
+                                                                        <magic:GradientStop Color="Black" />
+                                                                    </magic:LinearGradient>
+                                                                </magic:GradientView>
+                                                                <StackLayout
+                                                                    Grid.Column="0"
+                                                                    Grid.Row="0"
+                                                                    HorizontalOptions="End"
+                                                                    VerticalOptions="Start"
+                                                                    WidthRequest="30"
+                                                                    HeightRequest="30"
+                                                                    Padding="0"
+                                                                    Margin="0">
+                                                                    <Frame
+                                                                        Padding="0"
+                                                                        Margin="0"
+                                                                        CornerRadius="100"
+                                                                        HorizontalOptions="Center"
+                                                                        VerticalOptions="Center">
+                                                                        <Image
+                                                                            IsVisible="{Binding CanModifyReport}"
+                                                                            HeightRequest="25"
+                                                                            WidthRequest="25"
+                                                                            HorizontalOptions="Center"
+                                                                            VerticalOptions="Center"
+                                                                            Margin="0"
+                                                                            Source="icons8_cancel_480_RED.png">
+                                                                            <Image.GestureRecognizers>
+                                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="RemoveMedia_Tapped"/>
+                                                                            </Image.GestureRecognizers>
+                                                                        </Image>
+                                                                    </Frame>
+                                                                </StackLayout>
+                                                                <Image
+                                                                    Source="{Binding DocReportMediaType.IconSource}"
+                                                                    Grid.Column="0"
+                                                                    Grid.Row="2"
+                                                                    Grid.RowSpan="3"
+                                                                    VerticalOptions="End"
+                                                                    HorizontalOptions="Start"
+                                                                    HeightRequest="20"
+                                                                    WidthRequest="20"
+                                                                    Margin="5"/>
+                                                            </Grid>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </flv:FlowListView.FlowColumnTemplate>
+                                    </flv:FlowListView>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        <!-- MEDIA END -->
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Padding="10" Margin="0" IsVisible="{Binding CanModifyReport}">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Text="Cancel" CornerRadius="50" Grid.Column="0" Grid.Row="0" BackgroundColor="#006db3" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Cancel_Cliked" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+                        <Button Text="Save" CornerRadius="50" Grid.Column="1" Grid.Row="0" BackgroundColor="#006db3" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Command="{Binding SaveCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+            <StackLayout VerticalOptions="FillAndExpand"
+                IsVisible="{Binding HasError}">
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="30,0,30,0">
+                    <Image Source="{Binding ErrorImageSource}" HorizontalOptions="CenterAndExpand"/>
+                    <Label FontSize="30" Text="Oops!" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label FontSize="20" Text="{Binding ErrorMessage}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                    <Button Text="Retry" Padding="20" HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

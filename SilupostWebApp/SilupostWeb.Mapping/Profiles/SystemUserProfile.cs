@@ -69,6 +69,7 @@ namespace SilupostWeb.Mapping.Profiles
                         LastName = src.LastName,
                         MiddleName = src.MiddleName,
                         EmailAddress = src.EmailAddress,
+                        BirthDate = src.BirthDate,
                         Gender = new EntityGenderModel() { GenderId = src.GenderId },
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
@@ -95,7 +96,7 @@ namespace SilupostWeb.Mapping.Profiles
                 .ForPath(dest => dest.EnforcementStation, opt => opt.MapFrom(src =>
                     new EnforcementStationModel
                     {
-                        EnforcementStationId = src.EnforcementStationId
+                        EnforcementStationGuestCode = src.EnforcementStationGuestCode
                     }))
                 .ForPath(dest => dest.SystemUserConfig, opt => opt.MapFrom(src =>
                     new SystemUserConfigModel

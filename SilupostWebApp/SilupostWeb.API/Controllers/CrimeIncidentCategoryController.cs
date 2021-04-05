@@ -24,6 +24,7 @@ using System.Security.Claims;
 namespace SilupostWeb.API.Controllers
 {
     [Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/CrimeIncidentCategory")]
     public class CrimeIncidentCategoryController : ApiController
     {
@@ -194,6 +195,7 @@ namespace SilupostWeb.API.Controllers
                 return new SilupostAPIHttpActionResult<AppResponseModel<CrimeIncidentCategoryViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
         }
+
         [Route("")]
         [HttpPut]
         [ValidateModel]

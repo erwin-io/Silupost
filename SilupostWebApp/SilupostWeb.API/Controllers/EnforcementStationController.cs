@@ -24,6 +24,7 @@ using System.Security.Claims;
 namespace SilupostWeb.API.Controllers
 {
     [Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/EnforcementStation")]
     public class EnforcementStationController : ApiController
     {
@@ -87,7 +88,7 @@ namespace SilupostWeb.API.Controllers
 
             if (string.IsNullOrEmpty(id))
             {
-                response.Message = string.Format(Messages.InvalidId, "Enforcement Type");
+                response.Message = string.Format(Messages.InvalidId, "Enforcement Station");
                 return new SilupostAPIHttpActionResult<AppResponseModel<EnforcementStationViewModel>>(Request, HttpStatusCode.BadRequest, response);
             }
 

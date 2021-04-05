@@ -36,6 +36,16 @@
                 dataType: "json"
             });
         }
+        var getEnforcementByGuestCode = function (sender, code) {
+            return $.ajax({
+                url: apiURI + "SystemUserVerification/GetByGuestCode?sender=" + sender + "&code=" + code,
+                type: "GET",
+                contentType: 'application/json;charset=utf-8',
+                dataType: "json"
+            });
+        }
+
+        
         var saveAccount = function (account) {
             return $.ajax({
                 url: app.appSettings.silupostWebAPIURI + "/SystemUser/CreateWebAdminAccount",
@@ -58,6 +68,7 @@
             setApplicationState: setApplicationState, 
             sendVerification: sendVerification, 
             getBySender: getBySender, 
+            getEnforcementByGuestCode: getEnforcementByGuestCode,
             saveAccount: saveAccount,
             getUserByCredentials: getUserByCredentials,
             getLookup: getLookup,
@@ -251,6 +262,9 @@
                 },
                 GenderId: {
                     required: true
+                },
+                EnforcementStationGuestCode: {
+                    required: true
                 }
             },
             messages: {
@@ -259,6 +273,7 @@
                 LastName: "Please enter Lastname",
                 BirthDate: "Please select Birth Date",
                 GenderId: "Please select Gender",
+                EnforcementStationGuestCode: "Please Enter Guest Code",
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -488,14 +503,15 @@
             }).error(function (result) {
                 var errormessage = "";
                 var errorTitle = "";
-                if (result.responseJSON.Message != null) {
-                    erroTitle = "Error!";
-                    errormessage = result.responseJSON.Message;
-                }
-                if (result.responseJSON.DeveloperMessage != null && result.responseJSON.DeveloperMessage.includes("Cannot insert duplicate")) {
+                if (result.responseJSON.DeveloperMessage !== null && result.responseJSON.DeveloperMessage.includes("Cannot insert duplicate")) {
                     erroTitle = "Not Allowed!";
                     errormessage = "Already exist!";
-                }
+                } else if (result.responseJSON.DeveloperMessage !== null && result.responseJSON.DeveloperMessage.includes("Enforcement Station")) {
+                    erroTitle = "Not Allowed!";
+                    errormessage = "Invalid Guest Code!";
+                } else {
+                    erroTitle = "Error!";
+                    errormessage = result.responseJSON.Message;}
                 $(".content").find("input,button,a").prop("disabled", false).removeClass("disabled");
                 Swal.fire('Error!', errormessage, 'error');
                 circleProgress.close();

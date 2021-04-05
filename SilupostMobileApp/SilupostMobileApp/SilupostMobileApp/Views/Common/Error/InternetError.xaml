@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Common.Error.InternetError">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="30,0,30,0">
+                <Image Source="icons8_without_internet_96.png" HorizontalOptions="CenterAndExpand"/>
+                <Label FontSize="30" Text="Oh no!" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label FontSize="20" Text="No Inernet found. Check your connection or try again." VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                <Button Text="Retry" Padding="20" HorizontalOptions="CenterAndExpand" Clicked="Retry_Clicked"/>
+                <Button Text="Emergency call(911)" Padding="20" HorizontalOptions="CenterAndExpand" Clicked="EmergencyCall_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls" 
+             xmlns:converter="clr-namespace:SilupostMobileApp.Common" 
+             xmlns:behaviors="clr-namespace:SilupostMobileApp.Behavior"
+             x:Class="SilupostMobileApp.Views.Account.LoginPage"
+             Appearing="ContentPage_Appearing" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView.Content>
+                <StackLayout WidthRequest="400" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,40,40,40">
+                    <StackLayout WidthRequest="80" HeightRequest="80">
+                        <Image Source="SILUPOST_ICON.png" WidthRequest="50" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center">Login with SILUPOST to get Started</Label>
+                    </StackLayout>
+                    <StackLayout
+                    Margin="0,0,0,10">
+                        <material:MaterialEntry 
+                            LeadingIcon="icons8_user_90_gray.png"
+                            Type="Outlined" 
+                            Text="{Binding Email.Value}"
+                            LabelText="Username"
+                            Placeholder="Enter your Username"
+                            BackgroundColor="Transparent"
+                            AssistiveTextColor="Black"
+                            ClearIconIsVisible="True"
+                            ClearIcon="icons8_cancel_96_gray.png"
+                            FocusedBorderColor="#039be5"
+                            BorderColor="{Binding Email.BorderColor}">
+                            <material:MaterialEntry.Behaviors>
+                                <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="Email" />
+                            </material:MaterialEntry.Behaviors>
+                        </material:MaterialEntry>
+                        <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}" IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}" TextColor="{Binding Email.BorderColor}"/>
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="0,0,0,20">
+                        <material:MaterialEntry 
+                            LeadingIcon="icons8_password_1_96_gray.png"
+                            Type="Outlined" 
+                            Text="{Binding Password.Value}"
+                            IsPassword="True"
+                            LabelText="Password"
+                            Placeholder="Enter your Password"
+                            BackgroundColor="Transparent"
+                            AssistiveTextColor="Black"
+                            ClearIconIsVisible="True"
+                            ClearIcon="icons8_cancel_96_gray.png"
+                            ShowPasswordIconIsVisible="True"
+                            ShowPasswordIcon="icons8_show_password_96_gray.png"
+                            FocusedBorderColor="#039be5" 
+                            BorderColor="{Binding Password.BorderColor}">
+                            <material:MaterialEntry.Behaviors>
+                                <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}"
+                                        CommandParameter="Password" />
+                            </material:MaterialEntry.Behaviors>
+                        </material:MaterialEntry>
+                        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}" IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}" TextColor="{Binding Password.BorderColor}"/>
+                        <Label Text="Forgot password?" TextColor="#3F51B5" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10" HorizontalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ForgotPassword_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                    <Button
+                        Text="LOG IN"
+                        TextColor="{Binding ButtonFontColor}"
+                        BackgroundColor="{Binding ButtonBackgroundColor}"
+                        Clicked="ButtonLogin_Clicked"
+                        CornerRadius="5"></Button>
+
+                    <Label Text="OR" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+
+                    <Button
+                        Text="Create an account"
+                        Clicked="ButtonGotRegister_Tapped"
+                        TextColor="{Binding ButtonBackgroundColor}"
+                        BackgroundColor="{Binding ButtonFontColor}"
+                        BorderColor="{Binding ButtonBackgroundColor}"
+                        BorderWidth="2"
+                        CornerRadius="5"></Button>
+
+
+                </StackLayout>
+            </ScrollView.Content>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

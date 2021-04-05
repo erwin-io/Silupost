@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Common.CrimeIncidentCategoryLookupLookupPage"
+             Appearing="ContentPage_Appearing"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_delete_384_WHITE.png" Clicked="UnSelectAll_Clicked" Text="UnSelect All"/>
+        <ToolbarItem Icon="icons8_ok_384_WHITE.png" Clicked="Ok_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding GroupedCrimeIncidentCategory}"
+                      CachingStrategy="RecycleElementAndDataTemplate"
+                      HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="StartAndExpand"
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorColor="#bdbdbd"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupShortNameBinding="{Binding Key}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsProcessingRefresh, Mode=TwoWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsVisible="{Binding IsSelectMultiple, Converter={StaticResource InverseBoolConverter}}"
+                      >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="80">
+                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="#eeeeee">
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{Binding Key.IconFile.ImageSource}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" FontAttributes="Bold" FontSize="25" VerticalOptions="End" Text="{Binding Key.CrimeIncidentTypeName}"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Start" Text="{Binding Key.CrimeIncidentTypeDescription}"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0" HeightRequest="50" Margin="10,0,10,0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0" HeightRequest="50">
+                                    <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.3*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="1" VerticalTextAlignment="Center" FontSize="20" VerticalOptions="CenterAndExpand" Text="{Binding CrimeIncidentCategoryName}"/>
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView ItemsSource="{Binding GroupedCrimeIncidentCategory}"
+                      CachingStrategy="RecycleElementAndDataTemplate"
+                      HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="StartAndExpand"
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorColor="#bdbdbd"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupShortNameBinding="{Binding Key}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsProcessingRefresh, Mode=TwoWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsVisible="{Binding IsSelectMultiple}"
+                      >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="80">
+                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="#eeeeee">
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{Binding Key.IconFile.ImageSource}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" FontAttributes="Bold" FontSize="25" VerticalOptions="End" Text="{Binding Key.CrimeIncidentTypeName}"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Start" Text="{Binding Key.CrimeIncidentTypeDescription}"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0" HeightRequest="50" Margin="10,0,10,0">
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0" HeightRequest="50">
+                                    <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.3*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="1" Grid.Row="0" Grid.RowSpan="1" VerticalTextAlignment="Center" FontSize="20" VerticalOptions="CenterAndExpand" Text="{Binding CrimeIncidentCategoryName}"/>
+                                        <CheckBox IsChecked="{Binding IsSelected}" 
+                                                  Grid.Row="0" 
+                                                  Grid.Column="2" 
+                                                  CheckedChanged="OnCheckBoxCheckedChanged"/>
+                                    </Grid>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

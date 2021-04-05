@@ -756,6 +756,8 @@
     <Content Include="plugins\webcamjs-master\webcam.js" />
     <Content Include="plugins\webcamjs-master\webcam.min.js" />
     <Content Include="plugins\webcamjs-master\webcam.swf" />
+    <Content Include="Resources\Images\icons8_user_90_gray.png" />
+    <Content Include="Resources\Images\SIGIN_LOGO.png" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\App\dataFormat.js" />
     <Content Include="Scripts\App\globalConfig.js" />
@@ -812,6 +814,7 @@
     <Content Include="Scripts\Controller\EnforcementType.js" />
     <Content Include="Scripts\Controller\CrimeIncidentReport.js" />
     <Content Include="Scripts\Controller\EnforcementUnit.js" />
+    <Content Include="Scripts\Controller\ReportTrackerMobile.js" />
     <Content Include="Scripts\Controller\ReportTracker.js" />
     <Content Include="Scripts\Controller\MobileUser-Details.js" />
     <Content Include="Scripts\Controller\ResetPassword.js" />
@@ -935,6 +938,8 @@
     <Content Include="Views\ReportTracker\Index.cshtml" />
     <Content Include="Views\SystemWebAdminRolePrivileges\_Table.cshtml" />
     <Content Include="Views\SystemWebAdminRolePrivileges\Index.cshtml" />
+    <Content Include="Views\ReportTracker\MobileView.cshtml" />
+    <Content Include="Views\Shared\_MapLayoutMobile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

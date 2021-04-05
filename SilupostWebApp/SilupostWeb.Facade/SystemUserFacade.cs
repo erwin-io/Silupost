@@ -96,6 +96,18 @@ namespace SilupostWeb.Facade
                     }
                     //end store file directory
 
+                    if (model.IsEnforcementUnit)
+                    {
+                        addModel.EnforcementUnit.ProfilePicture = addModel.ProfilePicture;
+                        addModel.EnforcementUnit.LegalEntity = addModel.LegalEntity;
+                        addModel.EnforcementUnit.SystemRecordManager = addModel.SystemRecordManager;
+                        addModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(addModel.EnforcementUnit);
+                        if (string.IsNullOrEmpty(addModel.EnforcementUnit.EnforcementUnitId))
+                        {
+                            throw new Exception("Error Saving User Enforcement Unit");
+                        }
+                    }
+
                     addModel.SystemRecordManager.CreatedBy = CreatedBy;
                     addModel.LegalEntity.LegalEntityId = legalEntityId;
                     id = _systemUserRepository.Add(addModel);
@@ -114,17 +126,6 @@ namespace SilupostWeb.Facade
                         if (string.IsNullOrEmpty(SystemWebAdminUserRoleId))
                         {
                             throw new Exception("Error Creating System User Roles");
-                        }
-                    }
-                    if (model.IsEnforcementUnit)
-                    {
-                        addModel.EnforcementUnit.ProfilePicture = addModel.ProfilePicture;
-                        addModel.EnforcementUnit.LegalEntity = addModel.LegalEntity;
-                        addModel.EnforcementUnit.SystemRecordManager = addModel.SystemRecordManager;
-                        addModel.EnforcementUnit.EnforcementUnitId = _enforcementUnitRepositoryDAC.Add(addModel.EnforcementUnit);
-                        if (string.IsNullOrEmpty(addModel.EnforcementUnit.EnforcementUnitId))
-                        {
-                            throw new Exception("Error Saving User Enforcement Unit");
                         }
                     }
                     addModel.SystemUserConfig.SystemUser.SystemUserId = id;

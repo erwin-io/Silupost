@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:customRender="clr-namespace:SilupostMobileApp.CustomRender"
+             mc:Ignorable="d"
+             x:Class="SilupostMobileApp.Views.Common.MapBox.MapContentPage" 
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Padding="0" Margin="0">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" Padding="0" Margin="0">
+                            <customRender:GeoWebView x:Name="MapWebView" HorizontalOptions="FillAndExpand" BackgroundColor="Red" VerticalOptions="FillAndExpand" Navigated="WebView_Navigated" Source="{Binding WebViewSource}"/>
+                        </StackLayout>
+                        <AbsoluteLayout BackgroundColor="Transparent" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" VerticalOptions="End" HorizontalOptions="EndAndExpand" HeightRequest="50" Margin="10" Padding="0,0,10,10" WidthRequest="50">
+                            <Frame 
+                                IsVisible="{Binding ShowGPS}"
+                                HorizontalOptions="StartAndExpand" 
+                                VerticalOptions="StartAndExpand"
+                                Margin="0"
+                                BackgroundColor="White"
+                                CornerRadius="70"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                Padding="5">
+                                <ImageButton
+                                        Source="{Binding GpsButtonIconSource}"
+                                        Padding="15"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"
+                                        BackgroundColor="Transparent" 
+                                        AbsoluteLayout.LayoutFlags="All" 
+                                        Clicked="GpsButton_Clicked"/>
+                            </Frame>
+                        </AbsoluteLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10">
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,0" IsVisible="{Binding ShowRadius}">
+                        <Label Text="Radius" FontSize="15"/>
+                        <StackLayout VerticalOptions="Start" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                            <Label x:Name="RadiusLabeValue" Text="0" HorizontalOptions="Start" FontSize="15" HorizontalTextAlignment="Center" VerticalOptions="Start" Margin="0" Padding="0">
+                                <Label.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="15,0" />
+                                        <On Platform="Android" Value="10,0" />
+                                    </OnPlatform>
+                                </Label.Margin>
+                            </Label>
+                            <Slider x:Name="RadiusSlider" Maximum="100" Minimum="0" Value="0" MaximumTrackColor="Gray" MinimumTrackColor="Gray" ThumbColor="#ff8a80" HorizontalOptions="FillAndExpand" ValueChanged="RadiusSlider_ValueChanged" Margin="0">
+                            </Slider>
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowRadius}"/>
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
+                        <Button x:Name="MarkLocationButton" Clicked="MarkLocation_Clicked" Text="Select this Location" CornerRadius="2" TextColor="White" HorizontalOptions="FillAndExpand" BackgroundColor="#006db3"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
+                        <Button x:Name="DoneButton" Clicked="DoneButton_Clicked" IsEnabled="False" Text="Done" CornerRadius="4" BorderColor="LightGray" BorderWidth="2" TextColor="#006db3" HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

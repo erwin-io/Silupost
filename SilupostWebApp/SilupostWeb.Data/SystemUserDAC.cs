@@ -146,7 +146,6 @@ namespace SilupostWeb.Data
                         model.ProfilePicture = result.Read<FileModel>().FirstOrDefault();
                         model.LegalEntity = result.Read<LegalEntityModel>().FirstOrDefault();
                         model.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
-                        model.EnforcementUnit = result.Read<EnforcementUnitModel>().FirstOrDefault();
                         model.SystemUserConfig = result.Read<SystemUserConfigModel>().FirstOrDefault();
 
                         result.Read<SystemWebAdminUserRolesModel, SystemWebAdminRoleModel, SystemWebAdminUserRolesModel>((swaur, swar) =>
@@ -160,7 +159,6 @@ namespace SilupostWeb.Data
                         if (model.SystemWebAdminUserRoles == null)
                             model.SystemWebAdminUserRoles = new List<SystemWebAdminUserRolesModel>();
                         model.SystemWebAdminUserRoles.AddRange(lookupSystemWebAdminUserRoles.Values);
-
 
                         result.Read<SystemWebAdminMenuModel, SystemWebAdminModuleModel, SystemWebAdminMenuModel>((swam, swamd) =>
                         {
@@ -194,6 +192,7 @@ namespace SilupostWeb.Data
                         model.EnforcementUnit.LegalEntity.Gender = result.Read<EntityGenderModel>().FirstOrDefault();
                         model.EnforcementUnit.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EnforcementUnit.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
+
 
                         model.SystemRecordManager = result.Read<SystemRecordManagerModel>().FirstOrDefault();
                         model.EntityStatus = result.Read<EntityStatusModel>().FirstOrDefault();
@@ -453,7 +452,7 @@ namespace SilupostWeb.Data
                     model.UserName,
                     model.Password,
                     model.IsWebAdminGuestUser,
-                    model.EnforcementStation.EnforcementStationId
+                    model?.EnforcementStation?.EnforcementStationId
                 }, commandType: CommandType.StoredProcedure));
 
                 if (id.Contains("Error"))
