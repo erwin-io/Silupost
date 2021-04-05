@@ -232,6 +232,7 @@ namespace SilupostMobileApp.ViewModels
                             FileSize = media.File.FileSize
                         }
                     });
+                    File.Delete(media.File.FileName);
                 }
                 var model = new CreateCrimeIncidentReportBindingModel()
                 {

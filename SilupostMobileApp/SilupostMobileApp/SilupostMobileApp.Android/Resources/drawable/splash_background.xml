@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape android:shape="rectangle" >
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <item
+        android:height="70dp"
+        android:width="70dp"
+        android:drawable="@drawable/SILUPOST_ICON"
+        android:gravity="center">
+    </item>
+</layer-list>

@@ -32,6 +32,10 @@
   <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
   <uses-permission android:name="android.permission.CONTROL_LOCATION_UPDATES" />
   <uses-permission android:name="android.permission.INSTALL_LOCATION_PROVIDER" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.INSTANT_APP_FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND" />
+  <uses-permission android:name="android.permission.REQUEST_COMPANION_USE_DATA_IN_BACKGROUND" />
   <application android:label="Silupost" android:usesCleartextTraffic="true" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
     <!-- ADD FILE PROVIDER HERE -->
     <provider android:name="android.support.v4.content.FileProvider" android:authorities="com.companyname.silupostmobileapp.fileprovider" android:exported="false" android:grantUriPermissions="true">
@@ -41,17 +45,31 @@
     <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
     <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/icon" android:label="Silupost" android:launchMode="singleInstance" android:noHistory="false" android:theme="@style/MainTheme" android:name="crc64db17017dd0be5589.MainActivity">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-      <intent-filter>
         <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:host="www.silupostweblandingpage.somee.com" />
         <data android:scheme="http" />
       </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:host="SilupostAppShortcut" />
+        <data android:scheme="appshortcut" />
+      </intent-filter>
     </activity>
+    <activity android:configChanges="orientation|screenSize" android:icon="@mipmap/icon" android:label="Silupost" android:noHistory="true" android:theme="@style/Theme.Splash" android:name="crc64db17017dd0be5589.SplashScreen">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <service android:name="crc642adbee241703836e.BackgroundService" />
+    <receiver android:enabled="true" android:exported="false" android:label="Connectivity Plugin Broadcast Receiver" android:name="crc64cea48322b3427ae9.ConnectivityChangeBroadcastReceiver" />
     <activity android:configChanges="orientation|screenSize" android:name="crc64424a8adc5a1fbe28.FilePickerActivity" />
     <activity android:configChanges="orientation|screenSize|uiMode" android:name="crc646957603ea1820544.MediaPickerActivity" />
     <service android:name="crc64a98abb514ffad9f1.KeepAliveService" />

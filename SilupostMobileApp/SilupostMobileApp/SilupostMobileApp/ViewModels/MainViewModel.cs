@@ -20,9 +20,16 @@ namespace SilupostMobileApp.ViewModels
 
         public async Task InitLookup()
         {
-            AppSettingsHelper.goLookupSettings = new List<LookupTableModel>();
-            var tableNames = string.Join(",", new List<string>() { SilupostSystemLookupTable.ENTITY_GENDER, SilupostSystemLookupTable.SYSTEM_CONFIG_TYPE, SilupostSystemLookupTable.CRIME_INCIDENT_TYPE, SilupostSystemLookupTable.CRIME_INCIDENT_CATEGORY });
-            AppSettingsHelper.goLookupSettings = await SystemLookupService.GetLookup(tableNames);
+            try
+            {
+                AppSettingsHelper.goLookupSettings = new List<LookupTableModel>();
+                var tableNames = string.Join(",", new List<string>() { SilupostSystemLookupTable.ENTITY_GENDER, SilupostSystemLookupTable.SYSTEM_CONFIG_TYPE, SilupostSystemLookupTable.CRIME_INCIDENT_TYPE, SilupostSystemLookupTable.CRIME_INCIDENT_CATEGORY });
+                AppSettingsHelper.goLookupSettings = await SystemLookupService.GetLookup(tableNames);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

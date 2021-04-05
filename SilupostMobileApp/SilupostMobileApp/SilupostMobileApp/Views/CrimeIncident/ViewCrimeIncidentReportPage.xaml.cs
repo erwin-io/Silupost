@@ -108,7 +108,9 @@ namespace SilupostMobileApp.Views.CrimeIncident
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
-                await this.Navigation.PushAsync(new MediaUploadViewerPage(new MediaUploadViewerViewModel(this.Navigation)), true);
+                var viewModel = new MediaUploadViewerViewModel(this.Navigation);
+                viewModel.AllowMultipleType = true;
+                await this.Navigation.PushAsync(new MediaUploadViewerPage(viewModel), true);
                 this.viewModel.IsExecuting = false;
             }
             catch (Exception ex)

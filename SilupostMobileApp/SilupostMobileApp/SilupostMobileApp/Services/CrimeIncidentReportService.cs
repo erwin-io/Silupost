@@ -64,7 +64,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -99,7 +99,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
             }
@@ -114,7 +114,7 @@ namespace SilupostMobileApp.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CrimeIncidentReportModel> GetAsync(string id)
+        public async Task<SillupostWebAPIResponseModel<CrimeIncidentReportModel>> GetAsync(string id)
         {
             try
             {
@@ -132,14 +132,7 @@ namespace SilupostMobileApp.Services
                     var response = new SillupostWebAPIResponseModel<CrimeIncidentReportModel>();
                     JObject obj = JsonConvert.DeserializeObject<JObject>(_json);
                     response = obj.ToObject<SillupostWebAPIResponseModel<CrimeIncidentReportModel>>();
-                    if (response.IsSuccess)
-                    {
-                        return response.Data;
-                    }
-                    else
-                    {
-                        throw new Exception(response.Message);
-                    }
+                    return response;
                 }
                 #endregion
             }
@@ -175,7 +168,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
             }
@@ -185,7 +178,7 @@ namespace SilupostMobileApp.Services
             }
         }
 
-        public async Task<List<CrimeIncidentReportModel>> GetPageReportBySystemUserIdAsync(string SystemUserId, long PageNo, long PageSize)
+        public async Task<SillupostWebAPIResponseModel<List<CrimeIncidentReportModel>>> GetPageReportBySystemUserIdAsync(string SystemUserId, long PageNo, long PageSize)
         {
             try
             {
@@ -203,14 +196,7 @@ namespace SilupostMobileApp.Services
                     var response = new SillupostWebAPIResponseModel<List<CrimeIncidentReportModel>>();
                     JObject obj = JsonConvert.DeserializeObject<JObject>(_json);
                     response = obj.ToObject<SillupostWebAPIResponseModel<List<CrimeIncidentReportModel>>>();
-                    if (response.IsSuccess)
-                    {
-                        return response.Data;
-                    }
-                    else
-                    {
-                        throw new Exception(response.Message);
-                    }
+                    return response;
                 }
                 #endregion
             }

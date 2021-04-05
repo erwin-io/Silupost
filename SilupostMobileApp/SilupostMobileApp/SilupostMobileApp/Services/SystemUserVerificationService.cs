@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,7 +66,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion

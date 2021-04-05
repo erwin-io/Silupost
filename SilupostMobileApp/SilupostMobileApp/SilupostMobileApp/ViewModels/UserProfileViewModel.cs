@@ -27,6 +27,20 @@ namespace SilupostMobileApp.ViewModels
             set => SetProperty(ref _systemUser, value);
         }
 
+        public string _userFullName;
+        public string UserFullName
+        {
+            get => _userFullName;
+            set => SetProperty(ref _userFullName, value);
+        }
+
+        public ImageSource _userProfilePicture;
+        public ImageSource UserProfilePicture
+        {
+            get => _userProfilePicture;
+            set => SetProperty(ref _userProfilePicture, value);
+        }
+
         private ObservableCollection<UserProfileSettingModel> _userProfileSetting;
         public ObservableCollection<UserProfileSettingModel> UserProfileSetting
         {
@@ -51,23 +65,8 @@ namespace SilupostMobileApp.ViewModels
         {
             try
             {
-                this.SystemUser = new SystemUserModel()
-                {
-                    SystemUserId = AppSettingsHelper.AppSettings.UserSettings.SystemUserId,
-                    SystemUserType = new SystemUserTypeModel()
-                    {
-                        SystemUserTypeId = 2
-                    },
-                    ProfilePicture = new FileModel()
-                    {
-                        ImageSource = string.Format("{0}File/getFile?FileId={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, AppSettingsHelper.AppSettings.UserSettings.ProfilePictureFileId??string.Empty)
-                    },
-                    UserName = AppSettingsHelper.AppSettings.UserSettings.SystemUserId,
-                    LegalEntity = new LegalEntityModel() 
-                    {
-                        FullName = AppSettingsHelper.AppSettings.UserSettings.FullName
-                    }
-                };
+                this.UserProfilePicture = ImageSource.FromStream(() => { return new MemoryStream(AppSettingsHelper.AppSettings.UserSettings.FileContent); });
+                this.UserFullName = AppSettingsHelper.AppSettings.UserSettings.FullName;
             }
             catch (Exception ex)
             {
@@ -107,6 +106,22 @@ namespace SilupostMobileApp.ViewModels
             catch (Exception ex)
             {
                 SilupostExceptionLogger.GetError(ex);
+            }
+        }
+
+        public async Task<SystemUserModel> UpdateProfile(UpdateSystemUserBindingModel model )
+        {
+            SystemUserModel result = null;
+            try
+            {
+                result = await SystemUserService.UpdatePersonalDetails(model);
+                IsBusy = false;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                throw ex;
             }
         }
 

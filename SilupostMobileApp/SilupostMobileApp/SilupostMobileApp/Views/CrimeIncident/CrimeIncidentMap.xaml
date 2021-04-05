@@ -3,11 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:customRender="clr-namespace:SilupostMobileApp.CustomRender"
+             xmlns:customRender="clr-namespace:SilupostMobileApp.CustomRender" xmlns:converter="clr-namespace:SilupostMobileApp.Common"
              mc:Ignorable="d"
              x:Class="SilupostMobileApp.Views.CrimeIncident.CrimeIncidentMap" Appearing="ContentPage_Appearing"
-             BackgroundColor="Black"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:MonthConverter x:Key="MonthConverter" />
+            <converter:DateConverter x:Key="DateConverter" />
+            <converter:TimeConverter x:Key="TimeConverter" />
+            <converter:TimeSpanConverter x:Key="TimeSpanConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <NavigationPage.TitleView>
         <StackLayout>
             <Grid>
@@ -18,19 +26,31 @@
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="icons8_place_marker_96.png" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0"/>
+                <StackLayout Margin="0" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <ImageButton Source="{Binding ImageSource}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="100" HeightRequest="35" WidthRequest="35" Aspect="AspectFill" BackgroundColor="Transparent" Clicked="UserProfile_Clicked" ></ImageButton>
+                </StackLayout>
                 <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
             </Grid>
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="icons8_place_marker_96.png" Clicked="TrackerCurrentLocationButton_CLick"/>
         <ToolbarItem Icon="icons8_find_clinic_96_WHITE.png" Clicked="NewReport_CLiked"/>
         <ToolbarItem Icon="icons8_slider_96.png" Clicked="ToggleFilter_CLiked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0" IsVisible="{Binding HasError, Converter={StaticResource InverseBoolConverter}}">
                 <customRender:GeoWebView x:Name="MapWebView" HorizontalOptions="FillAndExpand" BackgroundColor="Red" Navigating="MapWebView_Navigating" VerticalOptions="FillAndExpand" Navigated="WebView_Navigated" Source="{Binding WebViewURI}"/>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="FillAndExpand" IsVisible="{Binding HasError}">
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="30,0,30,0">
+                    <Image Source="{Binding ErrorImageSource}" HorizontalOptions="CenterAndExpand"/>
+                    <Label FontSize="30" Text="Oops!" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label FontSize="20" Text="{Binding ErrorMessage}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                    <Button Text="Retry" HorizontalOptions="CenterAndExpand" Clicked="Retry_Clicked"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

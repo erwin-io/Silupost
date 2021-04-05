@@ -59,6 +59,7 @@ namespace SilupostMobileApp.ViewModels
             get => _showCrimeReportList;
             set => SetProperty(ref _showCrimeReportList, value);
         }
+
         #endregion
 
         #region COMMANDS
@@ -79,21 +80,46 @@ namespace SilupostMobileApp.ViewModels
                 IsProcessingRefresh = true;
                 this.CurrentPageNo = 1;
                 this.PageSize = 5;
+                this.NoRecordFound = true;
+                this.HasError = false;
+
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
 
                 CrimeIncidentReport = new ObservableCollection<CrimeIncidentReportModel>();
-                var result = await GetPageReportBySystemUserIdAsync();
-
-                foreach (var report in result)
+                var result = await CrimeIncidentReportService.GetPageReportBySystemUserIdAsync(AppSettingsHelper.AppSettings.UserSettings.SystemUserId, CurrentPageNo, PageSize);
+                if (result != null && !result.IsSuccess)
+                {
+                    if (!string.IsNullOrEmpty(result.Message))
+                    {
+                        throw new Exception(result.Message);
+                    }
+                    else
+                    {
+                        throw new Exception(SilupostMessage.APP_ERROR);
+                    }
+                }
+                if (result != null && result.Data.Count == 0)
+                {
+                    throw new Exception(string.Format(SilupostMessage.NO_RECORDS_FOUND, "report"));
+                }
+                else
+                {
+                    this.NoRecordFound = false;
+                }
+                foreach (var report in result.Data)
                 {
                     if (!CrimeIncidentReport.Any(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId))
                     {
-                        report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
+                        report.CrimeIncidentCategory.CrimeIncidentType.IconFile.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.CrimeIncidentCategory.CrimeIncidentType.IconFile.FileContent); });
                         CrimeIncidentReport.Add(report);
                     }
                     else
                     {
                         int i = CrimeIncidentReport.ToList().FindIndex(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId);
-                        report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
+                        report.CrimeIncidentCategory.CrimeIncidentType.IconFile.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.CrimeIncidentCategory.CrimeIncidentType.IconFile.FileContent); });
                         CrimeIncidentReport[i] = report;
                     }
                 }
@@ -107,11 +133,41 @@ namespace SilupostMobileApp.ViewModels
                 //create a new collection of groups
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>(sorted);
                 this.ShowCrimeReportList = this.GroupedCrimeIncidentReport.Count > 0;
-                IsProcessingRefresh = false;
+                this.IsProcessingRefresh = false;
+                this.HasError = false;
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                CrimeIncidentReport = new ObservableCollection<CrimeIncidentReportModel>();
+                GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>();
+
+                this.HasError = true;
+                this.NoRecordFound = true;
+                this.IsExecuting = false;
+                this.IsBusy = false;
+                if (ex.Message.ToLower().Contains("no report record found") || ex.Message.ToLower().Contains("no record found"))
+                {
+                    this.ErrorMessage = string.Format("{0}", ex.Message);
+                    this.ErrorImageSource = "icons8_nothing_found_96.png";
+                }
+                else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
+                {
+                    this.ErrorMessage = string.Format("{0}", ex.Message);
+                    this.ErrorImageSource = "icons8_online_maintenance_portal_96.png";
+                }
+                else if (ex.Message.Contains(SilupostMessage.NO_INTERNET))
+                {
+                    this.ErrorMessage = string.Format("{0}", ex.Message);
+                    this.ErrorImageSource = "icons8_without_internet_96.png";
+                }
+                else
+                {
+                    this.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                    this.ErrorImageSource = "icons8_error_80.png";
+                }
+                SilupostExceptionLogger.GetError(ex);
+                if(this.ProgressDialog!= null)
+                    this.ProgressDialog.Hide();
             }
         }
         public async Task LoadMore()
@@ -121,19 +177,47 @@ namespace SilupostMobileApp.ViewModels
                 IsProcessingRefresh = true;
                 this.CurrentPageNo++;
                 this.PageSize = 5;
-                var result = await GetPageReportBySystemUserIdAsync();
+                this.NoRecordFound = true;
+                this.HasError = false;
 
-                foreach (var report in result)
+
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
+
+                var result = await CrimeIncidentReportService.GetPageReportBySystemUserIdAsync(AppSettingsHelper.AppSettings.UserSettings.SystemUserId, CurrentPageNo, PageSize);
+                if (result != null && !result.IsSuccess)
+                {
+                    if (!string.IsNullOrEmpty(result.Message))
+                    {
+                        throw new Exception(result.Message);
+                    }
+                    else
+                    {
+                        throw new Exception(SilupostMessage.APP_ERROR);
+                    }
+                }
+                if (result != null && result.Data.Count == 0)
+                {
+                    this.HasError = false;
+                    this.NoRecordFound = false;
+                    IsProcessingRefresh = false;
+                    return;
+                }
+
+                foreach (var report in result.Data)
                 {
                     if(!CrimeIncidentReport.Any(x=>x.CrimeIncidentReportId == report.CrimeIncidentReportId))
                     {
-                        report.PostedBySystemUser.ProfilePicture.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.PostedBySystemUser.ProfilePicture.FileContent); });
+                        report.CrimeIncidentCategory.CrimeIncidentType.IconFile.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.CrimeIncidentCategory.CrimeIncidentType.IconFile.FileContent); });
                         CrimeIncidentReport.Add(report);
                     }
                     else
                     {
                         int i = CrimeIncidentReport.ToList().FindIndex(x => x.CrimeIncidentReportId == report.CrimeIncidentReportId);
                         CrimeIncidentReport[i] = report;
+                        report.CrimeIncidentCategory.CrimeIncidentType.IconFile.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(report.CrimeIncidentCategory.CrimeIncidentType.IconFile.FileContent); });
                     }
                 }
 
@@ -146,49 +230,35 @@ namespace SilupostMobileApp.ViewModels
                 //create a new collection of groups
                 GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>(sorted);
                 this.ShowCrimeReportList = this.GroupedCrimeIncidentReport.Count > 0;
-                IsProcessingRefresh = false;
+                this.IsProcessingRefresh = false;
+                this.HasError = false;
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
-            }
-        }
-        public async Task<CrimeIncidentReportModel> InitViewCrimeIncidentReport(string CrimeIncidentReportId)
-        {
-            return await GetCrimeIncidentReportByIdAsync(CrimeIncidentReportId);
-        }
+                CrimeIncidentReport = new ObservableCollection<CrimeIncidentReportModel>();
+                GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>();
 
-        public async Task<List<CrimeIncidentReportModel>> GetPageReportBySystemUserIdAsync()
-        {
-            try
-            {
-                List<CrimeIncidentReportModel> result = await CrimeIncidentReportService.GetPageReportBySystemUserIdAsync(AppSettingsHelper.AppSettings.UserSettings.SystemUserId, CurrentPageNo, PageSize);
-                return result;
-            }
-            catch(SilupostServiceException ex)
-            {
-                if(ex.Type == SilupostServiceExceptionTypeEnums.NOT_FOUND)
+                this.HasError = true;
+                this.NoRecordFound = true;
+                this.IsExecuting = false;
+                this.IsBusy = false;
+                if (ex.Message.ToLower().Contains("no record"))
                 {
-                    this.NoRecordFound = true;
+                    this.ErrorMessage = string.Format("{0}", ex.Message);
+                    this.ErrorImageSource = "icons8_nothing_found_96.png";
                 }
-                throw new Exception(ex.ExceptionMessage);
-            }
-        }
-
-        public async Task<CrimeIncidentReportModel> GetCrimeIncidentReportByIdAsync(string id)
-        {
-            try
-            {
-                CrimeIncidentReportModel result = await CrimeIncidentReportService.GetAsync(id);
-                return result;
-            }
-            catch (SilupostServiceException ex)
-            {
-                if (ex.Type == SilupostServiceExceptionTypeEnums.NOT_FOUND)
+                else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
                 {
-                    this.NoRecordFound = true;
+                    this.ErrorMessage = string.Format("{0}", ex.Message);
+                    this.ErrorImageSource = "icons8_online_maintenance_portal_96.png";
                 }
-                throw new Exception(ex.ExceptionMessage);
+                else
+                {
+                    this.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                    this.ErrorImageSource = "icons8_error_80.png";
+                }
+                SilupostExceptionLogger.GetError(ex);
+                this.ProgressDialog.Hide();
             }
         }
     }

@@ -13,6 +13,8 @@ using SilupostMobileApp.Views.CrimeIncident;
 using SilupostMobileApp.Views.Account;
 using System.ComponentModel;
 using Acr.UserDialogs;
+using System.IO;
+using System.Collections.ObjectModel;
 
 namespace SilupostMobileApp.Views.Timeline
 {
@@ -26,6 +28,8 @@ namespace SilupostMobileApp.Views.Timeline
             InitializeComponent();
             BindingContext = viewModel = new TimelineViewModel(this.Navigation);
             viewModel.Title = SilupostPageTitle.TIMELINE;
+            this.viewModel.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(AppSettingsHelper.AppSettings.UserSettings.FileContent); });
+
             InitReportList();
         }
 
@@ -72,19 +76,94 @@ namespace SilupostMobileApp.Views.Timeline
                     SilupostExceptionLogger.GetError(ex);
                 }
             });
+            MessagingCenter.Subscribe<UserProfilePage>(this, "ReloadProfile", async (obj) =>
+            {
+                try
+                {
+                    if (!AppSettingsHelper.CanAccessInternet())
+                    {
+                        MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                        throw new Exception(SilupostMessage.NO_INTERNET);
+                    }
+                    this.viewModel.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(AppSettingsHelper.AppSettings.UserSettings.FileContent); });
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+            MessagingCenter.Subscribe<Object>(this, "ApplicationIsOffline", async (obj) =>
+            {
+                try
+                {
+                    if (this.viewModel.HasError && !string.IsNullOrEmpty(this.viewModel.ErrorMessage) && this.viewModel.ErrorMessage.Equals(SilupostMessage.NO_INTERNET))
+                        return;
+                    this.viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
 
-            this.viewModel.ImageSource = string.Format("{0}File/getFile?FileId={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, AppSettingsHelper.AppSettings.UserSettings.ProfilePictureFileId ?? string.Empty);
+                    await this.viewModel.WaitAndExecute(1000, async () =>
+                    {
+                        this.viewModel.CrimeIncidentReport = new ObservableCollection<CrimeIncidentReportModel>();
+                        this.viewModel.GroupedCrimeIncidentReport = new ObservableCollection<GroupingModel<DateTime, CrimeIncidentReportModel>>();
+
+                        this.viewModel.HasError = true;
+                        this.viewModel.NoRecordFound = true;
+                        this.viewModel.IsExecuting = false;
+                        this.viewModel.IsBusy = false;
+                        this.viewModel.ErrorMessage = string.Format("{0}", SilupostMessage.NO_INTERNET);
+                        this.viewModel.ErrorImageSource = "icons8_without_internet_96.png";
+                        if (this.viewModel.ProgressDialog != null)
+                            this.viewModel.ProgressDialog.Hide();
+                    });
+                }
+                catch(Exception ex)
+                {
+                    if(this.viewModel.ProgressDialog != null)
+                        this.viewModel.ProgressDialog.Hide();
+                }
+            });
+            MessagingCenter.Subscribe<Object>(this, "ApplicationIsOnline", async (obj) =>
+            {
+                try
+                {
+                    if (this.viewModel.HasError && !string.IsNullOrEmpty(this.viewModel.ErrorMessage) && this.viewModel.ErrorMessage.Equals(SilupostMessage.NO_INTERNET))
+                    {
+                        await viewModel.InitSystemUserTimeline();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (this.viewModel.ProgressDialog != null)
+                        this.viewModel.ProgressDialog.Hide();
+                }
+            });
         }
 
         async void LoadMore_Clicked(object sender, EventArgs e)
         {
-            await viewModel.LoadMore();
+            try
+            {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
+                await viewModel.LoadMore();
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
@@ -106,6 +185,11 @@ namespace SilupostMobileApp.Views.Timeline
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
@@ -137,6 +221,11 @@ namespace SilupostMobileApp.Views.Timeline
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
@@ -147,6 +236,23 @@ namespace SilupostMobileApp.Views.Timeline
                 _viewModel.ProgressDialog.Hide();
             }
             catch(Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
+        }
+
+        async void Retry_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
+                await viewModel.InitSystemUserTimeline();
+            }
+            catch (Exception ex)
             {
                 SilupostExceptionLogger.GetError(ex);
             }

@@ -49,6 +49,8 @@ namespace SilupostMobileApp.ViewModels
         public IPhoneCall PhoneCall => DependencyService.Get<IPhoneCall>();
         public IFileSystem FileSystem => DependencyService.Get<IFileSystem>();
         public ISystemLookupService SystemLookupService => DependencyService.Get<ISystemLookupService>();
+        public ICoreFunctions CoreFunctions => DependencyService.Get<ICoreFunctions>();
+        public ISystemConfigService SystemConfigService => DependencyService.Get<ISystemConfigService>();
 
         #region THEME COLORS
 
@@ -160,6 +162,25 @@ namespace SilupostMobileApp.ViewModels
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
+        }
+
+        bool _hasError;
+        public bool HasError
+        {
+            get => _hasError;
+            set => SetProperty(ref _hasError, value);
+        }
+        string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set => SetProperty(ref _errorMessage, value);
+        }
+        ImageSource _errorImageSource;
+        public ImageSource ErrorImageSource
+        {
+            get => _errorImageSource;
+            set => SetProperty(ref _errorImageSource, value);
         }
 
         string title = string.Empty;

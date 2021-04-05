@@ -6,16 +6,19 @@ namespace SilupostMobileApp.Common
 {
     public class SilupostAppSettings
     {
-        public const string SILUPOST_API_URI = "http://192.168.43.93:9100/api/v1/";
-        //public const string SILUPOST_API_URI = "http://192.168.254.145:9100/api/v1/";
-        public const string SILUPOST_WEB_APP_URI = "http://192.168.43.93:9300/";
-        //public const string SILUPOST_WEB_APP_URI = "http://192.168.254.145:9300/";
+        //public const string SILUPOST_API_URI = "http://192.168.43.93:9100/api/v1/";
+        public const string SILUPOST_API_URI = "http://silupostweb-001-site1.htempurl.com/api/v1/";
+        //public const string SILUPOST_WEB_APP_URI = "http://192.168.43.93:9300/";
+        public const string SILUPOST_WEB_APP_URI = "http://www.silupostwebcontroller1.somee.com/";
         public const string SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH = "reporttracker/mobileview";
         public const string SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH = "crimeIncidentReport/details/";
         public const string MAP_BOX_TOKEN = "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg";
         public const string SILUPOST_WEBLANDINGPAGEHOST = "www.silupostweblandingpage.somee.com";
         public const float DEFAULT_LOCATION_LATITUDE = 16.407706109071114f;
         public const float DEFAULT_LOCATION_LONGITUDE = 120.58722946069425f;
+        public const double CHECK_INTERNET_INTERVAL_SECONDS = 10;
+        public const double REFRESH_TOKEN_INTERVAL_SECONDS = 7200;
+        public const string APP_NAME = "Silupost";
     }
     public class SilupostEmergency
     {
@@ -38,7 +41,10 @@ namespace SilupostMobileApp.Common
         public const string NO_RECORDS_FOUND = "There are no {0} record found";
         public const string RECORD_NOT_FOUND = "Opps, the record was not found";
         public const string SERVER_ERROR = "Opps, the application encountered problem while accessing the server, Please check your internet or contact the developer";
+        public const string SERVER_INACTIVE = "There was a problem connecting to the server. Please try again.";
         public const string APP_ERROR = "Opps, the application encountered problem, Please try again!";
+        public const string NO_INTERNET = "No Inernet found. Check your connection or try again.";
+        public const string GPS_OR_LOCATION_ERROR = "Unable to get location!. Please swithched Location to 'ON'";
     }
     public class SilupostPageTitle
     {

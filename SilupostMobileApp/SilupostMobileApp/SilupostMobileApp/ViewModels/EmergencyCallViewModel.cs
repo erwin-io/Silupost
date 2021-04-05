@@ -15,7 +15,6 @@ namespace SilupostMobileApp.ViewModels
     public class EmergencyCallViewModel : BaseViewModel
     {
         public INavigation Navigation { get; set; }
-        public Command EmergencyCallCommand { get; set; }
         public SystemUserModel SystemUser { get; set; }
 
         private ObservableCollection<PhoneCallLogsModel> _phoneCallLogs;
@@ -25,14 +24,20 @@ namespace SilupostMobileApp.ViewModels
             set => SetProperty(ref _phoneCallLogs, value);
         }
 
+        ImageSource _imageSource;
+        public ImageSource ImageSource
+        {
+            get => _imageSource;
+            set => SetProperty(ref _imageSource, value);
+        }
+
         public EmergencyCallViewModel(INavigation pNavigation)
         {
             this.Navigation = pNavigation;
             PhoneCallLogs = new ObservableCollection<PhoneCallLogsModel>();
-            EmergencyCallCommand = new Command(async () => await EmergencyCall());
         }
 
-        async Task EmergencyCall()
+        public async Task EmergencyCall()
         {
             try
             {
@@ -41,7 +46,7 @@ namespace SilupostMobileApp.ViewModels
             }
             catch(Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                throw ex;
             }
         }
 

@@ -332,7 +332,7 @@
                                                                Grid.Column="0" 
                                                                Grid.Row="0">
                                                             <Image.GestureRecognizers>
-                                                                <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="Media_Clicked"/>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Media_Clicked"/>
                                                             </Image.GestureRecognizers>
                                                         </Image>
                                                         <StackLayout 

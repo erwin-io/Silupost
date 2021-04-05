@@ -27,6 +27,10 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#63ccff</item>
   </style>
+  
+  <style name="Theme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_background</item> 
+ </style>
 <color name="ListViewSelected">#EEEEEE</color>
 <color name="ListViewHighlighted">#EEEEEE</color>
 </resources>

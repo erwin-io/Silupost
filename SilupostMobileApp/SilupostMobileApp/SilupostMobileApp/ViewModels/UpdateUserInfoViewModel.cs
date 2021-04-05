@@ -280,24 +280,6 @@ namespace SilupostMobileApp.ViewModels
                 throw ex;
             }
         }
-        public async Task<SystemUserModel> Login()
-        {
-            SystemUserModel result = null;
-            try
-            {
-                if (await CredentialsValid())
-                {
-                    result = await SystemUserService.GetByCredentials(this.Email.Value, this.Password.Value);
-                }
-                IsBusy = false;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                IsBusy = false;
-                throw ex;
-            }
-        }
         public async Task TextChanged(string Name)
         {
             switch (Name)

@@ -11,6 +11,11 @@ namespace SilupostMobileApp.Common
         VIDEO = 2,
         AUDIO = 3
     }
+    public enum SilupostServerStatusEnums
+    {
+        ACTIVE = 1,
+        NOT_ACCESSIBLE = 2,
+    }
     public enum SilupostServiceExceptionTypeEnums
     {
         NOT_FOUND = 1,
@@ -32,5 +37,10 @@ namespace SilupostMobileApp.Common
     {
         EMAIL_CONFIRMATION = 1,
         CHANGE_PASSWORD = 2
+    }
+    public enum SilupostErrorPageTypeEnums
+    {
+        INTERNET_ERROR = 1,
+        SERVER_ERROR = 2,
     }
 }

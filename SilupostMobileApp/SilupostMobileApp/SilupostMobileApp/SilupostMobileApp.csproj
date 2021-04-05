@@ -17,8 +17,10 @@
     <PackageReference Include="MagicGradients" Version="1.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
+    <PackageReference Include="Plugin.AppShortcuts" Version="1.0.0.3" />
     <PackageReference Include="Plugin.MaterialDesignControls" Version="1.8.1" />
     <PackageReference Include="Plugin.Toast" Version="2.2.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Messaging" Version="5.2.0" />
@@ -69,6 +71,9 @@
     <Compile Update="Views\Account\UserProfile\UpdateUserInfoPage.xaml.cs">
       <DependentUpon>UpdateUserInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Common\Error\ServerError.xaml.cs">
+      <DependentUpon>ServerError.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Common\ImageCropperPage.xaml.cs">
       <DependentUpon>ImageCropperPage.xaml</DependentUpon>
     </Compile>
@@ -85,6 +90,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Common\CrimeIncidentMapFilterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Error\ErrorMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Error\InternetError.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Common\MediaUploadViewerPage.xaml">

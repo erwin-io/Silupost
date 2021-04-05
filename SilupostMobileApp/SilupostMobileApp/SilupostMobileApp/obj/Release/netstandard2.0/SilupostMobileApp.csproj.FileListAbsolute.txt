@@ -2,7 +2,6 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\Sil
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\bin\Release\netstandard2.0\SilupostMobileApp.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\bin\Release\netstandard2.0\ref\SilupostMobileApp.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\bin\Release\netstandard2.0\SilupostMobileApp.pdb
-D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\SilupostMobileApp.csprojAssemblyReference.cache
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\App.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\AboutPage.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\LoginPage.xaml.g.cs
@@ -39,3 +38,11 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\Sil
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\ChangePasswordPage.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\ChangePassword\CredentialsContentView.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\ChangePassword\EmailRegistrationContentView.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\UpdateEmailPage.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\UpdateEmail\EmailRegistrationContentView.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\UserProfilePage.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\UserProfile\UpdateUserInfoPage.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Account\UserProfile\UserProfileSettingsPage.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\ErrorMainPage.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\InternetError.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\ServerError.xaml.g.cs

@@ -21,14 +21,13 @@ namespace SilupostMobileApp.Views.Account.UserProfile
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
-            this.viewModel.InitUserProfileSettings();
             this.viewModel.ProgressDialog.Hide();
             MessagingCenter.Subscribe<UpdateUserInfoPage, SystemUserModel>(this, "UpdateSuccess", async (obj, model) =>
             {
                 try
                 {
                     this.viewModel.SystemUser = model;
-                    this.viewModel.InitUserProfileSettings();
+                    await this.viewModel.InitUserProfileSettings();
                 }
                 catch (Exception ex)
                 {

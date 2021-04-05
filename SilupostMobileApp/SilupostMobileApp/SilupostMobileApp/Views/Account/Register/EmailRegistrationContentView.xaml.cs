@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using SilupostMobileApp.Common;
 using SilupostMobileApp.ViewModels;
 using System;
 using System.Collections.Generic;

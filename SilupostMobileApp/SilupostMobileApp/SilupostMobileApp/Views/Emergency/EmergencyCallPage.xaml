@@ -6,7 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="SilupostMobileApp.Views.Emergency.EmergencyCallPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Appearing="ContentPage_Appearing">
     <NavigationPage.TitleView>
         <StackLayout>
             <Grid>
@@ -17,7 +18,9 @@
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="icons8_outgoing_call_96_WHITE.png" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0"/>
+                <StackLayout Margin="0" HorizontalOptions="Start" WidthRequest="35" HeightRequest="35" Grid.Column="0">
+                    <ImageButton Source="{Binding ImageSource}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="100" HeightRequest="35" WidthRequest="35" Aspect="AspectFill" BackgroundColor="Transparent" Clicked="UserProfile_Clicked" ></ImageButton>
+                </StackLayout>
                 <Label Text="{Binding Title}" TextColor="White" FontSize="Title" Grid.Column="1" VerticalTextAlignment="Center"/>
             </Grid>
         </StackLayout>
@@ -45,7 +48,7 @@
                            HorizontalOptions="CenterAndExpand"
                            Margin="50,0,50,0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EmergencyCallCommand}" NumberOfTapsRequired="1" />
+                            <TapGestureRecognizer Tapped="EmergencyCall_Clicked" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>

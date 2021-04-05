@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using SilupostMobileApp.Models;
 using SilupostMobileApp.Views.Account.Register;
 using Acr.UserDialogs;
+using SilupostMobileApp.Views.Common.Error;
 
 namespace SilupostMobileApp.Views
 {
@@ -29,10 +30,14 @@ namespace SilupostMobileApp.Views
     public partial class MainPage : Xamarin.Forms.TabbedPage
     {
         MainViewModel viewModel;
-        public MainPage()
+        bool IsLaunchFromShortcut = false;
+        string Page = null;
+        public MainPage(bool IsLaunchFromShortcut = false, string Page = null)
         {
             InitializeComponent();
             BindingContext = this.viewModel = new MainViewModel();
+            this.IsLaunchFromShortcut = IsLaunchFromShortcut;
+            this.Page = Page;
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             CurrentPageChanged += CurrentPageHasChanged;
 
@@ -40,8 +45,9 @@ namespace SilupostMobileApp.Views
             {
                 try
                 {
-                    //this.CurrentPage.TabIndex = tabIndex;
-                    CurrentPage = Children[tabIndex];
+                    var appSettings = await AppSettingsHelper.GetAppSetting();
+                    if (appSettings != null && appSettings.IsAuthenticated && Children != null && Children.Count() > 0)
+                        CurrentPage = Children[tabIndex];
                 }
                 catch (Exception ex)
                 {
@@ -50,10 +56,25 @@ namespace SilupostMobileApp.Views
             });
 
 
+            MessagingCenter.Subscribe<Object, int>(this, "SelectTab", async (obj, tabIndex) =>
+            {
+                try
+                {
+                    var appSettings = await AppSettingsHelper.GetAppSetting();
+                    if (appSettings != null && appSettings.IsAuthenticated && Children != null && Children.Count() > 0)
+                        CurrentPage = Children[tabIndex];
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+
             MessagingCenter.Subscribe<LoginPage, SystemUserModel>(this, "AuthenticateUser", async (obj, model) =>
             {
                 try
                 {
+                    MessagingCenter.Send<Object>(new Object(), "StartBackgroundService");
                     await InitTab();
                 }
                 catch (Exception ex)
@@ -66,6 +87,7 @@ namespace SilupostMobileApp.Views
             {
                 try
                 {
+                    MessagingCenter.Send<Object>(new Object(), "StartBackgroundService");
                     await InitTab();
                 }
                 catch (Exception ex)
@@ -73,24 +95,62 @@ namespace SilupostMobileApp.Views
                     SilupostExceptionLogger.GetError(ex);
                 }
             });
+
             MessagingCenter.Subscribe<UserProfileSettingsPage>(this, "Logout", async (obj) =>
             {
+                MessagingCenter.Send<Object>(new Object(), "StopBackgroundService");
                 await AppSettingsHelper.SetAppSetting(null);
-                App.Current.MainPage = new MainPage();
-                await InitUser();
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    App.Current.MainPage = new MainPage();
+                    await InitUser();
+                });
             });
+
             MessagingCenter.Subscribe<Account.UpdateEmail.EmailRegistrationContentView>(this, "Logout", async (obj) =>
             {
+                MessagingCenter.Send<Object>(new Object(), "StopBackgroundService");
                 await AppSettingsHelper.SetAppSetting(null);
-                App.Current.MainPage = new MainPage();
-                await InitUser();
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    App.Current.MainPage = new MainPage();
+                    await InitUser();
+                });
             });
+
             MessagingCenter.Subscribe<UpdateEmailPage>(this, "Logout", async (obj) =>
             {
+                MessagingCenter.Send<Object>(new Object(), "StopBackgroundService");
                 await AppSettingsHelper.SetAppSetting(null);
-                App.Current.MainPage = new MainPage();
-                await InitUser();
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    App.Current.MainPage = new MainPage();
+                    await InitUser();
+                });
             });
+
+            MessagingCenter.Subscribe<Object>(this, "Logout", async (obj) =>
+            {
+                MessagingCenter.Send<Object>(new Object(), "StopBackgroundService");
+                await AppSettingsHelper.SetAppSetting(null);
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    App.Current.MainPage = new MainPage();
+                    await InitUser();
+                });
+            });
+
+            MessagingCenter.Subscribe<SilupostServiceException>(this, "Logout", async (obj) =>
+            {
+                MessagingCenter.Send<Object>(new Object(), "StopBackgroundService");
+                await AppSettingsHelper.SetAppSetting(null); 
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    App.Current.MainPage = new MainPage();
+                    await InitUser();
+                });
+            });
+            
             MessagingCenter.Subscribe<App>(this, "OpenWelcomePage", async (obj) =>
             {
                 try
@@ -144,8 +204,8 @@ namespace SilupostMobileApp.Views
         {
             try
             {
-                var appsSettings = await AppSettingsHelper.GetAppSetting();
-                if (appsSettings == null)
+                var appSettings = await AppSettingsHelper.GetAppSetting();
+                if (appSettings == null)
                 {
                     if (!AppSettingsHelper.goIsLaunchFromURL)
                     {
@@ -184,7 +244,7 @@ namespace SilupostMobileApp.Views
                 }
                 else
                 {
-                    if (appsSettings != null && appsSettings.UserSettings != null && string.IsNullOrEmpty(appsSettings.UserSettings.SystemUserId))
+                    if (appSettings != null && appSettings.UserSettings != null && string.IsNullOrEmpty(appSettings.UserSettings.SystemUserId))
                     {
                         var _viewModel = new WelcomeViewModel(this.Navigation);
                         _viewModel.ShowAuthControls = false;
@@ -195,7 +255,7 @@ namespace SilupostMobileApp.Views
                         _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
                         await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage(loginViewModel)), true);
                     }
-                    else if (appsSettings != null && appsSettings.UserSettings != null && !appsSettings.IsAuthenticated)
+                    else if (appSettings != null && appSettings.UserSettings != null && !appSettings.IsAuthenticated)
                     {
                         var _viewModel = new WelcomeViewModel(this.Navigation);
                         _viewModel.ShowAuthControls = false;
@@ -206,14 +266,95 @@ namespace SilupostMobileApp.Views
                     }
                     else
                     {
-                        AppSettingsHelper.AppSettings = appsSettings;
+                        AppSettingsHelper.AppSettings = appSettings;
+                        try
+                        {
+                            var newToken = await this.viewModel.SystemUserService.GetRefreshToken(AppSettingsHelper.AppSettings.AppToken.RefreshToken);
+
+                            appSettings.AppToken = new Models.AppTokenModel
+                            {
+                                AccessToken = newToken.AccessToken,
+                                RefreshToken = newToken.RefreshToken
+                            };
+                        }
+                        catch(Exception ex)
+                        {
+                            if (ex.Message.ToLower().Contains("invalid_grant"))
+                            {
+                                appSettings.IsAuthenticated = false;
+                                await AppSettingsHelper.SetAppSetting(appSettings);
+                                AppSettingsHelper.AppSettings = await AppSettingsHelper.GetAppSetting();
+
+                                var user = await this.viewModel.SystemUserService.GetByCredentials(AppSettingsHelper.AppSettings.UserSettings.UserName, AppSettingsHelper.AppSettings.UserSettings.Password);
+                                if (!user.IsSuccess)
+                                    throw new Exception(user.Message);
+                                appSettings.AppToken = new Models.AppTokenModel
+                                {
+                                    AccessToken = user.Data.Token.AccessToken,
+                                    RefreshToken = user.Data.Token.RefreshToken
+                                };
+                            }
+                            else
+                            {
+                                throw ex;
+                            }
+                        }
+                        await AppSettingsHelper.SetAppSetting(appSettings);
+                        AppSettingsHelper.AppSettings = await AppSettingsHelper.GetAppSetting();
+                        MessagingCenter.Send<Object>(new Object(), "StartBackgroundService");
                         await InitTab();
+                        if (this.IsLaunchFromShortcut)
+                        {
+                            switch (this.Page)
+                            {
+                                case SilupostPageTitle.EMERGENCY_CALL:
+                                    CurrentPage = Children[0];
+                                    break;
+                                case SilupostPageTitle.CRIMEINCIDENT_MAP:
+                                    CurrentPage = Children[2];
+                                    break;
+                                case SilupostPageTitle.TIMELINE:
+                                    CurrentPage = Children[2];
+                                    break;
+                                case SilupostPageTitle.CRIMEINCIDENT_NEW_REPORT:
+                                    CurrentPage = Children[2];
+                                    try
+                                    {
+                                        if (!AppSettingsHelper.CanAccessInternet())
+                                        {
+                                            MessagingCenter.Send<System.Object>(new System.Object(), "ApplicationIsOffline");
+                                            throw new Exception(SilupostMessage.NO_INTERNET);
+                                        }
+                                        if (this.viewModel.IsExecuting)
+                                            return;
+                                        this.viewModel.IsExecuting = true;
+                                        var _viewModel = new NewCrimeIncidentReportViewModel(this.Navigation);
+                                        _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                                        await Navigation.PushModalAsync(new NavigationPage(new NewCrimeIncidentReportPage(_viewModel)), true);
+                                        this.viewModel.IsExecuting = false;
+                                        _viewModel.ProgressDialog.Hide();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        this.viewModel.IsExecuting = false;
+                                        SilupostExceptionLogger.GetError(ex);
+                                    }
+                                    break;
+                            }
+                            this.IsLaunchFromShortcut = false;
+                            this.Page = null;
+                        }
                     }
                 }
             }
             catch(Exception ex)
             {
+                await AppSettingsHelper.SetAppSetting(null);
                 CrossToastPopUp.Current.ShowToastMessage(string.Format(" {0}", ex.Message));
+                await this.viewModel.WaitAndExecute(1000, async () =>
+                {
+                    await InitUser();
+                });
             }
         }
 
@@ -227,6 +368,16 @@ namespace SilupostMobileApp.Views
 
             if (!this.Children.Any(x => x.Title == SilupostPageTitle.TIMELINE))
                 this.Children.Add(new NavigationPage(new TimelinePage()) { IconImageSource = "icons8_activity_feed_96_BLACK.png", Title = SilupostPageTitle.TIMELINE });
+        }
+
+        async Task ShowInternetErrorWindow()
+        {
+            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+        }
+
+        async Task ShowServerErrorWindow()
+        {
+            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
         }
 
         async void CurrentPageHasChanged(object sender, EventArgs e)
@@ -245,10 +396,61 @@ namespace SilupostMobileApp.Views
 
         async void TabbedPage_Appearing(object sender, EventArgs e)
         {
-            var dialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
-            InitUser();
-            this.viewModel.InitLookup();
-            dialog.Hide();
+            try
+            {
+                if (AppSettingsHelper.CanAccessInternet())
+                {
+                    var serverStatus = await this.viewModel.SystemConfigService.GetServerStatus();
+                    if (serverStatus == SilupostServerStatusEnums.ACTIVE)
+                    {
+                        this.viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                        await InitUser();
+                        await this.viewModel.InitLookup();
+                        this.viewModel.ProgressDialog.Hide();
+                    }
+                    else
+                    {
+                        await ShowServerErrorWindow();
+                    }
+                }
+                else
+                {
+                    await ShowInternetErrorWindow();
+                }
+            }
+            catch(Exception ex)
+            {
+                this.viewModel.HasError = true;
+                this.viewModel.IsExecuting = false;
+                this.IsBusy = false; 
+                if (ex.Message.ToLower().Contains("unexpected character encountered"))
+                {
+                    await ShowServerErrorWindow();
+                }
+                else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
+                {
+                    await ShowServerErrorWindow();
+                }
+                else if (ex.Message.ToLower().Contains("unable to resolve host"))
+                {
+                    await ShowInternetErrorWindow();
+                }
+                else if (ex.Message.ToLower().Contains("no address associated with hostname"))
+                {
+                    await ShowInternetErrorWindow();
+                }
+                else if (ex.Message.Contains(SilupostMessage.NO_INTERNET))
+                {
+                    await ShowInternetErrorWindow();
+                }
+                else
+                {
+                    this.viewModel.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                    this.viewModel.ErrorImageSource = "icons8_error_80.png";
+                }
+                if (this.viewModel.ProgressDialog != null)
+                    this.viewModel.ProgressDialog.Hide();
+            }
         }
     }
 }

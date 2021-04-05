@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "16JWewfR+eW77sA17rAJBqxSpzbS6tzXSbc7JXfT++nY4xpNFd1MrmR0UOsS8lNfl57Y/UWt+hdVsDNbn0kKhQ==",
+  "dgSpecHash": "ZrMKUvUMDMm0IGYJjxdEySG++OktekqcWyCdpK21S5gvA+oqSuf49DVhHJcl2BT3wIV+1jn6c9RqChidTEs/SQ==",
   "success": true,
   "projectFilePath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\SHENA\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\octane.xam.videoplayer\\3.1.0\\octane.xam.videoplayer.3.1.0.nupkg.sha512",
+    "C:\\Users\\SHENA\\.nuget\\packages\\plugin.appshortcuts\\1.0.0.3\\plugin.appshortcuts.1.0.0.3.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\plugin.materialdesigncontrols\\1.8.1\\plugin.materialdesigncontrols.1.8.1.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\plugin.toast\\2.2.0\\plugin.toast.2.2.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\skiasharp\\1.68.1.1\\skiasharp.1.68.1.1.nupkg.sha512",
@@ -35,6 +36,7 @@
     "C:\\Users\\SHENA\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.connectivity\\3.2.0\\xam.plugin.connectivity.3.2.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.geolocator\\4.5.0.6\\xam.plugin.geolocator.4.5.0.6.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugins.messaging\\5.2.0\\xam.plugins.messaging.5.2.0.nupkg.sha512",

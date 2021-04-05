@@ -3,9 +3,11 @@ using Plugin.Toast;
 using SilupostMobileApp.Common;
 using SilupostMobileApp.Models;
 using SilupostMobileApp.ViewModels;
+using SilupostMobileApp.Views.Account;
 using SilupostMobileApp.Views.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +27,56 @@ namespace SilupostMobileApp.Views.CrimeIncident
             BindingContext = viewModel = new CrimeIncidentMapViewModel(this.Navigation);
             viewModel.Title = SilupostPageTitle.CRIMEINCIDENT_MAP;
             this.viewModel.WebViewURI = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH);
+
             MessagingCenter.Subscribe<CrimeIncidentMapFilterPage, CrimeIncidentMapFilterModel>(this, "ApplyMapFilter", async (obj, crimeIncidentMapFilter) =>
             {
                 this.viewModel.CrimeIncidentMapFilter = crimeIncidentMapFilter;
                 await SearchMap();
             });
+            MessagingCenter.Subscribe<UserProfilePage>(this, "ReloadProfile", async (obj) =>
+            {
+                try
+                {
+                    this.viewModel.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(AppSettingsHelper.AppSettings.UserSettings.FileContent); });
+                }
+                catch (Exception ex)
+                {
+                    SilupostExceptionLogger.GetError(ex);
+                }
+            });
+
+            MessagingCenter.Subscribe<Object>(this, "ApplicationIsOffline", async (obj) =>
+            {
+                try
+                {
+                    await this.viewModel.ShowInternetError();
+                }
+                catch (Exception ex)
+                {
+                    if (this.viewModel.ProgressDialog != null)
+                        this.viewModel.ProgressDialog.Hide();
+                }
+            });
+            MessagingCenter.Subscribe<Object>(this, "ApplicationIsOnline", async (obj) =>
+            {
+                try
+                {
+                    this.viewModel.HideInternetError();
+                }
+                catch (Exception ex)
+                {
+                    if (this.viewModel.ProgressDialog != null)
+                        this.viewModel.ProgressDialog.Hide();
+                }
+            });
+            try
+            {
+                this.viewModel.ImageSource = ImageSource.FromStream(() => { return new MemoryStream(AppSettingsHelper.AppSettings.UserSettings.FileContent); });
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
         async void WebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
@@ -47,14 +94,28 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.apiToken = '{AppSettingsHelper.AppSettings.AppToken.AccessToken}';");
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.init();");
-
-                await this.viewModel.GetCurrentUserGeoLocation();
-                await this.viewModel.WaitAndExecute(2000, async () =>
+                var gpsEnable = await AppSettingsHelper.GPSEnable();
+                if (gpsEnable)
                 {
-                    await MapWebView.EvaluateJavaScriptAsync($"reportTracker.flyToLocation('{this.viewModel.CurrentUserGeoLocation.Latitude}','{this.viewModel.CurrentUserGeoLocation.Longitude}');");
-                });
+                    var position = await this.viewModel.GetCurrentUserGeoLocation();
+                    await this.viewModel.WaitAndExecute(2000, async () =>
+                    {
+                        await this.viewModel.HideGPSError();
+                        await MapWebView.EvaluateJavaScriptAsync($"reportTracker.flyToLocation('{position.Latitude}','{position.Longitude}');");
+                    });
+                }
+                else
+                {
+                    await this.viewModel.ShowGPSError();
+                    await AppSettingsHelper.OpenGPSSettings();
+                }
             }
             catch (Exception ex)
             {
@@ -66,6 +127,11 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.apiToken = '{AppSettingsHelper.AppSettings.AppToken.AccessToken}';");
                 this.viewModel.CrimeIncidentMapFilter.CrimeIncidentCategoryIds = string.Join(",", this.viewModel.CrimeIncidentMapFilter.SelectedCrimeIncidentCategory.Select(x=>x.CrimeIncidentCategoryId).ToArray());
                 await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.trackerFilterMapModel.CrimeIncidentCategoryIds = '{this.viewModel.CrimeIncidentMapFilter.CrimeIncidentCategoryIds}'");
@@ -99,6 +165,11 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 var _isMapLoaded = await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.IsMapLoaded;");
                 this.viewModel.IsMapLoaded = bool.Parse(_isMapLoaded);
                 if (this.viewModel.IsMapLoaded)
@@ -143,6 +214,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+
             }
             catch (Exception ex)
             {
@@ -150,10 +222,15 @@ namespace SilupostMobileApp.Views.CrimeIncident
             }
         }
 
-        private void MapWebView_Navigating(object sender, WebNavigatingEventArgs e)
+        async void MapWebView_Navigating(object sender, WebNavigatingEventArgs e)
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 var soure = e.Url.ToLower();
                 var mapUri = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH).ToLower();
                 if (!soure.Equals(mapUri))
@@ -176,6 +253,11 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
@@ -194,6 +276,11 @@ namespace SilupostMobileApp.Views.CrimeIncident
         {
             try
             {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
                 if (this.viewModel.IsExecuting)
                     return;
                 this.viewModel.IsExecuting = true;
@@ -206,6 +293,103 @@ namespace SilupostMobileApp.Views.CrimeIncident
             catch (Exception ex)
             {
                 this.viewModel.IsExecuting = false;
+                SilupostExceptionLogger.GetError(ex);
+            }
+        }
+
+        async void UserProfile_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                    throw new Exception(SilupostMessage.NO_INTERNET);
+                }
+                if (this.viewModel.IsExecuting)
+                    return;
+                this.viewModel.IsExecuting = true;
+                var _viewModel = new UserProfileViewModel(this.Navigation);
+                _viewModel.ProgressDialog = UserDialogs.Instance.Loading("Loading...", null, "OK", true, MaskType.Gradient);
+                await Navigation.PushModalAsync(new NavigationPage(new UserProfilePage(_viewModel)), true);
+                this.viewModel.IsExecuting = false;
+                _viewModel.ProgressDialog.Hide();
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
+        }
+
+        async void Retry_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.viewModel.HasError && this.viewModel.ErrorMessage.Equals(SilupostMessage.GPS_OR_LOCATION_ERROR))
+                {
+                    var gpsEnable = await AppSettingsHelper.GPSEnable();
+                    if (!gpsEnable)
+                    {
+                        await this.viewModel.ShowGPSError();
+                        await AppSettingsHelper.OpenGPSSettings();
+                    }
+                    else
+                    {
+                        var position = await AppSettingsHelper.GetCurrentUserGeoLocation();
+                        await this.viewModel.WaitAndExecute(2000, async () =>
+                        {
+                            await MapWebView.EvaluateJavaScriptAsync($"reportTracker.flyToLocation('{position.Latitude}','{position.Longitude}');");
+                            await this.viewModel.HideGPSError();
+                        });
+                    }
+                }
+                else if (this.viewModel.HasError && this.viewModel.ErrorMessage.Equals(SilupostMessage.NO_INTERNET))
+                {
+                    if (!AppSettingsHelper.CanAccessInternet())
+                    {
+                        await this.viewModel.ShowInternetError();
+                    }
+                    else
+                    {
+                        await this.viewModel.HideInternetError();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
+        }
+        async void TrackerCurrentLocationButton_CLick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!AppSettingsHelper.CanAccessInternet())
+                {
+                    await this.viewModel.ShowInternetError();
+                }
+                else
+                {
+                    await this.viewModel.HideInternetError();
+                }
+                var gpsEnable = await AppSettingsHelper.GPSEnable();
+                if (!gpsEnable)
+                {
+                    await this.viewModel.ShowGPSError();
+                    await AppSettingsHelper.OpenGPSSettings();
+                }
+                else
+                {
+                    var position = await AppSettingsHelper.GetCurrentUserGeoLocation();
+                    await this.viewModel.WaitAndExecute(2000, async () =>
+                    {
+                        await MapWebView.EvaluateJavaScriptAsync($"reportTracker.flyToLocation('{position.Latitude}','{position.Longitude}');");
+                        await this.viewModel.HideGPSError();
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
                 SilupostExceptionLogger.GetError(ex);
             }
         }

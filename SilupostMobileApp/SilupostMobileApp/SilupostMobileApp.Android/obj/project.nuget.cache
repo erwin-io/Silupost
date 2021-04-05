@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "61dIMwyu9O4+cfsUOL/PwolNqp/Quu+pPh9t8rgzhNPSyUat7V8x+KqWZ5rp4gmrqL7B0Wl1gQUZYE/HyKw+ng==",
+  "dgSpecHash": "vSnynLdynosZRlgJcPJyuKhhBkcDQmPwfTMH3Q/JoHNgdQPUvLrS3Q8psQ2tBdRYjkuBnGPeF1ONgSw7xJEiZw==",
   "success": true,
   "projectFilePath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\SHENA\\.nuget\\packages\\magicgradients\\1.2.0\\magicgradients.1.2.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\octane.xam.videoplayer\\3.1.0\\octane.xam.videoplayer.3.1.0.nupkg.sha512",
+    "C:\\Users\\SHENA\\.nuget\\packages\\plugin.appshortcuts\\1.0.0.3\\plugin.appshortcuts.1.0.0.3.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\plugin.materialdesigncontrols\\1.8.1\\plugin.materialdesigncontrols.1.8.1.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\plugin.toast\\2.2.0\\plugin.toast.2.2.0.nupkg.sha512",
@@ -23,6 +24,7 @@
     "C:\\Users\\SHENA\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\thrivegmbh.bottomnavigationbar.xf\\1.0.2\\thrivegmbh.bottomnavigationbar.xf.1.0.2.nupkg.sha512",
+    "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.connectivity\\3.2.0\\xam.plugin.connectivity.3.2.0.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.geolocator\\4.5.0.6\\xam.plugin.geolocator.4.5.0.6.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
     "C:\\Users\\SHENA\\.nuget\\packages\\xam.plugins.messaging\\5.2.0\\xam.plugins.messaging.5.2.0.nupkg.sha512",

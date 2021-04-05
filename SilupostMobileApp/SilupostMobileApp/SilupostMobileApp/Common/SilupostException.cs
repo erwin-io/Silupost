@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Xamarin.Forms;
 
 namespace SilupostMobileApp.Common
 {
@@ -12,22 +13,7 @@ namespace SilupostMobileApp.Common
         public SilupostServiceExceptionTypeEnums Type { get; set; }
         public SilupostServiceException(string exception)
         {
-
-            if (exception.Contains("No record"))
-            {
-                ExceptionMessage = SilupostMessage.NO_RECORDS_FOUND;
-                Type = SilupostServiceExceptionTypeEnums.NOT_FOUND;
-            }
-            else if(exception.Contains("Problem occurs"))
-            {
-                ExceptionMessage = SilupostMessage.SERVER_ERROR;
-                Type = SilupostServiceExceptionTypeEnums.SERVER_ERROR;
-            }
-            else
-            {
-                ExceptionMessage = SilupostMessage.APP_ERROR;
-                Type = SilupostServiceExceptionTypeEnums.APP_ERROR;
-            }
+            MessagingCenter.Send(this, "Logout");
         }
     }
     public static class SilupostExceptionLogger
@@ -41,7 +27,8 @@ namespace SilupostMobileApp.Common
             // Get the line number from the stack frame
             var line = frame.GetFileLineNumber();
             //CrossToastPopUp.Current.ShowToastMessage(string.Format("Error at line {0}, Message: {1}", line, exception.Message));
-            CrossToastPopUp.Current.ShowToastMessage(exception.Message);
+            if(!exception.Message.ToLower().Contains("object reference"))
+                CrossToastPopUp.Current.ShowToastMessage(exception.Message);
         }
         public static void GetError(Exception exception, string CustomMessage)
         {

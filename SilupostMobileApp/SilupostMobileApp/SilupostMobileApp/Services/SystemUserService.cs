@@ -39,7 +39,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -50,7 +50,7 @@ namespace SilupostMobileApp.Services
             }
         }
 
-        public async Task<SystemUserModel> GetByCredentials(string username, string password)
+        public async Task<SillupostWebAPIResponseModel<SystemUserModel>> GetByCredentials(string username, string password)
         {
             try
             {
@@ -65,14 +65,7 @@ namespace SilupostMobileApp.Services
                     var response = new SillupostWebAPIResponseModel<SystemUserModel>();
                     JObject obj = JsonConvert.DeserializeObject<JObject>(_json);
                     response = obj.ToObject<SillupostWebAPIResponseModel<SystemUserModel>>();
-                    if (response.IsSuccess)
-                    {
-                        return response.Data;
-                    }
-                    else
-                    {
-                        throw new Exception(response.Message);
-                    }
+                    return response;
                 }
                 #endregion
             }
@@ -106,7 +99,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -145,7 +138,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -158,7 +151,37 @@ namespace SilupostMobileApp.Services
 
         public async Task<SystemTokenModel> GetRefreshToken(string RefreshToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                #region
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(AppSettingsHelper.goSILUPOST_WEBAPI_URI);
+                    string _paramString = AppSettingsHelper.AppSettings.AppToken.AccessToken;
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _paramString);
+                    HttpResponseMessage _responseMessage = new HttpResponseMessage();
+                    _responseMessage = await client.GetAsync(string.Format("{0}SystemUser/GetRefreshToken?RefreshToken={1}", AppSettingsHelper.goSILUPOST_WEBAPI_URI, RefreshToken));
+                    string _json = await _responseMessage.Content.ReadAsStringAsync();
+
+                    var response = new SillupostWebAPIResponseModel<SystemTokenModel>();
+                    JObject obj = JsonConvert.DeserializeObject<JObject>(_json);
+                    response = obj.ToObject<SillupostWebAPIResponseModel<SystemTokenModel>>();
+                    if (response.IsSuccess)
+                    {
+                        return response.Data;
+                    }
+                    else
+                    {
+                        throw new Exception(response.Message);
+                    }
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public async Task<SystemUserModel> ResetPassword(UpdateSystemResetPasswordBindingModel model)
         {
@@ -185,7 +208,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -223,7 +246,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion

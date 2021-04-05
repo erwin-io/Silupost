@@ -178,7 +178,21 @@ namespace SilupostMobileApp.ViewModels
             {
                 try
                 {
-                    this.CrimeIncidentReport = await CrimeIncidentReportService.GetAsync(this.CrimeIncidentReportId);
+                    this.HasError = false;
+                    var result = await CrimeIncidentReportService.GetAsync(this.CrimeIncidentReportId);
+                    if(result != null && !result.IsSuccess)
+                    {
+                        if (!string.IsNullOrEmpty(result.Message))
+                        {
+                            throw new Exception(result.Message);
+                        }
+                        else
+                        {
+                            this.ErrorMessage = SilupostMessage.APP_ERROR;
+                            throw new Exception(SilupostMessage.APP_ERROR);
+                        }
+                    }
+                    this.CrimeIncidentReport = result.Data;
                     this.CanModifyReport = this.CrimeIncidentReport.PostedBySystemUser.SystemUserId.Equals(AppSettingsHelper.AppSettings.UserSettings.SystemUserId);
                     this.CrimeIncidentCategory = this.CrimeIncidentReport.CrimeIncidentCategory;
                     this.CrimeIncidentReportMediaCollection = new ObservableCollection<CrimeIncidentReportMediaModel>();
@@ -225,8 +239,27 @@ namespace SilupostMobileApp.ViewModels
                 }
                 catch(Exception ex)
                 {
+                    this.HasError = true;
+                    this.NoRecordFound = true;
+                    this.IsExecuting = false;
+                    this.IsBusy = false;
+                    if (ex.Message.ToLower().Contains("no record"))
+                    {
+                        this.ErrorMessage = string.Format("{0}", ex.Message);
+                        this.ErrorImageSource = "icons8_nothing_found_96.png";
+                    }
+                    else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
+                    {
+                        this.ErrorMessage = string.Format("{0}", ex.Message);
+                        this.ErrorImageSource = "icons8_online_maintenance_portal_96.png";
+                    }
+                    else
+                    {
+                        this.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                        this.ErrorImageSource = "icons8_error_80.png";
+                    }
                     SilupostExceptionLogger.GetError(ex);
-                    await this.Navigation.PopModalAsync(true);
+                    this.ProgressDialog.Hide();
                 }
             });
         }
@@ -302,6 +335,7 @@ namespace SilupostMobileApp.ViewModels
                             this.IsExecuting = false;
                             return;
                         }
+                        File.Delete(media.File.FileName);
                     }
                     foreach (var media in toRemoveMediaCollection)
                     {

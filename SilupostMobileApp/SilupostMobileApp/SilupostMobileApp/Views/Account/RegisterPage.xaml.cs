@@ -14,6 +14,7 @@ using SilupostMobileApp.Views.Account.Register;
 using Plugin.Toast;
 using Xamarin.Forms.PlatformConfiguration;
 using SilupostMobileApp.Models;
+using SilupostMobileApp.Views.Common.Error;
 
 namespace SilupostMobileApp.Views.Account
 {
@@ -33,45 +34,71 @@ namespace SilupostMobileApp.Views.Account
         {
             MessagingCenter.Subscribe<EmailRegistrationContentView>(this, "SubmitEmail", async (obj) =>
             {
-                try
+                this.viewModel.ProgressDialog.Show();
+                await this.viewModel.ResetVerification();
+                await this.viewModel.WaitAndExecute(1000, async () =>
                 {
-                    this.viewModel.ProgressDialog.Show();
-                    await this.viewModel.ResetVerification();
-                    await this.viewModel.WaitAndExecute(1000, async () =>
+                    try
                     {
-                        try
+                        var model = new SystemUserVerificationBindingModel()
                         {
-                            var model = new SystemUserVerificationBindingModel()
-                            {
-                                VerificationSender = this.viewModel.Email.Value,
-                                VerificationTypeId = "1"
-                            };
-                            var result = await this.viewModel.SendEmailVerification(model);
-                            if (result != null)
-                            {
-                                this.Content = new VerifyContentView(this.viewModel);
-                                this.viewModel.ProgressDialog.Hide();
-                            }
-                            else
-                            {
-                                this.viewModel.ProgressDialog.Hide();
-                                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
-                            }
-                        }
-                        catch (Exception ex)
+                            VerificationSender = this.viewModel.Email.Value,
+                            VerificationTypeId = "1"
+                        };
+                        var result = await this.viewModel.SendEmailVerification(model);
+                        if (result != null)
                         {
-                            SilupostExceptionLogger.GetError(ex);
+                            this.Content = new VerifyContentView(this.viewModel);
                             this.viewModel.ProgressDialog.Hide();
-                            this.viewModel.IsExecuting = false;
                         }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    this.viewModel.IsExecuting = false;
-                    SilupostExceptionLogger.GetError(ex);
-                    this.viewModel.ProgressDialog.Hide();
-                }
+                        else
+                        {
+                            this.viewModel.ProgressDialog.Hide();
+                            CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        #region Error
+                        this.viewModel.HasError = true;
+                        this.viewModel.IsExecuting = false;
+                        this.IsBusy = false;
+                        if (ex.Message.Contains(SilupostMessage.SERVER_INACTIVE))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.Contains(SilupostMessage.NO_INTERNET))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("unexpected character encountered"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("unable to resolve host"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("no address associated with hostname"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else
+                        {
+                            this.viewModel.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                            this.viewModel.ErrorImageSource = "icons8_error_80.png";
+                            this.viewModel.ProgressDialog.Hide();
+                            SilupostExceptionLogger.GetError(ex, SilupostMessage.APP_ERROR);
+                        }
+                        if (this.viewModel.ProgressDialog != null)
+                            this.viewModel.ProgressDialog.Hide();
+                        #endregion
+                    }
+                });
             });
             MessagingCenter.Subscribe<VerifyContentView>(this, "ResendEmail", async (obj) =>
             {
@@ -187,87 +214,114 @@ namespace SilupostMobileApp.Views.Account
             });
             MessagingCenter.Subscribe<UserInfoContentView>(this, "SaveUserInfo", async (obj) =>
             {
-                try
+                this.viewModel.ProgressDialog.Show();
+                await this.viewModel.WaitAndExecute(1000, async () =>
                 {
-                    this.viewModel.ProgressDialog.Show();
-                    await this.viewModel.WaitAndExecute(1000, async () =>
+                    try
                     {
-                        try
+                        if (!await this.viewModel.UserInfoValid())
+                            return;
+                        var model = new CreateAccountSystemUserBindingModel()
                         {
-                            if (!await this.viewModel.UserInfoValid())
-                                return;
-                            var model = new CreateAccountSystemUserBindingModel()
-                            {
-                                VerificationCode = this.viewModel.VerificationCode.Value,
-                                EmailAddress = this.viewModel.Email.Value,
-                                Password = this.viewModel.Password.Value,
-                                FirstName = this.viewModel.FirstName.Value,
-                                MiddleName = this.viewModel?.MiddleName?.Value,
-                                LastName = this.viewModel.LastName.Value,
-                                GenderId = this.viewModel.SelectedGender.Value.GenderId,
-                                BirthDate = this.viewModel.BirthDay.Value
-                            };
-                            var result = await this.viewModel.CreateAccount(model);
-                            if (result != null)
-                            {
-                                AppSettingsHelper.goIsLaunchFromURL = false;
-                                AppSettingsHelper.goLaunchFromURLData = null;
-                                result = await this.viewModel.Login();
-                                await this.viewModel.ResetEmailRegistration();
-                                await this.viewModel.ResetVerification();
-                                await this.viewModel.ResetCredentials();
-                                await this.viewModel.ResetUserInfo();
-                                this.viewModel.ProgressDialog.Hide();
+                            VerificationCode = this.viewModel.VerificationCode.Value,
+                            EmailAddress = this.viewModel.Email.Value,
+                            Password = this.viewModel.Password.Value,
+                            FirstName = this.viewModel.FirstName.Value,
+                            MiddleName = this.viewModel?.MiddleName?.Value,
+                            LastName = this.viewModel.LastName.Value,
+                            GenderId = this.viewModel.SelectedGender.Value.GenderId,
+                            BirthDate = this.viewModel.BirthDay.Value
+                        };
+                        var result = await this.viewModel.CreateAccount(model);
+                        if (result != null)
+                        {
+                            AppSettingsHelper.goIsLaunchFromURL = false;
+                            AppSettingsHelper.goLaunchFromURLData = null;
+                            result = await this.viewModel.Login();
+                            this.viewModel.ProgressDialog.Hide();
 
-                                await AppSettingsHelper.SetAppSetting(new AppSettingsModel()
-                                {
-                                    AppToken = new AppTokenModel()
-                                    {
-                                        AccessToken = result.Token.AccessToken,
-                                        RefreshToken = result.Token.RefreshToken
-                                    },
-                                    UserSettings = new AppUserSettingsModel()
-                                    {
-                                        SystemUserId = result.SystemUserId,
-                                        UserName = result.UserName,
-                                        FullName = string.Format("{0} {1}", result.LegalEntity.FirstName, result.LegalEntity.LastName),
-                                        ProfilePictureFileId = result.ProfilePicture.FileId
-                                    },
-                                    IsAuthenticated = true
-                                });
-                                AppSettingsHelper.AppSettings = await AppSettingsHelper.GetAppSetting();
-                                await this.viewModel.WaitAndExecute(1000, async () =>
-                                {
-                                    var _viewModel = new WelcomeViewModel(this.Navigation);
-                                    _viewModel.ShowAuthControls = false;
-                                    _viewModel.ShowTitle = true;
-                                    _viewModel.ShowSuccessMessage = true;
-                                    App.Current.MainPage = new WelcomePage(_viewModel);
-                                    MessagingCenter.Send(this, "RegisterSuccess", result);
-                                });
-                            }
-                            else
+                            await AppSettingsHelper.SetAppSetting(new AppSettingsModel()
                             {
-                                this.viewModel.IsExecuting = false;
-                                this.viewModel.ProgressDialog.Hide();
-                                throw new Exception(SilupostMessage.APP_ERROR);
-                            }
+                                AppToken = new AppTokenModel()
+                                {
+                                    AccessToken = result.Token.AccessToken,
+                                    RefreshToken = result.Token.RefreshToken
+                                },
+                                UserSettings = new AppUserSettingsModel()
+                                {
+                                    SystemUserId = result.SystemUserId,
+                                    UserName = result.UserName,
+                                    Password = this.viewModel.Password.Value,
+                                    FullName = string.Format("{0} {1}", result.LegalEntity.FirstName, result.LegalEntity.LastName),
+                                    ProfilePictureFileId = result.ProfilePicture.FileId,
+                                    FileContent = result.ProfilePicture.FileContent,
+                                },
+                                IsAuthenticated = true
+                            });
+                            await this.viewModel.ResetEmailRegistration();
+                            await this.viewModel.ResetVerification();
+                            await this.viewModel.ResetCredentials();
+                            await this.viewModel.ResetUserInfo();
+                            AppSettingsHelper.AppSettings = await AppSettingsHelper.GetAppSetting();
+                            await this.viewModel.WaitAndExecute(1000, async () =>
+                            {
+                                var _viewModel = new WelcomeViewModel(this.Navigation);
+                                _viewModel.ShowAuthControls = false;
+                                _viewModel.ShowTitle = true;
+                                _viewModel.ShowSuccessMessage = true;
+                                App.Current.MainPage = new WelcomePage(_viewModel);
+                                MessagingCenter.Send(this, "RegisterSuccess", result);
+                            });
                         }
-                        catch (Exception ex)
+                        else
                         {
                             this.viewModel.IsExecuting = false;
-                            if(!ex.Message.ToLower().Contains("object"))
-                                SilupostExceptionLogger.GetError(ex);
                             this.viewModel.ProgressDialog.Hide();
+                            throw new Exception(SilupostMessage.APP_ERROR);
                         }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    this.viewModel.IsExecuting = false;
-                    this.viewModel.ProgressDialog.Hide();
-                    SilupostExceptionLogger.GetError(ex);
-                }
+                    }
+                    catch (Exception ex)
+                    {
+                        #region Error
+                        this.viewModel.HasError = true;
+                        this.viewModel.IsExecuting = false;
+                        this.IsBusy = false;
+                        if (ex.Message.Contains(SilupostMessage.SERVER_INACTIVE))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.Contains(SilupostMessage.NO_INTERNET))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("unexpected character encountered"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("problem occurs while proccessing"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.SERVER_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("unable to resolve host"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else if (ex.Message.ToLower().Contains("no address associated with hostname"))
+                        {
+                            App.Current.MainPage = new ErrorMainPage(SilupostErrorPageTypeEnums.INTERNET_ERROR);
+                        }
+                        else
+                        {
+                            this.viewModel.ErrorMessage = string.Format("{0}", SilupostMessage.APP_ERROR);
+                            this.viewModel.ErrorImageSource = "icons8_error_80.png";
+                            this.viewModel.ProgressDialog.Hide();
+                            SilupostExceptionLogger.GetError(ex, SilupostMessage.APP_ERROR);
+                        }
+                        if (this.viewModel.ProgressDialog != null)
+                            this.viewModel.ProgressDialog.Hide();
+                        #endregion
+                    }
+                });
             });
             this.viewModel.ProgressDialog.Show();
             await this.viewModel.WaitAndExecute(1000, async () =>

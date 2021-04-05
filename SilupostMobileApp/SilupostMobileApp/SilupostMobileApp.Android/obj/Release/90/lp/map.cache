@@ -7,6 +7,8 @@ FFImageLoading.Platform
 FFImageLoading.Transformations
 FormsViewGroup
 Octane.Xamarin.Forms.VideoPlayer.Android
+Plugin.AppShortcuts
+Plugin.Connectivity
 Plugin.FilePicker
 Plugin.Geolocator
 Plugin.MaterialDesignControls.Android

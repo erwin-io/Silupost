@@ -45,7 +45,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using SilupostMobileApp.BindingModels;
+using SilupostMobileApp.Common;
 using SilupostMobileApp.Models;
 
 namespace SilupostMobileApp.Services.Interface
@@ -10,7 +11,7 @@ namespace SilupostMobileApp.Services.Interface
     public interface ISystemUserService
     {
         Task<SystemUserModel> Get(string id);
-        Task<SystemUserModel> GetByCredentials(string username, string password);
+        Task<SillupostWebAPIResponseModel<SystemUserModel>> GetByCredentials(string username, string password);
         Task<SystemUserModel> CreateAccount(CreateAccountSystemUserBindingModel model);
         Task<SystemUserModel> UpdatePersonalDetails(UpdateSystemUserBindingModel model);
         Task<SystemTokenModel> GetRefreshToken(string RefreshToken);

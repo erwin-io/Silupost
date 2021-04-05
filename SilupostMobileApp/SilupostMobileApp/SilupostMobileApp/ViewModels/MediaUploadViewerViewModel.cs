@@ -26,6 +26,12 @@ namespace SilupostMobileApp.ViewModels
             get => _newMedia;
             set => SetProperty(ref _newMedia, value);
         }
+        bool _allowMultipleType;
+        public bool AllowMultipleType
+        {
+            get => _allowMultipleType;
+            set => SetProperty(ref _allowMultipleType, value);
+        }
 
         bool _isAudio;
         public bool IsAudio
@@ -157,33 +163,90 @@ namespace SilupostMobileApp.ViewModels
                         Directory = "SilupostMedia",
                         Name = $"Silupost-Media-({DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.TimeOfDay}).png"
                     });
-                    if (file == null)
-                        return;
-                    var fileExtension = Path.GetExtension(file.Path).Replace(".", String.Empty);
-                    var isFileValid = AppSettingsHelper.goAllowedMediaFileType.ToList().Any(f => f.Key.ToString() == fileExtension.ToUpper());
-                    if (!isFileValid)
+                    await this.WaitAndExecute(1000, async () =>
                     {
-                        await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
-                        return;
-                    }
-
-                    var fileStream = file.GetStream();
-                    byte[] fileBytes = null;
-                    var buffer = new byte[16 * 1024];
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        int read;
-                        while ((read = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                        if (file == null)
+                            return;
+                        var fileExtension = Path.GetExtension(file.Path).Replace(".", String.Empty);
+                        var isFileValid = AppSettingsHelper.goAllowedMediaFileType.ToList().Any(f => f.Key.ToString() == fileExtension.ToUpper());
+                        if (!isFileValid)
                         {
-                            ms.Write(buffer, 0, read);
+                            await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
+                            return;
                         }
-                        fileBytes = ms.ToArray();
-                    }
 
-                    this.IsImage = true;
-                    if (fileStream != null)
+                        var fileStream = file.GetStream();
+                        byte[] fileBytes = null;
+                        var buffer = new byte[16 * 1024];
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            int read;
+                            while ((read = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                ms.Write(buffer, 0, read);
+                            }
+                            fileBytes = ms.ToArray();
+                        }
+
+                        this.IsImage = true;
+                        if (fileStream != null)
+                        {
+                            var imageSource = ImageSource.FromStream(() => file.GetStream());
+                            mediaFile = new SilupostMediaModel()
+                            {
+                                IsNew = true,
+                                FileName = file.Path,
+                                FileSize = fileBytes.Length,
+                                FileContent = fileBytes,
+                                MimeType = AppSettingsHelper.goAllowedMediaFileType.ToList().FirstOrDefault(f => f.Key.ToString() == fileExtension.ToUpper()).Value,
+                                MediaType = AppSettingsHelper.goGetMediaType(fileExtension),
+                                SourceURL = file.Path,
+                                ImageSource = imageSource,
+                                IconSource = SilupostMediaTypeIconSource.IMAGE
+                            };
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
+                            return;
+                        }
+                    });
+                }
+                else if(cameraFileType == SilupostDocReportMediaTypeEnums.VIDEO)
+                {
+                    var file = await CrossMedia.Current.TakeVideoAsync(new Plugin.Media.Abstractions.StoreVideoOptions
                     {
-                        var imageSource = ImageSource.FromStream(() => file.GetStream());
+                        Directory = "SilupostMedia",
+                        Name = $"Silupost-Media-({DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.TimeOfDay}).mp4"
+                    });
+
+                    await this.WaitAndExecute(1000, async () =>
+                    {
+                        if (file == null)
+                            return;
+                        var fileExtension = Path.GetExtension(file.Path).Replace(".", String.Empty);
+                        var isFileValid = AppSettingsHelper.goAllowedMediaFileType.ToList().Any(f => f.Key.ToString() == fileExtension.ToUpper());
+                        if (!isFileValid)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
+                            return;
+                        }
+
+                        var fileStream = file.GetStream();
+                        byte[] fileBytes = null;
+                        var buffer = new byte[16 * 1024];
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            int read;
+                            while ((read = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                ms.Write(buffer, 0, read);
+                            }
+                            fileBytes = ms.ToArray();
+                        }
+
+                        this.IsVideo = true;
+                        var thumbnail = MediaHelpers.GenerateThumbImageFromLocal(file.Path, 1);
                         mediaFile = new SilupostMediaModel()
                         {
                             IsNew = true,
@@ -193,60 +256,10 @@ namespace SilupostMobileApp.ViewModels
                             MimeType = AppSettingsHelper.goAllowedMediaFileType.ToList().FirstOrDefault(f => f.Key.ToString() == fileExtension.ToUpper()).Value,
                             MediaType = AppSettingsHelper.goGetMediaType(fileExtension),
                             SourceURL = file.Path,
-                            ImageSource = imageSource,
-                            IconSource = SilupostMediaTypeIconSource.IMAGE
+                            ImageSource = thumbnail,
+                            IconSource = SilupostMediaTypeIconSource.VIDEO
                         };
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
-                        return;
-                    }
-                }
-                else if(cameraFileType == SilupostDocReportMediaTypeEnums.VIDEO)
-                {
-                    var file = await CrossMedia.Current.TakeVideoAsync(new Plugin.Media.Abstractions.StoreVideoOptions
-                    {
-                        Directory = "SilupostMedia",
-                        Name = $"Silupost-Media-({DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.TimeOfDay}).mp4"
                     });
-                    if (file == null)
-                        return;
-                    var fileExtension = Path.GetExtension(file.Path).Replace(".", String.Empty);
-                    var isFileValid = AppSettingsHelper.goAllowedMediaFileType.ToList().Any(f => f.Key.ToString() == fileExtension.ToUpper());
-                    if (!isFileValid)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Oops!", "Camera error! Please check your camera", "ok");
-                        return;
-                    }
-
-                    var fileStream = file.GetStream();
-                    byte[] fileBytes = null;
-                    var buffer = new byte[16 * 1024];
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        int read;
-                        while ((read = fileStream.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            ms.Write(buffer, 0, read);
-                        }
-                        fileBytes = ms.ToArray();
-                    }
-
-                    this.IsVideo = true;
-                    var thumbnail = MediaHelpers.GenerateThumbImageFromLocal(file.Path, 1);
-                    mediaFile = new SilupostMediaModel()
-                    {
-                        IsNew = true,
-                        FileName = file.Path,
-                        FileSize = fileBytes.Length,
-                        FileContent = fileBytes,
-                        MimeType = AppSettingsHelper.goAllowedMediaFileType.ToList().FirstOrDefault(f => f.Key.ToString() == fileExtension.ToUpper()).Value,
-                        MediaType = AppSettingsHelper.goGetMediaType(fileExtension),
-                        SourceURL = file.Path,
-                        ImageSource = thumbnail,
-                        IconSource = SilupostMediaTypeIconSource.VIDEO
-                    };
                 }
                 else
                 {

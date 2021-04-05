@@ -6,7 +6,8 @@ using SilupostMobileApp.Models;
 
 namespace SilupostMobileApp.Services.Interface
 {
-    public interface IFileService : IService<FileModel>
+    public interface IFileService
     {
+        Task<FileModel> Get(string fileId);
     }
 }

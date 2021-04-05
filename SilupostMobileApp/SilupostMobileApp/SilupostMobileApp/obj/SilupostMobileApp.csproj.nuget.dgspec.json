@@ -73,6 +73,10 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "Plugin.AppShortcuts": {
+              "target": "Package",
+              "version": "[1.0.0.3, )"
+            },
             "Plugin.MaterialDesignControls": {
               "target": "Package",
               "version": "[1.8.1, )"
@@ -80,6 +84,10 @@
             "Plugin.Toast": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Xam.Plugin.Connectivity": {
+              "target": "Package",
+              "version": "[3.2.0, )"
             },
             "Xam.Plugin.Geolocator": {
               "target": "Package",

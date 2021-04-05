@@ -108,6 +108,18 @@
           "lib/MonoAndroid81/Octane.Xamarin.Forms.VideoPlayer.dll": {}
         }
       },
+      "Plugin.AppShortcuts/1.0.0.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid71/Plugin.AppShortcuts.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid71/Plugin.AppShortcuts.dll": {}
+        }
+      },
       "Plugin.MaterialDesignControls/1.8.1": {
         "type": "package",
         "dependencies": {
@@ -262,6 +274,17 @@
         "runtime": {
           "lib/MonoAndroid10/BottomBar.Droid.dll": {},
           "lib/MonoAndroid10/BottomBar.XamarinForms.dll": {}
+        }
+      },
+      "Xam.Plugin.Connectivity/3.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/MonoAndroid10/Plugin.Connectivity.Abstractions.dll": {},
+          "lib/MonoAndroid10/Plugin.Connectivity.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/Plugin.Connectivity.Abstractions.dll": {},
+          "lib/MonoAndroid10/Plugin.Connectivity.dll": {}
         }
       },
       "Xam.Plugin.Geolocator/4.5.0.6": {
@@ -1176,8 +1199,10 @@
           "MagicGradients": "1.2.0",
           "Newtonsoft.Json": "12.0.3",
           "Octane.Xam.VideoPlayer": "3.1.0",
+          "Plugin.AppShortcuts": "1.0.0.3",
           "Plugin.MaterialDesignControls": "1.8.1",
           "Plugin.Toast": "2.2.0",
+          "Xam.Plugin.Connectivity": "3.2.0",
           "Xam.Plugin.Geolocator": "4.5.0.6",
           "Xam.Plugin.Media": "5.0.1",
           "Xam.Plugins.Messaging": "5.2.0",
@@ -1350,6 +1375,28 @@
         "lib/uap10.0/Octane.Xamarin.Forms.VideoPlayer.xml",
         "octane.xam.videoplayer.3.1.0.nupkg.sha512",
         "octane.xam.videoplayer.nuspec"
+      ]
+    },
+    "Plugin.AppShortcuts/1.0.0.3": {
+      "sha512": "sOy7hLg+fcectRJL/xXS6qE5B9yJb/JvTgIkitbKHOoluF7tVG2dSuqeOgE3j85FRLhdx5Fy6UuDjOgXNQVcZA==",
+      "type": "package",
+      "path": "plugin.appshortcuts/1.0.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid71/Plugin.AppShortcuts.dll",
+        "lib/monoandroid71/Plugin.AppShortcuts.xml",
+        "lib/netstandard1.0/Plugin.AppShortcuts.dll",
+        "lib/netstandard1.0/Plugin.AppShortcuts.xml",
+        "lib/netstandard2.0/Plugin.AppShortcuts.dll",
+        "lib/netstandard2.0/Plugin.AppShortcuts.xml",
+        "lib/uap10.0.10586/Plugin.AppShortcuts.dll",
+        "lib/uap10.0.10586/Plugin.AppShortcuts.pri",
+        "lib/uap10.0.10586/Plugin.AppShortcuts.xml",
+        "lib/xamarinios10/Plugin.AppShortcuts.dll",
+        "lib/xamarinios10/Plugin.AppShortcuts.xml",
+        "plugin.appshortcuts.1.0.0.3.nupkg.sha512",
+        "plugin.appshortcuts.nuspec"
       ]
     },
     "Plugin.MaterialDesignControls/1.8.1": {
@@ -1680,6 +1727,73 @@
         "lib/portable-net45+win8+wpa81/BottomBar.XamarinForms.dll",
         "thrivegmbh.bottomnavigationbar.xf.1.0.2.nupkg.sha512",
         "thrivegmbh.bottomnavigationbar.xf.nuspec"
+      ]
+    },
+    "Xam.Plugin.Connectivity/3.2.0": {
+      "sha512": "ZV45TaBTCJg7XQNEl3fPyyJcuMMhdDEQ6BCLc/5pMuTv38M226ER0WTu5sbmba8jlliDuzeRqkRFHwrGdWAgyg==",
+      "type": "package",
+      "path": "xam.plugin.connectivity/3.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid10/Plugin.Connectivity.Abstractions.dll",
+        "lib/MonoAndroid10/Plugin.Connectivity.Abstractions.pdb",
+        "lib/MonoAndroid10/Plugin.Connectivity.Abstractions.xml",
+        "lib/MonoAndroid10/Plugin.Connectivity.dll",
+        "lib/MonoAndroid10/Plugin.Connectivity.pdb",
+        "lib/MonoAndroid10/Plugin.Connectivity.xml",
+        "lib/UAP10/Plugin.Connectivity.Abstractions.dll",
+        "lib/UAP10/Plugin.Connectivity.Abstractions.pdb",
+        "lib/UAP10/Plugin.Connectivity.Abstractions.xml",
+        "lib/UAP10/Plugin.Connectivity.XML",
+        "lib/UAP10/Plugin.Connectivity.dll",
+        "lib/UAP10/Plugin.Connectivity.pdb",
+        "lib/UAP10/Plugin.Connectivity.pri",
+        "lib/UAP10/Plugin.Connectivity/Properties/Plugin.Connectivity.rd.xml",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.Abstractions.dll",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.Abstractions.pdb",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.Abstractions.xml",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.dll",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.pdb",
+        "lib/Xamarin.Mac20/Plugin.Connectivity.xml",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.Abstractions.dll",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.Abstractions.pdb",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.Abstractions.xml",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.dll",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.pdb",
+        "lib/Xamarin.iOS10/Plugin.Connectivity.xml",
+        "lib/XamarinTVOS/Plugin.Connectivity.Abstractions.dll",
+        "lib/XamarinTVOS/Plugin.Connectivity.Abstractions.pdb",
+        "lib/XamarinTVOS/Plugin.Connectivity.Abstractions.xml",
+        "lib/XamarinTVOS/Plugin.Connectivity.dll",
+        "lib/XamarinTVOS/Plugin.Connectivity.pdb",
+        "lib/XamarinTVOS/Plugin.Connectivity.xml",
+        "lib/net45/Plugin.Connectivity.Abstractions.dll",
+        "lib/net45/Plugin.Connectivity.Abstractions.pdb",
+        "lib/net45/Plugin.Connectivity.Abstractions.xml",
+        "lib/net45/Plugin.Connectivity.XML",
+        "lib/net45/Plugin.Connectivity.dll",
+        "lib/net45/Plugin.Connectivity.pdb",
+        "lib/netcoreapp2.0/Plugin.Connectivity.Abstractions.dll",
+        "lib/netcoreapp2.0/Plugin.Connectivity.Abstractions.pdb",
+        "lib/netcoreapp2.0/Plugin.Connectivity.Abstractions.xml",
+        "lib/netcoreapp2.0/Plugin.Connectivity.deps.json",
+        "lib/netcoreapp2.0/Plugin.Connectivity.dll",
+        "lib/netcoreapp2.0/Plugin.Connectivity.xml",
+        "lib/netstandard1.0/Plugin.Connectivity.Abstractions.dll",
+        "lib/netstandard1.0/Plugin.Connectivity.Abstractions.pdb",
+        "lib/netstandard1.0/Plugin.Connectivity.Abstractions.xml",
+        "lib/netstandard1.0/Plugin.Connectivity.deps.json",
+        "lib/netstandard1.0/Plugin.Connectivity.dll",
+        "lib/netstandard1.0/Plugin.Connectivity.pdb",
+        "lib/netstandard1.0/Plugin.Connectivity.xml",
+        "lib/tizen40/Plugin.Connectivity.Abstractions.dll",
+        "lib/tizen40/Plugin.Connectivity.Abstractions.pdb",
+        "lib/tizen40/Plugin.Connectivity.Abstractions.xml",
+        "lib/tizen40/Plugin.Connectivity.deps.json",
+        "lib/tizen40/Plugin.Connectivity.dll",
+        "xam.plugin.connectivity.3.2.0.nupkg.sha512",
+        "xam.plugin.connectivity.nuspec"
       ]
     },
     "Xam.Plugin.Geolocator/4.5.0.6": {

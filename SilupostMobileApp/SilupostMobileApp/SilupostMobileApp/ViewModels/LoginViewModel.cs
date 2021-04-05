@@ -92,18 +92,25 @@ namespace SilupostMobileApp.ViewModels
         }
         public async Task<SystemUserModel> Login()
         {
-            SystemUserModel result = null;
+            SystemUserModel model = null;
             try
             {
-                result = await SystemUserService.GetByCredentials(this.Email.Value, this.Password.Value);
+
+                var serverStatus = await SystemConfigService.GetServerStatus();
+                if (serverStatus != SilupostServerStatusEnums.ACTIVE)
+                    throw new Exception(SilupostMessage.SERVER_INACTIVE);
+                var result = await SystemUserService.GetByCredentials(this.Email.Value, this.Password.Value);
+                if (result.Data == null && !result.IsSuccess)
+                    throw new Exception(result.Message);
+                model = result.Data;
                 IsBusy = false;
             }
             catch (Exception ex)
             {
                 IsBusy = false;
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                throw ex;
             }
-            return result;
+            return model;
         }
     }
 }

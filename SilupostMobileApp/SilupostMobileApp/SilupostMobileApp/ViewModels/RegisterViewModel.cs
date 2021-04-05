@@ -226,6 +226,9 @@ namespace SilupostMobileApp.ViewModels
             SystemUserVerificationModel result = null;
             try
             {
+                var serverStatus = await SystemConfigService.GetServerStatus();
+                if (serverStatus != SilupostServerStatusEnums.ACTIVE)
+                    throw new Exception(SilupostMessage.SERVER_INACTIVE);
                 result = await SystemUserVerificationService.SendEmailVerification(model);
                 IsBusy = false;
                 return result;
@@ -256,6 +259,9 @@ namespace SilupostMobileApp.ViewModels
             SystemUserModel result = null;
             try
             {
+                var serverStatus = await SystemConfigService.GetServerStatus();
+                if (serverStatus != SilupostServerStatusEnums.ACTIVE)
+                    throw new Exception(SilupostMessage.SERVER_INACTIVE);
                 result = await SystemUserService.CreateAccount(model);
                 IsBusy = false;
                 return result;
@@ -283,21 +289,24 @@ namespace SilupostMobileApp.ViewModels
         }
         public async Task<SystemUserModel> Login()
         {
-            SystemUserModel result = null;
+            SystemUserModel model = null;
             try
             {
-                if (await CredentialsValid())
-                {
-                    result = await SystemUserService.GetByCredentials(this.Email.Value, this.Password.Value);
-                }
+                var serverStatus = await SystemConfigService.GetServerStatus();
+                if (serverStatus != SilupostServerStatusEnums.ACTIVE)
+                    throw new Exception(SilupostMessage.SERVER_INACTIVE);
+                var result = await SystemUserService.GetByCredentials(this.Email.Value, this.Password.Value);
+                if (result.Data == null && !result.IsSuccess)
+                    throw new Exception(result.Message);
+                model = result.Data;
                 IsBusy = false;
-                return result;
             }
             catch (Exception ex)
             {
                 IsBusy = false;
                 throw ex;
             }
+            return model;
         }
         public async Task TextChanged(string Name)
         {

@@ -26,41 +26,63 @@ namespace SilupostMobileApp.Views.Common
 
         async void ContentPage_Appearing(object sender, EventArgs e)
         {
-            var action = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectAction.PICKFILE, SilupostServiceMediaSelectAction.TAKEFROMCAMERA);
-            this.viewModel.IsAudio = false;
-            this.viewModel.IsVideo = false;
-            this.viewModel.IsImage = false;
-            if(action == SilupostServiceMediaSelectAction.PICKFILE)
-            {
-                await this.viewModel.PickFile();
-            }
-            else if(action == SilupostServiceMediaSelectAction.TAKEFROMCAMERA)
-            {
-                var cameraAction = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectFileType.IMAGE, SilupostServiceMediaSelectFileType.VIDEO);
-                var cameraFileType = SilupostDocReportMediaTypeEnums.NA;
-                if (cameraAction == SilupostServiceMediaSelectFileType.IMAGE)
-                {
-                    cameraFileType = SilupostDocReportMediaTypeEnums.IMAGE;
-                }
-                else if (cameraAction == SilupostServiceMediaSelectFileType.VIDEO)
-                {
-                    cameraFileType = SilupostDocReportMediaTypeEnums.VIDEO;
-                }
-                await this.viewModel.TakeFromCamera(cameraFileType);
-            }
-            else
-            {
-                await this.Navigation.PopAsync();
-            }
+        }
 
-            if(this.viewModel.NewMedia == null)
-                await this.Navigation.PopAsync();
+        async void Upload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string action = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectAction.PICKFILE, SilupostServiceMediaSelectAction.TAKEFROMCAMERA);
+                this.viewModel.IsAudio = false;
+                this.viewModel.IsVideo = false;
+                this.viewModel.IsImage = false;
+                if (action == SilupostServiceMediaSelectAction.PICKFILE)
+                {
+                    await this.viewModel.PickFile();
+                }
+                else if (action == SilupostServiceMediaSelectAction.TAKEFROMCAMERA)
+                {
+                    string cameraAction = string.Empty;
+                    if (this.viewModel.AllowMultipleType)
+                    {
+                        cameraAction = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectFileType.IMAGE, SilupostServiceMediaSelectFileType.VIDEO);
+                    }
+                    else
+                    {
+                        cameraAction = SilupostServiceMediaSelectFileType.IMAGE;
+                    }
+                    var cameraFileType = SilupostDocReportMediaTypeEnums.NA;
+                    if (cameraAction == SilupostServiceMediaSelectFileType.IMAGE)
+                    {
+                        cameraFileType = SilupostDocReportMediaTypeEnums.IMAGE;
+                    }
+                    else if (cameraAction == SilupostServiceMediaSelectFileType.VIDEO)
+                    {
+                        cameraFileType = SilupostDocReportMediaTypeEnums.VIDEO;
+                    }
+                    await this.viewModel.TakeFromCamera(cameraFileType);
+                }
+                else
+                {
+                    await this.Navigation.PopAsync();
+                }
+
+                if (this.viewModel.NewMedia == null)
+                    await this.Navigation.PopAsync();
+            }
+            catch(Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
         }
 
         async void UploadOk_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "UploadMedia", viewModel.NewMedia);
             await this.Navigation.PopAsync();
+            await this.viewModel.WaitAndExecute(1000, async () =>
+            {
+                MessagingCenter.Send(this, "UploadMedia", viewModel.NewMedia);
+            });
         }
         async void ResetUpload_Clicked(object sender, EventArgs e)
         {
@@ -82,7 +104,15 @@ namespace SilupostMobileApp.Views.Common
                         break;
                     case SilupostServiceMediaSelectAction.TAKEFROMCAMERA:
 
-                        var cameraAction = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectFileType.IMAGE, SilupostServiceMediaSelectFileType.VIDEO);
+                        string cameraAction = string.Empty;
+                        if (this.viewModel.AllowMultipleType)
+                        {
+                            cameraAction = await DisplayActionSheet(null, "Cancel", null, SilupostServiceMediaSelectFileType.IMAGE, SilupostServiceMediaSelectFileType.VIDEO);
+                        }
+                        else
+                        {
+                            cameraAction = SilupostServiceMediaSelectFileType.IMAGE;
+                        }
                         var cameraFileType = SilupostDocReportMediaTypeEnums.NA;
                         switch (cameraAction)
                         {

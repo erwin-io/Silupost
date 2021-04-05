@@ -140,5 +140,17 @@ namespace SilupostMobileApp.Views
             });
             return true;
         }
+
+        async void EmergencyCall_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await this.viewModel.PhoneCall.Call(SilupostEmergency.EMERGENCY_CALL_NUMBER);
+            }
+            catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex);
+            }
+        }
     }
 }

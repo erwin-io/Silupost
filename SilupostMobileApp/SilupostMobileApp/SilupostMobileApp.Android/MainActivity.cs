@@ -18,13 +18,19 @@ using FFImageLoading.Forms.Droid;
 using SilupostMobileApp.Common;
 using SilupostMobileApp.Models;
 using Xamarin.Forms;
+using SilupostMobileApp.Droid.Common;
+using Plugin.AppShortcuts;
 
 namespace SilupostMobileApp.Droid
 {
-    [IntentFilter(new[] { Intent.ActionView }, Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable }, DataScheme = "http", DataHost = SilupostAppSettings.SILUPOST_WEBLANDINGPAGEHOST)]
-    [Activity(Label = "Silupost", NoHistory = false, Icon = "@mipmap/icon", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleInstance, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [BroadcastReceiver(Enabled = true, DirectBootAware = true)]
+    [IntentFilter(new[] { Intent.ActionView, Intent.ActionBootCompleted, Intent.ActionLockedBootCompleted, "android.intent.action.QUICKBOOT_POWERON", "com.htc.intent.action.QUICKBOOT_POWERON" }, Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable }, DataScheme = "http", DataHost = SilupostAppSettings.SILUPOST_WEBLANDINGPAGEHOST)]
+    [IntentFilter(new[] { Intent.ActionView }, Categories = new[] { Intent.CategoryDefault}, DataScheme = "appshortcut", DataHost = "SilupostAppShortcut")]
+    //[IntentFilter(new string[] { Intent.ActionBootCompleted, Intent.ActionLockedBootCompleted, "android.intent.action.QUICKBOOT_POWERON", "com.htc.intent.action.QUICKBOOT_POWERON" })]
+    [Activity(Label = "Silupost", NoHistory = false, Icon = "@mipmap/icon", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleInstance, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private static Context context = global::Android.App.Application.Context;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -84,8 +90,10 @@ namespace SilupostMobileApp.Droid
                 AppSettingsHelper.goLaunchFromURLData.EmailId = email ?? string.Empty;
                 AppSettingsHelper.goIsLaunchFromURL = true;
             }
-
+            CrossAppShortcuts.Current.Init();
             LoadApplication(new App());
+
+            Loadservice();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -93,6 +101,84 @@ namespace SilupostMobileApp.Droid
             //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+
+        private void Loadservice()
+        {
+            try
+            {
+                var backgroundServiceIntent = new Intent(Android.App.Application.Context, typeof(BackgroundService));
+                backgroundServiceIntent.SetAction(BackgroundService.ACTION_START_SERVICE);
+                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+                {
+                    StartForegroundService(backgroundServiceIntent);
+                }
+                else
+                {
+                    StartService(backgroundServiceIntent);
+                }
+                MessagingCenter.Subscribe<Object>(this, "StartBackgroundService", (sender) => 
+                {
+                    try
+                    {
+                        var backgroundServiceIntent = new Intent(Android.App.Application.Context, typeof(BackgroundService));
+                        backgroundServiceIntent.SetAction(BackgroundService.ACTION_START_SERVICE);
+                        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+                        {
+                            StartForegroundService(backgroundServiceIntent);
+                        }
+                        else
+                        {
+                            StartService(backgroundServiceIntent);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToLower().Contains("service"))
+                        {
+                            Loadservice();
+                        }
+                        else
+                        {
+                            MessagingCenter.Send<Object>(new Object(), "Logout");
+                        }
+                    }
+                });
+
+                MessagingCenter.Subscribe<Object>(this, "StopBackgroundService", (sender) => 
+                {
+                    try
+                    {
+                        var backgroundServiceIntent = new Intent(Android.App.Application.Context, typeof(BackgroundService));
+                        backgroundServiceIntent.SetAction(BackgroundService.ACTION_START_SERVICE);
+
+                        StopService(backgroundServiceIntent);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToLower().Contains("service"))
+                        {
+                            Loadservice();
+                        }
+                        else
+                        {
+                            MessagingCenter.Send<Object>(new Object(), "Logout");
+                        }
+                    }
+                });
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message.ToLower().Contains("service"))
+                {
+                    Loadservice();
+                }
+                else
+                {
+                    MessagingCenter.Send<Object>(new Object(), "Logout");
+                }
+            }
         }
     }
 }

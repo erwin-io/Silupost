@@ -61,8 +61,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        var exception = new SilupostServiceException(response.Message);
-                        throw new Exception(exception.ExceptionMessage);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion
@@ -98,7 +97,7 @@ namespace SilupostMobileApp.Services
                     }
                     else
                     {
-                        throw new Exception(response.Message);
+                        throw new SilupostServiceException(response.Message);
                     }
                 }
                 #endregion

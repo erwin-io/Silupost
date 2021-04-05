@@ -62,11 +62,11 @@
                             </Grid.RowDefinitions>
                             <StackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                    <ImageButton Source="{Binding SystemUser.ProfilePicture.ImageSource}" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" BackgroundColor="White" CornerRadius="100"></ImageButton>
+                                    <ImageButton Source="{Binding UserProfilePicture}" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="180" WidthRequest="180" BackgroundColor="White" CornerRadius="100" Clicked="ChangeProfile_Clicked" Aspect="AspectFill"></ImageButton>
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout Grid.Row="1" Grid.Column="0" Margin="0" BackgroundColor="Transparent">
-                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Text="{Binding SystemUser.LegalEntity.FullName}"/>
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="25" FontAttributes="Bold" Text="{Binding UserFullName}"/>
                             </StackLayout>
                         </Grid>
                     </StackLayout>

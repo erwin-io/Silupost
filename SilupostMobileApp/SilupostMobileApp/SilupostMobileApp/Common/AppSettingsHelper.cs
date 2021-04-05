@@ -1,14 +1,17 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using SilupostMobileApp.Common.Interface;
 using SilupostMobileApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace SilupostMobileApp.Common
 {
@@ -116,14 +119,30 @@ namespace SilupostMobileApp.Common
 
         public async static Task<Position> GetCurrentUserGeoLocation()
         {
+            var position = new Position();
             try
             {
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
                 TimeSpan timeout = TimeSpan.FromMilliseconds(1000);
-                return await locator.GetPositionAsync(timeout: timeout);
-            } catch (Exception ex) { throw ex; }
+                position = await locator.GetPositionAsync(timeout: timeout);
+            } catch (Exception ex)
+            {
+                SilupostExceptionLogger.GetError(ex, string.Format("{0} {1}", "Oops!", ex.Message));
+            }
+            return position;
         }
+
+        public async static Task<bool> GPSEnable()
+        {
+            return Xamarin.Forms.DependencyService.Get<IGpsService>().IsGpsEnable();
+        }
+
+        public async static Task OpenGPSSettings()
+        {
+            Xamarin.Forms.DependencyService.Get<IGpsService>().OpenSettings();
+        }
+
         public static bool IsValidTimeFormat(this string input)
         {
             TimeSpan dummyOutput;
@@ -134,5 +153,12 @@ namespace SilupostMobileApp.Common
 
         public static bool goIsLaunchFromURL { get; set; }
         public static AppUserSettingsLaunchFromURLDataModel goLaunchFromURLData { get; set; }
+
+        public static bool goIsConnectedToInternet { get; set; }
+
+        public static bool CanAccessInternet()
+        {
+            return CrossConnectivity.Current.IsConnected;
+        }
     }
 }
