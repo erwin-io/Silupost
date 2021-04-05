@@ -52,6 +52,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/AutoMapper.pdb">
       <publishTime>11/17/2018 10:14:56</publishTime>
     </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>02/19/2021 21:04:50</publishTime>
+    </File>
     <File Include="bin/Dapper.dll">
       <publishTime>11/17/2020 09:58:48</publishTime>
     </File>
@@ -154,6 +157,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Google.Apis.PlatformServices.dll">
       <publishTime>02/09/2021 10:37:32</publishTime>
     </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>03/24/2021 03:53:26</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.pdb">
+      <publishTime>03/24/2021 03:53:26</publishTime>
+    </File>
     <File Include="bin/it/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
@@ -240,6 +249,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>02/25/2020 23:35:32</publishTime>
+    </File>
+    <File Include="bin/MailKit.dll">
+      <publishTime>03/16/2021 17:15:52</publishTime>
+    </File>
+    <File Include="bin/MailKit.pdb">
+      <publishTime>03/16/2021 17:15:52</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Authorization.dll">
       <publishTime>11/16/2015 16:03:38</publishTime>
@@ -420,6 +435,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/MimeKit.dll">
+      <publishTime>03/12/2021 22:18:36</publishTime>
+    </File>
+    <File Include="bin/MimeKit.pdb">
+      <publishTime>03/12/2021 22:18:34</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>11/09/2019 00:56:44</publishTime>
@@ -635,34 +656,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.dll">
-      <publishTime>03/28/2021 16:24:35</publishTime>
+      <publishTime>04/02/2021 21:57:54</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.pdb">
-      <publishTime>03/28/2021 16:24:35</publishTime>
+      <publishTime>04/02/2021 21:57:54</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.dll">
-      <publishTime>03/28/2021 00:55:36</publishTime>
+      <publishTime>04/02/2021 21:57:47</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.pdb">
-      <publishTime>03/28/2021 00:55:36</publishTime>
+      <publishTime>04/02/2021 21:57:47</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.dll">
-      <publishTime>03/28/2021 00:55:33</publishTime>
+      <publishTime>04/02/2021 21:57:45</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Domain.pdb">
-      <publishTime>03/28/2021 00:55:33</publishTime>
+      <publishTime>04/02/2021 21:57:45</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.dll">
-      <publishTime>03/28/2021 16:24:29</publishTime>
+      <publishTime>04/02/2021 21:57:49</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Facade.pdb">
-      <publishTime>03/28/2021 16:24:29</publishTime>
+      <publishTime>04/02/2021 21:57:49</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.dll">
-      <publishTime>03/28/2021 00:55:37</publishTime>
+      <publishTime>04/02/2021 21:57:48</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Mapping.pdb">
-      <publishTime>03/28/2021 00:55:37</publishTime>
+      <publishTime>04/02/2021 21:57:48</publishTime>
     </File>
     <File Include="bin/SimpleInjector.dll">
       <publishTime>12/01/2018 17:29:08</publishTime>
@@ -806,7 +827,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2020 03:47:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/28/2021 16:24:38</publishTime>
+      <publishTime>04/02/2021 21:57:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -268,3 +268,14 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Rele
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\obj\Release\SilupostWeb.API.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.dll
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.xml
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.pdb
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.xml

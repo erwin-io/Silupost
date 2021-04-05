@@ -24,6 +24,7 @@ using System.Security.Claims;
 namespace SilupostWeb.API.Controllers
 {
     [Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/EnforcementStation")]
     public class EnforcementStationController : ApiController
     {

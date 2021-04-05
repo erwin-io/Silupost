@@ -66,6 +66,8 @@
     <Compile Include="Entity\LookupModel.cs" />
     <Compile Include="Entity\LookupTableModel.cs" />
     <Compile Include="Entity\EnforcementUnitModel.cs" />
+    <Compile Include="Entity\SystemConfigTypeModel.cs" />
+    <Compile Include="Entity\SystemConfigModel.cs" />
     <Compile Include="Entity\SystemTokenModel.cs" />
     <Compile Include="Entity\SystemUserVerificationModel.cs" />
     <Compile Include="Entity\SystemUserConfigModel.cs" />
@@ -86,11 +88,13 @@
     <Compile Include="Entity\SystemUserModel.cs" />
     <Compile Include="Entity\SystemWebAdminUserRolesModel.cs" />
     <Compile Include="Interface\IEnforcementReportValidationRepositoryDAC.cs" />
+    <Compile Include="Interface\ISystemConfigRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemUserVerificationRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemUserConfigRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminMenuModuleRepositoryDAC.cs" />
     <Compile Include="Interface\ISystemWebAdminRolePrivilegesRepositoryDAC.cs" />
+    <Compile Include="SystemConfigDAC.cs" />
     <Compile Include="SystemTokenDAC.cs" />
     <Compile Include="FileDAC.cs" />
     <Compile Include="Interface\ICrimeIncidentCategoryRepositoryDAC.cs" />

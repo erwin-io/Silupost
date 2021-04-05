@@ -11,6 +11,8 @@ namespace SilupostWeb.API.Helpers
         public static string goAppHostName { get; set; }
         public static string goOAuthURI { get; set; }
         public static string goApplicationName { get; set; }
+        public static bool goEnableSwagger { get; set; }
+        public static bool goEnableAPI { get; set; }
         public static string goIssuer { get; set; }
         public static string goAudienceId { get; set; }
         public static string goAudienceSecret { get; set; }

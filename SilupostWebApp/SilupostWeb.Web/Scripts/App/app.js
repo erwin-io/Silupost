@@ -62,7 +62,7 @@ var appController = function () {
         apiToken: "",
         authorized: false,
         apiRefreshToken: "",
-        refreshTokenInterval: 30000,
+        refreshTokenInterval: 10000000,
         apiCLient: "silupost",
         mapBoxToken: "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg"
     }

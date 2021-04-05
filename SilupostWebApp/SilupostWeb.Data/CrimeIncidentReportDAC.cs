@@ -300,8 +300,9 @@ namespace SilupostWeb.Data
                 {
                     typeof(CrimeIncidentReportModel),
                     typeof(CrimeIncidentCategoryModel),
-                    typeof(SystemUserModel),
+                    typeof(CrimeIncidentTypeModel),
                     typeof(FileModel),
+                    typeof(SystemUserModel),
                     typeof(LegalEntityModel),
                     typeof(EntityApprovalStatusModel),
                     typeof(PageResultsModel),
@@ -309,21 +310,22 @@ namespace SilupostWeb.Data
                 {
                     CrimeIncidentReportModel cir = obj[0] as CrimeIncidentReportModel;
                     CrimeIncidentCategoryModel cic = obj[1] as CrimeIncidentCategoryModel;
-                    SystemUserModel p = obj[2] as SystemUserModel;
-                    FileModel suf = obj[3] as FileModel;
-                    LegalEntityModel le = obj[4] as LegalEntityModel;
-                    EntityApprovalStatusModel eas = obj[5] as EntityApprovalStatusModel;
-                    PageResultsModel pr = obj[6] as PageResultsModel;
+                    CrimeIncidentTypeModel cit = obj[2] as CrimeIncidentTypeModel;
+                    FileModel citi = obj[3] as FileModel;
+                    SystemUserModel p = obj[4] as SystemUserModel;
+                    LegalEntityModel le = obj[5] as LegalEntityModel;
+                    EntityApprovalStatusModel eas = obj[6] as EntityApprovalStatusModel;
+                    PageResultsModel pr = obj[7] as PageResultsModel;
                     CrimeIncidentReportModel model;
                     if (!lookup.TryGetValue(cir.CrimeIncidentReportId, out model))
                         lookup.Add(cir.CrimeIncidentReportId, model = cir);
 
                     if (model.CrimeIncidentCategory == null)
                         model.CrimeIncidentCategory = new CrimeIncidentCategoryModel();
+                    if (model.CrimeIncidentCategory.CrimeIncidentType == null)
+                        model.CrimeIncidentCategory.CrimeIncidentType = new CrimeIncidentTypeModel();
                     if (model.PostedBySystemUser == null)
                         model.PostedBySystemUser = new SystemUserModel();
-                    if (model.PostedBySystemUser.ProfilePicture == null)
-                        model.PostedBySystemUser.ProfilePicture = new FileModel();
                     if (model.PostedBySystemUser.LegalEntity == null)
                         model.PostedBySystemUser.LegalEntity = new LegalEntityModel();
                     if (model.ApprovalStatus == null)
@@ -331,8 +333,9 @@ namespace SilupostWeb.Data
                     if (model.PageResult == null)
                         model.PageResult = new PageResultsModel();
                     model.CrimeIncidentCategory = cic;
+                    model.CrimeIncidentCategory.CrimeIncidentType = cit;
+                    model.CrimeIncidentCategory.CrimeIncidentType.IconFile = citi;
                     model.PostedBySystemUser = p;
-                    model.PostedBySystemUser.ProfilePicture = suf;
                     model.PostedBySystemUser.LegalEntity = le;
                     model.ApprovalStatus = eas;
                     model.PageResult = pr;
@@ -343,7 +346,7 @@ namespace SilupostWeb.Data
                     PostedBySystemUserId = PostedBySystemUserId,
                     PageNo = PageNo,
                     PageSize = PageSize
-                }, splitOn: "CrimeIncidentReportId,CrimeIncidentCategoryId,SystemUserId,FileId,LegalEntityId,ApprovalStatusId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
+                }, splitOn: "CrimeIncidentReportId,CrimeIncidentCategoryId,CrimeIncidentTypeId,FileId,SystemUserId,LegalEntityId,ApprovalStatusId,TotalRows", commandType: CommandType.StoredProcedure).ToList();
                 if (lookup.Values.Any())
                 {
                     results.AddRange(lookup.Values);

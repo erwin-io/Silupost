@@ -223,8 +223,6 @@ var mobileUserController = function() {
                                 +'</button>'
                                 +'<ul aria-labelledby="drop-role-'+full.SystemUserId+'" role="menu" class="dropdown-menu pmd-dropdown-menu-top-right">'
                                     +'<li role="presentation"><a class="view" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="'+full.SystemUserId+'" role="menuitem">Details</a></li>'
-                                    + '<li role="presentation"><a class="block-posting" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemUserId +'" role="menuitem">Block User From Posting</a></li>'
-                                    + '<li role="presentation"><a class="disable" style="color:#000" href="javascript:void(0);" tabindex="-1" data-value="' + full.SystemUserId +'" role="menuitem">Disable User</a></li>'
                                 +'</ul>'
                                 +'</span>'
                     }

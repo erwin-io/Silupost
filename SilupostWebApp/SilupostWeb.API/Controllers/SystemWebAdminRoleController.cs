@@ -22,6 +22,7 @@ using System.Security.Claims;
 namespace SilupostWeb.API.Controllers
 {
     [Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/SystemWebAdminRole")]
     public class SystemWebAdminRoleController : ApiController
     {

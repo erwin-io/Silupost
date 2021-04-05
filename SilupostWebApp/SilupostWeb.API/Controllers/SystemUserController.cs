@@ -24,7 +24,7 @@ using System.Net.Http.Headers;
 
 namespace SilupostWeb.API.Controllers
 {
-    [Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/SystemUser")]
     public class SystemUserController : ApiController
     {
@@ -44,6 +44,7 @@ namespace SilupostWeb.API.Controllers
         #endregion
 
 
+        [Authorize]
         [Route("getPage")]
         [HttpGet]
         [SwaggerOperation("getPage")]
@@ -85,6 +86,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("{id}/detail")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -126,6 +128,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("{id}/TrackerStatus")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -167,7 +170,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [SilupostAuthorizationFilter]
         [Route("GetByCredentials")]
         [HttpGet]
         [SwaggerOperation("GetByCredentials")]
@@ -244,6 +247,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("")]
         [HttpPost]
         [ValidateModel]
@@ -294,7 +298,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [SilupostAuthorizationFilter]
         [Route("CreateAccount")]
         [HttpPost]
         [ValidateModel]
@@ -382,7 +386,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [SilupostAuthorizationFilter]
         [Route("CreateWebAdminAccount")]
         [HttpPost]
         [ValidateModel]
@@ -491,6 +495,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("")]
         [HttpPut]
         [ValidateModel]
@@ -584,6 +589,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("UpdatePersonalDetails")]
         [HttpPut]
         [ValidateModel]
@@ -645,7 +651,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-
+        [Authorize]
         [Route("UpdateUsername")]
         [HttpPut]
         [ValidateModel]
@@ -702,7 +708,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        [SilupostAuthorizationFilter]
         [Route("ResetPassword")]
         [HttpPut]
         [ValidateModel]
@@ -754,6 +760,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("UpdatePassword")]
         [HttpPut]
         [ValidateModel]
@@ -816,6 +823,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("{id}")]
         [HttpDelete]
         [SwaggerOperation("remove")]
@@ -870,6 +878,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("GetAddressByLegalEntityId")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -911,6 +920,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("createSystemUserAddress")]
         [HttpPost]
         [ValidateModel]
@@ -950,6 +960,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("UpdateSystemUserAddress")]
         [HttpPut]
         [ValidateModel]
@@ -1000,6 +1011,7 @@ namespace SilupostWeb.API.Controllers
             }
         }
 
+        [Authorize]
         [Route("RemoveSystemUserAddress/{id}")]
         [HttpDelete]
         [SwaggerOperation("remove")]
@@ -1050,7 +1062,7 @@ namespace SilupostWeb.API.Controllers
         }
 
 
-        [AllowAnonymous]
+        [SilupostAuthorizationFilter]
         [Route("GetRefreshToken")]
         [HttpGet]
         [SwaggerOperation("GetRefreshToken")]
@@ -1118,6 +1130,7 @@ namespace SilupostWeb.API.Controllers
         }
 
 
+        [Authorize]
         [Route("UpdateSystemUserConfig")]
         [HttpPut]
         [ValidateModel]

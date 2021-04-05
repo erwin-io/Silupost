@@ -39,6 +39,8 @@ namespace SilupostWeb.API.App_Start
             GlobalVariables.goAppHostName = GlobalVariables.GetApplicationConfig("AppHostName");
             GlobalVariables.goOAuthURI = GlobalVariables.GetApplicationConfig("OAuthURI");
             GlobalVariables.goApplicationName = GlobalVariables.GetApplicationConfig("ApplicationName");
+            GlobalVariables.goEnableSwagger = bool.Parse(GlobalVariables.GetApplicationConfig("EnableSwagger"));
+            GlobalVariables.goEnableAPI = bool.Parse(GlobalVariables.GetApplicationConfig("EnableAPI"));
             GlobalVariables.goDefaultSystemUserProfilePicPath = GlobalVariables.GetApplicationConfig("DefaultSystemUserProfilePic");
             GlobalVariables.goDefaultCrimeIncidentTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultCrimeIncidentTypeIconfilePic");
             GlobalVariables.goDefaultEnforcementTypeIconFilePath = GlobalVariables.GetApplicationConfig("DefaultEnforcementTypeIconfilePic");
@@ -78,6 +80,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ICrimeIncidentReportMediaRepositoryDAC, CrimeIncidentReportMediaDAC>(Lifestyle.Scoped);
             container.Register<IEnforcementReportValidationRepositoryDAC, EnforcementReportValidationDAC>(Lifestyle.Scoped);
             container.Register<ISystemUserVerificationRepositoryDAC, SystemUserVerificationDAC>(Lifestyle.Scoped);
+            container.Register<ISystemConfigRepositoryDAC, SystemConfigDAC>(Lifestyle.Scoped);
             #endregion
 
             #region Facade
@@ -98,6 +101,7 @@ namespace SilupostWeb.API.App_Start
             container.Register<ICrimeIncidentReportMediaFacade, CrimeIncidentReportMediaFacade>(Lifestyle.Scoped);
             container.Register<IEnforcementReportValidationFacade, EnforcementReportValidationFacade>(Lifestyle.Scoped);
             container.Register<ISystemUserVerificationFacade, SystemUserVerificationFacade>(Lifestyle.Scoped);
+            container.Register<ISystemConfigFacade, SystemConfigFacade>(Lifestyle.Scoped);
             #endregion
         }
     }

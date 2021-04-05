@@ -28,7 +28,6 @@ namespace SilupostWeb.OAuth.Providers
             context.Validated();
             return Task.FromResult<object>(null);
         }
-
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             SystemUserViewModel user = await Task.Run(() => this._userAuthFacade.Find(context.UserName, context.Password));
@@ -45,7 +44,6 @@ namespace SilupostWeb.OAuth.Providers
                 var authProperties = new Dictionary<string, string>
                 {
                     {"as:clientRefreshTokenLifeTime", refreshTokenLifeTime.ToString()},
-                    { "username", user.UserName },
                     { "SystemUserId", user.SystemUserId },
                 };
                 props = new AuthenticationProperties(authProperties);

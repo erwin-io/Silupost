@@ -25,7 +25,7 @@ using System.Threading;
 
 namespace SilupostWeb.API.Controllers
 {
-    //[Authorize]
+    [SilupostAuthorizationFilter]
     [RoutePrefix("api/v1/File")]
     public class FileController : ApiController
     {
@@ -38,7 +38,6 @@ namespace SilupostWeb.API.Controllers
         }
 
         #endregion
-        //[AllowAnonymous]
         [Route("getFile")]
         [HttpGet]
         [SwaggerOperation("get")]
@@ -50,6 +49,27 @@ namespace SilupostWeb.API.Controllers
             try
             {
                 var result = _fileFacade.Find(FileId);
+                if (result == null)
+                {
+                    string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goEmailTempProfilePath);
+                    string fileName = Path.GetFileNameWithoutExtension(filePath); 
+                    var fileSize = new FileInfo(filePath).Length;
+                    using (Image image = Image.FromFile(filePath))
+                    {
+                        using (MemoryStream m = new MemoryStream())
+                        {
+                            image.Save(m, image.RawFormat);
+                            byte[] imageBytes = m.ToArray();
+                            result = new FileViewModel()
+                            {
+                                FileName = fileName,
+                                FileSize = int.Parse(fileSize.ToString()),
+                                MimeType = image.RawFormat.ToString(),
+                                FileContent = imageBytes
+                            };
+                        }
+                    }
+                }
                 string mimeType = MimeMapping.GetMimeMapping(result.FileName);
                 var contentType = new MediaTypeHeaderValue(mimeType);
                 HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.OK);

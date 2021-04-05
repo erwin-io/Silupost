@@ -8,12 +8,85 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Web;
+using HtmlAgilityPack;
+using MailKit;
+using MimeKit;
+using Newtonsoft.Json;
 using SilupostWeb.API.Helpers;
 
 namespace SilupostWeb.API.Utility
 {
     public static class EmailService
     {
+        public static bool SendEmailVerificationMailKit(string recieverEmail, string code)
+        {
+            bool success = false;
+            try
+            {
+
+                string filePath = HttpContext.Current.Server.MapPath(GlobalVariables.goEmailVerificationTempPath);
+                string emailProfilePath = HttpContext.Current.Server.MapPath(GlobalVariables.goEmailTempProfilePath);
+                StreamReader str = new StreamReader(filePath);
+                string MailText = str.ReadToEnd();
+                str.Close();
+
+                MailText = MailText.Replace("[APP_VERIFICATION_HOSTNAME]", GlobalVariables.goAppHostName);
+                MailText = MailText.Replace("[APP_NAME]", GlobalVariables.goApplicationName);
+                MailText = MailText.Replace("[SUPPORT_EMAIL_ID]", GlobalVariables.goSiteSupportEmail);
+                MailText = MailText.Replace("[EMAIL_ID]", recieverEmail);
+                MailText = MailText.Replace("[VERIFICATION_CODE]", code);
+                MailText = MailText.Replace("[CLIENT_LANDING_PAGE_WEBSITE]", GlobalVariables.goClientLandingPageWebsite.Replace("/", ""));
+
+
+                byte[] bytes = File.ReadAllBytes(emailProfilePath);
+                string base64 = Convert.ToBase64String(bytes);
+                //MailText = MailText.Replace("[IMAGE_DATA]", $"data:image/png;base64,{base64}");
+
+
+                string subject = "Email Verification";
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(GlobalVariables.goSiteSupportEmail));
+                message.To.Add(new MailboxAddress(recieverEmail));
+                message.Subject = subject;
+
+                var builder = new BodyBuilder();
+                builder.HtmlBody = MailText;
+                builder.Attachments.Add(emailProfilePath, bytes, new MimeKit.ContentType("image", "jpeg"));
+                var contentId = MimeKit.Utils.MimeUtils.GenerateMessageId();
+                builder.HtmlBody = builder.HtmlBody.Replace("[IMAGE_DATA]", contentId);
+                builder.Attachments.FirstOrDefault().ContentId = contentId;
+                message.Body = builder.ToMessageBody();
+
+                using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    //Set HOST server SMTP detail
+                    var smtpType = GetEmailType(recieverEmail);
+                    if (smtpType == EmailSenderEnums.EmailSMTPTypeEnums.GMAIL)
+                    {
+                        smtpClient.Connect("smtp.gmail.com", 465, true);
+                    }
+                    if (smtpType == EmailSenderEnums.EmailSMTPTypeEnums.YAHOO)
+                    {
+                        smtpClient.Connect("smtp.mail.yahoo.com", 587, true);
+                    }
+                    if (smtpType == EmailSenderEnums.EmailSMTPTypeEnums.HOTMAIL)
+                    {
+                        smtpClient.Connect("smtp.live.com", 587, true);
+                    }
+                    smtpClient.Authenticate(GlobalVariables.goSiteSupportEmail, GlobalVariables.goSiteSupportEmailPassword);
+                    smtpClient.SendAsync(message);
+                    smtpClient.Disconnect(true);
+                }
+
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return success;
+        }
         public static bool SendEmailVerification(string recieverEmail, string code)
         {
             bool success = false;
@@ -90,6 +163,9 @@ namespace SilupostWeb.API.Utility
 
                 //Set SSL --> True / False
                 _smtp.EnableSsl = true;
+
+                //Set Default Credentials --> True / False
+                _smtp.UseDefaultCredentials = false;
 
                 //Set Sender UserEmailID, Password
                 NetworkCredential _network = new NetworkCredential(GlobalVariables.goSiteSupportEmail, GlobalVariables.goSiteSupportEmailPassword);
@@ -179,6 +255,9 @@ namespace SilupostWeb.API.Utility
 
                 //Set SSL --> True / False
                 _smtp.EnableSsl = true;
+
+                //Set Default Credentials --> True / False
+                _smtp.UseDefaultCredentials = false;
 
                 //Set Sender UserEmailID, Password
                 NetworkCredential _network = new NetworkCredential(GlobalVariables.goSiteSupportEmail, GlobalVariables.goSiteSupportEmailPassword);
