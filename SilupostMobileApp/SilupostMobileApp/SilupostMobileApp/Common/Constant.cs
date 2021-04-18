@@ -7,7 +7,7 @@ namespace SilupostMobileApp.Common
     public class SilupostAppSettings
     {
         //public const string SILUPOST_API_URI = "http://192.168.43.93:9100/api/v1/";
-        public const string SILUPOST_API_URI = "http://silupostweb-001-site1.htempurl.com/api/v1/";
+        public const string SILUPOST_API_URI = "http://silupostweb1-001-site1.itempurl.com/api/v1/";
         //public const string SILUPOST_WEB_APP_URI = "http://192.168.43.93:9300/";
         public const string SILUPOST_WEB_APP_URI = "http://www.silupostwebcontroller1.somee.com/";
         public const string SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH = "reporttracker/mobileview";
