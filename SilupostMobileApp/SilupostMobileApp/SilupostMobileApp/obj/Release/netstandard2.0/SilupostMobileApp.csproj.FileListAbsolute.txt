@@ -46,3 +46,4 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\Sil
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\ErrorMainPage.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\InternetError.xaml.g.cs
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\Views\Common\Error\ServerError.xaml.g.cs
+D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostMobileApp\SilupostMobileApp\SilupostMobileApp\obj\Release\netstandard2.0\SilupostMobileApp.csprojAssemblyReference.cache
