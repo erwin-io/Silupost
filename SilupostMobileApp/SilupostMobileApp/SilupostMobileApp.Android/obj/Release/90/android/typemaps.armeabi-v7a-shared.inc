@@ -97,98 +97,98 @@
 	.section	.rodata.map_aname.16,"aMS",%progbits,1
 	.type	.L.map_aname.16, %object
 .L.map_aname.16:
-	.asciz	"SilupostMobileApp.Android"
-	.size	.L.map_aname.16, 26
+	.asciz	"Acr.UserDialogs"
+	.size	.L.map_aname.16, 16
 
 	.section	.rodata.map_aname.17,"aMS",%progbits,1
 	.type	.L.map_aname.17, %object
 .L.map_aname.17:
-	.asciz	"Acr.UserDialogs"
-	.size	.L.map_aname.17, 16
+	.asciz	"Xamarin.Android.Support.Compat"
+	.size	.L.map_aname.17, 31
 
 	.section	.rodata.map_aname.18,"aMS",%progbits,1
 	.type	.L.map_aname.18, %object
 .L.map_aname.18:
-	.asciz	"Xamarin.Android.Support.Compat"
-	.size	.L.map_aname.18, 31
+	.asciz	"Plugin.FilePicker"
+	.size	.L.map_aname.18, 18
 
 	.section	.rodata.map_aname.19,"aMS",%progbits,1
 	.type	.L.map_aname.19, %object
 .L.map_aname.19:
-	.asciz	"Plugin.FilePicker"
-	.size	.L.map_aname.19, 18
+	.asciz	"FFImageLoading.Platform"
+	.size	.L.map_aname.19, 24
 
 	.section	.rodata.map_aname.20,"aMS",%progbits,1
 	.type	.L.map_aname.20, %object
 .L.map_aname.20:
-	.asciz	"FFImageLoading.Platform"
-	.size	.L.map_aname.20, 24
+	.asciz	"FFImageLoading.Forms.Droid"
+	.size	.L.map_aname.20, 27
 
 	.section	.rodata.map_aname.21,"aMS",%progbits,1
 	.type	.L.map_aname.21, %object
 .L.map_aname.21:
-	.asciz	"FFImageLoading.Forms.Droid"
-	.size	.L.map_aname.21, 27
+	.asciz	"Xamarin.Android.Support.CoordinaterLayout"
+	.size	.L.map_aname.21, 42
 
 	.section	.rodata.map_aname.22,"aMS",%progbits,1
 	.type	.L.map_aname.22, %object
 .L.map_aname.22:
-	.asciz	"Xamarin.Android.Support.CoordinaterLayout"
-	.size	.L.map_aname.22, 42
+	.asciz	"Mono.Android"
+	.size	.L.map_aname.22, 13
 
 	.section	.rodata.map_aname.23,"aMS",%progbits,1
 	.type	.L.map_aname.23, %object
 .L.map_aname.23:
-	.asciz	"Mono.Android"
-	.size	.L.map_aname.23, 13
+	.asciz	"FormsViewGroup"
+	.size	.L.map_aname.23, 15
 
 	.section	.rodata.map_aname.24,"aMS",%progbits,1
 	.type	.L.map_aname.24, %object
 .L.map_aname.24:
-	.asciz	"FormsViewGroup"
-	.size	.L.map_aname.24, 15
+	.asciz	"Xamarin.Android.Support.SwipeRefreshLayout"
+	.size	.L.map_aname.24, 43
 
 	.section	.rodata.map_aname.25,"aMS",%progbits,1
 	.type	.L.map_aname.25, %object
 .L.map_aname.25:
-	.asciz	"Xamarin.Android.Support.SwipeRefreshLayout"
-	.size	.L.map_aname.25, 43
+	.asciz	"Xamarin.Android.Support.ViewPager"
+	.size	.L.map_aname.25, 34
 
 	.section	.rodata.map_aname.26,"aMS",%progbits,1
 	.type	.L.map_aname.26, %object
 .L.map_aname.26:
-	.asciz	"Xamarin.Android.Support.ViewPager"
-	.size	.L.map_aname.26, 34
+	.asciz	"Xamarin.Android.Support.DrawerLayout"
+	.size	.L.map_aname.26, 37
 
 	.section	.rodata.map_aname.27,"aMS",%progbits,1
 	.type	.L.map_aname.27, %object
 .L.map_aname.27:
-	.asciz	"Xamarin.Android.Support.DrawerLayout"
-	.size	.L.map_aname.27, 37
+	.asciz	"Xamarin.Android.Arch.Lifecycle.Common"
+	.size	.L.map_aname.27, 38
 
 	.section	.rodata.map_aname.28,"aMS",%progbits,1
 	.type	.L.map_aname.28, %object
 .L.map_aname.28:
-	.asciz	"Xamarin.Android.Arch.Lifecycle.Common"
-	.size	.L.map_aname.28, 38
+	.asciz	"Xamarin.Forms.Platform.Android"
+	.size	.L.map_aname.28, 31
 
 	.section	.rodata.map_aname.29,"aMS",%progbits,1
 	.type	.L.map_aname.29, %object
 .L.map_aname.29:
-	.asciz	"Xamarin.Forms.Platform.Android"
+	.asciz	"Xamarin.Android.Support.Design"
 	.size	.L.map_aname.29, 31
 
 	.section	.rodata.map_aname.30,"aMS",%progbits,1
 	.type	.L.map_aname.30, %object
 .L.map_aname.30:
-	.asciz	"Xamarin.Android.Support.Design"
-	.size	.L.map_aname.30, 31
+	.asciz	"Xamarin.Android.Arch.Lifecycle.ViewModel"
+	.size	.L.map_aname.30, 41
 
 	.section	.rodata.map_aname.31,"aMS",%progbits,1
 	.type	.L.map_aname.31, %object
 .L.map_aname.31:
-	.asciz	"Xamarin.Android.Arch.Lifecycle.ViewModel"
-	.size	.L.map_aname.31, 41
+	.asciz	"SilupostMobileApp.Android"
+	.size	.L.map_aname.31, 26
 
 	.section	.rodata.map_aname.32,"aMS",%progbits,1
 	.type	.L.map_aname.32, %object

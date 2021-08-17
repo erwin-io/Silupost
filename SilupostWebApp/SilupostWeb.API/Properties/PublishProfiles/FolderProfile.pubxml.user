@@ -656,10 +656,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/25/2020 23:35:32</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.dll">
-      <publishTime>04/02/2021 21:57:54</publishTime>
+      <publishTime>07/11/2021 18:55:57</publishTime>
     </File>
     <File Include="bin/SilupostWeb.API.pdb">
-      <publishTime>04/02/2021 21:57:54</publishTime>
+      <publishTime>07/11/2021 18:55:57</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Data.dll">
       <publishTime>04/02/2021 21:57:47</publishTime>
@@ -827,7 +827,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2020 03:47:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/02/2021 21:57:57</publishTime>
+      <publishTime>07/11/2021 18:56:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -56,10 +56,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2020 05:12:25</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Web.dll">
-      <publishTime>04/03/2021 12:08:43</publishTime>
+      <publishTime>07/11/2021 19:01:07</publishTime>
     </File>
     <File Include="bin/SilupostWeb.Web.pdb">
-      <publishTime>04/03/2021 12:08:43</publishTime>
+      <publishTime>07/11/2021 19:01:07</publishTime>
     </File>
     <File Include="bin/SimpleInjector.dll">
       <publishTime>06/10/2020 17:39:54</publishTime>
@@ -2021,7 +2021,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/07/2021 11:49:10</publishTime>
     </File>
     <File Include="Scripts/App/app.js">
-      <publishTime>04/03/2021 11:52:18</publishTime>
+      <publishTime>04/17/2021 22:10:44</publishTime>
     </File>
     <File Include="Scripts/App/dataFormat.js">
       <publishTime>06/27/2020 00:25:50</publishTime>
@@ -2393,7 +2393,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2020 00:25:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/07/2021 08:56:59</publishTime>
+      <publishTime>07/11/2021 18:58:53</publishTime>
     </File>
   </ItemGroup>
 </Project>
