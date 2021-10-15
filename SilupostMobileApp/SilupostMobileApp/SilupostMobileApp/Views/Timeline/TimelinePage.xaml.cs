@@ -47,7 +47,8 @@ namespace SilupostMobileApp.Views.Timeline
             {
                 try
                 {
-                    await viewModel.InitSystemUserTimeline();
+                    if(!this.viewModel.IsProcessingRefresh)
+                        await viewModel.InitSystemUserTimeline();
                 }
                 catch (Exception ex)
                 {

@@ -59,7 +59,7 @@ namespace SilupostMobileApp.Views.Common
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 
@@ -99,7 +99,7 @@ namespace SilupostMobileApp.Views.Common
             }
             catch(Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 

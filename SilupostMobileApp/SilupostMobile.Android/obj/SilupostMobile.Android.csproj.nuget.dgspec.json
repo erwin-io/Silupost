@@ -1,0 +1,243 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobile.Android\\SilupostMobile.Android.csproj": {}
+  },
+  "projects": {
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobile.Android\\SilupostMobile.Android.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobile.Android\\SilupostMobile.Android.csproj",
+        "projectName": "SilupostMobile.Android",
+        "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobile.Android\\SilupostMobile.Android.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobile.Android\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "monoandroid90"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "monoandroid90": {
+            "projectReferences": {
+              "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+                "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "monoandroid90": {
+          "dependencies": {
+            "Acr.UserDialogs": {
+              "target": "Package",
+              "version": "[7.1.0.475, )"
+            },
+            "Octane.Xam.VideoPlayer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Plugin.CurrentActivity": {
+              "target": "Package",
+              "version": "[2.1.0.2, )"
+            },
+            "Plugin.Permissions": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "ThriveGmbH.BottomNavigationBar.XF": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "Xam.Plugin.Media": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Xam.Plugins.Messaging": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Xamarin.AndroidX.AppCompat": {
+              "target": "Package",
+              "version": "[1.2.0.5, )"
+            },
+            "Xamarin.AndroidX.Browser": {
+              "target": "Package",
+              "version": "[1.3.0.3-alpha01, )"
+            },
+            "Xamarin.AndroidX.Legacy.Support.V4": {
+              "target": "Package",
+              "version": "[1.0.0.5, )"
+            },
+            "Xamarin.AndroidX.Lifecycle.LiveData": {
+              "target": "Package",
+              "version": "[2.2.0.3, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.6.1, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[4.6.0.800, )"
+            },
+            "Xamarin.Google.Android.Material": {
+              "target": "Package",
+              "version": "[1.0.0.1, )"
+            }
+          }
+        }
+      }
+    },
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+        "projectName": "SilupostMobileApp",
+        "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Acr.UserDialogs": {
+              "target": "Package",
+              "version": "[7.1.0.475, )"
+            },
+            "DLToolkit.Forms.Controls.FlowListView": {
+              "target": "Package",
+              "version": "[2.0.11, )"
+            },
+            "DLToolkit.Forms.Controls.ImageCropView": {
+              "target": "Package",
+              "version": "[1.0.7, )"
+            },
+            "MagicGradients": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "Octane.Xam.VideoPlayer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Plugin.AppShortcuts": {
+              "target": "Package",
+              "version": "[1.0.0.3, )"
+            },
+            "Plugin.MaterialDesignControls": {
+              "target": "Package",
+              "version": "[1.8.1, )"
+            },
+            "Plugin.Toast": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Xam.Plugin.Connectivity": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "Xam.Plugin.Geolocator": {
+              "target": "Package",
+              "version": "[4.5.0.6, )"
+            },
+            "Xam.Plugin.Media": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Xam.Plugins.Messaging": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Xam.Plugins.Settings": {
+              "target": "Package",
+              "version": "[4.1.0-beta, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[4.6.0.800, )"
+            },
+            "Xamarin.Forms.PinchZoomImage": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Xamarin.Plugin.FilePicker": {
+              "target": "Package",
+              "version": "[2.1.41, )"
+            },
+            "modernhttpclient": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -11,3 +11,29 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Rel
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Data.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Data.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Dapper.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Domain.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Domain.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Dapper.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Data.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Data.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Dapper.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Domain.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Newtonsoft.Json.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\SilupostWeb.Domain.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Dapper.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Release\Newtonsoft.Json.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.AssemblyReference.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.CoreCompileInputs.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.csproj.CopyComplete
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Release\SilupostWeb.Data.pdb

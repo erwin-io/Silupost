@@ -331,7 +331,7 @@ namespace SilupostMobileApp.ViewModels
                         success = await CrimeIncidentReportMedia.AddAsync(mediaModel);
                         if (!success)
                         {
-                            CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                            SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                             this.IsExecuting = false;
                             return;
                         }
@@ -342,13 +342,13 @@ namespace SilupostMobileApp.ViewModels
                         success = await CrimeIncidentReportMedia.DeleteAsync(media.CrimeIncidentReportMediaId);
                         if (!success)
                         {
-                            CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                            SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                             this.IsExecuting = false;
                             return;
                         }
                     }
                     ProgressDialog.Hide();
-                    CrossToastPopUp.Current.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
+                    SilupostPopMessage.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
                     this.IsExecuting = false;
                     await this.Navigation.PopModalAsync(true);
                     await this.WaitAndExecute(1000, async () =>
@@ -359,7 +359,7 @@ namespace SilupostMobileApp.ViewModels
                 else
                 {
                     ProgressDialog.Hide();
-                    CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                    SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                     this.IsExecuting = false;
                     return;
                 }

@@ -81,13 +81,13 @@ namespace SilupostMobileApp.ViewModels
                 if (confirm)
                 {
                     var result = await PhoneCall.ClearCallLogByNumber(SilupostEmergency.EMERGENCY_CALL_NUMBER);
-                    CrossToastPopUp.Current.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_DELETED, Title));
+                    SilupostPopMessage.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_DELETED, Title));
                 }
                 await InitCallLogs();
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
             }
         }
 

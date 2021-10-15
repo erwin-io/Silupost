@@ -58,3 +58,122 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debu
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csprojAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.dll.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Antlr3.Runtime.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\DataTables.Mvc.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Security.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Owin.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.Mvc.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Extensions.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Formatting.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Primitives.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Helpers.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Http.Common.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Mvc.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Optimization.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Razor.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\WebActivatorEx.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\WebGrease.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Security.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.Mvc.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Helpers.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Http.Common.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Mvc.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Optimization.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Razor.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.dll.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SilupostWeb.Web.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Antlr3.Runtime.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\DataTables.Mvc.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Security.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Newtonsoft.Json.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Owin.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.Mvc.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Extensions.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Formatting.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Net.Http.Primitives.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Threading.Tasks.Extensions.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Helpers.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Http.Common.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Mvc.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Optimization.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Razor.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Razor.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\WebActivatorEx.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\WebGrease.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Antlr3.Runtime.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Microsoft.Owin.Security.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\Newtonsoft.Json.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\SimpleInjector.Integration.Web.Mvc.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Threading.Tasks.Extensions.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Helpers.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Http.Common.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Mvc.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Optimization.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.Razor.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\bin\System.Web.WebPages.Razor.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.AssemblyReference.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.CoreCompileInputs.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.csproj.CopyComplete
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Web\obj\Debug\SilupostWeb.Web.pdb

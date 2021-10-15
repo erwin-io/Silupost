@@ -104,8 +104,10 @@ namespace SilupostMobileApp.ViewModels
             this.DateReportedTo = CrimeIncidentMapFilter.DateReportedTo;
             this.PossibleDateFrom = CrimeIncidentMapFilter.PossibleDateFrom;
             this.PossibleDateTo = CrimeIncidentMapFilter.PossibleDateTo;
-            this.PossibleTimeFrom = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateFrom.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeFrom)).TimeOfDay;
-            this.PossibleTimeTo = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateTo.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeTo)).TimeOfDay;
+            //this.PossibleTimeFrom = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateFrom.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeFrom)).TimeOfDay;
+            //this.PossibleTimeTo = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateTo.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeTo)).TimeOfDay;
+            this.PossibleTimeFrom = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeFrom, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+            this.PossibleTimeTo = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeTo, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
         }
 
         public async Task RemoveSelectedCrimeIncidentCategoryItem(string Id)

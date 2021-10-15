@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj": {}
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj": {}
   },
   "projects": {
-    "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj": {
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+        "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
         "projectName": "SilupostMobileApp.Android",
-        "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
-        "packagesPath": "C:\\Users\\SHENA\\.nuget\\packages\\",
-        "outputPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
+        "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SHENA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -27,14 +27,13 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\SHENA\\Downloads": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "monoandroid90": {
             "projectReferences": {
-              "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
-                "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
+              "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+                "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
               }
             }
           }
@@ -50,6 +49,10 @@
             "Octane.Xam.VideoPlayer": {
               "target": "Package",
               "version": "[3.1.0, )"
+            },
+            "Plugin.CurrentActivity": {
+              "target": "Package",
+              "version": "[2.1.0.4, )"
             },
             "Plugin.Permissions": {
               "target": "Package",
@@ -79,20 +82,20 @@
         }
       }
     },
-    "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+    "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+        "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
         "projectName": "SilupostMobileApp",
-        "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
-        "packagesPath": "C:\\Users\\SHENA\\.nuget\\packages\\",
-        "outputPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\obj\\",
+        "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SHENA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -101,11 +104,11 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\SHENA\\Downloads": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -117,6 +120,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Acr.UserDialogs": {
               "target": "Package",
@@ -195,6 +199,10 @@
             "Xamarin.Plugin.FilePicker": {
               "target": "Package",
               "version": "[2.1.41, )"
+            },
+            "modernhttpclient": {
+              "target": "Package",
+              "version": "[2.4.2, )"
             }
           },
           "imports": [
@@ -207,7 +215,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

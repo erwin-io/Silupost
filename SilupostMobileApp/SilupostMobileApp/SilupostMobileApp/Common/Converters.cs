@@ -59,7 +59,8 @@ namespace SilupostMobileApp.Common
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime date = DateTime.Parse(string.Format("{0} {1}", DateTime.Now.ToString("MM/dd/yyyy"), value.ToString().Remove(5).ToString()));
+            //DateTime date = DateTime.Parse(string.Format("{0} {1}", DateTime.Now.ToString("MM/dd/yyyy"), value.ToString().Remove(5).ToString()));
+            DateTime date = DateTime.ParseExact(value.ToString().Remove(5).ToString(), "hh:mm", null, System.Globalization.DateTimeStyles.None);
             return date.ToString("hh:mm tt");
         }
 

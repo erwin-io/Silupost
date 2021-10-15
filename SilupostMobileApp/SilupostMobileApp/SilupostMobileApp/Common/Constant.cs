@@ -6,17 +6,18 @@ namespace SilupostMobileApp.Common
 {
     public class SilupostAppSettings
     {
-        //public const string SILUPOST_API_URI = "http://192.168.43.93:9100/api/v1/";
-        public const string SILUPOST_API_URI = "http://silupostweb1-001-site1.itempurl.com/api/v1/";
+        public const string SILUPOST_API_CONNECT_URI = "https://api.npoint.io/de4e4a84e70250b866b4";
+        public const string SILUPOST_API_URI = "http://192.168.254.109:1100/api/v1/";
+        //public const string SILUPOST_API_URI = "http://silupost3api-001-site1.dtempurl.com/api/v1/";
         //public const string SILUPOST_WEB_APP_URI = "http://192.168.43.93:9300/";
-        public const string SILUPOST_WEB_APP_URI = "http://www.silupostwebcontroller1.somee.com/";
+        public const string SILUPOST_WEB_APP_URI = "http://192.168.254.109:1000/";
         public const string SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH = "reporttracker/mobileview";
         public const string SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH = "crimeIncidentReport/details/";
         public const string MAP_BOX_TOKEN = "pk.eyJ1IjoiZXJ3aW5yYW1pcmV6MjIwIiwiYSI6ImNrZ3U1cHJzazAwYTAycm82MDRmdWNmczAifQ.TarlRjuzi62vw_hPR6uTGg";
         public const string SILUPOST_WEBLANDINGPAGEHOST = "www.silupostweblandingpage.somee.com";
         public const float DEFAULT_LOCATION_LATITUDE = 16.407706109071114f;
         public const float DEFAULT_LOCATION_LONGITUDE = 120.58722946069425f;
-        public const double CHECK_INTERNET_INTERVAL_SECONDS = 10;
+        public const double CHECK_INTERNET_INTERVAL_SECONDS = 240;
         public const double REFRESH_TOKEN_INTERVAL_SECONDS = 7200;
         public const string APP_NAME = "Silupost";
     }

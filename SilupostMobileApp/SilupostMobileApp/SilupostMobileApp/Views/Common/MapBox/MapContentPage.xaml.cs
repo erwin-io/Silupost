@@ -103,7 +103,7 @@ namespace SilupostMobileApp.Views.Common.MapBox
             }
             catch(Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage("Error loading map please try again." + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage("Error loading map please try again." + string.Format(" {0}", ex.Message));
             }
 
         }
@@ -186,7 +186,7 @@ namespace SilupostMobileApp.Views.Common.MapBox
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage("Error loading map please try again." + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage("Error loading map please try again." + string.Format(" {0}", ex.Message));
             }
         }
     }

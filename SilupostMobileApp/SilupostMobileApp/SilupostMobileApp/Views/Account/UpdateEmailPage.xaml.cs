@@ -69,7 +69,7 @@ namespace SilupostMobileApp.Views.Account
                             else
                             {
                                 this.viewModel.ProgressDialog.Hide();
-                                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                                SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                             }
                         }
                         catch (Exception ex)

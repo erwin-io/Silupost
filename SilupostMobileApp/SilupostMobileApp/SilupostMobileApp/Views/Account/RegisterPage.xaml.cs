@@ -54,7 +54,7 @@ namespace SilupostMobileApp.Views.Account
                         else
                         {
                             this.viewModel.ProgressDialog.Hide();
-                            CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                            SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                         }
                     }
                     catch (Exception ex)
@@ -151,7 +151,7 @@ namespace SilupostMobileApp.Views.Account
                             {
                                 this.viewModel.ProgressDialog.Hide();
                                 this.viewModel.VerificationCode.HasCustomError = true;
-                                CrossToastPopUp.Current.ShowToastMessage("Invalid Verification code!");
+                                SilupostPopMessage.ShowToastMessage("Invalid Verification code!");
                                 this.viewModel.VerificationCode.Errors.Add("Invalid Verification code!");
                                 this.viewModel.VerificationCode.Validate();
                                 this.viewModel.IsExecuting = false;

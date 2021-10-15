@@ -69,6 +69,15 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "modernhttpclient/2.4.2": {
+        "type": "package",
+        "compile": {
+          "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll": {}
+        },
+        "runtime": {
+          "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -649,6 +658,28 @@
         "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
+      ]
+    },
+    "modernhttpclient/2.4.2": {
+      "sha512": "Srkrjz2wBCh7af+AGqpPkJ3FSSFSruzg9mHVwwXiklf9gx2L1Ss2M+p2Mf4Fw17AOe6yPuJwdu4AAoslc6zP+w==",
+      "type": "package",
+      "path": "modernhttpclient/2.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/ModernHttpClient-2.4.1.zip",
+        "lib/MonoAndroid/ModernHttpClient.dll",
+        "lib/MonoAndroid/ModernHttpClient.dll.mdb",
+        "lib/MonoAndroid/OkHttp.dll",
+        "lib/MonoTouch/ModernHttpClient.dll",
+        "lib/MonoTouch/ModernHttpClient.dll.mdb",
+        "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll",
+        "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll.mdb",
+        "lib/Xamarin.iOS10/ModernHttpClient.dll",
+        "lib/Xamarin.iOS10/ModernHttpClient.dll.mdb",
+        "lib/modernhttpclient.2.4.1.nupkg",
+        "modernhttpclient.2.4.2.nupkg.sha512",
+        "modernhttpclient.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -2833,27 +2864,28 @@
       "Xamarin.Essentials >= 1.6.0",
       "Xamarin.Forms >= 4.6.0.800",
       "Xamarin.Forms.PinchZoomImage >= 1.1.0",
-      "Xamarin.Plugin.FilePicker >= 2.1.41"
+      "Xamarin.Plugin.FilePicker >= 2.1.41",
+      "modernhttpclient >= 2.4.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SHENA\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+      "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
       "projectName": "SilupostMobileApp",
-      "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
-      "packagesPath": "C:\\Users\\SHENA\\.nuget\\packages\\",
-      "outputPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\obj\\",
+      "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\SHENA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -2862,11 +2894,11 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\SHENA\\Downloads": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "projectReferences": {}
         }
       },
@@ -2878,6 +2910,7 @@
     },
     "frameworks": {
       "netstandard2.0": {
+        "targetAlias": "netstandard2.0",
         "dependencies": {
           "Acr.UserDialogs": {
             "target": "Package",
@@ -2956,6 +2989,10 @@
           "Xamarin.Plugin.FilePicker": {
             "target": "Package",
             "version": "[2.1.41, )"
+          },
+          "modernhttpclient": {
+            "target": "Package",
+            "version": "[2.4.2, )"
           }
         },
         "imports": [
@@ -2968,8 +3005,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'modernhttpclient 2.4.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "modernhttpclient",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
 }

@@ -29,4 +29,14 @@ namespace SilupostMobileApp.Models
         public string Code { get; set; }
         public string EmailId { get; set; }
     }
+    public class AppConnectConfigModel
+    {
+        public string SILUPOST_API_URL { get; set; }
+        public string SILUPOST_WEB_APP_URI { get; set; }
+        public string MAP_BOX_TOKEN { get; set; }
+        public string SILUPOST_WEBLANDINGPAGEHOST { get; set; }
+        public string DEFAULT_LOCATION_LATITUDE { get; set; }
+        public string DEFAULT_LOCATION_LONGITUDE { get; set; }
+        public string REFRESH_TOKEN_INTERVAL_SECONDS { get; set; }
+    }
 }

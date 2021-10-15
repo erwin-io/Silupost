@@ -26,7 +26,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
             InitializeComponent();
             BindingContext = viewModel = new CrimeIncidentMapViewModel(this.Navigation);
             viewModel.Title = SilupostPageTitle.CRIMEINCIDENT_MAP;
-            this.viewModel.WebViewURI = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH);
+            this.viewModel.WebViewURI = string.Format("{0}{1}", AppSettingsHelper.goSILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH);
 
             MessagingCenter.Subscribe<CrimeIncidentMapFilterPage, CrimeIncidentMapFilterModel>(this, "ApplyMapFilter", async (obj, crimeIncidentMapFilter) =>
             {
@@ -192,10 +192,10 @@ namespace SilupostMobileApp.Views.CrimeIncident
                     var _possibleTimeTo = await MapWebView.EvaluateJavaScriptAsync($"reportTracker.appSettings.trackerFilterMapModel.PossibleTimeTo;");
                     this.viewModel.CrimeIncidentMapFilter.SelectedCrimeIncidentCategory = _selectedCrimeIncidentCategory;
                     this.viewModel.CrimeIncidentMapFilter.TrackerRadiusInKM = double.Parse(_trackerRadiusInKM);
-                    this.viewModel.CrimeIncidentMapFilter.DateReportedFrom = DateTime.Parse(_dateReportedFrom);
-                    this.viewModel.CrimeIncidentMapFilter.DateReportedTo = DateTime.Parse(_dateReportedTo);
-                    this.viewModel.CrimeIncidentMapFilter.PossibleDateFrom = DateTime.Parse(_possibleDateFrom);
-                    this.viewModel.CrimeIncidentMapFilter.PossibleDateTo = DateTime.Parse(_possibleDateTo);
+                    this.viewModel.CrimeIncidentMapFilter.DateReportedFrom = DateTime.ParseExact(_dateReportedFrom, "MM/dd/yyyy", null);
+                    this.viewModel.CrimeIncidentMapFilter.DateReportedTo = DateTime.ParseExact(_dateReportedTo, "MM/dd/yyyy", null);
+                    this.viewModel.CrimeIncidentMapFilter.PossibleDateFrom = DateTime.ParseExact(_possibleDateFrom, "MM/dd/yyyy", null);
+                    this.viewModel.CrimeIncidentMapFilter.PossibleDateTo = DateTime.ParseExact(_possibleDateTo, "MM/dd/yyyy", null);
                     this.viewModel.CrimeIncidentMapFilter.PossibleTimeFrom = _possibleTimeFrom;
                     this.viewModel.CrimeIncidentMapFilter.PossibleTimeTo = _possibleTimeTo;
                     this.viewModel.IsExecuting = true;
@@ -232,12 +232,12 @@ namespace SilupostMobileApp.Views.CrimeIncident
                     throw new Exception(SilupostMessage.NO_INTERNET);
                 }
                 var soure = e.Url.ToLower();
-                var mapUri = string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH).ToLower();
+                var mapUri = string.Format("{0}{1}", AppSettingsHelper.goSILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_MAP_URI_PATH).ToLower();
                 if (!soure.Equals(mapUri))
                 {
                     if (soure.Contains(SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH.ToLower()))
                     {
-                        var id = soure.Replace(string.Format("{0}{1}", SilupostAppSettings.SILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH).ToLower(), "");
+                        var id = soure.Replace(string.Format("{0}{1}", AppSettingsHelper.goSILUPOST_WEB_APP_URI, SilupostAppSettings.SILUPOST_WEB_CRIMEINCIDENT_DETAILS_URI_PATH).ToLower(), "");
                         OpenReport(id);
                     }
                     e.Cancel = true;

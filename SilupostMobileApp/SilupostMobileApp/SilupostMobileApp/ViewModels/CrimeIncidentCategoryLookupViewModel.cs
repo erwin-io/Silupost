@@ -98,7 +98,7 @@ namespace SilupostMobileApp.ViewModels
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
             }
         }
 

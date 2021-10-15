@@ -279,3 +279,589 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\Mime
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.pdb
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.dll.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.rsp
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.exe
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.exe.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.rsp
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Console.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.exe
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.exe.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.rsp
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Antlr3.Runtime.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Authorization.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Http.Features.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNetCore.Metadata.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Options.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.OptionsModel.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Cors.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.Jwt.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.Design.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WebDesign.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.SqlServer.Types.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Owin.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Data.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Domain.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Facade.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Mapping.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.Integration.WebApi.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Swashbuckle.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Buffers.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Memory.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Net.Http.Formatting.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Numerics.Vectors.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Cors.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Helpers.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.Owin.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.WebHost.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Mvc.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Optimization.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Razor.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebActivator.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebActivatorEx.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebGrease.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Dapper.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\EnvDTE.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WinForms.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.ValueTuple.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\stdole.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.VSHelp.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.11.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.10.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.14.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.9.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ProjectAggregator.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.12.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ComponentModelHost.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Designer.Interfaces.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TemplateWizardInterface.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Debugger.InteropA.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\EnvDTE80.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Tasks.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Data.Services.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.11.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Data.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.10.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj80.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ManagedInterfaces.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.WCFReference.Interop.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.GraphModel.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.MSXML.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Utilities.Core.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.10.0.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Framework.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj2.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Mapping.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Data.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Domain.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Facade.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Authorization.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Http.Features.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNetCore.Metadata.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Options.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.OptionsModel.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Cors.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.Jwt.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.Integration.WebApi.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Buffers.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Memory.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Net.Http.Formatting.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Numerics.Vectors.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Helpers.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.Owin.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.WebHost.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Mvc.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Optimization.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Razor.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Dapper.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.ValueTuple.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.11.0.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.10.0.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.14.0.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.12.0.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Designer.Interfaces.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TemplateWizardInterface.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.WCFReference.Interop.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WebDesign.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.ResolveComReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.dll.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.API.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.exe.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csc.rsp
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.exe
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.exe.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\csi.rsp
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.AppContext.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Collections.Immutable.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Console.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Compression.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.FileSystem.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.IO.Pipes.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Reflection.Metadata.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.AccessControl.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Claims.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Security.Principal.Windows.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.ValueTuple.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XPath.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.exe
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.exe.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\vbc.rsp
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\VBCSCompiler.exe
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\roslyn\VBCSCompiler.exe.config
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Antlr3.Runtime.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Authorization.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Http.Features.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNetCore.Metadata.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Binder.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Options.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.OptionsModel.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Primitives.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Cors.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.Jwt.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.Common.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.DataVisualization.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.Design.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WebDesign.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WebForms.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.SqlServer.Types.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Web.Infrastructure.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Newtonsoft.Json.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Owin.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Data.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Domain.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Facade.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Mapping.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.Integration.WebApi.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Swashbuckle.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Buffers.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Memory.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Net.Http.Formatting.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Numerics.Vectors.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Cors.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Helpers.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.Owin.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.WebHost.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Mvc.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Optimization.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Razor.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Deployment.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Razor.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebActivator.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebActivatorEx.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\WebGrease.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Dapper.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\EnvDTE.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.ReportViewer.WinForms.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.ValueTuple.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\stdole.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.OLE.Interop.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.VSHelp.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.11.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.10.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.14.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.9.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ProjectAggregator.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.12.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ComponentModelHost.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Designer.Interfaces.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TemplateWizardInterface.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Debugger.InteropA.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\EnvDTE80.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Tasks.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Data.Services.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.11.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Data.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Interop.10.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj80.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.ManagedInterfaces.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.WCFReference.Interop.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.GraphModel.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.MSXML.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Utilities.Core.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TextManager.Interop.10.0.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Build.Framework.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\VSLangProj2.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Mapping.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Data.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Domain.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SilupostWeb.Facade.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Antlr3.Runtime.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\BouncyCastle.Crypto.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\HtmlAgilityPack.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MailKit.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Authorization.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.Http.Features.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.AspNetCore.Metadata.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Configuration.Binder.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Logging.Abstractions.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Options.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.OptionsModel.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Extensions.Primitives.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Logging.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.IdentityModel.Tokens.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Cors.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.Jwt.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\MimeKit.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Newtonsoft.Json.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\SimpleInjector.Integration.WebApi.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Buffers.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.IdentityModel.Tokens.Jwt.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Memory.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Net.Http.Formatting.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Numerics.Vectors.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Helpers.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.Owin.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Http.WebHost.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Mvc.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Optimization.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.Razor.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Deployment.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.Web.WebPages.Razor.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Thinktecture.IdentityModel.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\AutoMapper.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Dapper.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\System.ValueTuple.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.11.0.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.10.0.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.14.0.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Shell.Immutable.12.0.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.Designer.Interfaces.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.TemplateWizardInterface.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\Microsoft.VisualStudio.WCFReference.Interop.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WebDesign.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\de\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\es\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\fr\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\it\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ja\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ko\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\pt\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\ru\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.AssemblyReference.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.ResolveComReference.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CoreCompileInputs.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.csproj.CopyComplete
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.API\obj\Debug\SilupostWeb.API.pdb

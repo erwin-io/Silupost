@@ -85,6 +85,17 @@
           "lib/netstandard2.0/MagicGradients.dll": {}
         }
       },
+      "modernhttpclient/2.4.2": {
+        "type": "package",
+        "compile": {
+          "lib/MonoAndroid/ModernHttpClient.dll": {},
+          "lib/MonoAndroid/OkHttp.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid/ModernHttpClient.dll": {},
+          "lib/MonoAndroid/OkHttp.dll": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -118,6 +129,18 @@
         },
         "runtime": {
           "lib/monoandroid71/Plugin.AppShortcuts.dll": {}
+        }
+      },
+      "Plugin.CurrentActivity/2.1.0.4": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid44/Plugin.CurrentActivity.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid44/Plugin.CurrentActivity.dll": {}
         }
       },
       "Plugin.MaterialDesignControls/1.8.1": {
@@ -1210,7 +1233,8 @@
           "Xamarin.Essentials": "1.6.0",
           "Xamarin.Forms": "4.6.0.800",
           "Xamarin.Forms.PinchZoomImage": "1.1.0",
-          "Xamarin.Plugin.FilePicker": "2.1.41"
+          "Xamarin.Plugin.FilePicker": "2.1.41",
+          "modernhttpclient": "2.4.2"
         },
         "compile": {
           "bin/placeholder/SilupostMobileApp.dll": {}
@@ -1321,6 +1345,28 @@
         "magicgradients.nuspec"
       ]
     },
+    "modernhttpclient/2.4.2": {
+      "sha512": "Srkrjz2wBCh7af+AGqpPkJ3FSSFSruzg9mHVwwXiklf9gx2L1Ss2M+p2Mf4Fw17AOe6yPuJwdu4AAoslc6zP+w==",
+      "type": "package",
+      "path": "modernhttpclient/2.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/ModernHttpClient-2.4.1.zip",
+        "lib/MonoAndroid/ModernHttpClient.dll",
+        "lib/MonoAndroid/ModernHttpClient.dll.mdb",
+        "lib/MonoAndroid/OkHttp.dll",
+        "lib/MonoTouch/ModernHttpClient.dll",
+        "lib/MonoTouch/ModernHttpClient.dll.mdb",
+        "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll",
+        "lib/Portable-Net45+WinRT45+WP8+WPA81/ModernHttpClient.dll.mdb",
+        "lib/Xamarin.iOS10/ModernHttpClient.dll",
+        "lib/Xamarin.iOS10/ModernHttpClient.dll.mdb",
+        "lib/modernhttpclient.2.4.1.nupkg",
+        "modernhttpclient.2.4.2.nupkg.sha512",
+        "modernhttpclient.nuspec"
+      ]
+    },
     "Newtonsoft.Json/12.0.3": {
       "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
@@ -1397,6 +1443,20 @@
         "lib/xamarinios10/Plugin.AppShortcuts.xml",
         "plugin.appshortcuts.1.0.0.3.nupkg.sha512",
         "plugin.appshortcuts.nuspec"
+      ]
+    },
+    "Plugin.CurrentActivity/2.1.0.4": {
+      "sha512": "m8xaXvXUzBSqP6xRe5PeIG347WxsG/VWrZta7MnPpSvNuPf0RLB/S49UCCQyBKSsfu053+apvYm14BC7GU6Zzg==",
+      "type": "package",
+      "path": "plugin.currentactivity/2.1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid44/Plugin.CurrentActivity.dll",
+        "lib/monoandroid44/Plugin.CurrentActivity.xml",
+        "plugin.currentactivity.2.1.0.4.nupkg.sha512",
+        "plugin.currentactivity.nuspec",
+        "readme.txt"
       ]
     },
     "Plugin.MaterialDesignControls/1.8.1": {
@@ -3274,6 +3334,7 @@
     "MonoAndroid,Version=v9.0": [
       "Acr.UserDialogs >= 7.1.0.475",
       "Octane.Xam.VideoPlayer >= 3.1.0",
+      "Plugin.CurrentActivity >= 2.1.0.4",
       "Plugin.Permissions >= 6.0.1",
       "SilupostMobileApp >= 1.0.0",
       "ThriveGmbH.BottomNavigationBar.XF >= 1.0.2",
@@ -3284,24 +3345,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SHENA\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+      "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
       "projectName": "SilupostMobileApp.Android",
-      "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
-      "packagesPath": "C:\\Users\\SHENA\\.nuget\\packages\\",
-      "outputPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
+      "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\SHENA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -3310,14 +3371,13 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\SHENA\\Downloads": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
-              "projectPath": "D:\\Erwin\\MyDev\\Project\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
+            "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+              "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
             }
           }
         }
@@ -3333,6 +3393,10 @@
           "Octane.Xam.VideoPlayer": {
             "target": "Package",
             "version": "[3.1.0, )"
+          },
+          "Plugin.CurrentActivity": {
+            "target": "Package",
+            "version": "[2.1.0.4, )"
           },
           "Plugin.Permissions": {
             "target": "Package",
