@@ -67,7 +67,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 
@@ -99,7 +99,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 
@@ -141,7 +141,7 @@ namespace SilupostMobileApp.Views.CrimeIncident
             catch(Exception ex)
             {
                 this.viewModel.IsExecuting = false;
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 
@@ -224,15 +224,15 @@ namespace SilupostMobileApp.Views.CrimeIncident
                 await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('AccessToken').value = '{this.viewModel.Token}';");
                 await MapWebView.EvaluateJavaScriptAsync($"LoadMap();");
 
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{SilupostAppSettings.DEFAULT_LOCATION_LATITUDE}';");
-                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{SilupostAppSettings.DEFAULT_LOCATION_LONGITUDE}';");
+                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Latitude').value = '{AppSettingsHelper.goDEFAULT_LOCATION_LATITUDE}';");
+                await MapWebView.EvaluateJavaScriptAsync($"document.getElementById('Longitude').value = '{AppSettingsHelper.goDEFAULT_LOCATION_LONGITUDE}';");
                 await MapWebView.EvaluateJavaScriptAsync($"FlyToLocation();");
-                var placemarks = await this.viewModel.GeoCodeOpenCageDataService.GetGeoAddressAsync(SilupostAppSettings.DEFAULT_LOCATION_LATITUDE.ToString(), SilupostAppSettings.DEFAULT_LOCATION_LONGITUDE.ToString());
+                var placemarks = await this.viewModel.GeoCodeOpenCageDataService.GetGeoAddressAsync(AppSettingsHelper.goDEFAULT_LOCATION_LATITUDE.ToString(), AppSettingsHelper.goDEFAULT_LOCATION_LONGITUDE.ToString());
                 var placemark = placemarks.Results?.FirstOrDefault();
                 this.viewModel.GeoLocation = new GeoLocationModel()
                 {
-                    GeoLatitude = SilupostAppSettings.DEFAULT_LOCATION_LATITUDE,
-                    GeoLongitude = SilupostAppSettings.DEFAULT_LOCATION_LONGITUDE,
+                    GeoLatitude = AppSettingsHelper.goDEFAULT_LOCATION_LATITUDE,
+                    GeoLongitude = AppSettingsHelper.goDEFAULT_LOCATION_LONGITUDE,
                     GeoCountry = placemark.Components.Country,
                     GeoProvince = placemark.Components.State,
                     GeoCityMun = placemark.Components.City ?? placemark.Components.Town ?? placemark.Components.County ?? string.Empty,

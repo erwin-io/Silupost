@@ -59,7 +59,7 @@ namespace SilupostMobileApp.Views.Common
             }
             catch(Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR + string.Format(" {0}", ex.Message));
             }
         }
 
@@ -104,8 +104,10 @@ namespace SilupostMobileApp.Views.Common
                 DateReportedTo = this.viewModel.DateReportedTo,
                 PossibleDateFrom = this.viewModel.PossibleDateFrom,
                 PossibleDateTo = this.viewModel.PossibleDateTo,
-                PossibleTimeFrom = this.viewModel.PossibleTimeFrom.ToString().Remove(5),
-                PossibleTimeTo = this.viewModel.PossibleTimeTo.ToString().Remove(5),
+                //PossibleTimeFrom = this.viewModel.PossibleTimeFrom.ToString().Remove(5),
+                //PossibleTimeTo = this.viewModel.PossibleTimeTo.ToString().Remove(5),
+                PossibleTimeFrom = new DateTime(this.viewModel.PossibleTimeFrom.Ticks).ToString("hh:mm tt"),
+                PossibleTimeTo = new DateTime(this.viewModel.PossibleTimeTo.Ticks).ToString("hh:mm tt"),
 
             };
             MessagingCenter.Send(this, "ApplyMapFilter", this.viewModel.CrimeIncidentMapFilter);

@@ -5709,6 +5709,7 @@ namespace SilupostMobileApp.Droid
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_id = global::SilupostMobileApp.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_inflatedId = global::SilupostMobileApp.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_layout = global::SilupostMobileApp.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::ModernHttpClient.Resource.String.library_name = global::SilupostMobileApp.Droid.Resource.String.library_name;
 			global::Plugin.AppShortcuts.Resource.Drawable.ic_plugin_sc_add = global::SilupostMobileApp.Droid.Resource.Drawable.ic_plugin_sc_add;
 			global::Plugin.AppShortcuts.Resource.Drawable.ic_plugin_sc_alarm = global::SilupostMobileApp.Droid.Resource.Drawable.ic_plugin_sc_alarm;
 			global::Plugin.AppShortcuts.Resource.Drawable.ic_plugin_sc_audio = global::SilupostMobileApp.Droid.Resource.Drawable.ic_plugin_sc_audio;

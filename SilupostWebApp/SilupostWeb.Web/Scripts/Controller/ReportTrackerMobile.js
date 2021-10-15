@@ -250,8 +250,8 @@ var reportTrackerController = function() {
 
         var _dateFrom = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
         var _dateTo = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-        var _timeFrom = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        var _timeto = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var _timeFrom = date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + date.getSeconds();
+        var _timeto = date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + date.getSeconds();
 
         appSettings.trackerFilterMapModel = {
             ApprovalStatusId: 3,

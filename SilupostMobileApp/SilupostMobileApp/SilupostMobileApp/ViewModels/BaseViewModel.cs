@@ -36,6 +36,7 @@ namespace SilupostMobileApp.ViewModels
             ButtonUpBackgroundColor = SilupostTheme.BUTTON_UP_BACKGROUND_COLOR;
 
         }
+        public IAppConnectService AppConnectService => DependencyService.Get<IAppConnectService>();
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IBaseUrl BaseUrl => DependencyService.Get<IBaseUrl>();
         public IGeoCodeOpenCageDataService GeoCodeOpenCageDataService => DependencyService.Get<IGeoCodeOpenCageDataService>();

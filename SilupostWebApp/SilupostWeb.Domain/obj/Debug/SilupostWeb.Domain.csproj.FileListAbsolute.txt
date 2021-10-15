@@ -7,3 +7,19 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\D
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb

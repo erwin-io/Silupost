@@ -26,9 +26,9 @@ namespace SilupostMobileApp.Common
             var frame = st.GetFrame(0);
             // Get the line number from the stack frame
             var line = frame.GetFileLineNumber();
-            //CrossToastPopUp.Current.ShowToastMessage(string.Format("Error at line {0}, Message: {1}", line, exception.Message));
+            //SilupostPopMessage.ShowToastMessage(string.Format("Error at line {0}, Message: {1}", line, exception.Message));
             if(!exception.Message.ToLower().Contains("object reference"))
-                CrossToastPopUp.Current.ShowToastMessage(exception.Message);
+                SilupostPopMessage.ShowToastMessage(exception.Message);
         }
         public static void GetError(Exception exception, string CustomMessage)
         {
@@ -38,8 +38,8 @@ namespace SilupostMobileApp.Common
             var frame = st.GetFrame(0);
             // Get the line number from the stack frame
             var line = frame.GetFileLineNumber();
-            //CrossToastPopUp.Current.ShowToastMessage(string.Format("Error at line {0}, Message: {1}", line, CustomMessage));
-            CrossToastPopUp.Current.ShowToastMessage(CustomMessage);
+            //SilupostPopMessage.ShowToastMessage(string.Format("Error at line {0}, Message: {1}", line, CustomMessage));
+            SilupostPopMessage.ShowToastMessage(CustomMessage);
         }
     }
 }

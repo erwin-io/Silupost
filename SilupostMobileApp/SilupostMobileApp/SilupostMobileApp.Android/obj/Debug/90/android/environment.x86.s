@@ -2,8 +2,8 @@
 	.section	.rodata.env.str.1,"aMS",@progbits,1
 	.type	.L.env.str.1, @object
 .L.env.str.1:
-	.asciz	"com.companyname.silupostmobileapp"
-	.size	.L.env.str.1, 34
+	.asciz	"com.debug1.silupostmobileapp"
+	.size	.L.env.str.1, 29
 	.section	.data.application_config,"aw",@progbits
 	.type	application_config, @object
 	.p2align	2
@@ -71,7 +71,7 @@ mono_aot_mode_name:
 	.section	.rodata.env.str.8,"aMS",@progbits,1
 	.type	.L.env.str.8, @object
 .L.env.str.8:
-	.asciz	"3eb1a0ff-b517-4445-bfec-3f6fc1c0e974"
+	.asciz	"6bad6425-f1db-4320-b299-9160f82f233c"
 	.size	.L.env.str.8, 37
 	.section	.rodata.env.str.9,"aMS",@progbits,1
 	.type	.L.env.str.9, @object

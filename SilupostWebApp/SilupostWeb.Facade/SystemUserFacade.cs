@@ -55,7 +55,9 @@ namespace SilupostWeb.Facade
                     var addModel = AutoMapperHelper<CreateSystemUserBindingModel, SystemUserModel>.Map(model);
 
                     //Start Saving LegalEntity
+                    addModel.SystemRecordManager.CreatedBy = CreatedBy;
                     var legalEntityId = _legalEntityRepository.Add(addModel.LegalEntity);
+                    addModel.LegalEntity.LegalEntityId = legalEntityId;
                     //End Saving LegalEntity
 
                     //Start Saving LegalEntity Address

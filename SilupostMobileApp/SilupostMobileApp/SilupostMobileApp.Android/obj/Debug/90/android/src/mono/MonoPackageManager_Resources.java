@@ -17,12 +17,15 @@ public class MonoPackageManager_Resources {
 		"FFImageLoading.Transformations.dll",
 		"FormsViewGroup.dll",
 		"MagicGradients.dll",
+		"ModernHttpClient.dll",
 		"Newtonsoft.Json.dll",
 		"Octane.Xamarin.Forms.VideoPlayer.Android.dll",
 		"Octane.Xamarin.Forms.VideoPlayer.dll",
+		"OkHttp.dll",
 		"Plugin.AppShortcuts.dll",
 		"Plugin.Connectivity.Abstractions.dll",
 		"Plugin.Connectivity.dll",
+		"Plugin.CurrentActivity.dll",
 		"Plugin.FilePicker.dll",
 		"Plugin.Geolocator.dll",
 		"Plugin.MaterialDesignControls.Android.dll",
@@ -84,5 +87,4 @@ public class MonoPackageManager_Resources {
 	};
 	public static String[] Dependencies = new String[]{
 	};
-	public static String ApiPackageName = "Mono.Android.Platform.ApiLevel_28";
 }

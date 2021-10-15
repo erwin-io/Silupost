@@ -200,6 +200,25 @@ namespace SilupostMobileApp.Views
             });
         }
 
+        async Task InitServerConnect()
+        {
+            try
+            {
+                AppConnectConfigModel appConnect = await this.viewModel.AppConnectService.Get(AppSettingsHelper.goSILUPOST_API_CONNECT_URI);
+                AppSettingsHelper.goSILUPOST_WEBAPI_URI = appConnect.SILUPOST_API_URL;
+                AppSettingsHelper.goSILUPOST_WEB_APP_URI = appConnect.SILUPOST_WEB_APP_URI;
+                AppSettingsHelper.goMAP_BOX_TOKEN = appConnect.MAP_BOX_TOKEN;
+                AppSettingsHelper.goSILUPOST_WEBLANDINGPAGEHOST = appConnect.SILUPOST_WEBLANDINGPAGEHOST;
+                AppSettingsHelper.goDEFAULT_LOCATION_LATITUDE = float.Parse(appConnect.DEFAULT_LOCATION_LATITUDE);
+                AppSettingsHelper.goDEFAULT_LOCATION_LONGITUDE = float.Parse(appConnect.DEFAULT_LOCATION_LONGITUDE);
+                AppSettingsHelper.goREFRESH_TOKEN_INTERVAL_SECONDS = double.Parse(appConnect.REFRESH_TOKEN_INTERVAL_SECONDS);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         async Task InitUser()
         {
             try
@@ -350,7 +369,7 @@ namespace SilupostMobileApp.Views
             catch(Exception ex)
             {
                 await AppSettingsHelper.SetAppSetting(null);
-                CrossToastPopUp.Current.ShowToastMessage(string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(string.Format(" {0}", ex.Message));
                 await this.viewModel.WaitAndExecute(1000, async () =>
                 {
                     await InitUser();
@@ -400,6 +419,7 @@ namespace SilupostMobileApp.Views
             {
                 if (AppSettingsHelper.CanAccessInternet())
                 {
+                    await InitServerConnect();
                     var serverStatus = await this.viewModel.SystemConfigService.GetServerStatus();
                     if (serverStatus == SilupostServerStatusEnums.ACTIVE)
                     {

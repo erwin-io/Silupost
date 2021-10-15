@@ -18,3 +18,43 @@ D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.CopyComplete
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.dll
 D:\Erwin\MyDev\Project\Silupost\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Mapping.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Mapping.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Data.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Domain.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\System.ValueTuple.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Dapper.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Data.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Domain.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\System.ValueTuple.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Dapper.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.AssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\New folder\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Mapping.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Mapping.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Data.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Domain.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\System.ValueTuple.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Dapper.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Newtonsoft.Json.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Data.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\SilupostWeb.Domain.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.pdb
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\AutoMapper.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\System.ValueTuple.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Dapper.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\bin\Release\Newtonsoft.Json.xml
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.AssemblyReference.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.CoreCompileInputs.cache
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.csproj.CopyComplete
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.dll
+D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Mapping\obj\Release\SilupostWeb.Mapping.pdb

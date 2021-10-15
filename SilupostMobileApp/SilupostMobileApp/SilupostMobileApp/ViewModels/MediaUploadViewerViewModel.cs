@@ -80,7 +80,7 @@ namespace SilupostMobileApp.ViewModels
                 mediaFile = new SilupostMediaModel();
                 var file = await CrossFilePicker.Current.PickFile();
                 if (file == null)
-                    CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.APP_ERROR);
+                    SilupostPopMessage.ShowToastMessage(SilupostMessage.APP_ERROR);
                 var fileExtension = Path.GetExtension(file.FileName).Replace(".", String.Empty);
                 var isFileValid = AppSettingsHelper.goAllowedMediaFileType.ToList().Any(f => f.Key.ToString() == fileExtension.ToUpper());
                 if (!isFileValid)
@@ -142,7 +142,7 @@ namespace SilupostMobileApp.ViewModels
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
             }
         }
         public async Task TakeFromCamera(SilupostDocReportMediaTypeEnums cameraFileType)
@@ -270,7 +270,7 @@ namespace SilupostMobileApp.ViewModels
             }
             catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
             }
         }
     }

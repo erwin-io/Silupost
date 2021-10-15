@@ -36,16 +36,17 @@ namespace SilupostMobileApp
             {
                 MainPage = new MainPage();
                 //AppSettingsHelper.goSILUPOST_WEBAPI_Authentication = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZXJ3aW5yYW1pcmV6MjIwQGdtYWlsLmNvbSIsIlN5c3RlbVVzZXJJZCI6IlNVLTAwMDAwMDAwMDEiLCJuYmYiOjE2MTUxMDI1NDEsImV4cCI6MTYxNTE0NTc0MSwiaXNzIjoiaHR0cDovL3d3dy5zaWx1cG9zdHdlYmxhbmRpbmdwYWdlLnNvbWVlLmNvbSIsImF1ZCI6IkFFNDlBMkNDQjJDNTNDMkFGMjE2NUI2MDg3NEQ3MTkxIn0.vJDOZenyKJhqIcfhQpxNO9hJ7tJoBZIr2t-S09afVCI";
-                AppSettingsHelper.goMAP_BOX_TOKEN = SilupostAppSettings.MAP_BOX_TOKEN;
+                //AppSettingsHelper.goMAP_BOX_TOKEN = SilupostAppSettings.MAP_BOX_TOKEN;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(string.Format(" {0}", ex.Message));
+                SilupostPopMessage.ShowToastMessage(string.Format(" {0}", ex.Message));
             }
         }
 
         protected override void OnStart()
         {
+            DependencyService.Register<AppConnectService>();
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<FileService>();
             DependencyService.Register<GeoCodeOpenCageDataService>();

@@ -136,7 +136,16 @@ namespace SilupostMobileApp.ViewModels
         {
             this.Navigation = pNavigation;
             //this.CrimeIncidentReportId = CrimeIncidentReportId;
-            this.SaveCommand = new Command(async () => await Save());
+            this.SaveCommand = new Command(async () => {
+                try
+                {
+                    await Save();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            });
             this.Token = AppSettingsHelper.goMAP_BOX_TOKEN;
 
             MessagingCenter.Subscribe<MediaUploadViewerPage, SilupostMediaModel>(this, "UploadMedia", async (obj, item) =>
@@ -188,7 +197,7 @@ namespace SilupostMobileApp.ViewModels
             catch(Exception ex)
             {
                 ProgressDialog.Hide();
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
             }
         }
 
@@ -204,7 +213,7 @@ namespace SilupostMobileApp.ViewModels
         {
             if (string.IsNullOrEmpty(this.CrimeIncidentCategory.CrimeIncidentCategoryId))
             {
-                CrossToastPopUp.Current.ShowToastMessage("Please select category!");
+                SilupostPopMessage.ShowToastMessage("Please select category!");
                 return;
             }
             var result = await Application.Current.MainPage.DisplayAlert("Submit Report", "Do you want to continue?", "Yes", "No");
@@ -257,7 +266,7 @@ namespace SilupostMobileApp.ViewModels
                 if (success)
                 {
                     ProgressDialog.Hide();
-                    CrossToastPopUp.Current.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
+                    SilupostPopMessage.ShowToastMessage(string.Format(SilupostMessage.SUCCESS_SAVED, "Report"));
                     this.IsExecuting = false;
                     await this.Navigation.PopModalAsync(true);
                     await this.WaitAndExecute(1000, async () =>
@@ -268,14 +277,14 @@ namespace SilupostMobileApp.ViewModels
                 }
                 else
                 {
-                    CrossToastPopUp.Current.ShowToastMessage(SilupostMessage.SERVER_ERROR);
+                    SilupostPopMessage.ShowToastMessage(SilupostMessage.SERVER_ERROR);
                     this.IsExecuting = false;
                     return;
                 }
             }
             catch(Exception ex)
             {
-                CrossToastPopUp.Current.ShowToastMessage(ex.Message);
+                SilupostPopMessage.ShowToastMessage(ex.Message);
                 this.IsExecuting = false;
                 return;
             }

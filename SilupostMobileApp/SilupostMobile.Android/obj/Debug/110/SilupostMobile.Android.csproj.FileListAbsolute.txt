@@ -1,0 +1,4 @@
+D:\Erwin\Silupost\SilupostMobileApp\SilupostMobile.Android\obj\Debug\110\MonoAndroid,Version=v11.0.AssemblyAttributes.cs
+D:\Erwin\Silupost\SilupostMobileApp\SilupostMobile.Android\obj\Debug\110\build.props
+D:\Erwin\Silupost\SilupostMobileApp\SilupostMobile.Android\obj\Debug\110\adb.props
+D:\Erwin\Silupost\SilupostMobileApp\SilupostMobile.Android\obj\Debug\110\SilupostMobile.Android.csproj.AssemblyReference.cache

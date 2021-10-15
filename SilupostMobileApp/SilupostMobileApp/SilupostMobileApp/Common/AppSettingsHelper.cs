@@ -68,9 +68,17 @@ namespace SilupostMobileApp.Common
         }
 
 
-        public static readonly string goSILUPOST_WEBAPI_URI = SilupostAppSettings.SILUPOST_API_URI;
+        //public static readonly string goSILUPOST_WEBAPI_URI = SilupostAppSettings.SILUPOST_API_URI;
+        public static string goSILUPOST_API_CONNECT_URI = SilupostAppSettings.SILUPOST_API_CONNECT_URI;
+        public static string goSILUPOST_WEBAPI_URI { get; set; }
+        public static string goSILUPOST_WEB_APP_URI { get; set; }
         public static string goSILUPOST_WEBAPI_Authentication { get; set; }
         public static string goMAP_BOX_TOKEN { get; set; }
+        public static string goSILUPOST_WEBLANDINGPAGEHOST { get; set; }
+        public static float goDEFAULT_LOCATION_LATITUDE { get; set; }
+        public static float goDEFAULT_LOCATION_LONGITUDE { get; set; }
+        public static double goREFRESH_TOKEN_INTERVAL_SECONDS { get; set; } = SilupostAppSettings.REFRESH_TOKEN_INTERVAL_SECONDS;
+        
 
         public static Dictionary<string, string> goAllowedMediaFileType = new Dictionary<string, string>()
         {

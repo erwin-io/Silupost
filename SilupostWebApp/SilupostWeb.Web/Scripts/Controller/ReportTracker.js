@@ -305,10 +305,10 @@ var reportTrackerController = function() {
 
         // START Time picker only
         $('#PossibleTimeFrom').datetimepicker({
-            format: 'LT'
+            format: 'HH:mm'
         });
         $('#PossibleTimeTo').datetimepicker({
-            format: 'LT'
+            format: 'HH:mm'
         });
         // END Time picker only
 

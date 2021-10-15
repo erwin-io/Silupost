@@ -86,7 +86,7 @@ namespace SilupostMobileApp.Droid.Common
                 CheckInternet();
                 return true;
             });
-            Device.StartTimer(TimeSpan.FromSeconds(SilupostMobileApp.Common.SilupostAppSettings.REFRESH_TOKEN_INTERVAL_SECONDS), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(SilupostMobileApp.Common.AppSettingsHelper.goREFRESH_TOKEN_INTERVAL_SECONDS), () =>
             {
                 RefreshToken();
                 return true;
