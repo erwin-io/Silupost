@@ -350,7 +350,7 @@
 
 	/* 38: SilupostMobileApp.dll */
 	/* uncompressed_file_size */
-	.word	650240
+	.word	650752
 	/* loaded */
 	.byte	0
 	/* data */
@@ -710,7 +710,7 @@
 
 	/* 78: mscorlib.dll */
 	/* uncompressed_file_size */
-	.word	2118656
+	.word	2119168
 	/* loaded */
 	.byte	0
 	/* data */

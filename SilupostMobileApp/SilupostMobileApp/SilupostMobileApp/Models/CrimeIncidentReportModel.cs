@@ -16,7 +16,9 @@ namespace SilupostMobileApp.Models
             get
             {
                 //return DateTime.Parse(string.Format("{0} {1}", PossibleDate.ToString("MM/dd/yyyy"), PossibleTime.Remove(5).ToString())).TimeOfDay;
-                return DateTime.ParseExact(PossibleTime.ToString().Remove(5).ToString(), "hh:mm", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+                //return DateTime.ParseExact(PossibleTime.ToString().Remove(5).ToString(), "hh:mm", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+                var timeArray = PossibleTime.ToString().Split(new string[] { ":", " ", "." }, StringSplitOptions.RemoveEmptyEntries);
+                return DateTime.ParseExact(string.Format("{0}:{1}", timeArray[0].PadLeft(2, '0'), timeArray[1].PadLeft(2, '0')), "hh:mmtt", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
             }
             set
             {

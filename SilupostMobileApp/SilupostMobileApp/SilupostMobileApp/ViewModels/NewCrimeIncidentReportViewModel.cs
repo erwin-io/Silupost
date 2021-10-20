@@ -185,7 +185,7 @@ namespace SilupostMobileApp.ViewModels
                 this.CrimeIncidentReport = new CrimeIncidentReportModel()
                 {
                     PossibleDate = DateTime.Now,
-                    PossibleTime = DateTime.Now.ToString("hh:mm tt")
+                    PossibleTime = DateTime.Now.ToString("hh:mmtt")
                 };
                 this.CrimeIncidentCategory = new CrimeIncidentCategoryModel()
                 {

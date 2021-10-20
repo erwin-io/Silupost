@@ -212,7 +212,7 @@
                                     Type="Filled" 
                                     LabelText="Possible Time" 
                                     IsEnabled="{Binding CanModifyReport}"
-                                    Format="HH:mm tt" 
+                                    Format="hh:mm tt" 
                                     Grid.Column="1"
                                     Grid.Row="0" 
                                     CornerRadius="5"

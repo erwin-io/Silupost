@@ -133,38 +133,38 @@
 	.section	.rodata.map_aname.22,"aMS",%progbits,1
 	.type	.L.map_aname.22, %object
 .L.map_aname.22:
-	.asciz	"Plugin.FilePicker"
-	.size	.L.map_aname.22, 18
+	.asciz	"SilupostMobileApp.Android"
+	.size	.L.map_aname.22, 26
 
 	.section	.rodata.map_aname.23,"aMS",%progbits,1
 	.type	.L.map_aname.23, %object
 .L.map_aname.23:
-	.asciz	"FFImageLoading.Platform"
-	.size	.L.map_aname.23, 24
+	.asciz	"Plugin.FilePicker"
+	.size	.L.map_aname.23, 18
 
 	.section	.rodata.map_aname.24,"aMS",%progbits,1
 	.type	.L.map_aname.24, %object
 .L.map_aname.24:
-	.asciz	"FFImageLoading.Forms.Droid"
-	.size	.L.map_aname.24, 27
+	.asciz	"FFImageLoading.Platform"
+	.size	.L.map_aname.24, 24
 
 	.section	.rodata.map_aname.25,"aMS",%progbits,1
 	.type	.L.map_aname.25, %object
 .L.map_aname.25:
-	.asciz	"Xamarin.Android.Support.ViewPager"
-	.size	.L.map_aname.25, 34
+	.asciz	"FFImageLoading.Forms.Droid"
+	.size	.L.map_aname.25, 27
 
 	.section	.rodata.map_aname.26,"aMS",%progbits,1
 	.type	.L.map_aname.26, %object
 .L.map_aname.26:
-	.asciz	"Xamarin.Android.Support.CustomTabs"
-	.size	.L.map_aname.26, 35
+	.asciz	"Xamarin.Android.Support.ViewPager"
+	.size	.L.map_aname.26, 34
 
 	.section	.rodata.map_aname.27,"aMS",%progbits,1
 	.type	.L.map_aname.27, %object
 .L.map_aname.27:
-	.asciz	"SilupostMobileApp.Android"
-	.size	.L.map_aname.27, 26
+	.asciz	"Xamarin.Android.Support.CustomTabs"
+	.size	.L.map_aname.27, 35
 
 	.section	.rodata.map_aname.28,"aMS",%progbits,1
 	.type	.L.map_aname.28, %object

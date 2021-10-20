@@ -106,8 +106,13 @@ namespace SilupostMobileApp.ViewModels
             this.PossibleDateTo = CrimeIncidentMapFilter.PossibleDateTo;
             //this.PossibleTimeFrom = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateFrom.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeFrom)).TimeOfDay;
             //this.PossibleTimeTo = DateTime.Parse(string.Format("{0} {1}", CrimeIncidentMapFilter.PossibleDateTo.ToString("MM/dd/yyyy"), CrimeIncidentMapFilter.PossibleTimeTo)).TimeOfDay;
-            this.PossibleTimeFrom = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeFrom, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
-            this.PossibleTimeTo = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeTo, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+            //this.PossibleTimeFrom = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeFrom, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+            //this.PossibleTimeTo = DateTime.ParseExact(CrimeIncidentMapFilter.PossibleTimeTo, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+            var possibleTImeFromArray = CrimeIncidentMapFilter.PossibleTimeFrom.Split(new string[] { ":", " " }, StringSplitOptions.RemoveEmptyEntries);
+            var possibleTimeToArray = CrimeIncidentMapFilter.PossibleTimeTo.Split(new string[] { ":", " " }, StringSplitOptions.RemoveEmptyEntries);
+            this.PossibleTimeFrom = DateTime.ParseExact(string.Format("{0}:{1}:{2}", possibleTImeFromArray[0].PadLeft(2, '0'), possibleTImeFromArray[1].PadLeft(2, '0'), possibleTImeFromArray[2].PadLeft(2, '0')), "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+            this.PossibleTimeTo = DateTime.ParseExact(string.Format("{0}:{1}:{2}", possibleTimeToArray[0].PadLeft(2, '0'), possibleTimeToArray[1].PadLeft(2, '0'), possibleTimeToArray[2].PadLeft(2, '0')), "HH:mm:ss", null, System.Globalization.DateTimeStyles.None).TimeOfDay;
+
         }
 
         public async Task RemoveSelectedCrimeIncidentCategoryItem(string Id)

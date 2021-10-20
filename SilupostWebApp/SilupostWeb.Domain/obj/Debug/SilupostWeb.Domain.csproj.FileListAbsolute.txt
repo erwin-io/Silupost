@@ -23,3 +23,11 @@ D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\SilupostWeb.Domain.pdb
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Debug\Newtonsoft.Json.xml
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.csproj.CopyComplete
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Debug\SilupostWeb.Domain.pdb

@@ -204,7 +204,7 @@
                                     Time="{Binding CrimeIncidentReport.PossibleTimeSpan}"
                                     Type="Filled" 
                                     LabelText="Possible Time" 
-                                    Format="HH:mm tt" 
+                                    Format="hh:mm tt" 
                                     Grid.Column="1"
                                     Grid.Row="0" 
                                     CornerRadius="5"

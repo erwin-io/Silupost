@@ -3345,24 +3345,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Users\\Minjung\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+      "projectUniqueName": "E:\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
       "projectName": "SilupostMobileApp.Android",
-      "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
+      "projectPath": "E:\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\SilupostMobileApp.Android.csproj",
+      "packagesPath": "C:\\Users\\Minjung\\.nuget\\packages\\",
+      "outputPath": "E:\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Minjung\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -3376,8 +3376,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
-              "projectPath": "D:\\Erwin\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
+            "E:\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj": {
+              "projectPath": "E:\\Silupost\\Silupost\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp\\SilupostMobileApp.csproj"
             }
           }
         }

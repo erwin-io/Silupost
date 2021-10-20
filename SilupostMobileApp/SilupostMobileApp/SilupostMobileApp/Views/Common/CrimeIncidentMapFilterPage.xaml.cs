@@ -106,8 +106,8 @@ namespace SilupostMobileApp.Views.Common
                 PossibleDateTo = this.viewModel.PossibleDateTo,
                 //PossibleTimeFrom = this.viewModel.PossibleTimeFrom.ToString().Remove(5),
                 //PossibleTimeTo = this.viewModel.PossibleTimeTo.ToString().Remove(5),
-                PossibleTimeFrom = new DateTime(this.viewModel.PossibleTimeFrom.Ticks).ToString("hh:mm tt"),
-                PossibleTimeTo = new DateTime(this.viewModel.PossibleTimeTo.Ticks).ToString("hh:mm tt"),
+                PossibleTimeFrom = new DateTime(this.viewModel.PossibleTimeFrom.Ticks).ToString("HH:mm:ss"),
+                PossibleTimeTo = new DateTime(this.viewModel.PossibleTimeTo.Ticks).ToString("HH:mm:ss"),
 
             };
             MessagingCenter.Send(this, "ApplyMapFilter", this.viewModel.CrimeIncidentMapFilter);

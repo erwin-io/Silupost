@@ -37,3 +37,16 @@ D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csp
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.CopyComplete
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.dll
 D:\Erwin\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.pdb
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\SilupostWeb.Data.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\SilupostWeb.Data.pdb
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Dapper.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\SilupostWeb.Domain.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Newtonsoft.Json.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\SilupostWeb.Domain.pdb
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Dapper.xml
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\bin\Debug\Newtonsoft.Json.xml
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.AssemblyReference.cache
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.CoreCompileInputs.cache
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.csproj.CopyComplete
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.dll
+E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Data\obj\Debug\SilupostWeb.Data.pdb
