@@ -25,3 +25,12 @@ E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.D
 E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.CopyComplete
 E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.dll
 E:\Silupost\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.pdb
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\SilupostWeb.Domain.dll
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\SilupostWeb.Domain.pdb
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\Newtonsoft.Json.dll
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\bin\Release\Newtonsoft.Json.xml
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.AssemblyReference.cache
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.CoreCompileInputs.cache
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.csproj.CopyComplete
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.dll
+D:\Archive\Development\Repository\Silupost\SilupostWebApp\SilupostWeb.Domain\obj\Release\SilupostWeb.Domain.pdb

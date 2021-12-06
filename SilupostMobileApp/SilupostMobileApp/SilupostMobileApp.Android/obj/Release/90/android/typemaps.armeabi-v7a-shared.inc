@@ -169,38 +169,38 @@
 	.section	.rodata.map_aname.28,"aMS",%progbits,1
 	.type	.L.map_aname.28, %object
 .L.map_aname.28:
-	.asciz	"Xamarin.Android.Support.CoordinaterLayout"
-	.size	.L.map_aname.28, 42
+	.asciz	"Mono.Android"
+	.size	.L.map_aname.28, 13
 
 	.section	.rodata.map_aname.29,"aMS",%progbits,1
 	.type	.L.map_aname.29, %object
 .L.map_aname.29:
-	.asciz	"Xamarin.Android.Support.Compat"
-	.size	.L.map_aname.29, 31
+	.asciz	"Xamarin.Android.Support.CoordinaterLayout"
+	.size	.L.map_aname.29, 42
 
 	.section	.rodata.map_aname.30,"aMS",%progbits,1
 	.type	.L.map_aname.30, %object
 .L.map_aname.30:
-	.asciz	"Xamarin.Forms.Platform.Android"
+	.asciz	"Xamarin.Android.Support.Compat"
 	.size	.L.map_aname.30, 31
 
 	.section	.rodata.map_aname.31,"aMS",%progbits,1
 	.type	.L.map_aname.31, %object
 .L.map_aname.31:
-	.asciz	"Xamarin.Android.Support.SwipeRefreshLayout"
-	.size	.L.map_aname.31, 43
+	.asciz	"Xamarin.Forms.Platform.Android"
+	.size	.L.map_aname.31, 31
 
 	.section	.rodata.map_aname.32,"aMS",%progbits,1
 	.type	.L.map_aname.32, %object
 .L.map_aname.32:
-	.asciz	"Xamarin.Android.Support.v7.AppCompat"
-	.size	.L.map_aname.32, 37
+	.asciz	"Xamarin.Android.Support.SwipeRefreshLayout"
+	.size	.L.map_aname.32, 43
 
 	.section	.rodata.map_aname.33,"aMS",%progbits,1
 	.type	.L.map_aname.33, %object
 .L.map_aname.33:
-	.asciz	"Mono.Android"
-	.size	.L.map_aname.33, 13
+	.asciz	"Xamarin.Android.Support.v7.AppCompat"
+	.size	.L.map_aname.33, 37
 
 	.section	.rodata.map_aname.34,"aMS",%progbits,1
 	.type	.L.map_aname.34, %object

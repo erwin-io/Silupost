@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c13321d3-3d27-4db0-94ac-3cd8c542872e": {
+      "ProjectGuid": "c13321d3-3d27-4db0-94ac-3cd8c542872e",
+      "DisplayName": "SilupostWeb.API",
+      "ColorIndex": 0
+    },
+    "e858ab30-19fc-4386-ad1f-b932a5019062": {
+      "ProjectGuid": "e858ab30-19fc-4386-ad1f-b932a5019062",
+      "DisplayName": "SilupostWeb.OAuth",
+      "ColorIndex": 1
+    },
+    "917e7e85-0099-48c8-8d1f-7f2102ee7a10": {
+      "ProjectGuid": "917e7e85-0099-48c8-8d1f-7f2102ee7a10",
+      "DisplayName": "SilupostWeb.Web",
+      "ColorIndex": 2
+    },
+    "facad72e-5a62-443f-93d4-d590953b7bc1": {
+      "ProjectGuid": "facad72e-5a62-443f-93d4-d590953b7bc1",
+      "DisplayName": "SilupostWeb.Facade",
+      "ColorIndex": 3
+    },
+    "6ed6c5c5-3e42-43da-bd78-09b809bb3008": {
+      "ProjectGuid": "6ed6c5c5-3e42-43da-bd78-09b809bb3008",
+      "DisplayName": "SilupostWeb.Data",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

@@ -125,7 +125,7 @@
 
 	/* 13: Java.Interop.dll */
 	/* uncompressed_file_size */
-	.word	163840
+	.word	164864
 	/* loaded */
 	.byte	0
 	/* data */
@@ -152,7 +152,7 @@
 
 	/* 16: Mono.Android.dll */
 	/* uncompressed_file_size */
-	.word	2390016
+	.word	2390528
 	/* loaded */
 	.byte	0
 	/* data */
@@ -287,7 +287,7 @@
 
 	/* 31: Plugin.Messaging.Abstractions.dll */
 	/* uncompressed_file_size */
-	.word	5632
+	.word	6144
 	/* loaded */
 	.byte	0
 	/* data */
@@ -386,7 +386,7 @@
 
 	/* 42: System.Buffers.dll */
 	/* uncompressed_file_size */
-	.word	13688
+	.word	13704
 	/* loaded */
 	.byte	0
 	/* data */

@@ -347,9 +347,11 @@ var enforcementReportValidationController = function() {
                 appSettings.model.IsRejected = false;
                 appSettings.model.IsPending = false;
                 appSettings.model.Canceled = false;
+                appSettings.model.IsOngoing = false;
 
                 appSettings.model.CanValidate = false;
                 appSettings.model.CanReject = false;
+                appSettings.model.CanProcess = false;
                 appSettings.model.IsViewOnly = false;
 
 
@@ -360,44 +362,67 @@ var enforcementReportValidationController = function() {
                 if (appSettings.model.ReportValidationStatusId === 1) {
                     appSettings.model.IsValidated = true;
                     appSettings.model.IsViewOnly = true;
+                    appSettings.model.IsOngoing = false;
                 }
                 if (appSettings.model.ReportValidationStatusId === 2) {
                     appSettings.model.IsRejected = true;
                     appSettings.model.IsViewOnly = true;
+                    appSettings.model.IsOngoing = false;
                 }
                 if (appSettings.model.ReportValidationStatusId === 3) {
                     appSettings.model.IsPending = true;
                     appSettings.model.IsViewOnly = false;
+                    appSettings.model.IsOngoing = false;
                 }
                 if (appSettings.model.ReportValidationStatusId === 4) {
                     appSettings.model.Canceled = true;
                     appSettings.model.IsViewOnly = true;
+                    appSettings.model.IsOngoing = false;
+                }
+                if (appSettings.model.ReportValidationStatusId === 5) {
+                    appSettings.model.Canceled = false;
+                    appSettings.model.IsViewOnly = false;
+                    appSettings.model.IsOngoing = true;
                 }
 
                 if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 1) {
                     appSettings.model.IsViewOnly = true;
-                    appSettings.model.CanValidate = false;
-                    appSettings.model.CanReject = false;
                     appSettings.model.IsReportApproved = true;
                 }
                 else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 2) {
                     appSettings.model.IsViewOnly = true;
-                    appSettings.model.CanValidate = false;
-                    appSettings.model.CanReject = false;
                     appSettings.model.IsReportDeclined = true;
+                }
+                else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 2) {
+                    appSettings.model.IsReportPending = true;
                 }
                 else {
                     appSettings.model.CanValidate = true;
                     appSettings.model.CanReject = true;
                     appSettings.model.IsReportPending = true;
+                    appSettings.model.IsReportDeclined = false;
                 }
 
                 if (appSettings.model.IsViewOnly) {
+                    $("#modal-dialog #btnAccept").addClass("hidden");
                     $("#modal-dialog #btnValidate").addClass("hidden");
                     $("#modal-dialog #btnReject").addClass("hidden");
                 } else {
-                    $("#modal-dialog #btnValidate").removeClass("hidden");
-                    $("#modal-dialog #btnReject").removeClass("hidden");
+                    if (appSettings.model.IsOngoing) {
+                        appSettings.model.CanProcess = false;
+                        appSettings.model.CanValidate = true;
+                        appSettings.model.CanReject = true;
+                        $("#modal-dialog #btnAccept").addClass("hidden");
+                        $("#modal-dialog #btnValidate").removeClass("hidden");
+                        $("#modal-dialog #btnReject").removeClass("hidden");
+                    } else {
+                        appSettings.model.CanProcess = true;
+                        appSettings.model.CanValidate = false;
+                        appSettings.model.CanReject = false;
+                        $("#modal-dialog #btnAccept").removeClass("hidden");
+                        $("#modal-dialog #btnValidate").addClass("hidden");
+                        $("#modal-dialog #btnReject").addClass("hidden");
+                    }
                 }
 
                 appSettings.AllowedToValidateEnforcementReport = false;
@@ -494,6 +519,26 @@ var enforcementReportValidationController = function() {
                     });
                     Update();
                 });
+
+                $("#modal-dialog #btnAccept").on("click", function () {
+                    appSettings.model.ReportValidationStatusId = 5;
+                    form = $("#form-enforcementReportValidation");
+                    form.validate({
+                        ignore: [],
+                        errorElement: 'span',
+                        errorPlacement: function (error, element) {
+                            error.addClass('help-block');
+                            element.closest('.form-group').append(error);
+                        },
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').addClass('has-error');
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).closest('.form-group').removeClass('has-error');
+                        },
+                    });
+                    Update();
+                });
             });
         }
     }
@@ -505,6 +550,8 @@ var enforcementReportValidationController = function() {
             message = 'Set Report as Validated';
         } else if (appSettings.model.ReportValidationStatusId === 2) {
             message = 'Set Report as Rejected';
+        } else if (appSettings.model.ReportValidationStatusId === 5) {
+            message = 'Process Report';
         }
         Swal.fire({
             title: message,
