@@ -243,12 +243,14 @@ var enforcementReportValidationController = function() {
                     render: function (data, type, full, meta) {
                         var badgeStatus = 'badge-warning';
                         if (full.ReportValidationStatus.ReportValidationStatusId === 1) {
-                            badgeStatus = 'badge-info';
+                            badgeStatus = 'badge-success';
                         } else if (full.ReportValidationStatus.ReportValidationStatusId === 2) {
                             badgeStatus = 'badge-error';
+                        } else if (full.ReportValidationStatus.ReportValidationStatusId === 3) {
+                            badgeStatus = '';
                         } else if (full.ReportValidationStatus.ReportValidationStatusId === 4) {
                             badgeStatus = 'badge-error';
-                        } else {
+                        }else {
                             badgeStatus = 'badge-warning';
                         }
                         return '<span class="badge ' + badgeStatus + '" style="padding: 10px">' + data + '</span>';
@@ -358,6 +360,8 @@ var enforcementReportValidationController = function() {
                 appSettings.model.IsReportApproved = false;
                 appSettings.model.IsReportDeclined = false;
                 appSettings.model.IsReportPending = false;
+                appSettings.model.IsReportOngoing = false;
+                appSettings.model.IsReportValidated = false;
 
                 if (appSettings.model.ReportValidationStatusId === 1) {
                     appSettings.model.IsValidated = true;
@@ -393,14 +397,17 @@ var enforcementReportValidationController = function() {
                     appSettings.model.IsViewOnly = true;
                     appSettings.model.IsReportDeclined = true;
                 }
-                else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 2) {
+                else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 3) {
                     appSettings.model.IsReportPending = true;
                 }
-                else {
+                else if (data.Data.CrimeIncidentReport.ApprovalStatus.ApprovalStatusId === 4) {
                     appSettings.model.CanValidate = true;
                     appSettings.model.CanReject = true;
-                    appSettings.model.IsReportPending = true;
-                    appSettings.model.IsReportDeclined = false;
+                    appSettings.model.IsReportOngoing = true;
+                }
+                else {
+                    appSettings.model.IsViewOnly = true;
+                    appSettings.model.IsReportValidated = true;
                 }
 
                 if (appSettings.model.IsViewOnly) {

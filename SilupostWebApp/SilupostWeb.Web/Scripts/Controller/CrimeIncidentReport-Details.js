@@ -262,6 +262,8 @@ var crimeIncidentReportDetailsController = function() {
 
 
             appSettings.model.IsPending = false;
+            appSettings.model.IsOngoing = false;
+            appSettings.model.IsValidated = false;
             appSettings.model.IsDeclined = false;
             appSettings.model.IsApproved = false;
 
@@ -270,23 +272,36 @@ var crimeIncidentReportDetailsController = function() {
             appSettings.model.AllowedToCancelReport = false;
 
             appSettings.model.PossibleTime = moment(appSettings.model.PossibleTime, ["HH:mm"]).format("h: mm A");
-            if (data.Data.ApprovalStatus.ApprovalStatusId === 1) {
+            if (data.Data.ApprovalStatus.ApprovalStatusId === 1) {//Approved
                 appSettings.model.IsApproved = true;
                 appSettings.model.CanApprove = false;
                 appSettings.model.CanDecline = false;
                 appSettings.model.CanSubmissionEnforcementReportValidation = false;
             }
-            else if (data.Data.ApprovalStatus.ApprovalStatusId === 2) {
+            else if (data.Data.ApprovalStatus.ApprovalStatusId === 2) {//Declined
                 appSettings.model.IsDeclined = true;
                 appSettings.model.CanApprove = false;
                 appSettings.model.CanDecline = false;
                 appSettings.model.CanSubmissionEnforcementReportValidation = false;
             }
-            else {
+            else if (data.Data.ApprovalStatus.ApprovalStatusId === 3) {//Pending
                 appSettings.model.IsPending = true;
                 appSettings.model.CanApprove = appSettings.model.Validated;
                 appSettings.model.CanDecline = true;
-                appSettings.model.CanSubmissionEnforcementReportValidation = (!appSettings.model.Validated);
+                //appSettings.model.CanSubmissionEnforcementReportValidation = (!appSettings.model.Validated);
+                appSettings.model.CanSubmissionEnforcementReportValidation = true;
+            }
+            else if (data.Data.ApprovalStatus.ApprovalStatusId === 4) {//Ongoing
+                appSettings.model.IsOngoing = true;
+                appSettings.model.CanApprove = false;
+                appSettings.model.CanDecline = false;
+                appSettings.model.CanSubmissionEnforcementReportValidation = false;
+            }
+            else {//Validated
+                appSettings.model.CanApprove = true;
+                appSettings.model.CanDecline = false;
+                appSettings.model.IsValidated = true;
+                appSettings.model.CanSubmissionEnforcementReportValidation = false;
             }
             appSettings.model.lookup = appSettings.lookup;
 
@@ -447,11 +462,23 @@ var crimeIncidentReportDetailsController = function() {
         $("#modal-dialog-EnforcementReportValidation").find('.modal-title').html('Enforcement Report Validation');
         $("#modal-dialog-EnforcementReportValidation").modal('show');
         $("body").addClass("modal-open");
+		if(appSettings.model.ApprovalStatusId === 1){//Approved
+			appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 1;
+		} else if(appSettings.model.ApprovalStatusId === 2){//Declined
+			appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 2;
+		} else if(appSettings.model.ApprovalStatusId === 3){//Pending
+			appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 3;
+		} else if(appSettings.model.ApprovalStatusId === 4){//Ongoing
+			appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 5;
+		}else{//Validated
+			appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 1;
+		}
+		$('#ReportValidationStatusId').val(appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId);
+		$('#ReportValidationStatusId').trigger('change');
         if (!appSettings.model.CanSubmissionEnforcementReportValidation) {
-            appSettings.EnforcementReportValidationFilterSearchModel.ReportValidationStatusId = 1;
-            $("#btnNewEnforcementReportValidation").attr("disabled", true)
+            $("#btnNewEnforcementReportValidation").attr("disabled", true);
         }
-    }
+    } 
 
     var initGridEnforcementReportValidation = function () {
         if (datatableEnforcementReportValidation !== undefined && datatableEnforcementReportValidation !== null) {
@@ -495,9 +522,9 @@ var crimeIncidentReportDetailsController = function() {
                 {
                     "data": "ReportValidationStatus.ReportValidationStatusName", "sortable": false, "orderable": false, "searchable": false,
                     render: function (data, type, full, meta) {
-                        var badgeStatus = 'badge-warning';
+                        var badgeStatus = '';
                         if (full.ReportValidationStatus.ReportValidationStatusId === 1) {
-                            badgeStatus = 'badge-info';
+                            badgeStatus = 'badge-success';
                         } else if (full.ReportValidationStatus.ReportValidationStatusId === 2) {
                             badgeStatus = 'badge-error';
                         } else if (full.ReportValidationStatus.ReportValidationStatusId === 4) {
@@ -695,6 +722,7 @@ var crimeIncidentReportDetailsController = function() {
         manageEnforcementReportValidationTemplate.link("#modal-dialog-ManageEnforcementReportValidation .modal-body", appSettings.EnforcementReportValidationModel);
         $("#modal-dialog-ManageEnforcementReportValidation").modal('show');
 
+		$("#modal-dialog-ManageEnforcementReportValidation #btnSave").hide();
         $(".select-simple").select2({
             theme: "bootstrap",
             minimumResultsForSearch: Infinity,
@@ -708,6 +736,10 @@ var crimeIncidentReportDetailsController = function() {
             appSettings.EnforcementReportValidationModel.EnforcementUnitId = $(this).val();
         });
         $("#modal-dialog-ManageEnforcementReportValidation #btnSave").on("click", UpdateSubmissionEnforcementReportValidation);
+		
+		if(model.ReportValidationStatusId === 3){
+			$("#modal-dialog-ManageEnforcementReportValidation #btnSave").show();
+		}
     }
 
     var EnforcementStationCahnge = function () {

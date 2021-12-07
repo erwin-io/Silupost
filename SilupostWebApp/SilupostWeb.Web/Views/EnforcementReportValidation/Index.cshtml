@@ -166,7 +166,28 @@
             </div>
             <div class="group-fields clearfix row">
                 <div class="col-xs-12">
-                    {^{if IsReportApproved}}
+                    <div class="pull-left">
+                        <h4>Report Status</h4>
+                        {^{if IsReportApproved}}
+                        <span class="badge badge-info" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                        {{/if}}
+                        {^{if IsReportDeclined}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                        {{/if}}
+                        {^{if IsReportPending}}
+                        <span class="badge" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                        {{/if}}
+                        {^{if IsReportOngoing}}
+                        <span class="badge badge-warning" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                        {{/if}}
+                        {^{if IsReportValidated}}
+                        <span class="badge badge-success" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
+                        {{/if}}
+                        {^{if IsRejected}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                    </div>
+                    @*{^{if IsReportApproved}}
                     <div class="pull-left">
                         <h4>Report Status</h4>
                         <span class="badge badge-success" style="padding: 10px" data-link="text{:ApprovalStatusName}"></span>
@@ -179,25 +200,25 @@
                     </div>
                     {{/if}}
                     {^{if IsReportPending}}
-                <div class="pull-left">
-                    <h4>Validation Status</h4>
-                    {^{if IsValidated}}
-                    <span class="badge badge-success" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
-                    {{/if}}
-                    {^{if IsRejected}}
-                    <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
-                    {{/if}}
-                    {^{if Canceled}}
-                    <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
-                    {{/if}}
-                    {^{if IsPending}}
-                    <span class="badge badge-warning" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
-                    {{/if}}
-                    {^{if IsOngoing}}
-                    <span class="badge badge-warning" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
-                    {{/if}}
-                </div>
-                    {{/if}}
+                    <div class="pull-left">
+                        <h4>Validation Status</h4>
+                        {^{if IsValidated}}
+                        <span class="badge badge-success" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if IsRejected}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if Canceled}}
+                        <span class="badge badge-error" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if IsPending}}
+                        <span class="badge badge-warning" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                        {^{if IsOngoing}}
+                        <span class="badge badge-warning" style="padding: 10px" data-link="text{:ReportValidationStatusName}"></span>
+                        {{/if}}
+                    </div>
+                    {{/if}}*@
                     <div class="pull-right">
                         <a id="btnShowReport" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-warning pmd-tooltip" data-toggle="tooltip" data-placement="left" title="View report details">
                             <i class="material-icons pmd">info</i>

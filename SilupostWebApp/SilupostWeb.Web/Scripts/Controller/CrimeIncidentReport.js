@@ -261,8 +261,12 @@ var crimeIncidentReportController = function() {
                                 badgeStatus = 'badge-info';
                             }else if(full.ApprovalStatus.ApprovalStatusId === 2){
                                 badgeStatus = 'badge-error';
-                            }else {
+                            } else if (full.ApprovalStatus.ApprovalStatusId === 3) {
+                                badgeStatus = '';
+                            } else if (full.ApprovalStatus.ApprovalStatusId === 4) {
                                 badgeStatus = 'badge-warning';
+                            } else {
+                                badgeStatus = 'badge-success';
                             }
                             return '<span class="badge '+ badgeStatus +'" style="padding: 10px">' + data + '</span>';
                         }

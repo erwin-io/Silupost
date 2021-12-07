@@ -56,8 +56,8 @@ var appController = function () {
     var api = new apiService();
 
     var appSettings = {
-        silupostWebAPIURI: "http://localhost:8100/api/v1/",//api link
-        //silupostWebAPIURI: "http://192.168.254.109:1100/api/v1/",//api link
+        //silupostWebAPIURI: "http://localhost:8100/api/v1/",//api link
+        silupostWebAPIURI: "http://192.168.254.118:1100/api/v1/",//api link
         apiToken: "",
         authorized: false,
         apiRefreshToken: "",

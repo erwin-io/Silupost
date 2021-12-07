@@ -12,7 +12,13 @@
                 <span class="badge badge-error" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
                 {{/if}}
                 {^{if IsPending}}
+                <span class="badge" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
+                {{/if}}
+                {^{if IsOngoing}}
                 <span class="badge badge-warning" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
+                {{/if}}
+                {^{if IsValidated}}
+                <span class="badge badge-success" style="padding: 10px" data-link="text{:ApprovalStatus.ApprovalStatusName}"></span>
                 {{/if}}
             </div>
             {{/if}}
